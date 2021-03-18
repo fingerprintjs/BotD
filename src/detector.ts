@@ -5,17 +5,13 @@ export default class BotDetector {
         this.url = url;
     }
 
-    // TODO: Fix it
-    // private notificationPermissions(): boolean | undefined {
-    //     if(navigator.permissions !== undefined) {
-    //         let notificationState
-    //         navigator.permissions.query({name: "notifications"}).then(
-    //             notificationsStatus => notificationState = notificationsStatus.state
-    //         )
-    //         return Notification.permission === "denied" && notificationState === 'prompt'
-    //     } else
-    //         return undefined
-    // }
+    private static async notificationPermissions() {
+        if(navigator.permissions !== undefined) {
+            let notificationsStatus = await navigator.permissions.query({name: "notifications"})
+            return Notification.permission === "denied" && notificationsStatus.state === 'prompt'
+        } else
+            return undefined
+    }
 
     private static getWebGLInfo(): string[] | undefined[] {
         let canvasElement = document.createElement('canvas');
@@ -43,7 +39,7 @@ export default class BotDetector {
         return navigator.connection.rtt
     }
 
-    private collect() {
+    private static async collect() {
         return {
             "user_agent": navigator.userAgent,
             "is_user_agent_data_undefined": navigator.userAgentData === undefined,
@@ -51,8 +47,7 @@ export default class BotDetector {
             "web_driver": navigator.webdriver,
             "rtt": BotDetector.getRTT(),
             "window_outer_size": [window.outerWidth, window.outerHeight],
-            // "notification_permissions": this.notificationPermissions(),
-            "notification_permissions": false,
+            "notification_permissions": await BotDetector.notificationPermissions(),
             "webgl": BotDetector.getWebGLInfo(),
             "screen": [screen.width, screen.height],
             "device_memory": navigator.deviceMemory,
@@ -62,14 +57,12 @@ export default class BotDetector {
     }
 
     async detect() {
-        let result = await fetch(this.url, {
+        return await fetch(this.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.collect())
+            body: JSON.stringify(await BotDetector.collect())
         }).then(resp => resp.json())
-        console.log(result)
-        return result
     }
 }

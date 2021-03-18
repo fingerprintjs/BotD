@@ -1,0 +1,29 @@
+h1 {
+    font-size: 200%;
+    color: #222;
+}
+h2 {
+    font-size: 150%;
+    color: #333;
+}
+h3 {
+    font-size: 100%;
+}
+div, label {
+    font-size: 100%;
+    color: #336;
+}
+p {
+    display: none;
+}
+a {
+    font-size: 100%;
+    color: #0000ff;
+    display: inline-block;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
