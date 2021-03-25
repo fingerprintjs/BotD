@@ -10,5 +10,9 @@ interface NavigatorUAData {
 interface Navigator {
     readonly connection?: NetworkInformation
     readonly userAgentData?: NavigatorUAData
-    readonly deviceMemory?: Number
+    readonly deviceMemory?: number
+}
+
+interface Window {
+    readonly chrome?: object
 }
