@@ -2,91 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bot detect playground</title>
+    <title>FingerprintJS Bot Detect</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" type="image/ico" href="./favicon.ico">
 </head>
 <body>
-<script type="module">
-  import {createNamedElement, updateNamedElement, createElement, updateNamedElementBool} from "./render.js";
-  import {BotDetector} from "../dist/index.js";
+<div class="content">
+    <img id="logo" src="logo.svg" alt="FingerprintJS">
+    <h1>Bot Detect Playground</h1>
 
-  createElement("h1", "Bot Detect Playground")
+    <form class="url_form">
+        <label>
+            <input id="url" type="text" placeholder="URL of bot detection server">
+        </label>
+        <button id="button" type="button">Start detect</button>
+    </form>
 
-  let labelEl = document.createElement("label");
-  labelEl.textContent = "URL of bot detection server:";
-  labelEl.for = "url"
-  document.body.appendChild(labelEl);
+    <div class="output_holder">
+        <section class="output">
+            <h5>Time to get result:</h5>
+            <pre class="output_div" id="time"></pre>
+            <h5>Collected data:</h5>
+            <pre class="output_div" id="sources"></pre>
+            <h5>Detector result:</h5>
+            <pre class="output_div" id="result"></pre>
+        </section>
+    </div>
 
-  let inputEl = document.createElement("input");
-  inputEl.id = "url";
-  inputEl.type = "text"
-  document.body.appendChild(inputEl);
+    <div id="error" style="display: none">
+        Please specify URL of bot detection server in form, or as url parameter
+    </div>
 
-  let buttonEl = document.createElement("input");
-  buttonEl.value = "Start detect";
-  buttonEl.type = "button"
-  buttonEl.onclick = getResults
-  document.body.appendChild(buttonEl);
+    <script type="module">
+      import {BotDetector} from "../dist/index.js";
 
-  const urlParametersString = window.location.search;
-  const urlParameters = new URLSearchParams(urlParametersString);
-  const serverUrl = urlParameters.get('url')
+      document.getElementById("button").addEventListener("click", function() {
+        getResults(undefined).then( time => document.getElementById("time").textContent = `${time.toFixed(0)} ms`)
+      }, false);
 
-  if(serverUrl  != null)
-    getResults(serverUrl)
+      const urlParametersString = window.location.search;
+      const urlParameters = new URLSearchParams(urlParametersString);
+      const serverUrl = urlParameters.get('url')
 
-  function getResults(serverUrl=undefined) {
-    let url
-    if(serverUrl === undefined)
-        url = document.getElementById("url").value;
-    else
-        url = serverUrl
+      if(serverUrl != null) {
+        getResults(serverUrl).then( time => document.getElementById("time").textContent = `${time.toFixed(0)} ms`)
+      }
+      else {
+        document.getElementsByClassName("output_holder")[0].style.display = "none"
+        document.getElementById("error").style.display = "block"
+      }
 
-    createElement("h2", "Headless")
-    createNamedElement("div", "h_ua", "UserAgent test:")
-    createNamedElement("div", "h_av", "AppVersion test:")
-    createNamedElement("div", "h_wd", "WebDriver test:")
-    createNamedElement("div", "h_rt", "ConnectionRTT test:")
-    createNamedElement("div", "h_ws", "WindowSize test:")
-    createNamedElement("div", "h_ud", "UserAgentData test:")
-    createNamedElement("div", "h_np", "NotificationPermissions test:")
+      async function getResults(url=undefined) {
+        let t0 = performance.now()
+        if(url === undefined) {
+          url = document.getElementById("url").value;
+          document.getElementsByClassName("output_holder")[0].style.display = "block"
+          document.getElementById("error").style.display = "none"
+        }
 
-    createElement("h2", "Virtual Machine")
+        let botDetector = new BotDetector(url)
+        await botDetector.detect()
+        document.getElementById("sources").innerHTML = JSON.stringify(botDetector.sources, null, 4)
+        document.getElementById("result").innerHTML = JSON.stringify(botDetector.result, null, 4)
+        let t1 = performance.now()
+        return t1 - t0
+      }
 
-    createElement("h3", "WebGL")
-    createNamedElement("div", "vm_wg", "VM tests:")
-    createNamedElement("div", "vm_df", "Default tests:")
-
-    createElement("h3", "Screen")
-    createNamedElement("div", "vm_re", "Resolution/Viewport tests:")
-    createNamedElement("div", "vm_ra", "Ratio tests:")
-
-    createElement("h3", "System")
-    createNamedElement("div", "vm_cp", "CPU Cores tests:")
-    createNamedElement("div", "vm_me", "RAM memory tests:")
-
-    new BotDetector(url).detect().then( result => {
-
-      updateNamedElementBool("h_ua", "UserAgent tests:", result.headless[0])
-      updateNamedElementBool("h_av", "AppVersion tests:", result.headless[1])
-      updateNamedElementBool("h_wd", "WebDriver tests:", result.headless[2])
-      updateNamedElementBool("h_rt", "ConnectionRTT tests:", result.headless[3])
-      updateNamedElementBool("h_ws", "WindowSize tests:", result.headless[4])
-      updateNamedElementBool("h_ud", "UserAgentData tests:", result.headless[5])
-      updateNamedElementBool("h_np", "NotificationPermissions tests:", result.headless[6])
-
-      updateNamedElementBool("vm_wg", "VM tests:", result.vm["web_gl"][0])
-      updateNamedElementBool("vm_df", "Default tests:", result.vm["web_gl"][1])
-
-      updateNamedElementBool("vm_re", "Resolution/Viewport tests:", result.vm["screen"][0])
-      updateNamedElementBool("vm_ra", "Ratio tests:", result.vm["screen"][1])
-
-      updateNamedElement("vm_cp", `CPU Cores tests: ${result.vm["system"][0]}`)
-      updateNamedElement("vm_me", `RAM memory tests: ${result.vm["system"][1]}`)
-    })
-  }
-
-</script>
+    </script>
+</div>
 </body>
 </html>
