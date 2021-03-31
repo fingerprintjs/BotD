@@ -3,7 +3,7 @@ interface NetworkInformation extends EventTarget {
 }
 
 interface NavigatorUAData {
-    readonly brands?: Array
+    readonly brands?: Array<Record<string, string>>
     readonly mobile: boolean
 }
 
