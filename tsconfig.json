@@ -2,12 +2,14 @@
   "compilerOptions": {
     "target": "es2015",
     "module": "es2015",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "strict": true,
+    "esModuleInterop": false,
+    "outDir": "dist",
+    "rootDir": "src",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src/"
   }
 }

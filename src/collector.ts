@@ -1,20 +1,21 @@
-import handleAll from "./types.js";
-import getUserAgent from "./sources/userAgent.js";
-import hasUserAgentData from "./sources/userAgentData.js";
-import getAppVersion from "./sources/appVersion.js";
-import hasWebDriver from "./sources/webDriver.js";
-import getRTT from "./sources/rtt.js";
-import getWindowOuterSize from "./sources/windowOuterSize.js";
-import arePermissionsInconsistent from "./sources/permissions.js";
-import getWebGL from "./sources/webgl.js";
-import getScreen from "./sources/screen.js";
-import getDeviceMemory from "./sources/deviceMemory.js";
-import isBigEndian from "./sources/endian.js";
-import getHardwareConcurrency from "./sources/hardwareConcurrency.js";
-import hasChrome from "./sources/chrome.js";
-import isSelenium from "./sources/selenium.js";
-import getEmptyEvalLength from "./sources/emptyEvalLength.js";
-import isPhantomJS from "./sources/phantomjs.js";
+import handleAll from "./types";
+import getUserAgent from "./sources/userAgent";
+import hasUserAgentData from "./sources/userAgentData";
+import getAppVersion from "./sources/appVersion";
+import hasWebDriver from "./sources/webDriver";
+import getRTT from "./sources/rtt";
+import getWindowOuterSize from "./sources/windowOuterSize";
+import arePermissionsInconsistent from "./sources/permissions";
+import getWebGL from "./sources/webgl";
+import getScreen from "./sources/screen";
+import getDeviceMemory from "./sources/deviceMemory";
+import isBigEndian from "./sources/endian";
+import getHardwareConcurrency from "./sources/hardwareConcurrency";
+import hasChrome from "./sources/chrome";
+import isSelenium from "./sources/selenium";
+import getEvalLength from "./sources/evalLength";
+import isPhantomJS from "./sources/phantomjs";
+import arePluginsInconsistent from "./sources/plugins";
 
 export default async function collect() {
     return handleAll({
@@ -33,6 +34,7 @@ export default async function collect() {
         "selenium": isSelenium,
         "phantomjs": isPhantomJS,
         "web_driver": hasWebDriver,
-        "empty_eval_length": getEmptyEvalLength
+        "eval_length": getEvalLength,
+        "plugins": arePluginsInconsistent
     })
 }

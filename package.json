@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build typescript": "tsc",
+    "build rollup": "rimraf dist && rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,9 @@
   },
   "homepage": "https://github.com/fingerprintjs/botd-client#readme",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.44.0",
     "typescript": "^4.2.3"
   }
 }

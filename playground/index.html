@@ -5,6 +5,7 @@
     <title>FingerprintJS Bot Detect</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" type="image/ico" href="./favicon.ico">
+    <script src="../dist/index.js"></script>
 </head>
 <body>
 <div class="content">
@@ -32,10 +33,7 @@
     <div id="error" style="display: none">
         Please specify URL of bot detection server in form, or as url parameter
     </div>
-
-    <script type="module">
-      import {BotDetector} from "../dist/index.js";
-
+    <script>
       document.getElementById("button").addEventListener("click", function() {
         getResults(undefined).then( time => document.getElementById("time").textContent = `${time.toFixed(0)} ms`)
       }, false);

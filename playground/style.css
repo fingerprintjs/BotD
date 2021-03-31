@@ -25,7 +25,7 @@ h1 {
     height: 100vh;
     box-sizing: border-box;
     margin: 0 auto;
-    padding: 1.25em;
+    padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
 }

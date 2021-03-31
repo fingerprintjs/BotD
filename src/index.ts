@@ -1,3 +1,3 @@
-import BotDetector from "./detector.js";
+import BotDetector from "./detector";
 
-export {BotDetector}
+export default BotDetector

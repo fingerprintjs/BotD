@@ -1,5 +1,5 @@
-import collect from "./collector.js";
-import {TSourceResultDict} from "./types.js";
+import collect from "./collector";
+import {TSourceResultDict} from "./types";
 
 export default class BotDetector {
     url: string;
