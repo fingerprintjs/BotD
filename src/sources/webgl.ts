@@ -1,4 +1,4 @@
-export default function getWebGL(): string[] | undefined {
+export default function getWebGL(): string[] {
     let canvasElement = document.createElement('canvas');
     let webGLContext = canvasElement.getContext('webgl');
     if(webGLContext !== null) {
@@ -9,5 +9,5 @@ export default function getWebGL(): string[] | undefined {
             return [vendor, renderer]
         }
     }
-    return undefined
+    throw new Error('can`t get webgl data');
 }

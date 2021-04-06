@@ -18,6 +18,11 @@ import isPhantomJS from "./sources/phantomjs";
 import getPluginsLength from "./sources/pluginsLength";
 import arePluginsConsistent from "./sources/pluginsConsistence";
 import getErrorTrace from "./sources/errorTrace";
+import getErrorFF from "./sources/errorFF";
+import getOSCPU from "./sources/oscpu";
+import getPlatform from "./sources/platform";
+import getProductSub from "./sources/productSub";
+import getVendor from "./sources/vendor";
 
 export default async function collect() {
     return handleAll({
@@ -39,6 +44,11 @@ export default async function collect() {
         "eval_length": getEvalLength,
         "plugins_length": getPluginsLength,
         "plugins_consistence": arePluginsConsistent,
-        "error_trace": getErrorTrace
+        "error_trace": getErrorTrace,
+        "error_ff": getErrorFF,
+        "oscpu": getOSCPU,
+        "platform": getPlatform,
+        "product_sub": getProductSub,
+        "vendor": getVendor
     })
 }

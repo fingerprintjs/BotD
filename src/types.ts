@@ -1,4 +1,4 @@
-type TSimpleSourceResult = string | number | boolean | undefined
+type TSimpleSourceResult = string | number | boolean
 type TSourceResult =  TSimpleSourceResult | TSimpleSourceResult[]
 type TSourceFunction = () => TSourceResult | Promise<TSourceResult>
 export type TSourceDict = Record<string, TSourceFunction>

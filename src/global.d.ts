@@ -11,6 +11,7 @@ interface Navigator {
     readonly connection?: NetworkInformation
     readonly userAgentData?: NavigatorUAData
     readonly deviceMemory?: number
+    readonly oscpu?: string
 }
 
 interface Window {
