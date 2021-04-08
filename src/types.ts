@@ -1,34 +1,39 @@
-type TSimpleSourceResult = string | number | boolean
-type TSourceResult =  TSimpleSourceResult | TSimpleSourceResult[]
-type TSourceFunction = () => TSourceResult | Promise<TSourceResult>
-export type TSourceDict = Record<string, TSourceFunction>
-export type TSourceResultDict = Record<string, ISource>
+type SimpleSourceResult = string | number | boolean
+type SourceResult =  SimpleSourceResult | SimpleSourceResult[]
+type SourceFunction = () => SourceResult | Promise<SourceResult>
+export type SourceDict = Record<string, SourceFunction>
+export type SourceResultDict = Record<string, Source>
 
-interface ISource {
-    state: EState,
-    value: TSourceResult
+interface Source {
+    state: State,
+    value: SourceResult
 }
 
-enum EState {
+export interface Options {
+    token: string,
+    url: string
+}
+
+enum State {
     Success = 1,
     Failure = -1,
 }
 
-async function handleSource(sourceFunction: TSourceFunction): Promise<ISource> {
-    let sourceResult: TSourceResult
-    let result: ISource
+async function handleSource(sourceFunction: SourceFunction): Promise<Source> {
+    let sourceResult: SourceResult
+    let result: Source
     try {
         sourceResult = await sourceFunction()
-        result = { value: sourceResult, state: EState.Success}
+        result = { value: sourceResult, state: State.Success}
     }
     catch (e) {
-        result = { value: e.toString(), state: EState.Failure}
+        result = { value: e.toString(), state: State.Failure}
     }
     return result
 }
 
-export default async function handleAll(sources: TSourceDict): Promise<TSourceResultDict> {
-    let results: TSourceResultDict = {}
+export default async function handleAll(sources: SourceDict): Promise<SourceResultDict> {
+    let results: SourceResultDict = {}
     for (let name in sources) {
         if (sources.hasOwnProperty(name)) {
             let sourceFunction = sources[name];

@@ -1,18 +1,20 @@
 import collect from "./collector";
-import {TSourceResultDict} from "./types";
+import {Options, SourceResultDict} from "./types";
 
 export default class BotDetector {
     url: string;
     version: string;
-    sources: TSourceResultDict | undefined;
+    token: string;
+    sources: SourceResultDict | undefined;
     result: object | undefined;
 
-    constructor(url: string) {
-        this.url = url;
+    constructor(options: Options) {
+        this.url = options.url;
+        this.token = options.token;
         this.version = "0.1.0"
     }
 
-    async detect(): Promise<boolean> {
+    async get(): Promise<boolean> {
         try {
             let timestamp = Date.now()
             this.sources = await collect()
@@ -20,7 +22,8 @@ export default class BotDetector {
             let body = {
                 "timestamp": timestamp,
                 "signals": this.sources,
-                "version": this.version
+                "version": this.version,
+                "token": this.token
             }
 
             let response = await fetch(this.url, {
