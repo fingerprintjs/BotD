@@ -2,7 +2,6 @@ import handleAll from "./types";
 import getUserAgent from "./sources/userAgent";
 import hasUserAgentData from "./sources/userAgentData";
 import getAppVersion from "./sources/appVersion";
-import hasWebdriver from "./sources/webDriver";
 import getRTT from "./sources/rtt";
 import getWindowOuterSize from "./sources/windowOuterSize";
 import arePermissionsInconsistent from "./sources/permissions";
@@ -22,6 +21,8 @@ import getPlatform from "./sources/platform";
 import getProductSub from "./sources/productSub";
 import getVendor from "./sources/vendor";
 import isFramework from "./sources/frameworks";
+import getWebDriver from "./sources/webDriver";
+import getInstallTrigger from "./sources/installTrigger";
 
 export default async function collect() {
     return handleAll({
@@ -37,8 +38,9 @@ export default async function collect() {
         "endian": isBigEndian,
         "cores": getHardwareConcurrency,
         "chrome": hasChrome,
+        "install_trigger": getInstallTrigger,
         "framework": isFramework,
-        "webdriver": hasWebdriver,
+        "webdriver": getWebDriver,
         "eval_length": getEvalLength,
         "plugins_length": getPluginsLength,
         "plugins_consistence": arePluginsConsistent,

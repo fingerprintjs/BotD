@@ -1,62 +1,147 @@
-export default function isFramework(): boolean {
+function checkPhantomJS(): boolean {
+    return 'callPhantom' in window || '_phantom' in window || 'phantom' in window
+}
+
+function checkNightmareJS(): boolean {
+    return '__nightmare' in window
+}
+
+function checkGeb(): boolean {
+    return 'geb' in window
+}
+
+function checkAwesomium(): boolean {
+    return 'awesomium' in window
+}
+
+function checkPhantomas(): boolean {
+    return '__phantomas' in window
+}
+
+function checkCouchJS(): boolean {
+    return 'emit' in window
+}
+
+function checkRhino(): boolean {
+    return 'spawn' in window
+}
+
+function checkNodeJS(): boolean {
+    return 'Buffer' in window
+}
+
+function checkSequenium(): boolean {
     const w = window
+    return ('external' in w && w['external'].toString().indexOf('Sequentum') !== -1)
+}
+
+function checkElectron() {
+    return window.close.toString().toLowerCase().indexOf("electron") !== -1
+}
+
+function checkChromium(): boolean {
+    return 'domAutomation' in window || 'domAutomationController' in window
+}
+
+function checkCDCache() {
     const d = document
+    for (const k in d) { // @ts-ignore
+        if (d.hasOwnProperty(k) && k.match(/\$[a-z]dc_/) && d[k]['cache_'])
+            return true
+    }
+    return false
+}
+
+function checkCDC() {
+    const w = window
+    for (const k in w)
+        if(w.hasOwnProperty(k) && k.match(/[a-z]dc_/))
+            return true
+    return false
+}
+
+function detectKeys(keys: string[], o: Object): boolean {
+    for (const i in keys)
+        if (keys.hasOwnProperty(i)) {
+            const value = keys[i];
+            if (o.hasOwnProperty(value))
+                return true;
+        }
+    return false
+}
+
+function checkWebdriver() {
+    const d = document
+    const w = window
     const {documentElement} = d
 
-    return (
-        'callPhantom' in w ||               //  phantomjs
-        '_phantom' in w ||
+    const list = [
+        'webdriver',
+        '__webdriver_script_fn',
+        '__driver_evaluate',
+        '__webdriver_evaluate',
+        '__fxdriver_evaluate',
+        '__webdriverFunc',
+        '__driver_unwrapped',
+        '__webdriver_unwrapped',
+        '__fxdriver_unwrapped',
+        '__webdriver_script_fn',
+        '__webdriver_script_func',
+        '__webdriver_script_function',
+        '$cdc_asdjflasutopfhvcZLmcf',
+        '$cdc_asdjflasutopfhvcZLmcfl_',
+        '$chrome_asyncScriptInfo',
+        '__$webdriverAsyncExecutor',
+        '__lastWatirAlert',
+        '__lastWatirConfirm',
+        '__lastWatirPrompt',
+        '_WEBDRIVER_ELEM_CACHE',
+        'ChromeDriverw'
+    ]
 
-        '__nightmare' in w ||               //  nightmarejs
-
-        'geb' in w ||                       //  geb
-
-        'awesomium' in w ||                 //  awesomium
-
-        '__phantomas' in w ||               //  phantomas
-
-        'emit' in w ||                      //  couchjs
-
-        'spawn' in w ||                     //  rhino
-
-        'Buffer' in w ||                    //  nodejs
-
-        'domAutomation' in w ||             //  chromium
-        'domAutomationController' in w ||
-
-        'webdriver' in w ||                 //  selenium
-        '_Selenium_IDE_Recorder' in w ||
-        'callSelenium' in w ||
-        '_selenium' in w ||
-
-        '__webdriver_script_fn' in d ||
-        '__driver_evaluate' in d ||
-        '__webdriver_evaluate' in d ||
-        '__selenium_evaluate' in d ||
-        '__fxdriver_evaluate' in d ||
-        '__webdriverFunc' in w ||
-        '__driver_unwrapped' in d ||
-        '__webdriver_unwrapped' in d ||
-        '__selenium_unwrapped' in d ||
-        '__fxdriver_unwrapped' in d ||
-        '__webdriver_script_fn' in d ||
-        '__webdriver_script_func' in d ||
-        '__webdriver_script_function' in d ||
-
-        'calledSelenium' in w ||
-        '$cdc_asdjflasutopfhvcZLmcfl_' in w ||
-        '$chrome_asyncScriptInfo' in w ||
-
-        '__$webdriverAsyncExecutor' in d ||
-
-        '__lastWatirAlert' in w ||
-        '__lastWatirConfirm' in w ||
-        '__lastWatirPrompt' in w ||
-
-        '_WEBDRIVER_ELEM_CACHE' in w ||
-
-        documentElement.getAttribute('selenium') !== null ||
-        documentElement.getAttribute('webdriver') !== null ||
+    const inWindow = detectKeys(list, w)
+    const inDocument = detectKeys(list, d)
+    const inAttr = documentElement.getAttribute('webdriver') !== null ||
         documentElement.getAttribute('driver') !== null
-    )
+
+    return inWindow || inDocument || inAttr
+}
+
+function checkSelenium() {
+    const d = document
+    const w = window
+    const {documentElement} = d
+
+    const list = [
+        '__selenium_evaluate',
+        '__selenium_unwrapped',
+        '_Selenium_IDE_Recorder',
+        '_selenium',
+        'calledSelenium',
+        'selenium-evaluate',
+    ]
+
+    const inWindow = detectKeys(list, w)
+    const inDocument = detectKeys(list, d)
+    const inAttr = documentElement.getAttribute('selenium') !== null
+
+    return inWindow || inDocument || inAttr
+}
+
+export default function isFramework(): boolean {
+    return checkPhantomJS() ||
+        checkPhantomas() ||
+        checkNightmareJS() ||
+        checkAwesomium() ||
+        checkGeb() ||
+        checkCouchJS() ||
+        checkElectron() ||
+        checkRhino() ||
+        checkNodeJS() ||
+        checkChromium() ||
+        checkSequenium() ||
+        checkCDC() ||
+        checkCDCache() ||
+        checkWebdriver() ||
+        checkSelenium()
 }

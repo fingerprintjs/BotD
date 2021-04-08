@@ -1,3 +1,5 @@
-export default function hasWebDriver(): boolean {
-    return navigator.webdriver !== undefined
+export default function getWebDriver(): boolean {
+    if (navigator.webdriver == undefined)
+        throw new Error('navigator.webdriver is undefined');
+    return navigator.webdriver
 }
