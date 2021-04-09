@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/fingerprintjs/botd-client#readme",
   "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.44.0",

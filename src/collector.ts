@@ -23,6 +23,10 @@ import getVendor from "./sources/vendor";
 import isFramework from "./sources/frameworks";
 import getWebDriver from "./sources/webDriver";
 import getInstallTrigger from "./sources/installTrigger";
+import getFrequency from "./sources/frequency";
+import getWindowProperties from "./sources/window";
+import getDocumentProperties from "./sources/document";
+import getNavigatorProperties from "./sources/navigator";
 
 export default async function collect() {
     return handleAll({
@@ -49,6 +53,10 @@ export default async function collect() {
         "oscpu": getOSCPU,
         "platform": getPlatform,
         "product_sub": getProductSub,
-        "vendor": getVendor
+        "vendor": getVendor,
+        "frequency": getFrequency,
+        "window": getWindowProperties,
+        "document": getDocumentProperties,
+        "navigator": getNavigatorProperties
     })
 }

@@ -14,6 +14,13 @@ export interface Options {
     url: string
 }
 
+export interface Result {
+    is_bad_bot: string,
+    is_good_bot: string,
+    inconsistency: string,
+    is_vm: string
+}
+
 enum State {
     Success = 1,
     Failure = -1,

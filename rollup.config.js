@@ -1,4 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
+import jsonPlugin from '@rollup/plugin-json';
 
 export default {
   input: 'src/index.ts',
@@ -7,5 +8,8 @@ export default {
     format: 'umd',
     name: 'BotDetector'
   },
-  plugins: [typescript()],
+  plugins: [
+    typescript(),
+    jsonPlugin(),
+  ],
 };
