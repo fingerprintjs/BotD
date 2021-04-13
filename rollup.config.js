@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript';
 import jsonPlugin from '@rollup/plugin-json';
-import { terser as terserPlugin } from 'rollup-plugin-terser';
 import dtsPlugin from 'rollup-plugin-dts';
+import { terser as terserPlugin } from 'rollup-plugin-terser';
 
 const inputFile = 'src/index.ts';
 
@@ -11,7 +11,7 @@ export default [
     output: {
       file: 'dist/botd.umd.min.js',
       format: 'umd',
-      name: 'BotDetector'
+      name: 'FPJSBotDetect'
     },
     plugins: [
       typescript(),
@@ -22,6 +22,18 @@ export default [
         },
         safari10: true,
       }),
+    ],
+  },
+  {
+    input: inputFile,
+    output: {
+      file: 'dist_dev/botd.umd.js',
+      format: 'umd',
+      name: 'FPJSBotDetect'
+    },
+    plugins: [
+      typescript(),
+      jsonPlugin(),
     ],
   },
   {
