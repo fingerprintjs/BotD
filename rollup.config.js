@@ -1,15 +1,37 @@
 import typescript from '@rollup/plugin-typescript';
 import jsonPlugin from '@rollup/plugin-json';
+import { terser as terserPlugin } from 'rollup-plugin-terser';
+import dtsPlugin from 'rollup-plugin-dts';
 
-export default {
-  input: 'src/index.ts',
-  output: {
-    dir: 'dist',
-    format: 'umd',
-    name: 'BotDetector'
+const inputFile = 'src/index.ts';
+
+export default [
+  {
+    input: inputFile,
+    output: {
+      file: 'dist/botd.umd.min.js',
+      format: 'umd',
+      name: 'BotDetector'
+    },
+    plugins: [
+      typescript(),
+      jsonPlugin(),
+      terserPlugin({
+        format: {
+          comments: false,
+        },
+        safari10: true,
+      }),
+    ],
   },
-  plugins: [
-    typescript(),
-    jsonPlugin(),
-  ],
-};
+  {
+    input: inputFile,
+    output: {
+      file: 'dist/botd.d.ts',
+      format: 'es',
+    },
+    plugins: [
+      dtsPlugin(),
+    ],
+  },
+];

@@ -2,12 +2,16 @@
   "name": "botd-client",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/botd.umd.min.js",
+  "types": "dist/botd.d.ts",
   "scripts": {
     "build typescript": "tsc",
     "build rollup": "rimraf dist && rollup -c rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fingerprintjs/botd-client.git"
@@ -23,6 +27,8 @@
     "@rollup/plugin-typescript": "^8.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.44.0",
+    "rollup-plugin-dts": "^3.0.1",
+    "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.2.3"
   }
 }
