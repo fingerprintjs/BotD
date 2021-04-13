@@ -122,7 +122,7 @@
         }
     </style>
     <link rel="icon" type="image/ico" href="./img/favicon.ico">
-    <script src="../dist/botd.umd.min.js"></script>
+    <script src="../dist_dev/botd.umd.js"></script>
 </head>
 <body>
 <div class="content">
@@ -163,8 +163,10 @@
     <div id="error" style="display: none">
         Please specify URL of bot detection server in form, or as url parameter
     </div>
-
     <script>
+      let defaultURL = "https://fpjs-botd-dev-use1.fpjs.sh/detect"
+      document.getElementById("url").value = defaultURL
+
       let setTime = (time) => { document.getElementById("time").textContent = `${time.toFixed(0)} ms` }
 
       document.getElementById("button").addEventListener("click", () => { getResults().then(t => setTime(t)) }, false);
@@ -192,7 +194,10 @@
         else
           showResult()
 
-        let botDetector = new BotDetector({token: "wt=GYDFn>tvh[EfAYE)<3dV7`t`:5k{a", url: serverUrl})
+        let botDetector = await FPJSBotDetect.load({
+          token: "wt=GYDFn>tvh[EfAYE)<3dV7`t`:5k{a",
+          url: serverUrl
+        })
         let result = await botDetector.get()
 
         document.getElementById("perf").innerHTML = botDetector.performance + " ms"
