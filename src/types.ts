@@ -15,8 +15,8 @@ export interface Options {
 }
 
 export interface Result {
-    is_bad_bot: string,
-    is_good_bot: string,
+    is_bot: string,
+    is_search_bot: string,
     inconsistency: string,
     is_vm: string
 }
