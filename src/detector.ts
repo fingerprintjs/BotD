@@ -14,7 +14,7 @@ export default class BotDetector {
         this.token = options.token;
     }
 
-    async get(): Promise<boolean> {
+    async detect(): Promise<boolean> {
         try {
             let timestamp = Date.now()
             this.sources = await collect()
