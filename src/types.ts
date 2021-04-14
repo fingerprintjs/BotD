@@ -4,10 +4,15 @@ type SourceFunction = () => SourceResult | Promise<SourceResult>
 export type SourceDict = Record<string, SourceFunction>
 export type SourceResultDict = Record<string, Source>
 
-interface Source {
-  state: State
-  value: SourceResult
-}
+type Source =
+  | {
+      state: State.Success
+      value: SourceResult
+    }
+  | {
+      state: State.Failure
+      value: string
+    }
 
 export interface Options {
   token: string
@@ -31,9 +36,9 @@ async function handleSource(sourceFunction: SourceFunction): Promise<Source> {
   let result: Source
   try {
     sourceResult = await sourceFunction()
-    result = { value: sourceResult, state: State.Success }
+    result = { state: State.Success, value: sourceResult }
   } catch (e) {
-    result = { value: e.toString(), state: State.Failure }
+    result = { state: State.Failure, value: e.toString() }
   }
   return result
 }
@@ -41,7 +46,7 @@ async function handleSource(sourceFunction: SourceFunction): Promise<Source> {
 export default async function handleAll(sources: SourceDict): Promise<SourceResultDict> {
   const results: SourceResultDict = {}
   for (const name in sources) {
-    if (sources.hasOwnProperty(name)) {
+    if (Object.prototype.hasOwnProperty.call(sources, name)) {
       const sourceFunction = sources[name]
       results[name] = await handleSource(sourceFunction)
     }

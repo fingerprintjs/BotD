@@ -198,11 +198,11 @@
           token: "wt=GYDFn>tvh[EfAYE)<3dV7`t`:5k{a",
           url: serverUrl
         })
-        let result = await botDetector.get()
+        const result = await botDetector.get()
 
         document.getElementById("perf").innerHTML = botDetector.performance + " ms"
         document.getElementById("sources").innerHTML = JSON.stringify(botDetector.sources, null, 4)
-        document.getElementById("result").innerHTML = JSON.stringify(botDetector.result, null, 4)
+        document.getElementById("result").innerHTML = JSON.stringify(result, null, 4)
         let t1 = performance.now()
         return t1 - t0
       }

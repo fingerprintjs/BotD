@@ -5,41 +5,37 @@ import { Options, SourceResultDict } from './types'
 export default class BotDetector {
   url: string
   token: string
+  timestamp: number | undefined
   performance: number | undefined
   sources: SourceResultDict | undefined
-  result: object | undefined
 
   constructor(options: Options) {
     this.url = options.url
     this.token = options.token
   }
+  async collect(): Promise<SourceResultDict> {
+    this.timestamp = Date.now()
+    this.sources = await collect()
+    this.performance = Date.now() - this.timestamp
+    return this.sources
+  }
 
-  async detect(): Promise<boolean> {
-    try {
-      const timestamp = Date.now()
-      this.sources = await collect()
-      this.performance = Date.now() - timestamp
-
-      const body = {
-        timestamp: timestamp,
-        performance: this.performance,
-        signals: this.sources,
-        version: version,
-        token: this.token,
-      }
-
-      const response = await fetch(this.url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-      this.result = await response.json()
-    } catch {
-      return false
+  async get(): Promise<string> {
+    const body = {
+      timestamp: this.timestamp,
+      performance: this.performance,
+      signals: this.sources,
+      version: version,
+      token: this.token,
     }
 
-    return true
+    const response = await fetch(this.url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+    return await response.json()
   }
 }

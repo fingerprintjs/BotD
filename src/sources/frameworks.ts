@@ -46,23 +46,24 @@ function checkChromium(): boolean {
 function checkCDCache() {
   const d = document
   for (const k in d) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (d.hasOwnProperty(k) && k.match(/\$[a-z]dc_/) && d[k]['cache_']) return true
+    if (Object.prototype.hasOwnProperty.call(d, k) && k.match(/\$[a-z]dc_/) && d[k]['cache_']) return true
   }
   return false
 }
 
 function checkCDC() {
   const w = window
-  for (const k in w) if (w.hasOwnProperty(k) && k.match(/[a-z]dc_/)) return true
+  for (const k in w) if (Object.prototype.hasOwnProperty.call(w, k) && k.match(/[a-z]dc_/)) return true
   return false
 }
 
-function detectKeys(keys: string[], o: Object): boolean {
+function detectKeys(keys: string[], o: Window | Document): boolean {
   for (const i in keys)
-    if (keys.hasOwnProperty(i)) {
+    if (Object.prototype.hasOwnProperty.call(keys, i)) {
       const value = keys[i]
-      if (o.hasOwnProperty(value)) return true
+      if (Object.prototype.hasOwnProperty.call(o, value)) return true
     }
   return false
 }

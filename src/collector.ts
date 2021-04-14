@@ -1,4 +1,4 @@
-import handleAll from './types'
+import handleAll, { SourceResultDict } from './types'
 import getUserAgent from './sources/userAgent'
 import hasUserAgentData from './sources/userAgentData'
 import getAppVersion from './sources/appVersion'
@@ -28,7 +28,7 @@ import getWindowProperties from './sources/window'
 import getDocumentProperties from './sources/document'
 import getNavigatorProperties from './sources/navigator'
 
-export default async function collect() {
+export default async function collect(): Promise<SourceResultDict> {
   return handleAll({
     user_agent: getUserAgent,
     user_agent_data: hasUserAgentData,

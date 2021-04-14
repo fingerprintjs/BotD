@@ -15,6 +15,6 @@ interface Navigator {
 }
 
 interface Window {
-  readonly chrome?: object
-  readonly InstallTrigger?: object
+  readonly chrome?: unknown
+  readonly InstallTrigger?: unknown
 }
