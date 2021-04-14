@@ -158,7 +158,6 @@
     </div>
     <script>
       let defaultURL = "https://fpjs-botd-dev-use1.fpjs.sh/detect"
-      document.getElementById("url").value = defaultURL
 
       let setTime = (time) => {
         document.getElementById("time").textContent = `${time.toFixed(0)} ms`
@@ -188,9 +187,9 @@
           serverUrl = urlParameters.get('url')
 
           if (serverUrl === null) {
-            showError()
-            return 0
+            serverUrl = defaultURL
           }
+          document.getElementById("url").value = serverUrl
         } else
           showResult()
 
