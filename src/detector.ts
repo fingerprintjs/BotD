@@ -20,7 +20,7 @@ export default class BotDetector {
     return this.sources
   }
 
-  async get(): Promise<string> {
+  async get(): Promise<Record<string, unknown>> {
     const body = {
       timestamp: this.timestamp,
       performance: this.performance,
@@ -28,14 +28,22 @@ export default class BotDetector {
       version: version,
       token: this.token,
     }
-
-    const response = await fetch(this.url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
-    return await response.json()
+    try {
+      const response = await fetch(this.url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+      return await response.json()
+    } catch (e) {
+      return {
+        error: {
+          code: 'Failed',
+          message: e.toString(),
+        },
+      }
+    }
   }
 }
