@@ -1,3 +1,3 @@
 export default function hasUserAgentData(): boolean {
-    return navigator.userAgentData !== undefined
+  return navigator.userAgentData !== undefined
 }

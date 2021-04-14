@@ -1,5 +1,5 @@
-import {getProperties} from "../misc";
+import { getProperties } from '../misc'
 
 export default function getNavigatorProperties(): string[] {
-    return getProperties(window.navigator)
+  return getProperties(window.navigator)
 }

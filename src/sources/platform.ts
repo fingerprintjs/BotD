@@ -1,3 +1,3 @@
 export default function getPlatform(): string {
-    return navigator.platform
+  return navigator.platform
 }
