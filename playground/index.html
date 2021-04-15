@@ -193,19 +193,21 @@
         } else
           showResult()
 
-        let botDetector = await FPJSBotDetect.load({
+        const botdPromise = FPJSBotDetect.load({
           token: "wt=GYDFn>tvh[EfAYE)<3dV7`t`:5k{a",
           url: serverUrl
         })
-        const result = await botDetector.get()
 
-        document.getElementById("perf").innerHTML = botDetector.performance + " ms"
-        document.getElementById("sources").innerHTML = JSON.stringify(botDetector.sources, null, 4)
+        const botd = await botdPromise
+        const result = await botd.get();
+
+        document.getElementById("perf").innerHTML = botd.performance + " ms"
+        document.getElementById("sources").innerHTML = JSON.stringify(botd.sources, null, 4)
         document.getElementById("result").innerHTML = JSON.stringify(result, null, 4)
         let t1 = performance.now()
+
         return t1 - t0
       }
-
       getResults().then(t => setTime(t))
     </script>
 </div>
