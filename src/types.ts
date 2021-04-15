@@ -1,10 +1,10 @@
 type SimpleSourceResult = string | number | boolean
-export type SourceResult = SimpleSourceResult | SimpleSourceResult[]
-export type SourceFunction = () => SourceResult | Promise<SourceResult>
-export type SourceDict = Record<string, SourceFunction>
+type SourceResult = SimpleSourceResult | SimpleSourceResult[]
+type SourceFunction = () => SourceResult | Promise<SourceResult>
+type SourceDict = Record<string, SourceFunction>
 export type SourceResultDict = Record<string, Source>
 
-export type Source =
+type Source =
   | {
       state: State.Success
       value: SourceResult
@@ -16,14 +16,7 @@ export type Source =
 
 export interface Options {
   token: string
-  url: string
-}
-
-export interface Result {
-  is_bot: string
-  is_search_bot: string
-  inconsistency: string
-  is_vm: string
+  url: string | undefined
 }
 
 export const enum State {
@@ -43,7 +36,7 @@ async function handleSource(sourceFunction: SourceFunction): Promise<Source> {
   return result
 }
 
-export default async function handleAll(sources: SourceDict): Promise<SourceResultDict> {
+export async function handleAll(sources: SourceDict): Promise<SourceResultDict> {
   const results: SourceResultDict = {}
   for (const name in sources) {
     if (Object.prototype.hasOwnProperty.call(sources, name)) {

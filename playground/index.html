@@ -157,8 +157,6 @@
         Please specify URL of bot detection server in form, or as url parameter
     </div>
     <script>
-      let defaultURL = "https://fpjs-botd-dev-use1.fpjs.sh/detect"
-
       let setTime = (time) => {
         document.getElementById("time").textContent = `${time.toFixed(0)} ms`
       }
@@ -168,11 +166,6 @@
       }, false);
 
       async function getResults() {
-        let showError = () => {
-          document.getElementsByClassName("output_holder")[0].style.display = "none"
-          document.getElementById("error").style.display = "block"
-        }
-
         let showResult = () => {
           document.getElementsByClassName("output_holder")[0].style.display = "block"
           document.getElementById("error").style.display = "none"
@@ -187,9 +180,10 @@
           serverUrl = urlParameters.get('url')
 
           if (serverUrl === null) {
-            serverUrl = defaultURL
+            serverUrl = undefined
+          } else {
+            document.getElementById("url").value = serverUrl;
           }
-          document.getElementById("url").value = serverUrl
         } else
           showResult()
 

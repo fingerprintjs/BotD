@@ -11,7 +11,7 @@ export default class BotDetector {
   sources: SourceResultDict | undefined
 
   constructor(options: Options) {
-    this.url = options.url
+    this.url = options.url === undefined ? 'https://botd.fpapi.io/detect' : options.url
     this.token = options.token
   }
 

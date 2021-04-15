@@ -1,4 +1,4 @@
-import handleAll, { SourceResultDict } from './types'
+import { handleAll, SourceResultDict } from './types'
 import getUserAgent from './sources/userAgent'
 import hasUserAgentData from './sources/userAgentData'
 import getAppVersion from './sources/appVersion'
