@@ -16,7 +16,7 @@ type Source =
 
 export interface Options {
   token: string
-  url: string | undefined
+  endpoint?: string
 }
 
 export const enum State {

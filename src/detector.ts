@@ -3,15 +3,15 @@ import { version } from '../package.json'
 import { Options, SourceResultDict, State } from './types'
 
 export default class BotDetector {
-  url: string
+  endpoint: string
   token: string
-  timestamp: number | undefined
-  tag: string | undefined
-  performance: number | undefined
-  sources: SourceResultDict | undefined
+  timestamp?: number
+  tag?: string
+  performance?: number
+  sources?: SourceResultDict
 
   constructor(options: Options) {
-    this.url = options.url === undefined ? 'https://botd.fpapi.io/detect' : options.url
+    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/detect' : options.endpoint
     this.token = options.token
   }
 
@@ -43,7 +43,7 @@ export default class BotDetector {
       token: this.token,
     }
     try {
-      const response = await fetch(this.url, {
+      const response = await fetch(this.endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
