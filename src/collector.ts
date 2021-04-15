@@ -28,7 +28,7 @@ import getWindowProperties from './sources/window'
 import getDocumentProperties from './sources/document'
 import getNavigatorProperties from './sources/navigator'
 
-const enum SignalName {
+export const enum SignalName {
   UserAgent = 's1',
   UserAgentData = 's2',
   AppVersion = 's3',
@@ -57,6 +57,7 @@ const enum SignalName {
   WindowProperties = 's26',
   DocumentProperties = 's27',
   NavigatorProperties = 's28',
+  Tag = 's29',
 }
 
 export default async function collect(): Promise<SourceResultDict> {

@@ -199,7 +199,7 @@
         })
 
         const botd = await botdPromise
-        const result = await botd.get();
+        const result = await botd.get({isPlayground: true});
 
         document.getElementById("perf").innerHTML = botd.performance + " ms"
         document.getElementById("sources").innerHTML = JSON.stringify(botd.sources, null, 4)

@@ -1,10 +1,10 @@
 type SimpleSourceResult = string | number | boolean
-type SourceResult = SimpleSourceResult | SimpleSourceResult[]
-type SourceFunction = () => SourceResult | Promise<SourceResult>
+export type SourceResult = SimpleSourceResult | SimpleSourceResult[]
+export type SourceFunction = () => SourceResult | Promise<SourceResult>
 export type SourceDict = Record<string, SourceFunction>
 export type SourceResultDict = Record<string, Source>
 
-type Source =
+export type Source =
   | {
       state: State.Success
       value: SourceResult
@@ -26,7 +26,7 @@ export interface Result {
   is_vm: string
 }
 
-const enum State {
+export const enum State {
   Success = 1,
   Failure = -1,
 }

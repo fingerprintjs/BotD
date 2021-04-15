@@ -1,11 +1,12 @@
-import collect from './collector'
+import collect, { SignalName } from './collector'
 import { version } from '../package.json'
-import { Options, SourceResultDict } from './types'
+import { Options, SourceResultDict, State } from './types'
 
 export default class BotDetector {
   url: string
   token: string
   timestamp: number | undefined
+  tag: string | undefined
   performance: number | undefined
   sources: SourceResultDict | undefined
 
@@ -13,6 +14,18 @@ export default class BotDetector {
     this.url = options.url
     this.token = options.token
   }
+
+  setTag(tag: unknown): void {
+    if (this.sources !== undefined) {
+      try {
+        this.tag = tag === undefined ? '' : JSON.stringify(tag)
+      } catch (e) {
+        this.tag = ''
+      }
+      this.sources[SignalName.Tag] = { state: State.Success, value: this.tag }
+    }
+  }
+
   async collect(): Promise<SourceResultDict> {
     this.timestamp = Date.now()
     this.sources = await collect()
@@ -20,7 +33,8 @@ export default class BotDetector {
     return this.sources
   }
 
-  async get(): Promise<Record<string, unknown>> {
+  async get(tag: unknown): Promise<Record<string, unknown>> {
+    this.setTag(tag)
     const body = {
       timestamp: this.timestamp,
       performance: this.performance,
