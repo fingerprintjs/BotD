@@ -36,17 +36,18 @@ export default class BotDetector {
   async get(tag: unknown): Promise<Record<string, unknown>> {
     this.setTag(tag)
     const body = {
+      async: false,
       timestamp: this.timestamp,
       performance: this.performance,
       signals: this.sources,
       version: version,
-      token: this.token,
     }
     try {
       const response = await fetch(this.endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Auth-Token': this.token,
         },
         body: JSON.stringify(body),
       })
