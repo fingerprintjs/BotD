@@ -5,13 +5,18 @@ import { Options, SourceResultDict, State } from './types'
 export default class BotDetector {
   endpoint: string
   token: string
+  async: boolean
   timestamp?: number
   tag?: string
   performance?: number
   sources?: SourceResultDict
 
   constructor(options: Options) {
-    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/detect' : options.endpoint
+    this.async = options.async == undefined ? false : options.async
+    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/' : options.endpoint
+    if (!this.endpoint.endsWith('/')) {
+      this.endpoint += '/'
+    }
     this.token = options.token
   }
 
@@ -36,14 +41,14 @@ export default class BotDetector {
   async get(tag: unknown): Promise<Record<string, unknown>> {
     this.setTag(tag)
     const body = {
-      async: false,
+      async: this.async,
       timestamp: this.timestamp,
       performance: this.performance,
       signals: this.sources,
       version: version,
     }
     try {
-      const response = await fetch(this.endpoint, {
+      const response = await fetch(this.endpoint + 'detect', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,11 +56,53 @@ export default class BotDetector {
         },
         body: JSON.stringify(body),
       })
+      const json = await response.json()
+      if (this.async) {
+        localStorage.setItem('botd-request-id', json['request_id'])
+      }
+      return json
+    } catch (e) {
+      return {
+        error: {
+          code: 500,
+          message: e.toString(),
+        },
+      }
+    }
+  }
+
+  async poll(): Promise<Record<string, unknown>> {
+    if (!this.async) {
+      return {
+        error: {
+          code: 400,
+          message: 'You are in sync mode, set "async" as true in load() method',
+        },
+      }
+    }
+    const requestId = localStorage.getItem('botd-request-id')
+    if (requestId == null) {
+      return {
+        error: {
+          code: 400,
+          message: 'Call get() method first to make a request',
+        },
+      }
+    }
+
+    try {
+      const response = await fetch(this.endpoint + "results?id=" + requestId, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Auth-Token': this.token,
+        }
+      })
       return await response.json()
     } catch (e) {
       return {
         error: {
-          code: 'Failed',
+          code: 500,
           message: e.toString(),
         },
       }

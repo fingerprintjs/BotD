@@ -16,6 +16,7 @@ type Source =
 
 export interface Options {
   token: string
+  async?: boolean
   endpoint?: string
 }
 
