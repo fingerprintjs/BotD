@@ -46,13 +46,13 @@ export default class BotDetector {
       performance: this.performance,
       signals: this.sources,
       version: version,
+      token: this.token,
     }
     try {
       const response = await fetch(this.endpoint + 'detect', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': this.token,
+          'Content-Type': 'text/plain',
         },
         body: JSON.stringify(body),
       })
@@ -90,13 +90,18 @@ export default class BotDetector {
       }
     }
 
+    const body = {
+      token: this.token,
+      request_id: requestId,
+    }
+
     try {
-      const response = await fetch(this.endpoint + "results?id=" + requestId, {
-        method: 'GET',
+      const response = await fetch(this.endpoint + "results", {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': this.token,
-        }
+          'Content-Type': 'text/plain',
+        },
+        body: JSON.stringify(body),
       })
       return await response.json()
     } catch (e) {
