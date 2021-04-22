@@ -91,12 +91,12 @@ export default class BotDetector {
     }
 
     try {
-      const response = await fetch(this.endpoint + "results?id=" + requestId, {
+      const response = await fetch(this.endpoint + 'results?id=' + requestId, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Auth-Token': this.token,
-        }
+        },
       })
       return await response.json()
     } catch (e) {
