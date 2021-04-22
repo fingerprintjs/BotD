@@ -13,7 +13,7 @@ export default class BotDetector {
 
   constructor(options: Options) {
     this.async = options.async == undefined ? false : options.async
-    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/' : options.endpoint
+    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
     if (!this.endpoint.endsWith('/')) {
       this.endpoint += '/'
     }
