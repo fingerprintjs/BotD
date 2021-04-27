@@ -1,6 +1,6 @@
 import collect, { SignalName } from './collector'
 import { version } from '../package.json'
-import { Options, SourceResultDict, State } from './types'
+import { getCookie, Options, setCookie, SourceResultDict, State } from './types'
 
 export default class BotDetector {
   endpoint: string
@@ -46,20 +46,20 @@ export default class BotDetector {
       performance: this.performance,
       signals: this.sources,
       version: version,
+      token: this.token,
     }
     try {
       const response = await fetch(this.endpoint + 'detect', {
         method: 'POST',
         headers: {
+          // 'Content-Type': 'text/plain',
           'Content-Type': 'application/json',
           'Auth-Token': this.token,
         },
         body: JSON.stringify(body),
       })
       const json = await response.json()
-      if (this.async) {
-        localStorage.setItem('botd-request-id', json['request_id'])
-      }
+      if (this.async) setCookie('botd-request-id', json['request_id'])
       return json
     } catch (e) {
       return {
@@ -80,7 +80,7 @@ export default class BotDetector {
         },
       }
     }
-    const requestId = localStorage.getItem('botd-request-id')
+    const requestId = getCookie('botd-request-id')
     if (requestId == null) {
       return {
         error: {
@@ -90,13 +90,22 @@ export default class BotDetector {
       }
     }
 
+    // const body = {
+    //   token: this.token,
+    //   request_id: requestId,
+    // }
+
     try {
-      const response = await fetch(this.endpoint + "results?id=" + requestId, {
+      // const response = await fetch(this.endpoint + 'results', {
+      const response = await fetch(this.endpoint + 'results?id=' + requestId, {
+        //   method: 'POST',
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Auth-Token': this.token,
-        }
+          // 'Content-Type': 'text/plain',
+        },
+        // body: JSON.stringify(body),
       })
       return await response.json()
     } catch (e) {

@@ -1,9 +1,10 @@
 {
   "name": "@fpjs-incubator/botd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/botd.umd.min.js",
   "types": "dist/botd.d.ts",
+  "license": "private",
   "author": "FingerprintJS",
   "files": [
     "dist"

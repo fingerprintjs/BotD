@@ -124,7 +124,7 @@
     <link rel="icon" type="image/ico" href="./img/favicon.ico">
     <script src="../dist_dev/botd.umd.js"></script>
 </head>
-<body>
+<body onload="getResults()">
 <div class="content">
     <a href="https://fingerprintjs.com/">
         <svg id="logo" viewBox="0 0 450 63" xmlns="http://www.w3.org/2000/svg">
@@ -135,11 +135,11 @@
         </svg>
     </a>
     <h1>Bot Detect Playground</h1>
-    <form class="url_form">
+    <form class="url_form" onsubmit="getResults(); return false">
         <label>
             <input id="url" type="text" placeholder="URL of bot detection server">
         </label>
-        <button id="button" type="button">Start detect</button>
+        <button id="button" type="button" onclick="getResults()">Start detect</button>
     </form>
     <div class="output_holder">
         <section class="output">
@@ -153,24 +153,8 @@
             <pre class="output_div" id="sources"></pre>
         </section>
     </div>
-    <div id="error" style="display: none">
-        Please specify URL of bot detection server in form, or as url parameter
-    </div>
     <script>
-      let setTime = (time) => {
-        document.getElementById("time").textContent = `${time.toFixed(0)} ms`
-      }
-
-      document.getElementById("button").addEventListener("click", () => {
-        getResults().then(t => setTime(t))
-      }, false);
-
       async function getResults() {
-        let showResult = () => {
-          document.getElementsByClassName("output_holder")[0].style.display = "block"
-          document.getElementById("error").style.display = "none"
-        }
-
         let t0 = performance.now()
         let serverUrl = document.getElementById("url").value;
 
@@ -184,8 +168,7 @@
           } else {
             document.getElementById("url").value = serverUrl;
           }
-        } else
-          showResult()
+        }
 
         const botdPromise = FPJSBotDetect.load({
           token: "JzdWIiOiIxMjM0NTY3O",
@@ -199,11 +182,8 @@
         document.getElementById("perf").innerHTML = botd.performance + " ms"
         document.getElementById("sources").innerHTML = JSON.stringify(botd.sources, null, 4)
         document.getElementById("result").innerHTML = JSON.stringify(result, null, 4)
-        let t1 = performance.now()
-
-        return t1 - t0
+        document.getElementById("time").textContent = `${(performance.now() - t0).toFixed(0)} ms`
       }
-      getResults().then(t => setTime(t))
     </script>
 </div>
 </body>
