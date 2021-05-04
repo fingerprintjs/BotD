@@ -35,7 +35,8 @@ function initFpJSBotd() {
 }
 </script>
 <script async 
-        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="initFpJSBotd()">
+        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" 
+        onload="initFpJSBotd()">
 </script>
 ```
 
