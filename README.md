@@ -5,13 +5,13 @@
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/@fpjs-incubator/botd">
-    <img src="https://img.shields.io/npm/v/@fpjs-incubator/botd.svg" alt="Current NPM version">
+    <img src="https://img.shields.io/npm/v/@fpjs-incubator/botd-agent.svg" alt="Current NPM version">
   </a>
   <a href="https://www.npmjs.com/package/@fpjs-incubator/botd">
-    <img src="https://img.shields.io/npm/dm/@fpjs-incubator/botd.svg" alt="Monthly downloads from NPM">
+    <img src="https://img.shields.io/npm/dm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from NPM">
   </a>
   <a href="https://www.jsdelivr.com/package/npm/@fpjs-incubator/botd">
-    <img src="https://img.shields.io/jsdelivr/npm/hm/@fpjs-incubator/botd.svg" alt="Monthly downloads from jsDelivr">
+    <img src="https://img.shields.io/jsdelivr/npm/hm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from jsDelivr">
   </a>
 </p>
 
@@ -34,7 +34,9 @@ function initFpJSBotd() {
       });
 }
 </script>
-<script async src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="initFpJSBotd()"></script>
+<script async 
+        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="initFpJSBotd()">
+</script>
 ```
 
 ### Alternatively you can install from NPM to use with Webpack/Rollup/Browserify
