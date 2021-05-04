@@ -4,13 +4,13 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/@fpjs-incubator/botd">
+  <a href="https://www.npmjs.com/package/@fpjs-incubator/botd-agent">
     <img src="https://img.shields.io/npm/v/@fpjs-incubator/botd-agent.svg" alt="Current NPM version">
   </a>
-  <a href="https://www.npmjs.com/package/@fpjs-incubator/botd">
+  <a href="https://www.npmjs.com/package/@fpjs-incubator/botd-agent">
     <img src="https://img.shields.io/npm/dm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from NPM">
   </a>
-  <a href="https://www.jsdelivr.com/package/npm/@fpjs-incubator/botd">
+  <a href="https://www.jsdelivr.com/package/npm/@fpjs-incubator/botd-agent">
     <img src="https://img.shields.io/jsdelivr/npm/hm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from jsDelivr">
   </a>
 </p>
