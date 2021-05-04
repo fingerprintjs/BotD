@@ -22,22 +22,23 @@ FingerprintJS BotD is a browser library for detecting automation tools and brows
 ### Install from CDN
 
 ```html
-  <script>
-  function initFpJSBotd() {
-    // Initialize an agent at application startup.
-    const botdPromise = FPJSBotDetect.load({ token: "<token>" })
-    // Get the bot detection result when you need it.
-    botdPromise
+<script>
+function initFpJSBotd() {
+  // Initialize an agent at application startup.
+  const botdPromise = FPJSBotDetect.load({ token: "<token>" })
+  // Get the bot detection result when you need it.
+  botdPromise
       .then(botd => botd.get())
       .then(result => {
         console.log(result);
       });
-  }
+}
 </script>
-<script async src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="initFpJSBotd()"></script
-
+<script async src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="initFpJSBotd()"></script>
 ```
+
 ### Alternatively you can install from NPM to use with Webpack/Rollup/Browserify
+
 ```bash
 npm i @fpjs-incubator/botd-agent
 # or
@@ -63,6 +64,7 @@ import FPJSBotDetect from '@fpjs-incubator/botd-agent';
 #### `FpJSBotDetect.load({ token: string, endpoint?: string, async?: boolean}): Promise<BotDetector>`
 
 Builds an instance of BotDetector. We recommend calling it as soon as possible.
+
 `token` is a unique identifier required to access the API.
 
 `endpoint` used for development, production endpoint is used by default.
@@ -72,6 +74,7 @@ Builds an instance of BotDetector. We recommend calling it as soon as possible.
 #### `botd.get({ tag: object }): Promise<object>`
 
 Gets the result of bot detection.
+
 `tag` is custom object to store to database.
 
 #### `botd.poll(): Promise<Record<string, unknown>>`
@@ -119,16 +122,21 @@ Gets the result of bot detection.
     }
 }
 ```
+
 #### `bot.status`
+
 Possible values of `bot.status` field = [“ok” | “undefined” | “not_enough_info”]
 
 #### `bot.probability`
+
 Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
 
 #### `bot.type`
+
 Possible values = [“phantomjs”, “chrome_headless” … or empty string]
 
 #### `bot.browser_spoofing`
+
 Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
 
 `bot.browser_spoofing.status` - possible values = [“ok” | “undefined” | “not_enough_info”]
@@ -136,6 +144,7 @@ Check user browser for spoofing parameters (e.x. User-agent is chrome-windows bu
 `bot.browser_spoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
 
 #### `bot.search`
+
 Check if user is search bot of some famous search engine like Google
 
 `bot.search.status` - possible values = [“ok” | “undefined” | “not_enough_info”]
@@ -145,15 +154,19 @@ Check if user is search bot of some famous search engine like Google
 `bot.search.type` - possible values = [“google”, “yandex” … or empty string]
 
 #### `vm.status`
+
 Possible values of `vm.status` field = [“ok” | “undefined” | “not_enough_info”]
 
 #### `vm.probability`
+
 Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
 
 #### `vm.type`
+
 Possible values = [“vmware”, “parallels” … or empty string]
 
 ### Error occurred:
+
 ```json
 {
     "error": {
@@ -162,5 +175,7 @@ Possible values = [“vmware”, “parallels” … or empty string]
     }
 }
 ```
+
 #### `error.code` - Error code
+
 #### `error.description` - Error description
