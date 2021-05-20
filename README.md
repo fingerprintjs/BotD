@@ -161,7 +161,7 @@ Check if user is search bot of some famous search engine like Google
 
 #### `vm`
 
-Check if user is search bot of some famous search engine like Google
+Check if user access through virtual machine
 
 `status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
 
