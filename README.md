@@ -109,7 +109,7 @@ Gets the result of bot detection.
             "status": "Ok",
             "probability": 0,
             "type": ""
-        }
+        },
         "browserSpoofing": {
             "status": "Ok",
             "probability": 0,
@@ -149,27 +149,25 @@ Check user browser for spoofing parameters (e.x. User-agent is chrome-windows bu
 
 `bot.browserSpoofing.type` - possible values = [“userAgent” ... or empty string]
 
-#### `bot.search`
+#### `bot.searchEngine`
 
 Check if user is search bot of some famous search engine like Google
 
-`bot.search.status` - possible values = [“ok” | “undefined” | “not_enough_info”]
+`bot.searchEngine.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
 
-`bot.search.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`bot.searchEngine.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
-`bot.search.type` - possible values = [“google”, “yandex” … or empty string]
+`bot.searchEngine.type` - possible values = [“google”, “yandex” … or empty string]
 
-#### `vm.status`
+#### `vm`
 
-Possible values of `vm.status` field = [“ok” | “undefined” | “not_enough_info”]
+Check if user is search bot of some famous search engine like Google
 
-#### `vm.probability`
+`status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
 
-Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
-#### `vm.type`
-
-Possible values = [“vmware”, “parallels” … or empty string]
+`type` - possible values = [“vmware”, “parallels” … or empty string]
 
 ### Error occurred:
 
