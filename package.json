@@ -1,6 +1,6 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/botd.umd.min.js",
   "types": "dist/botd.d.ts",
