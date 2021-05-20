@@ -105,14 +105,17 @@ Gets the result of bot detection.
 ```json
 {
     "bot": {
-        "status": "Ok",
-        "probability": 0,
-        "type": "",
-        "browser_spoofing": {
+        "automationTool": {
             "status": "Ok",
-            "probability": 0
+            "probability": 0,
+            "type": ""
+        }
+        "browserSpoofing": {
+            "status": "Ok",
+            "probability": 0,
+            "type": ""
         },
-        "search": {
+        "searchEngine": {
             "status": "Ok",
             "probability": 0,
             "type": ""
@@ -126,25 +129,25 @@ Gets the result of bot detection.
 }
 ```
 
-#### `bot.status`
-
-Possible values of `bot.status` field = [“ok” | “undefined” | “not_enough_info”]
-
-#### `bot.probability`
-
-Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
-
-#### `bot.type`
-
-Possible values = [“phantomjs”, “chrome_headless” … or empty string]
-
-#### `bot.browser_spoofing`
+#### `bot.automationTool`
 
 Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
 
-`bot.browser_spoofing.status` - possible values = [“ok” | “undefined” | “not_enough_info”]
+`bot.automationTool.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
 
-`bot.browser_spoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
+`bot.automationTool.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+
+`bot.automationTool.type` - possible values = [“phantomjs”, "chromeHeadless" ... or empty string]
+
+#### `bot.browserSpoofing`
+
+Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
+
+`bot.browserSpoofing.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
+
+`bot.browserSpoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+
+`bot.browserSpoofing.type` - possible values = [“userAgent” ... or empty string]
 
 #### `bot.search`
 
@@ -152,7 +155,7 @@ Check if user is search bot of some famous search engine like Google
 
 `bot.search.status` - possible values = [“ok” | “undefined” | “not_enough_info”]
 
-`bot.search.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
+`bot.search.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
 `bot.search.type` - possible values = [“google”, “yandex” … or empty string]
 
@@ -162,7 +165,7 @@ Possible values of `vm.status` field = [“ok” | “undefined” | “not_enou
 
 #### `vm.probability`
 
-Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “not_enough_info” statuses]
+Possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
 #### `vm.type`
 
