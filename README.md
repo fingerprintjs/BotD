@@ -106,23 +106,23 @@ Gets the result of bot detection.
 {
     "bot": {
         "automationTool": {
-            "status": "Ok",
+            "status": "processed",
             "probability": 0,
             "type": ""
         },
         "browserSpoofing": {
-            "status": "Ok",
+            "status": "processed",
             "probability": 0,
             "type": ""
         },
         "searchEngine": {
-            "status": "Ok",
+            "status": "processed",
             "probability": 0,
             "type": ""
         }
     },
     "vm": {
-        "status": "Ok",
+        "status": "processed",
         "probability": 0,
         "type": ""
     }
@@ -133,7 +133,7 @@ Gets the result of bot detection.
 
 Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
 
-`bot.automationTool.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
+`bot.automationTool.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
 
 `bot.automationTool.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
@@ -143,7 +143,7 @@ Check user browser for spoofing parameters (e.x. User-agent is chrome-windows bu
 
 Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
 
-`bot.browserSpoofing.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
+`bot.browserSpoofing.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
 
 `bot.browserSpoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
@@ -153,7 +153,7 @@ Check user browser for spoofing parameters (e.x. User-agent is chrome-windows bu
 
 Check if user is search bot of some famous search engine like Google
 
-`bot.searchEngine.status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
+`bot.searchEngine.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
 
 `bot.searchEngine.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
@@ -163,7 +163,7 @@ Check if user is search bot of some famous search engine like Google
 
 Check if user access through virtual machine
 
-`status` - possible values = [“ok” | “undefined” | “notEnoughInfo”]
+`status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
 
 `probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
 
