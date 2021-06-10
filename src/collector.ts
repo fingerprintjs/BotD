@@ -10,7 +10,6 @@ import getScreen from './sources/screen'
 import getDeviceMemory from './sources/deviceMemory'
 import isBigEndian from './sources/endian'
 import getHardwareConcurrency from './sources/hardwareConcurrency'
-import hasChrome from './sources/chrome'
 import getEvalLength from './sources/evalLength'
 import getPluginsLength from './sources/pluginsLength'
 import arePluginsConsistent from './sources/pluginsConsistence'
@@ -20,13 +19,17 @@ import getOSCPU from './sources/oscpu'
 import getPlatform from './sources/platform'
 import getProductSub from './sources/productSub'
 import getVendor from './sources/vendor'
-import isFramework from './sources/frameworks'
 import getWebDriver from './sources/webDriver'
 import getInstallTrigger from './sources/installTrigger'
 import getFrequency from './sources/frequency'
-import getWindowProperties from './sources/window'
-import getDocumentProperties from './sources/document'
-import getNavigatorProperties from './sources/navigator'
+import getWindowProperties from './sources/windowProperties'
+import getDocumentProperties from './sources/documentProperties'
+import getNavigatorProperties from './sources/navigatorProperties'
+import getTouchPoints from './sources/touch'
+import getSourceBufferType from './sources/sourceBuffer'
+import getDocumentElementKeys from './sources/documentElementKeys'
+import getWindowClose from './sources/windowClose'
+import getWindowExternal from './sources/windowExternal'
 
 export const enum SignalName {
   UserAgent = 's1',
@@ -40,23 +43,26 @@ export const enum SignalName {
   DeviceMemory = 's9',
   Endian = 's10',
   HardwareConcurrency = 's11',
-  Chrome = 's12',
-  InstallTrigger = 's13',
-  Framework = 's14',
-  WebDriver = 's15',
-  EvalLength = 's16',
-  PluginsLength = 's17',
-  PluginsConsistent = 's18',
-  ErrorTrace = 's19',
-  ErrorFF = 's20',
-  OSCPU = 's21',
-  Platform = 's22',
-  ProductSub = 's23',
-  Vendor = 's24',
-  Frequency = 's25',
-  WindowProperties = 's26',
-  DocumentProperties = 's27',
-  NavigatorProperties = 's28',
+  InstallTrigger = 's12',
+  WebDriver = 's13',
+  EvalLength = 's14',
+  PluginsLength = 's15',
+  PluginsConsistent = 's16',
+  ErrorTrace = 's17',
+  ErrorFF = 's18',
+  OSCPU = 's19',
+  Platform = 's20',
+  ProductSub = 's21',
+  Vendor = 's22',
+  Frequency = 's23',
+  WindowProperties = 's24',
+  DocumentProperties = 's25',
+  NavigatorProperties = 's26',
+  Touch = 's27',
+  SourceBuffer = 's28',
+  DocumentElementKeys = 's29',
+  WindowClose = 's30',
+  WindowExternal = 's31',
   Tag = 's29',
 }
 
@@ -73,9 +79,7 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.DeviceMemory]: getDeviceMemory,
     [SignalName.Endian]: isBigEndian,
     [SignalName.HardwareConcurrency]: getHardwareConcurrency,
-    [SignalName.Chrome]: hasChrome,
     [SignalName.InstallTrigger]: getInstallTrigger,
-    [SignalName.Framework]: isFramework,
     [SignalName.WebDriver]: getWebDriver,
     [SignalName.EvalLength]: getEvalLength,
     [SignalName.PluginsLength]: getPluginsLength,
@@ -90,5 +94,10 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.WindowProperties]: getWindowProperties,
     [SignalName.DocumentProperties]: getDocumentProperties,
     [SignalName.NavigatorProperties]: getNavigatorProperties,
+    [SignalName.Touch]: getTouchPoints,
+    [SignalName.SourceBuffer]: getSourceBufferType,
+    [SignalName.DocumentElementKeys]: getDocumentElementKeys,
+    [SignalName.WindowClose]: getWindowClose,
+    [SignalName.WindowExternal]: getWindowExternal,
   })
 }
