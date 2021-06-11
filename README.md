@@ -63,7 +63,7 @@ yarn add @fpjs-incubator/botd-agent
 import Botd from '@fpjs-incubator/botd-agent';
 (async () => {
   // Initialize an agent at application startup.
-  const botdPromise = FPJSBotDetect.load({ token: "", mode "allData" })
+  const botdPromise = Botd.load({ token: "", mode "allData" })
   // Get the bot detection result when you need it.
   const botd = await botdPromise
   const result = await botd.get();
