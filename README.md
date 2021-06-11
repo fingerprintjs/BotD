@@ -25,9 +25,7 @@ _API may change_
 
 FingerprintJS **botd-agent** is a browser library for detecting automation tools, browser spoofing and virtual machines.
 
-## [Try Demo](https://example.com)
-
-## Quick start
+### [Try Demo](https://example.com)
 
 ### Install from CDN
 
@@ -78,7 +76,7 @@ _(just type `token` in the email subject, no need to compose a body)_
 <br/>
 _The free token is limited to 1M API calls per month while in beta._
 
-## Supported detection scenarios
+### Supported detection scenarios
 
 <table>
 <tr>
@@ -124,7 +122,7 @@ _The free token is limited to 1M API calls per month while in beta._
 </table>
 <small><i>Many more tools and configurations are supported</i></small>
 
-## [Full API documentation](docs/api.md)
+### [Full API documentation](docs/api.md)
 
 <p align="center">
 © 2021 FingerprintJS, Inc
