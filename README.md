@@ -123,23 +123,23 @@ analyze all signals and return back the `requestId`, which you can use later to 
         "automationTool": {
             "status": "processed",
             "probability": 0,
-            "type": ""
+            "type": "<type>"
         },
         "browserSpoofing": {
             "status": "processed",
             "probability": 0,
-            "type": ""
+            "type": "<type>"
         },
         "searchEngine": {
             "status": "processed",
             "probability": 0,
-            "type": ""
+            "type": "<type>"
         }
     },
     "vm": {
         "status": "processed",
         "probability": 0,
-        "type": ""
+        "type": "<type>"
     }
 }
 ```
@@ -148,11 +148,11 @@ analyze all signals and return back the `requestId`, which you can use later to 
 
 Results of detecting possible browser automation tools.
 
-`automationTool.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
+`automationTool.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`automationTool.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined" or  "notEnoughInfo" statuses]`.
+`automationTool.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error" or  "notEnoughData" statuses]`.
 
-`automationTool.type` - possible values are "phantomjs" or "chromeHeadless".
+`automationTool.type` - possible values are "phantomjs",  "chromeHeadless", or others.
 
 #### `bot.browserSpoofing`
 
@@ -160,31 +160,31 @@ Results of detecting possible browser spoofing.
 For example user agent string says it's Chrome on Windows, but other signals tell it is 
 Safari on MacOS.
 
-`browserSpoofing.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
+`browserSpoofing.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`browserSpoofing.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
+`browserSpoofing.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
 
-`browserSpoofing.type` - possible values = `"userAgent" | "os"`
+`browserSpoofing.type` - possible values = `"userAgent" | "os" | ...`
 
 #### `bot.searchEngine`
 
 Results of detecting a legitimate search engine, e.g. Google or Bing.
 
-`searchEngine.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
+`searchEngine.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`searchEngine.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
+`searchEngine.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
 
-`searchEngine.type` - possible values = `"google", "bing"`
+`searchEngine.type` - possible values = `"google"`, `"bing"` or others
 
 #### `vm`
 
 Results of detecting a virtual machine.
 
-`status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
+`status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
+`probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
 
-`type` - possible values = `"vmware", "parallels", "virtualBox"`
+`type` - possible values = `"vmware"`, `"parallels"`, `"virtualBox"` or others
 
 ### Error handling:
 
