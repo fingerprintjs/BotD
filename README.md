@@ -14,8 +14,19 @@
     <img src="https://img.shields.io/jsdelivr/npm/hm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from jsDelivr">
   </a>
 </p>
+<p align="center">
+  <a href="https://discord.gg/P6Ya76HkbF">
+    <img src="https://img.shields.io/discord/852099967190433792?style=for-the-badge&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
+  </a>
+</p>
 
-FingerprintJS BotD is a browser library for detecting automation tools and browsers running using virtual machines.
+## 🌱 botd-agent is currently in beta
+_API may change while in beta_
+
+FingerprintJS **botd-agent** is a browser library for detecting automation tools, browser spoofing and virtual machines.
+
+It requires a **free token** to connect to our bot detection API.
+To get your token, please email us at botd@fingerprintjs.com (just type `token` in email subject, no need to compose a body).
 
 ## Quick start
 
@@ -23,9 +34,9 @@ FingerprintJS BotD is a browser library for detecting automation tools and brows
 
 ```html
 <script>
-function initFpJSBotd() {
+function initBotd() {
   // Initialize an agent at application startup.
-  const botdPromise = FPJSBotDetect.load({ token: "<token>" })
+  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
   // Get the bot detection result when you need it.
   botdPromise
       .then(botd => botd.get())
@@ -36,7 +47,7 @@ function initFpJSBotd() {
 </script>
 <script async 
         src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" 
-        onload="initFpJSBotd()">
+        onload="initBotd()">
 </script>
 ```
 
@@ -49,10 +60,10 @@ yarn add @fpjs-incubator/botd-agent
 ```
 
 ```js
-import FPJSBotDetect from '@fpjs-incubator/botd-agent';
+import Botd from '@fpjs-incubator/botd-agent';
 (async () => {
   // Initialize an agent at application startup.
-  const botdPromise = FPJSBotDetect.load({ token: "" })
+  const botdPromise = FPJSBotDetect.load({ token: "", mode "allData" })
   // Get the bot detection result when you need it.
   const botd = await botdPromise
   const result = await botd.get();
@@ -62,47 +73,51 @@ import FPJSBotDetect from '@fpjs-incubator/botd-agent';
 
 ## API
 
-### Sync mode
+### Mode
 
-#### `FpJSBotDetect.load({ token: string, endpoint?: string, async?: boolean}): Promise<BotDetector>`
+Two modes are supported: `requestId` (default) and `allData`.
 
-Builds an instance of BotDetector. We recommend calling it as soon as possible.
+When `requestId` mode is used, only `requestId` field is returned back to the browser.
+It's a safe way to detect a bot server-side without leaking results to the browser.
+This mode is recommended for production usage.
 
-`token` is a unique identifier required to access the API.
+When `allData` mode is used, all data from the bot detection result is returned back to the browser. 
+This mode is not recommended for production, but can be used during development and testing.
 
-`endpoint` used for development, production endpoint is used by default.
+#### `Botd.load`
 
-`async` flag used to select the operating mode. By default, it has value `false`.
+```js
+Botd.load({ token: string, 
+  mode?: "requestId" | "allData",
+  endpoint?: string}): Promise<BotDetector>
+```
 
-#### `botd.get({ tag: object }): Promise<object>`
+Builds an instance of BotDetector. We recommend calling it as early as possible, 
+ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
-Gets the result of bot detection.
+`token` is your free account token required to access the server-side bot detection API.
+This is a required parameter.
 
-`tag` is custom object to store to database.
+`mode` is the mode of operation. By default it is `requestId`, which only returns `requestId` back to the browser.
+You can change it to `allData`, to return all information back to the browser. The `allData` mode is not recommended for production.
 
-#### `botd.poll(): Promise<Record<string, unknown>>`
+`endpoint` You don't need to use it, unless you use a subdomain integration. 
 
-Unused in sync mode
+#### `BotDetector#get`
 
-### Async mode
+```js
+botd.get({ tag?: object }): Promise<object>`
+```
 
-#### `FpJSBotDetect.load({ token: string, endpoint?: string, async?: boolean}): Promise<BotDetector>`
+Performs bot detection. Internally it will make an network request to our bot-detection API,
+analyze all signals and return back the `requestId`, which you can use later to retrieve bot detection results.
 
-Same as in sync mode, but async flag should have value `true`.
+`tag` is an optional metadata object that you can associate with each bot detection `get` call.
 
-#### `botd.get({ tag: object }): Promise<object>`
 
-In async mode it gets request identifier and stores it in cookie.
+### Response format:
 
-`tag` is custom object to store to database.
-
-#### `botd.poll(): Promise<Record<string, unknown>>`
-
-Gets the result of bot detection.
-
-### Response:
-
-```json
+```js
 {
     "bot": {
         "automationTool": {
@@ -131,55 +146,69 @@ Gets the result of bot detection.
 
 #### `bot.automationTool`
 
-Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
+Results of detecting possible browser automation tools.
 
-`bot.automationTool.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
+`automationTool.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
 
-`bot.automationTool.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`automationTool.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined" or  "notEnoughInfo" statuses]`.
 
-`bot.automationTool.type` - possible values = [“phantomjs”, "chromeHeadless" ... or empty string]
+`automationTool.type` - possible values are "phantomjs" or "chromeHeadless".
 
 #### `bot.browserSpoofing`
 
-Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
+Results of detecting possible browser spoofing.
+For example user agent string says it's Chrome on Windows, but other signals tell it is 
+Safari on MacOS.
 
-`bot.browserSpoofing.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
+`browserSpoofing.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
 
-`bot.browserSpoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`browserSpoofing.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
 
-`bot.browserSpoofing.type` - possible values = [“userAgent” ... or empty string]
+`browserSpoofing.type` - possible values = `"userAgent" | "os"`
 
 #### `bot.searchEngine`
 
-Check if user is search bot of some famous search engine like Google
+Results of detecting a legitimate search engine, e.g. Google or Bing.
 
-`bot.searchEngine.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
+`searchEngine.status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
 
-`bot.searchEngine.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`searchEngine.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
 
-`bot.searchEngine.type` - possible values = [“google”, “yandex” … or empty string]
+`searchEngine.type` - possible values = `"google", "bing"`
 
 #### `vm`
 
-Check if user access through virtual machine
+Results of detecting a virtual machine.
 
-`status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
+`status` - possible values = `"processed" | "undefined" | "notEnoughInfo"`
 
-`probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
+`probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "undefined", "notEnoughInfo" statuses]`
 
-`type` - possible values = [“vmware”, “parallels” … or empty string]
+`type` - possible values = `"vmware", "parallels", "virtualBox"`
 
-### Error occurred:
+### Error handling:
 
-```json
+You should always call both `load` and `get` with a `.catch` function where you should handle possible errors. 
+
+```js
+//example
+botdPromise
+  .then(botd => botd.get())
+  .then(result => {
+    console.log(result);
+  })
+  .catch(err => console.error(err))
+```
+
+#### Error format
+
+```js
 {
-    "error": {
-        "code": 401,
-        "description": "token is invalid"
-    }
+  "code": 401,
+  "description": "token is invalid"
 }
 ```
 
-#### `error.code` - Error code
+##### `code` - Error code
 
-#### `error.description` - Error description
+##### `description` - Error description
