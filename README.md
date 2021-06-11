@@ -21,12 +21,11 @@
 </p>
 
 ## 🌱 botd-agent is currently in beta
-_API may change while in beta_
+_API may change_
 
 FingerprintJS **botd-agent** is a browser library for detecting automation tools, browser spoofing and virtual machines.
 
-It requires a **free token** to connect to our bot detection API.
-To get your token, please email us at botd@fingerprintjs.com (just type `token` in email subject, no need to compose a body).
+## [Try Demo](https://example.com)
 
 ## Quick start
 
@@ -61,154 +60,72 @@ yarn add @fpjs-incubator/botd-agent
 
 ```js
 import Botd from '@fpjs-incubator/botd-agent';
-(async () => {
+
+;(async () => {
   // Initialize an agent at application startup.
-  const botdPromise = Botd.load({ token: "", mode "allData" })
+  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
   // Get the bot detection result when you need it.
   const botd = await botdPromise
   const result = await botd.get();
   console.log(result);
 })();
 ```
+A **free token** is required to connect to our bot detection API.
 
-## API
+_To get your token, please email us at botd@fingerprintjs.com_
+<br/>
+_(just type `token` in the email subject, no need to compose a body)_
+<br/>
+_The free token is limited to 1M API calls per month while in beta._
 
-### Mode
+## Supported detection scenarios
 
-Two modes are supported: `requestId` (default) and `allData`.
+<table>
+<tr>
+  <th colspan="2">Automation Tools & Frameworks</th>
+</tr>
+<tr>
+  <td>Chrome Headless</td>
+  <td>Full support, all versions supported</td>
+</tr>
+<tr>
+  <td>Playwright</td>
+  <td>Full support</td>
+</tr>
+<tr>
+  <th colspan="2">Browser spoofing</th>
+</tr>
+<tr>
+  <td>User Agent spoofing</td>
+  <td>OS name, Browser name</td>
+</tr>
+<tr>
+  <th colspan="2">VM detection</th>
+</tr>
+<tr>
+  <td>VirtualBox</td>
+  <td>Full support</td>
+</tr>
+<tr>
+  <td>VmWare</td>
+  <td>Full support</td>
+</tr>
+<tr>
+  <th colspan="2">Search bots</th>
+</tr>
+<tr>
+  <td>Google Bot</td>
+  <td>Full support</td>
+</tr>
+<tr>
+  <td>Bing Bot</td>
+  <td>Full support</td>
+</tr>
+</table>
+<small><i>Many more tools and configurations are supported</i></small>
 
-When `requestId` mode is used, only `requestId` field is returned back to the browser.
-It's a safe way to detect a bot server-side without leaking results to the browser.
-This mode is recommended for production usage.
+## [Full API documentation](docs/api.md)
 
-When `allData` mode is used, all data from the bot detection result is returned back to the browser. 
-This mode is not recommended for production, but can be used during development and testing.
-
-#### `Botd.load`
-
-```js
-Botd.load({ token: string, 
-  mode?: "requestId" | "allData",
-  endpoint?: string}): Promise<BotDetector>
-```
-
-Builds an instance of BotDetector. We recommend calling it as early as possible, 
-ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
-
-`token` is your free account token required to access the server-side bot detection API.
-This is a required parameter.
-
-`mode` is the mode of operation. By default it is `requestId`, which only returns `requestId` back to the browser.
-You can change it to `allData`, to return all information back to the browser. The `allData` mode is not recommended for production.
-
-`endpoint` You don't need to use it, unless you use a subdomain integration. 
-
-#### `BotDetector#get`
-
-```js
-botd.get({ tag?: object }): Promise<object>`
-```
-
-Performs bot detection. Internally it will make an network request to our bot-detection API,
-analyze all signals and return back the `requestId`, which you can use later to retrieve bot detection results.
-
-`tag` is an optional metadata object that you can associate with each bot detection `get` call.
-
-
-### Response format:
-
-```js
-{
-    "bot": {
-        "automationTool": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        },
-        "browserSpoofing": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        },
-        "searchEngine": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        }
-    },
-    "vm": {
-        "status": "processed",
-        "probability": 0,
-        "type": "<type>"
-    }
-}
-```
-
-#### `bot.automationTool`
-
-Results of detecting possible browser automation tools.
-
-`automationTool.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`automationTool.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error" or  "notEnoughData" statuses]`.
-
-`automationTool.type` - possible values are "phantomjs",  "chromeHeadless", or others.
-
-#### `bot.browserSpoofing`
-
-Results of detecting possible browser spoofing.
-For example user agent string says it's Chrome on Windows, but other signals tell it is 
-Safari on MacOS.
-
-`browserSpoofing.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`browserSpoofing.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
-
-`browserSpoofing.type` - possible values = `"userAgent" | "os" | ...`
-
-#### `bot.searchEngine`
-
-Results of detecting a legitimate search engine, e.g. Google or Bing.
-
-`searchEngine.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`searchEngine.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
-
-`searchEngine.type` - possible values = `"google"`, `"bing"` or others
-
-#### `vm`
-
-Results of detecting a virtual machine.
-
-`status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
-
-`type` - possible values = `"vmware"`, `"parallels"`, `"virtualBox"` or others
-
-### Error handling:
-
-You should always call both `load` and `get` with a `.catch` function where you should handle possible errors. 
-
-```js
-//example
-botdPromise
-  .then(botd => botd.get())
-  .then(result => {
-    console.log(result);
-  })
-  .catch(err => console.error(err))
-```
-
-#### Error format
-
-```js
-{
-  "code": 401,
-  "description": "token is invalid"
-}
-```
-
-##### `code` - Error code
-
-##### `description` - Error description
+<p align="center">
+© 2021 FingerprintJS, Inc
+</p>
