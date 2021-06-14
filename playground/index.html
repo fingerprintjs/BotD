@@ -166,7 +166,7 @@
       async function getResults() {
         let t0 = performance.now()
 
-        const botdPromise = FPJSBotDetect.load({token: "JzdWIiOiIxMjM0NTY3O"})
+        const botdPromise = Botd.load({token: "JzdWIiOiIxMjM0NTY3O"})
 
         const botd = await botdPromise
         const result = await botd.get({isPlayground: true});
