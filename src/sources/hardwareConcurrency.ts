@@ -7,6 +7,6 @@ export default function getHardwareConcurrency(): number {
     }
     return concurrency
   } catch (e) {
-    throw new Error('navigator.hardwareConcurrency wrong type')
+    throw new Error('wrong type')
   }
 }

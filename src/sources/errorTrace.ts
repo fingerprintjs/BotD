@@ -6,5 +6,5 @@ export default function getErrorTrace(): string {
   } catch (error) {
     return error.stack.toString()
   }
-  throw new Error('wrong error trace behaviour')
+  throw new Error('wrong behaviour')
 }

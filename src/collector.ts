@@ -30,6 +30,10 @@ import getSourceBufferType from './sources/sourceBuffer'
 import getDocumentElementKeys from './sources/documentElementKeys'
 import getWindowClose from './sources/windowClose'
 import getWindowExternal from './sources/windowExternal'
+import getLanguages from './sources/languages'
+import getMimeTypesLength from './sources/mimeTypesLength'
+import areMimeTypesConsistent from './sources/mimeTypesConsistence'
+import requiredAccelerometerPermission from './sources/accelerometerPermission'
 
 export const enum SignalName {
   UserAgent = 's1',
@@ -47,7 +51,7 @@ export const enum SignalName {
   WebDriver = 's13',
   EvalLength = 's14',
   PluginsLength = 's15',
-  PluginsConsistent = 's16',
+  PluginsConsistence = 's16',
   ErrorTrace = 's17',
   ErrorFF = 's18',
   OSCPU = 's19',
@@ -63,7 +67,11 @@ export const enum SignalName {
   DocumentElementKeys = 's29',
   WindowClose = 's30',
   WindowExternal = 's31',
-  Tag = 's29',
+  Languages = 's32',
+  MimeTypesLength = 's33',
+  MimeTypesConsistence = 's34',
+  AccelerometerPermission = 's35',
+  Tag = 's36',
 }
 
 export default async function collect(): Promise<SourceResultDict> {
@@ -83,7 +91,7 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.WebDriver]: getWebDriver,
     [SignalName.EvalLength]: getEvalLength,
     [SignalName.PluginsLength]: getPluginsLength,
-    [SignalName.PluginsConsistent]: arePluginsConsistent,
+    [SignalName.PluginsConsistence]: arePluginsConsistent,
     [SignalName.ErrorTrace]: getErrorTrace,
     [SignalName.ErrorFF]: getErrorFF,
     [SignalName.OSCPU]: getOSCPU,
@@ -99,5 +107,9 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.DocumentElementKeys]: getDocumentElementKeys,
     [SignalName.WindowClose]: getWindowClose,
     [SignalName.WindowExternal]: getWindowExternal,
+    [SignalName.Languages]: getLanguages,
+    [SignalName.MimeTypesLength]: getMimeTypesLength,
+    [SignalName.MimeTypesConsistence]: areMimeTypesConsistent,
+    [SignalName.AccelerometerPermission]: requiredAccelerometerPermission,
   })
 }

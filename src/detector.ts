@@ -1,18 +1,18 @@
 import collect, { SignalName } from './collector'
 import { version } from '../package.json'
-import { getCookie, Options, setCookie, SourceResultDict, State } from './types'
+import { getCookie, Modes, Options, setCookie, SourceResultDict, State } from './types'
 
 export default class BotDetector {
   endpoint: string
   token: string
-  async: boolean
+  mode: string
   timestamp?: number
   tag?: string
   performance?: number
   sources?: SourceResultDict
 
   constructor(options: Options) {
-    this.async = options.async == undefined ? false : options.async
+    this.mode = options.mode == undefined ? Modes.RequestID : options.mode
     this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
     if (!this.endpoint.endsWith('/')) {
       this.endpoint += '/'
@@ -41,7 +41,7 @@ export default class BotDetector {
   async get(tag: unknown): Promise<Record<string, unknown>> {
     this.setTag(tag)
     const body = {
-      async: this.async,
+      mode: this.mode,
       timestamp: this.timestamp,
       performance: this.performance,
       signals: this.sources,
@@ -58,7 +58,7 @@ export default class BotDetector {
         body: JSON.stringify(body),
       })
       const json = await response.json()
-      if (this.async) setCookie('botd-request-id', json['requestId'])
+      setCookie('botd-request-id', json['requestId'])
       return json
     } catch (e) {
       return {
@@ -71,14 +71,14 @@ export default class BotDetector {
   }
 
   async poll(): Promise<Record<string, unknown>> {
-    if (!this.async) {
-      return {
-        error: {
-          code: 400,
-          message: 'You are in sync mode, set "async" as true in load() method',
-        },
-      }
-    }
+    // if (this.mode !== Modes.RequestID) {
+    //   return {
+    //     error: {
+    //       code: 400,
+    //       message: 'You are in sync mode, set "async" as true in load() method',
+    //     },
+    //   }
+    // }
     const requestId = getCookie('botd-request-id')
     if (requestId == null) {
       return {

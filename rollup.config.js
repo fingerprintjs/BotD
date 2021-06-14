@@ -12,7 +12,7 @@ export default [
       {
         file: 'dist/botd.umd.min.js',
         format: 'umd',
-        name: 'FPJSBotDetect',
+        name: 'Botd',
         plugins: [
           terserPlugin({
             format: {
@@ -25,7 +25,7 @@ export default [
       {
         file: 'dist_dev/botd.umd.js',
         format: 'umd',
-        name: 'FPJSBotDetect',
+        name: 'Botd',
       },
     ],
     plugins: [typescript(), jsonPlugin()],

@@ -16,8 +16,13 @@ type Source =
 
 export interface Options {
   token: string
-  async?: boolean
+  mode?: string
   endpoint?: string
+}
+
+export const enum Modes {
+  RequestID = 'requestId',
+  AllData = 'allData',
 }
 
 export const enum State {
