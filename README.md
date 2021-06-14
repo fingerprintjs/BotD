@@ -23,7 +23,7 @@
 ## 🌱 botd
 <small><i>currently in beta - API may change</i></small>
 
-**botd** is a browser library for detecting automation tools, browser spoofing and virtual machines.
+**botd** is a browser library for bot detection (detecting automation tools, browser spoofing and virtual machines).
 
 ### [Try Demo](https://fingerprintjs.github.io/botd/)
 
