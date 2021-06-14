@@ -142,8 +142,7 @@
     </a>
     <h1>Bot Detect Playground</h1>
     <form class="url_form">
-        <button id="button" type="button">Start detect</button>
-        <label class="checkbox"><input type="checkbox" id="staging" name="staging">Use staging backend</label>
+        <button id="button" type="button" onclick="getResults()">Start detect</button>
     </form>
     <div class="output_holder">
         <section class="output">
@@ -168,16 +167,10 @@
                 .replace(/>/g, '&gt;');
       }
 
-      let buttonEl = document.getElementById("button")
-      buttonEl.onclick = function() {
-        let useStaging = document.getElementById("staging").checked
-        getResults(useStaging)
-      }
-
-      async function getResults(useStaging) {
+      async function getResults() {
         let t0 = performance.now()
 
-        const botdPromise = FPJSBotDetect.load({token: "JzdWIiOiIxMjM0NTY3O",})
+        const botdPromise = FPJSBotDetect.load({token: "JzdWIiOiIxMjM0NTY3O"})
 
         const botd = await botdPromise
         const result = await botd.get({isPlayground: true});
