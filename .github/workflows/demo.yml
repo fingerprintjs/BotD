@@ -21,8 +21,6 @@ jobs:
           restore-keys: nodemodules-
       - name: Install Node packages
         run: yarn install
-      - name: Build the demo
-        run: yarn playground:build
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
