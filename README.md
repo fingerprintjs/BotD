@@ -14,18 +14,26 @@
     <img src="https://img.shields.io/jsdelivr/npm/hm/@fpjs-incubator/botd-agent.svg" alt="Monthly downloads from jsDelivr">
   </a>
 </p>
+<p align="center">
+  <a href="https://discord.gg/P6Ya76HkbF">
+    <img src="https://img.shields.io/discord/852099967190433792?style=for-the-badge&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
+  </a>
+</p>
 
-FingerprintJS BotD is a browser library for detecting automation tools and browsers running using virtual machines.
+## 🌱 botd
+<small><i>currently in beta - API may change</i></small>
 
-## Quick start
+**botd** is a browser library for bot detection (detecting automation tools, browser spoofing and virtual machines).
+
+### [Try Demo](https://fingerprintjs.github.io/botd/)
 
 ### Install from CDN
 
 ```html
 <script>
-function initFpJSBotd() {
+function initBotd() {
   // Initialize an agent at application startup.
-  const botdPromise = FPJSBotDetect.load({ token: "<token>" })
+  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
   // Get the bot detection result when you need it.
   botdPromise
       .then(botd => botd.get())
@@ -36,7 +44,7 @@ function initFpJSBotd() {
 </script>
 <script async 
         src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" 
-        onload="initFpJSBotd()">
+        onload="initBotd()">
 </script>
 ```
 
@@ -49,137 +57,74 @@ yarn add @fpjs-incubator/botd-agent
 ```
 
 ```js
-import FPJSBotDetect from '@fpjs-incubator/botd-agent';
-(async () => {
+import Botd from '@fpjs-incubator/botd-agent';
+
+;(async () => {
   // Initialize an agent at application startup.
-  const botdPromise = FPJSBotDetect.load({ token: "" })
+  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
   // Get the bot detection result when you need it.
   const botd = await botdPromise
   const result = await botd.get();
   console.log(result);
 })();
 ```
+A **free token** is required to connect to our bot detection API.
 
-## API
+_To get your token, please email us at botd@fingerprintjs.com_
+_(just type `token` in the email subject, no need to compose a body)_
+<br/>
+_The free token is limited to 1M API calls per month while in beta._
 
-### Sync mode
+### Supported detection scenarios
 
-#### `FpJSBotDetect.load({ token: string, endpoint?: string, async?: boolean}): Promise<BotDetector>`
+<table>
+<tr>
+  <th>Automation Tools & Frameworks</th>
+</tr>
+<tr>
+  <td>Chrome Headless</td>
+</tr>
+<tr>
+  <td>Playwright</td>
+</tr>
+<tr>
+  <td>PhantomJS</td>
+</tr>
+<tr>
+  <th>Browser spoofing</th>
+</tr>
+<tr>
+  <td>User Agent spoofing</td>
+</tr>
+<tr>
+  <td>OS spoofing</td>
+</tr>
+<tr>
+  <th>VM detection</th>
+</tr>
+<tr>
+  <td>VirtualBox</td>
+</tr>
+<tr>
+  <td>VmWare</td>
+</tr>
+<tr>
+  <td>Parallels</td>
+</tr>
+<tr>
+  <th>Search bots</th>
+</tr>
+<tr>
+  <td>Google Bot</td>
+</tr>
+<tr>
+  <td>Bing Bot</td>
+</tr>
+</table>
+<small><i>Many more tools and configurations are supported</i></small>
 
-Builds an instance of BotDetector. We recommend calling it as soon as possible.
+### [Full API documentation](docs/api.md)
 
-`token` is a unique identifier required to access the API.
-
-`endpoint` used for development, production endpoint is used by default.
-
-`async` flag used to select the operating mode. By default, it has value `false`.
-
-#### `botd.get({ tag: object }): Promise<object>`
-
-Gets the result of bot detection.
-
-`tag` is custom object to store to database.
-
-#### `botd.poll(): Promise<Record<string, unknown>>`
-
-Unused in sync mode
-
-### Async mode
-
-#### `FpJSBotDetect.load({ token: string, endpoint?: string, async?: boolean}): Promise<BotDetector>`
-
-Same as in sync mode, but async flag should have value `true`.
-
-#### `botd.get({ tag: object }): Promise<object>`
-
-In async mode it gets request identifier and stores it in cookie.
-
-`tag` is custom object to store to database.
-
-#### `botd.poll(): Promise<Record<string, unknown>>`
-
-Gets the result of bot detection.
-
-### Response:
-
-```json
-{
-    "bot": {
-        "automationTool": {
-            "status": "processed",
-            "probability": 0,
-            "type": ""
-        },
-        "browserSpoofing": {
-            "status": "processed",
-            "probability": 0,
-            "type": ""
-        },
-        "searchEngine": {
-            "status": "processed",
-            "probability": 0,
-            "type": ""
-        }
-    },
-    "vm": {
-        "status": "processed",
-        "probability": 0,
-        "type": ""
-    }
-}
-```
-
-#### `bot.automationTool`
-
-Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
-
-`bot.automationTool.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
-
-`bot.automationTool.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
-
-`bot.automationTool.type` - possible values = [“phantomjs”, "chromeHeadless" ... or empty string]
-
-#### `bot.browserSpoofing`
-
-Check user browser for spoofing parameters (e.x. User-agent is chrome-windows but other signals say that user’s OS is macOS)
-
-`bot.browserSpoofing.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
-
-`bot.browserSpoofing.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
-
-`bot.browserSpoofing.type` - possible values = [“userAgent” ... or empty string]
-
-#### `bot.searchEngine`
-
-Check if user is search bot of some famous search engine like Google
-
-`bot.searchEngine.status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
-
-`bot.searchEngine.probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
-
-`bot.searchEngine.type` - possible values = [“google”, “yandex” … or empty string]
-
-#### `vm`
-
-Check if user access through virtual machine
-
-`status` - possible values = [“processed” | “undefined” | “notEnoughInfo”]
-
-`probability` - possible values = [0.0 .. 1.0 | -1.0 in case of “undefined”, “notEnoughInfo” statuses]
-
-`type` - possible values = [“vmware”, “parallels” … or empty string]
-
-### Error occurred:
-
-```json
-{
-    "error": {
-        "code": 401,
-        "description": "token is invalid"
-    }
-}
-```
-
-#### `error.code` - Error code
-
-#### `error.description` - Error description
+<p align="center">
+© 2021 FingerprintJS, Inc
+</p>
