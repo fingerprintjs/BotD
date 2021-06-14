@@ -71,14 +71,6 @@ export default class BotDetector {
   }
 
   async poll(): Promise<Record<string, unknown>> {
-    // if (this.mode !== Modes.RequestID) {
-    //   return {
-    //     error: {
-    //       code: 400,
-    //       message: 'You are in sync mode, set "async" as true in load() method',
-    //     },
-    //   }
-    // }
     const requestId = getCookie('botd-request-id')
     if (requestId == null) {
       return {
