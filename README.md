@@ -20,12 +20,12 @@
   </a>
 </p>
 
-## 🌱 botd-agent is currently in beta
-_API may change_
+## 🌱 botd
+<small><i>currently in beta - API may change</i></small>
 
-FingerprintJS **botd-agent** is a browser library for detecting automation tools, browser spoofing and virtual machines.
+**botd** is a browser library for detecting automation tools, browser spoofing and virtual machines.
 
-### [Try Demo](https://example.com)
+### [Try Demo](https://fingerprintjs.github.io/botd/)
 
 ### Install from CDN
 
@@ -79,44 +79,46 @@ _The free token is limited to 1M API calls per month while in beta._
 
 <table>
 <tr>
-  <th colspan="2">Automation Tools & Frameworks</th>
+  <th>Automation Tools & Frameworks</th>
 </tr>
 <tr>
   <td>Chrome Headless</td>
-  <td>Full support, all versions supported</td>
 </tr>
 <tr>
   <td>Playwright</td>
-  <td>Full support</td>
 </tr>
 <tr>
-  <th colspan="2">Browser spoofing</th>
+  <td>PhantomJS</td>
+</tr>
+<tr>
+  <th>Browser spoofing</th>
 </tr>
 <tr>
   <td>User Agent spoofing</td>
-  <td>OS name, Browser name</td>
 </tr>
 <tr>
-  <th colspan="2">VM detection</th>
+  <td>OS spoofing</td>
+</tr>
+<tr>
+  <th>VM detection</th>
 </tr>
 <tr>
   <td>VirtualBox</td>
-  <td>Full support</td>
 </tr>
 <tr>
   <td>VmWare</td>
-  <td>Full support</td>
 </tr>
 <tr>
-  <th colspan="2">Search bots</th>
+  <td>Parallels</td>
+</tr>
+<tr>
+  <th>Search bots</th>
 </tr>
 <tr>
   <td>Google Bot</td>
-  <td>Full support</td>
 </tr>
 <tr>
   <td>Bing Bot</td>
-  <td>Full support</td>
 </tr>
 </table>
 <small><i>Many more tools and configurations are supported</i></small>
