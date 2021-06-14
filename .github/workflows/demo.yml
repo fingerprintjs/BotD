@@ -19,8 +19,6 @@ jobs:
           path: node_modules
           key: nodemodules-${{ hashFiles('yarn.lock') }}
           restore-keys: nodemodules-
-      - name: Install Node packages
-        run: yarn install
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
