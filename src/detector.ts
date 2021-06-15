@@ -1,6 +1,7 @@
 import collect, { SignalName } from './collector'
 import { version } from '../package.json'
 import { getCookie, Modes, Options, setCookie, SourceResultDict, State } from './types'
+import { wait } from './misc'
 
 export default class BotDetector {
   endpoint: string
@@ -70,7 +71,7 @@ export default class BotDetector {
     }
   }
 
-  async poll(): Promise<Record<string, unknown>> {
+  async poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>> {
     const requestId = getCookie('botd-request-id')
     if (requestId == null) {
       return {
@@ -81,22 +82,41 @@ export default class BotDetector {
       }
     }
 
-    try {
-      const response = await fetch(this.endpoint + 'results?id=' + requestId, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': this.token,
-        },
-      })
-      return await response.json()
-    } catch (e) {
-      return {
-        error: {
-          code: 500,
-          message: e.toString(),
-        },
+    while (attempts > 0) {
+      try {
+        const response = await fetch(this.endpoint + 'results?id=' + requestId, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Auth-Token': this.token,
+          },
+        })
+
+        const json = await response.json()
+
+        if (json['status'] == 'inProgress') {
+          await wait(delayMs)
+          attempts--
+          if (attempts == 0) {
+            return {
+              error: {
+                code: 'inProgress',
+                message: 'Bot detection result is not ready yet',
+              },
+            }
+          }
+        } else {
+          return json
+        }
+      } catch (e) {
+        return {
+          error: {
+            code: 'Failed',
+            message: e.toString(),
+          },
+        }
       }
     }
+    return Promise.reject()
   }
 }
