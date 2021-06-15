@@ -133,13 +133,17 @@ You can use method `BotDetector.poll` then to get full detection report by `requ
 ## `BotDetector.poll`
 
 ```js
-botd.poll(): Promise<Record<string, unknown>>
+botd.poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>>
 ```
 
 The response will be the same as `BotDetector.get` has for `mode = "allData"`.
-The only one difference is that it's possible to receive `status = "inProgress"` if detection report is not ready yet.
-In this case try to call the method one more time after small period of time.
-Anyway, this case should be rare because calculation is fast enough.
+Internally the method tries to get bot detection report from Botd API.
+If the report is not ready yet, the method will ask for result several times with delay after each attempt.
+You can provide two parameters:
+
+`delayMs` - number of milliseconds to wait after each attempt (default value is `50` ms).
+
+`attempts` - number of tries to get the report (default value is `3`).
 
 ## Error handling:
 
