@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fingerprintjs.com">
-    <img src="resources/logo.svg" alt="FingerprintJS" width="312px" />
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/romchela/readme/resources/logo.svg" alt="FingerprintJS" width="312px" />
   </a>
 </p>
 <p align="center">
@@ -42,8 +42,8 @@ function initBotd() {
       });
 }
 </script>
-<script async 
-        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" 
+<script async
+        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js"
         onload="initBotd()">
 </script>
 ```
