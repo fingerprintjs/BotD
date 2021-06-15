@@ -23,9 +23,25 @@ export default [
         ],
       },
       {
+        file: 'dist/botd.cjs.min.js',
+        format: 'cjs',
+        plugins: [
+          terserPlugin({
+            format: {
+              comments: false,
+            },
+            safari10: true,
+          }),
+        ],
+      },
+      {
         file: 'dist_dev/botd.umd.js',
         format: 'umd',
         name: 'Botd',
+      },
+      {
+        file: 'dist_dev/botd.cjs.js',
+        format: 'cjs',
       },
     ],
     plugins: [typescript(), jsonPlugin()],

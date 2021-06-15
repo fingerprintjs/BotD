@@ -1,10 +1,10 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "",
   "main": "dist/botd.umd.min.js",
   "types": "dist/botd.d.ts",
-  "license": "private",
+  "license": "MIT",
   "author": "FingerprintJS",
   "files": [
     "dist"
