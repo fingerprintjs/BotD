@@ -29,7 +29,7 @@ This mode is not recommended for production, but can be used during development 
 ## `BotDetector.get`
 
 ```js
-botd.get({ tag?: object }): Promise<object>
+botd.get({ tag?: object }): Promise<Record<string, unknown>>
 ```
 
 Performs bot detection. Internally it will make a network request to our bot-detection API
@@ -74,8 +74,8 @@ to store and pass this value for future requests.
 
 ### `status`
 
-If something goes wrong internally `status` will be `error` and no other information will be provided in response.
-Otherwise, the value is `processed`.
+If something goes wrong internally `status` will be `error` and no other information will be provided in the response.
+Otherwise, the value will be `processed`.
 
 ### `bot.automationTool`
 
@@ -83,7 +83,7 @@ Results of detecting possible browser automation tools.
 
 `automationTool.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`automationTool.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error" or  "notEnoughData" statuses]`
+`automationTool.probability` - if `automationTool.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
 
 `automationTool.type` - optional field, possible values = `"phantomjs" | "chromeHeadless" | ...`
 
@@ -95,7 +95,7 @@ Safari on MacOS.
 
 `browserSpoofing.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`browserSpoofing.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
+`browserSpoofing.probability` - if `browserSpoofing.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
 
 `browserSpoofing.type` - optional field, possible values = `"userAgent" | "os" | ...`
 
@@ -105,7 +105,7 @@ Results of detecting a legitimate search engine, e.g. Google or Bing.
 
 `searchEngine.status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`searchEngine.probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
+`searchEngine.probability` - if `searchEngine.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
 
 `searchEngine.type` - optional field, possible values = `"google" | "bing" | ... `
 
@@ -115,7 +115,7 @@ Results of detecting a virtual machine.
 
 `status` - possible values = `"processed" | "error" | "notEnoughData"`
 
-`probability` - possible values = `[0.0 .. 1.0 | -1.0 in case of "error", "notEnoughData" statuses]`
+`probability` - if `status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
 
 `type` - optional field, possible values = `"vmware" | "parallels" | "virtualBox" | ... `
 
@@ -133,7 +133,7 @@ You can use method `BotDetector.poll` then to get full detection report by `requ
 ## `BotDetector.poll`
 
 ```js
-botd.poll(): Promise<object>
+botd.poll(): Promise<Record<string, unknown>>
 ```
 
 The response will be the same as `BotDetector.get` has for `mode = "allData"`.
