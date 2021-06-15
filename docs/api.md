@@ -1,6 +1,6 @@
 # botd API
 
-### Botd has a server-side API. List of available operations [there](server_api.md).
+#### Botd has a server-side API. The responses are identical and strongly typed. List of available operations [there](server_api.md).
 
 ## `Botd.load`
 
