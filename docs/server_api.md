@@ -17,13 +17,13 @@
 
 ```js
 {
-    "mode": "<string>",
-    "timestamp": <int64>,
-    "performance": <int64>,
-    "version": "<string>",
+    "mode": "<mode>",
+    "timestamp": 1623762359,
+    "performance": 12767,
+    "version": "0.0.1",
     "signals": {
         "s1": {
-            "state": <int>,
+            "state": 1,
             "value": <object>,
         },
         ...
