@@ -42,7 +42,7 @@ to store and pass this value for future requests.
 
 ## BotDetector.get response format
 
-Internally the method makes a request to `/detect` endpoint in [Server botd API](docs/server_api.md#response-body).
+Internally the method makes a request to `/detect` endpoint in [Server botd API](server_api.md#response-body).
 
 ## `BotDetector.poll`
 
@@ -50,7 +50,7 @@ Internally the method makes a request to `/detect` endpoint in [Server botd API]
 botd.poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>>
 ```
 
-Internally the method tries to get bot detection report by `/results` endpoint in [Server botd API](docs/server_api.md#get-results).
+Internally the method tries to get bot detection report by `/results` endpoint in [Server botd API](server_api.md#get-results).
 If the report is not ready yet, the method will ask for result several times with delay after each attempt.
 You can provide two parameters:
 
@@ -74,4 +74,4 @@ botdPromise
 
 ### Error format
 
-You can get this information in [Server botd API](docs/server_api.md#error-format).
+You can get this information in [Server botd API](server_api.md#error-format).
