@@ -15,7 +15,7 @@
 
 ### Request body
 
-```json
+```js
 {
     "mode": "<string>",
     "timestamp": <int64>,
