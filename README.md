@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fingerprintjs.com">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/romchela/readme/resources/logo.svg" alt="FingerprintJS" width="312px" />
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="FingerprintJS" width="312px" />
   </a>
 </p>
 <p align="center">
