@@ -80,7 +80,7 @@ const botdPromise = Botd.load({
 
 A **free token** is required to connect to our bot detection API.
 
-_To get your token, please email us at botd@fingerprintjs.com_
+_To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `token` in the email subject, no need to compose a body)_
 <br/>
 _The free token is limited to 1M API calls per month while in beta._
