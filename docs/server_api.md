@@ -82,7 +82,7 @@ Results of detecting possible browser automation tools.
 
 `automationTool.probability` - if `automationTool.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
 
-`automationTool.type` - optional field, possible values = `"phantomjs" | "chromeHeadless" | ...`
+`automationTool.type` - optional field, possible values = `"phantomjs" | "headlessChrome" | ...`
 
 ### `bot.browserSpoofing`
 
