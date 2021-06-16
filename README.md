@@ -76,7 +76,7 @@ const botdPromise = Botd.load({
   console.log(result);
 })();
 ```
-[Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.js)
 
 A **free token** is required to connect to our bot detection API.
 
