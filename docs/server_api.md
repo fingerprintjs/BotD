@@ -11,7 +11,7 @@
 'Auth-Token': "<token>"
 ```
 
-`Auth-Token` - client's token for accessing botd API.
+`Auth-Token` - client's token for accessing Server botd API.
 
 ### Request body
 
@@ -157,6 +157,6 @@ The only one difference is that request `status` can be `inProgress` if bot dete
 }
 ```
 
-#### `code` - error code, possible values = `"Failed", "TokenRequired", "TokenNotFound", "RequestCannotBeParsed"`.
+`code` - error code, possible values = `"Failed", "TokenRequired", "TokenNotFound", "RequestCannotBeParsed"`.
 
-#### `message` - error description.
+`message` - error description.
