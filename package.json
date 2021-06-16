@@ -1,11 +1,20 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.4",
+  "version": "0.1.11",
   "description": "",
-  "main": "dist/botd.umd.min.js",
+  "main": "dist/botd.cjs.min.js",
+  "module": "dist/botd.esm.min.js",
   "types": "dist/botd.d.ts",
   "license": "MIT",
-  "author": "FingerprintJS",
+  "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fingerprintjs/botd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fingerprintjs/botd/issues"
+  },
+  "homepage": "https://github.com/fingerprintjs/botd",
   "files": [
     "dist"
   ],

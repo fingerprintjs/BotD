@@ -6,3 +6,5 @@ export async function load(options: Options): Promise<BotDetector> {
   await detector.collect()
   return detector
 }
+
+export default { load }
