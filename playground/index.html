@@ -19,11 +19,16 @@
             height: auto;
         }
 
+        h1, h2 {
+          margin: 20px 50px;
+          font-weight: 700;
+          color: #0d102b;
+        }
         h1 {
             font-size: 24px;
-            font-weight: 700;
-            margin: 20px 50px;
-            color: #0d102b;
+        }
+        h2 {
+          font-size: 20px;
         }
 
         .content {
@@ -122,6 +127,17 @@
             margin: 10px;
             color: #f0470a;
         }
+
+        .result-table {
+          margin: 0 50px 20px 50px;
+        }
+
+        .green {
+          color: green;
+        }
+        .red {
+          color: orangered;
+        }
     </style>
     <link rel="icon" type="image/ico" href="./img/favicon.ico">
     <script async src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" onload="getResults()"></script>
@@ -137,6 +153,9 @@
         </svg>
     </a>
     <h1>Bot Detect Playground</h1>
+    <h2 id="status">Loading...</h2>
+    <table class="result-table" id="result-table"></table>
+
     <form class="url_form">
         <button id="button" type="button" onclick="getResults()">Start detect</button>
     </form>
@@ -166,6 +185,8 @@
       async function getResults() {
         let t0 = performance.now()
 
+        document.getElementById("status").innerHTML = 'Loading...'
+        document.getElementById("result-table").innerHTML = '';
         const botdPromise = Botd.load({token: "JzdWIiOiIxMjM0NTY3O", mode: "allData"})
 
         const botd = await botdPromise
@@ -174,6 +195,24 @@
         document.getElementById("perf").innerHTML = botd.performance + " ms"
         document.getElementById("sources").innerHTML = escapeHTML(JSON.stringify(botd.sources, null, 4))
         document.getElementById("result").innerHTML = JSON.stringify(result, null, 4)
+
+        document.getElementById("status").innerHTML = 'Result:'
+        document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ['vm', result.vm]].map(([key, value]) => {
+          let status = '';
+          let statusClass = '';
+          if (value.status === 'processed') {
+            if (value.probability > 0) {
+              status = `<b>detected</b> (probability ${value.probability.toFixed(2)})`;
+              statusClass = 'green';
+            } else {
+              status = 'not detected';
+            }
+          } else {
+            status = `<b>${value.status}</b>`;
+            statusClass = 'red';
+          }
+          return `<tr><td style='width: 25%'>${key}</td><td class="${statusClass}">${status}</td><td>${value.type || ''}</td></tr>`
+        }).join('');
 
         let time = performance.now() - t0
         document.getElementById("time").textContent = time.toFixed(0) + ' ms'
