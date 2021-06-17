@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://fingerprintjs.com">
-    <img src="resources/logo.svg" alt="FingerprintJS" width="312px" />
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="FingerprintJS" width="312px" />
   </a>
 </p>
 <p align="center">
@@ -23,7 +23,7 @@
 ## 🌱 botd
 <small><i>currently in beta - API may change</i></small>
 
-**botd** is a browser library for bot detection (detecting automation tools, browser spoofing and virtual machines).
+**botd** is a browser library for JavaScript bot detection (detecting automation tools, browser spoofing and virtual machines).
 
 ### [Try Demo](https://fingerprintjs.github.io/botd/)
 
@@ -33,7 +33,10 @@
 <script>
 function initBotd() {
   // Initialize an agent at application startup.
-  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
+  const botdPromise = Botd.load({
+      token: "<token>",
+      mode: "allData"
+  });
   // Get the bot detection result when you need it.
   botdPromise
       .then(botd => botd.get())
@@ -42,11 +45,12 @@ function initBotd() {
       });
 }
 </script>
-<script async 
-        src="https://unpkg.com/@fpjs-incubator/botd-agent@0/dist/botd.umd.min.js" 
+<script async
+        src="https://cdn.jsdelivr.net/npm/@fpjs-incubator/botd-agent@0/dist/botd.min.js"
         onload="initBotd()">
 </script>
 ```
+[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
 
 ### Alternatively you can install from NPM to use with Webpack/Rollup/Browserify
 
@@ -59,18 +63,24 @@ yarn add @fpjs-incubator/botd-agent
 ```js
 import Botd from '@fpjs-incubator/botd-agent';
 
-;(async () => {
-  // Initialize an agent at application startup.
-  const botdPromise = Botd.load({ token: "<token>", mode: "allData" })
+// Initialize an agent at application startup.
+const botdPromise = Botd.load({
+    token: "<token>",
+    mode: "allData"
+});
+
+(async () => {
   // Get the bot detection result when you need it.
   const botd = await botdPromise
   const result = await botd.get();
   console.log(result);
 })();
 ```
+[Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.js)
+
 A **free token** is required to connect to our bot detection API.
 
-_To get your token, please email us at botd@fingerprintjs.com_
+_To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `token` in the email subject, no need to compose a body)_
 <br/>
 _The free token is limited to 1M API calls per month while in beta._
