@@ -1,6 +1,5 @@
-# botd API
-
-#### Botd has a server-side API. The responses are identical and strongly typed. List of available operations [there](server_api.md).
+# Botd JavaScript API
+_Botd also has a [server-side API](server_api.md). The responses in both JS and server APIs are identical._
 
 ## `Botd.load`
 
@@ -10,7 +9,7 @@ Botd.load({ token: string,
   endpoint?: string}): Promise<BotDetector>
 ```
 
-Builds an instance of BotDetector. We recommend calling it as early as possible,
+Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
 `token` is your free account token required to access the server-side bot detection API.
@@ -31,34 +30,40 @@ This mode is not recommended for production, but can be used during development 
 ## `BotDetector.get`
 
 ```js
-botd.get({ tag?: object }): Promise<Record<string, unknown>>
+botDetector.get({ tag?: object }): Promise<Record<string, unknown>>
 ```
 
-Performs bot detection. Internally it will make a network request to our bot-detection API
-and return back the `requestId`, which you can use later to retrieve bot detection results
-using method `BotDetector.poll`. Also, the `requestId` will be set into cookie, so you don't need to think how
-to store and pass this value for future requests.
+Performs bot detection. Internally it will make a network request to our server-side bot detection API
+and return back the `requestId` which you can use later to retrieve bot detection results (or `allData` if you configured it this way).
 
-`tag` is an optional metadata object that you can associate with each bot detection `get` call.
+Note that the `requestId` will implicitly be stored in a cookie for future convenience.
 
+**`tag`** is an optional metadata object that you can associate with each bot detection event.
 
-## BotDetector.get response format
+The response object format is described [here](server_api.md#response-body).
 
-Internally the method makes a request to `/detect` endpoint in [Server botd API](server_api.md#response-body).
 
 ## `BotDetector.poll`
 
 ```js
-botd.poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>>
+botDetector.poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>>
 ```
+Will retrieve an existing bot detection result by `requestId`.
+Internally works by calling the  `/results` endpoint in the [server API](server_api.md#get-results).
 
-Internally the method tries to get bot detection report by `/results` endpoint in [Server botd API](server_api.md#get-results).
-If the report is not ready yet, the method will ask for result several times with delay after each attempt.
-You can provide two parameters:
+If the bot detection result is not ready yet (in case you call `poll` immediately after `get` and the result is being calculated), 
+the method will make several `attempts` with a specified `delayMs`.
+
+You can override two parameters:
 
 `delayMs` - number of milliseconds to wait after each attempt (default value is `50` ms).
 
-`attempts` - number of tries to get the report (default value is `3`).
+`attempts` - number of tries to get the results (default value is `3`).
+
+Note that `poll` is purely a client-side method for retrieving the detection results.
+It works by passing the `requestId`, previously stored in cookies as an implicit parameter.
+
+For server-side retrieval, use our server API instead.
 
 ## Error handling:
 
