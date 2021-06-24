@@ -39,7 +39,7 @@ function initBotd() {
   });
   // Get the bot detection result when you need it.
   botdPromise
-      .then(botd => botd.get())
+      .then(botd => botd.detect())
       .then(result => {
         console.log(result);
       });
@@ -72,7 +72,7 @@ const botdPromise = Botd.load({
 (async () => {
   // Get the bot detection result when you need it.
   const botd = await botdPromise
-  const result = await botd.get();
+  const result = await botd.detect();
   console.log(result);
 })();
 ```

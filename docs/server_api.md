@@ -146,7 +146,6 @@ Or you can pass token through query parameters.
 ### Response format
 
 The response will be the same as `/detect` has for `mode = "allData"`.
-The only one difference is that request `status` can be `inProgress` if bot detection report is not ready yet.
 
 ## Error format
 
