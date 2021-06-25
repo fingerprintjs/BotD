@@ -27,10 +27,10 @@ This mode is not recommended for production, but can be used during development 
 
 `endpoint` You don't need to use it, unless you use a subdomain integration.
 
-## `BotDetector.get`
+## `BotDetector.detect`
 
 ```js
-botDetector.get({ tag?: object }): Promise<Record<string, unknown>>
+botDetector.detect({ tag?: object }): Promise<Record<string, unknown>>
 ```
 
 Performs bot detection. Internally it will make a network request to our server-side bot detection API
@@ -43,36 +43,27 @@ Note that the `requestId` will implicitly be stored in a cookie for future conve
 The response object format is described [here](server_api.md#response-body).
 
 
-## `BotDetector.poll`
+## `BotDetector.getResult`
 
 ```js
-botDetector.poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>>
+botDetector.getResult(): Promise<Record<string, unknown>>
 ```
 Will retrieve an existing bot detection result by `requestId`.
 Internally works by calling the  `/results` endpoint in the [server API](server_api.md#get-results).
 
-If the bot detection result is not ready yet (in case you call `poll` immediately after `get` and the result is being calculated), 
-the method will make several `attempts` with a specified `delayMs`.
-
-You can override two parameters:
-
-`delayMs` - number of milliseconds to wait after each attempt (default value is `50` ms).
-
-`attempts` - number of tries to get the results (default value is `3`).
-
-Note that `poll` is purely a client-side method for retrieving the detection results.
+Note that `getResult` is purely a client-side method for retrieving the detection results.
 It works by passing the `requestId`, previously stored in cookies as an implicit parameter.
 
 For server-side retrieval, use our server API instead.
 
 ## Error handling:
 
-You should always call both `load` and `get` with a `.catch` function where you should handle possible errors.
+You should always call both `load` and `detect` with a `.catch` function where you should handle possible errors.
 
 ```js
 //example
 botdPromise
-  .then(botd => botd.get())
+  .then(botd => botd.detect())
   .then(result => {
     console.log(result);
   })

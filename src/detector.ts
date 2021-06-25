@@ -1,7 +1,6 @@
 import collect, { SignalName } from './collector'
 import { version } from '../package.json'
 import { getCookie, Modes, Options, setCookie, SourceResultDict, State } from './types'
-import { wait } from './misc'
 
 export default class BotDetector {
   endpoint: string
@@ -39,7 +38,7 @@ export default class BotDetector {
     return this.sources
   }
 
-  async get(tag: unknown): Promise<Record<string, unknown>> {
+  async detect(tag: unknown): Promise<Record<string, unknown>> {
     this.setTag(tag)
     const body = {
       mode: this.mode,
@@ -71,7 +70,7 @@ export default class BotDetector {
     }
   }
 
-  async poll(delayMs = 50, attempts = 3): Promise<Record<string, unknown>> {
+  async getResult(): Promise<Record<string, unknown>> {
     const requestId = getCookie('botd-request-id')
     if (requestId == null) {
       return {
@@ -82,41 +81,22 @@ export default class BotDetector {
       }
     }
 
-    while (attempts > 0) {
-      try {
-        const response = await fetch(this.endpoint + 'results?id=' + requestId, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Auth-Token': this.token,
-          },
-        })
-
-        const json = await response.json()
-
-        if (json['status'] == 'inProgress') {
-          await wait(delayMs)
-          attempts--
-          if (attempts == 0) {
-            return {
-              error: {
-                code: 'inProgress',
-                message: 'Bot detection result is not ready yet',
-              },
-            }
-          }
-        } else {
-          return json
-        }
-      } catch (e) {
-        return {
-          error: {
-            code: 'Failed',
-            message: e.toString(),
-          },
-        }
+    try {
+      const response = await fetch(this.endpoint + 'results?id=' + requestId, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Auth-Token': this.token,
+        },
+      })
+      return await response.json()
+    } catch (e) {
+      return {
+        error: {
+          code: 'Failed',
+          message: e.toString(),
+        },
       }
     }
-    return Promise.reject()
   }
 }
