@@ -1,0 +1,166 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+}
+
+h1, h2 {
+  margin: 20px 50px;
+  font-weight: 700;
+  color: #0d102b;
+}
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 20px;
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 60em;
+  height: 100vh;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 20px 20px 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.url_form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 50px;
+}
+
+label {
+  flex: 1 1;
+  background-color: #FFF;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid rgba(13, 16, 43, .5);
+  border-right: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  min-width: 100px;
+}
+
+input[type=text] {
+  padding: 0 2rem;
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+  border-radius: 7px;
+  border: none;
+}
+
+input[type=checkbox] {
+  margin-right: 10px;
+}
+
+input:focus {
+  outline: none;
+}
+
+#button {
+  border: none;
+  background: #f04405;
+  color: #fff;
+  font: inherit;
+  font-size: 88%;
+  font-weight: 600;
+  line-height: 1.2;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0.85em 1.7em;
+  text-align: center;
+  outline: none;
+  max-width: 130px;
+}
+
+.output_holder {
+  flex: 1;
+  min-height: 4em;
+  height: 100vh;
+  position: relative;
+  margin: 20px 50px;
+}
+
+.output {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #282c34;
+  box-shadow: 0 0 1.25em rgba(0, 0, 0, 0.2);
+  border-radius: 0.7em;
+  padding: 1em 1.25em;
+  overflow: auto;
+}
+
+.output_div {
+  color: white;
+  margin: 10px;
+  white-space: pre-wrap;
+}
+
+h5 {
+  margin: 10px;
+  color: #f0470a;
+}
+
+.result-table {
+  margin: 0 50px 20px 50px;
+  line-height: 20px;
+}
+
+.green {
+  color: green;
+}
+.red {
+  color: orangered;
+}
+
+@media (max-width: 1024px) {
+  body {
+    font-size: small;
+  }
+
+  .content {
+    padding: 10px 10px 0 10px;
+  }
+
+  h1, h2 {
+    margin: 10px 0 10px 0;
+  }
+
+  label[for=modes] {
+    padding-left: 0;
+  }
+
+  .url_form, .result-table {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .output_holder {
+    margin: 10px 0 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 100%;
+  }
+}
