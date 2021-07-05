@@ -44,12 +44,8 @@ The response object format is described [here](server_api.md#response-body).
 ```js
 botDetector.getResult(): Promise<Record<string, unknown>>
 ```
-Will retrieve an existing bot detection result by `requestId`.
+Will retrieve an existing bot detection result by `requestId`, previously stored in cookies as an implicit parameter.
 Internally works by calling the  `/results` endpoint in the [server API](server_api.md#get-results).
-
-Note that `getResult` is purely a client-side method for retrieving the detection results.
-It works by passing the `requestId`, previously stored in cookies as an implicit parameter.
-
 For server-side retrieval, use our server API instead.
 
 ## Error handling:
