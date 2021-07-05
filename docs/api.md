@@ -5,8 +5,7 @@ _Botd also has a [server-side API](server_api.md). The responses in both JS and 
 
 ```js
 Botd.load({ token: string,
-  mode?: "requestId" | "allData",
-  endpoint?: string}): Promise<BotDetector>
+  mode?: "requestId" | "allData" }): Promise<BotDetector>
 ```
 
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
@@ -23,9 +22,6 @@ This mode is recommended for production usage.
 
 When `allData` mode is used, all data from the bot detection result is returned back to the browser.
 This mode is not recommended for production, but can be used during development and testing.
-
-
-`endpoint` You don't need to use it, unless you use a subdomain integration.
 
 ## `BotDetector.detect`
 
