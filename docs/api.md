@@ -65,3 +65,5 @@ botdPromise
 ### Error format
 
 You can get this information in [Server botd API](server_api.md#error-format).
+
+Additional possible error codes in Botd: `BotdFailed`, `DetectNotCalled`
