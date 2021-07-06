@@ -48,55 +48,57 @@ export default class BotDetector {
       version: version,
       token: this.token,
     }
-    try {
-      const response = await fetch(this.endpoint + 'detect', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': this.token,
-        },
-        body: JSON.stringify(body),
+
+    return await fetch(this.endpoint + 'detect?token=' + this.token, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setCookie('botd-request-id', json['requestId'])
+        return json
       })
-      const json = await response.json()
-      setCookie('botd-request-id', json['requestId'])
-      return json
-    } catch (e) {
-      return {
-        error: {
-          code: 500,
-          message: e.toString(),
-        },
-      }
-    }
+      .then((json) => {
+        if (json['error']) throw json
+        return json
+      })
+      .catch((err) => {
+        if (err['error']) throw err
+        throw {
+          error: {
+            code: 'BotdFailed',
+            message: err.toString(),
+          },
+        }
+      })
   }
 
   async getResult(): Promise<Record<string, unknown>> {
     const requestId = getCookie('botd-request-id')
     if (requestId == null) {
-      return {
+      throw {
         error: {
-          code: 400,
-          message: 'Call get() method first to make a request',
+          code: 'DetectNotCalled',
+          message: 'Call detect() method first to make a request',
         },
       }
     }
 
-    try {
-      const response = await fetch(this.endpoint + 'results?id=' + requestId, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Auth-Token': this.token,
-        },
+    return fetch(this.endpoint + 'results?id=' + requestId + '&token=' + this.token, { method: 'GET' })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json['error']) throw json
+        return json
       })
-      return await response.json()
-    } catch (e) {
-      return {
-        error: {
-          code: 'Failed',
-          message: e.toString(),
-        },
-      }
-    }
+      .catch((err) => {
+        if (err['error']) throw err
+        throw {
+          error: {
+            code: 'BotdFailed',
+            message: err.toString(),
+          },
+        }
+      })
   }
 }
