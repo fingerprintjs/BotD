@@ -143,7 +143,9 @@ You can use method `/results` then to get full detection report by `requestId`.
 
 ### Query parameters
 
-`id` - request id.
+`id` - request id. 
+
+Or you can pass request id through `botd-request-id` variable in cookie.
 
 ### Response format
 
