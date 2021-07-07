@@ -20,13 +20,9 @@ export default class BotDetector {
     this.token = options.token
   }
 
-  setTag(tag: unknown): void {
+  setTag(tag: string): void {
     if (this.sources !== undefined) {
-      try {
-        this.tag = tag === undefined ? '' : JSON.stringify(tag)
-      } catch (e) {
-        this.tag = ''
-      }
+      this.tag = tag
       this.sources[SignalName.Tag] = { state: State.Success, value: this.tag }
     }
   }
@@ -38,7 +34,7 @@ export default class BotDetector {
     return this.sources
   }
 
-  async detect(tag: unknown): Promise<Record<string, unknown>> {
+  async detect(tag: string): Promise<Record<string, unknown>> {
     this.setTag(tag)
     const body = {
       mode: this.mode,

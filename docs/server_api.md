@@ -126,7 +126,7 @@ Client ip address, e.x. `82.200.40.10`
 
 ### `tag`
 
-Object which associated with the request. It's set up by Botd user.
+String which associated with the request. It's set up by Botd user.
 
 ***
 ### `mode` is `requestId`:
