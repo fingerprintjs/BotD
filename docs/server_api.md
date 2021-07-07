@@ -2,16 +2,19 @@
 
 ### Production endpoint `https://botd.fpapi.io/api/v1`
 
+## API token
+
+There are two possible variants how to pass API token:
+1) `Auth-Token` header (preflight requests will be sent)
+2) `token` query string parameter.
+
 ## POST `/detect`
 
 ### Request headers
 
 ```js
-'Content-Type': 'application/json'
-'Auth-Token': "<token>"
+'Content-Type': 'text/plain'
 ```
-
-`Auth-Token` - client's token for accessing Server botd API.
 
 ### Request body
 
@@ -43,7 +46,6 @@ Other data are user properties to make an analysis.
 
 ```json
 {
-    "status": "processed",
     "bot": {
         "automationTool": {
             "status": "processed",
@@ -65,14 +67,12 @@ Other data are user properties to make an analysis.
         "status": "processed",
         "probability": 0,
         "type": "<type>"
-    }
+    },
+    "requestId": "<requestId>",
+    "ip": "<ipAddress>",
+    "tag": "<tag>"
 }
 ```
-
-### `status`
-
-If something goes wrong internally `status` will be `error` and no other information will be provided in the response.
-Otherwise, the value will be `processed`.
 
 ### `bot.automationTool`
 
@@ -116,6 +116,18 @@ Results of detecting a virtual machine.
 
 `type` - optional field, possible values = `"vmware" | "parallels" | "virtualBox" | ... `
 
+### `requestId`
+
+Request identifier, e.x. `01F9XY24VDZ9F4HHR4FSCRYTSH`
+
+### `ip`
+
+Client ip address, e.x. `82.200.40.10`
+
+### `tag`
+
+String which associated with the request. It's set up by Botd user.
+
 ***
 ### `mode` is `requestId`:
 
@@ -129,19 +141,9 @@ You can use method `/results` then to get full detection report by `requestId`.
 
 ## GET `/results`
 
-### Request headers
-
-```js
-'Auth-Token': "<token>"
-```
-
-Or you can pass token through query parameters.
-
 ### Query parameters
 
 `id` - request id.
-
-`token` - authorization token if it was not provided through header `Auth-Token`.
 
 ### Response format
 
@@ -156,6 +158,6 @@ The response will be the same as `/detect` has for `mode = "allData"`.
 }
 ```
 
-`code` - error code, possible values = `"Failed", "TokenRequired", "TokenNotFound", "RequestCannotBeParsed"`.
+`code` - error code, possible values = `"BotdApiFailed", "TokenRequired", "TokenNotFound", "RequestCannotBeParsed"`.
 
 `message` - error description.

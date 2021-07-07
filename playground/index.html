@@ -48,7 +48,7 @@
       document.getElementById("result-table").innerHTML = '';
       const botdPromise = Botd.load({ token: '7WZ7tchNxRlEfamx10i', mode: 'allData' })
       const botd = await botdPromise
-      const result = await botd.detect({ data: "Playground" })
+      const result = await botd.detect("Playground")
       let time = performance.now() - t0
 
       document.getElementById('perf').innerHTML = botd.performance + ' ms'

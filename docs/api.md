@@ -34,7 +34,7 @@ and return back the `requestId` which you can use later to retrieve bot detectio
 
 Note that the `requestId` will implicitly be stored in a cookie for future convenience.
 
-**`tag`** is an optional metadata object that you can associate with each bot detection event.
+**`tag`** is an optional metadata string that you can associate with each bot detection event.
 
 The response object format is described [here](server_api.md#response-body).
 
@@ -65,3 +65,5 @@ botdPromise
 ### Error format
 
 You can get this information in [Server botd API](server_api.md#error-format).
+
+Additional possible error codes in Botd: `BotdFailed`, `DetectNotCalled`
