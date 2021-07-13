@@ -34,28 +34,21 @@
     </section>
   </div>
   <script>
-    function escapeHTML(s) {
-      return s.replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-    }
-
     async function getResults() {
       let t0 = performance.now()
 
-      document.getElementById("status").innerHTML = 'Loading...'
+      document.getElementById("status").textContent = 'Loading...'
       document.getElementById("result-table").innerHTML = '';
       const botdPromise = Botd.load({ token: '7WZ7tchNxRlEfamx10i', mode: 'allData' })
       const botd = await botdPromise
       const result = await botd.detect("Playground")
       let time = performance.now() - t0
 
-      document.getElementById('perf').innerHTML = botd.performance + ' ms'
-      document.getElementById('sources').innerHTML = escapeHTML(JSON.stringify(botd.sources, null, 4))
-      document.getElementById('result').innerHTML = JSON.stringify(result, null, 4)
+      document.getElementById('perf').textContent = botd.performance + ' ms'
+      document.getElementById('sources').textContent = JSON.stringify(botd.sources, null, 4)
+      document.getElementById('result').textContent = JSON.stringify(result, null, 4)
       document.getElementById('time').textContent = time.toFixed(0) + ' ms'
-      document.getElementById("status").innerHTML = 'Result:'
+      document.getElementById("status").textContent = 'Result:'
       document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ['vm', result.vm]].map(([key, value]) => {
         let status = '';
         let statusClass = '';
