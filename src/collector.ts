@@ -71,7 +71,7 @@ export const enum SignalName {
   MimeTypesLength = 's33',
   MimeTypesConsistence = 's34',
   AccelerometerPermission = 's35',
-  Tag = 's36',
+  ClientTimestamp = 's36',
 }
 
 export default async function collect(): Promise<SourceResultDict> {

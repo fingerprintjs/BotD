@@ -20,13 +20,6 @@ export default class BotDetector {
     this.token = options.token
   }
 
-  setTag(tag: string): void {
-    if (this.sources !== undefined) {
-      this.tag = tag
-      this.sources[SignalName.Tag] = { state: State.Success, value: this.tag }
-    }
-  }
-
   async collect(): Promise<SourceResultDict> {
     this.timestamp = Date.now()
     this.sources = await collect()
@@ -35,14 +28,17 @@ export default class BotDetector {
   }
 
   async detect(tag: string): Promise<Record<string, unknown>> {
-    this.setTag(tag)
+    if (this.sources != null) {
+      this.sources[SignalName.ClientTimestamp] = { state: State.Success, value: Date.now() }
+    }
+
     const body = {
       mode: this.mode,
-      timestamp: this.timestamp,
       performance: this.performance,
       signals: this.sources,
       version: version,
       token: this.token,
+      tag: tag,
     }
 
     return await fetch(this.endpoint + 'detect?token=' + this.token, {
