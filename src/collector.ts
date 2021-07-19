@@ -34,6 +34,7 @@ import getLanguages from './sources/languages'
 import getMimeTypesLength from './sources/mimeTypesLength'
 import areMimeTypesConsistent from './sources/mimeTypesConsistence'
 import requiredAccelerometerPermission from './sources/accelerometerPermission'
+import getTimestamp from './sources/timestamp'
 
 export const enum SignalName {
   UserAgent = 's1',
@@ -111,5 +112,6 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.MimeTypesLength]: getMimeTypesLength,
     [SignalName.MimeTypesConsistence]: areMimeTypesConsistent,
     [SignalName.AccelerometerPermission]: requiredAccelerometerPermission,
+    [SignalName.ClientTimestamp]: getTimestamp,
   })
 }
