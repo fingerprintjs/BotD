@@ -35,6 +35,7 @@ import getMimeTypesLength from './sources/mimeTypesLength'
 import areMimeTypesConsistent from './sources/mimeTypesConsistence'
 import requiredAccelerometerPermission from './sources/accelerometerPermission'
 import getTimestamp from './sources/timestamp'
+import getBackdropFilter from './sources/backdropFilter'
 
 export const enum SignalName {
   UserAgent = 's1',
@@ -73,6 +74,7 @@ export const enum SignalName {
   MimeTypesConsistence = 's34',
   AccelerometerPermission = 's35',
   ClientTimestamp = 's36',
+  BackdropFilter = 's37',
 }
 
 export default async function collect(): Promise<SourceResultDict> {
@@ -113,5 +115,6 @@ export default async function collect(): Promise<SourceResultDict> {
     [SignalName.MimeTypesConsistence]: areMimeTypesConsistent,
     [SignalName.AccelerometerPermission]: requiredAccelerometerPermission,
     [SignalName.ClientTimestamp]: getTimestamp,
+    [SignalName.BackdropFilter]: getBackdropFilter,
   })
 }
