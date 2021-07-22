@@ -1,12 +1,11 @@
-import collect, { SignalName } from './collector'
+import collect from './collector'
 import { version } from '../package.json'
-import { getCookie, Modes, Options, setCookie, SourceResultDict, State } from './types'
+import { getCookie, Modes, Options, setCookie, SourceResultDict } from './types'
 
 export default class BotDetector {
   endpoint: string
   token: string
   mode: string
-  timestamp?: number
   tag?: string
   performance?: number
   sources?: SourceResultDict
@@ -20,29 +19,21 @@ export default class BotDetector {
     this.token = options.token
   }
 
-  setTag(tag: string): void {
-    if (this.sources !== undefined) {
-      this.tag = tag
-      this.sources[SignalName.Tag] = { state: State.Success, value: this.tag }
-    }
-  }
-
   async collect(): Promise<SourceResultDict> {
-    this.timestamp = Date.now()
+    const timestamp = Date.now()
     this.sources = await collect()
-    this.performance = Date.now() - this.timestamp
+    this.performance = Date.now() - timestamp
     return this.sources
   }
 
-  async detect(tag: string): Promise<Record<string, unknown>> {
-    this.setTag(tag)
+  async detect(tag = ''): Promise<Record<string, unknown>> {
     const body = {
       mode: this.mode,
-      timestamp: this.timestamp,
       performance: this.performance,
       signals: this.sources,
       version: version,
       token: this.token,
+      tag: tag,
     }
 
     return await fetch(this.endpoint + 'detect?token=' + this.token, {
