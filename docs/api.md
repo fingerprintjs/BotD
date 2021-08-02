@@ -26,7 +26,7 @@ This mode is not recommended for production, but can be used during development 
 ## `BotDetector.detect`
 
 ```js
-botDetector.detect({ tag?: object }): Promise<Record<string, unknown>>
+botDetector.detect({ tag?: string }): Promise<Record<string, unknown>>
 ```
 
 Performs bot detection. Internally it will make a network request to our server-side bot detection API
