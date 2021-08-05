@@ -27,6 +27,9 @@
 
 ### [Try Demo](https://fingerprintjs.github.io/botd/)
 
+### Cloud Integrations
+The end-user's browser scripts for bot detection are just one part of the bigger solution. In production, it's essential to handle automation tools even on the backend. In the [botd-integrations](https://github.com/fingerprintjs/botd-integrations) repository you can find an explanation of integration flow together with sample middleware integration examples for various cloud providers like Cloudflare, Fastly, or Amazon.
+
 ### Install from CDN
 
 ```html
