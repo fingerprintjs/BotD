@@ -1,9 +1,20 @@
 import typescript from '@rollup/plugin-typescript'
 import jsonPlugin from '@rollup/plugin-json'
 import dtsPlugin from 'rollup-plugin-dts'
+import licensePlugin from 'rollup-plugin-license'
 import { terser as terserPlugin } from 'rollup-plugin-terser'
+import { join } from 'path'
 
 const inputFile = 'src/index.ts'
+const outputDirectory = 'dist'
+
+const commonBanner = licensePlugin({
+  banner: {
+    content: {
+      file: join(__dirname, 'resources', 'license_banner.txt'),
+    },
+  },
+})
 
 const min = {
   plugins: [
@@ -13,6 +24,7 @@ const min = {
       },
       safari10: true,
     }),
+    commonBanner,
   ],
 }
 
@@ -28,45 +40,45 @@ export default [
       {
         ...min,
         ...common,
-        file: `dist/botd.min.js`,
+        file: `${outputDirectory}/botd.min.js`,
         format: 'iife',
       },
       {
         ...min,
         ...common,
-        file: 'dist/botd.umd.min.js',
+        file: `${outputDirectory}/botd.umd.min.js`,
         format: 'umd',
       },
       {
         ...min,
         ...common,
-        file: 'dist/botd.cjs.min.js',
+        file: `${outputDirectory}/botd.cjs.min.js`,
         format: 'cjs',
       },
       {
         ...min,
         ...common,
-        file: 'dist/botd.esm.min.js',
+        file: `${outputDirectory}/botd.esm.min.js`,
         format: 'es',
       },
       {
         ...common,
-        file: `dist_dev/botd.js`,
+        file: `${outputDirectory}/botd.js`,
         format: 'iife',
       },
       {
         ...common,
-        file: 'dist_dev/botd.umd.js',
+        file: `${outputDirectory}/botd.umd.js`,
         format: 'umd',
       },
       {
         ...common,
-        file: 'dist_dev/botd.cjs.js',
+        file: `${outputDirectory}/botd.cjs.js`,
         format: 'cjs',
       },
       {
         ...common,
-        file: 'dist_dev/botd.esm.js',
+        file: `${outputDirectory}/botd.esm.js`,
         format: 'es',
       },
     ],
@@ -75,9 +87,9 @@ export default [
   {
     input: inputFile,
     output: {
-      file: 'dist/botd.d.ts',
+      file: `${outputDirectory}/botd.d.ts`,
       format: 'es',
     },
-    plugins: [dtsPlugin()],
+    plugins: [dtsPlugin(), commonBanner],
   },
 ]
