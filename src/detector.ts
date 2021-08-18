@@ -1,8 +1,8 @@
 import collect from './collector'
 import { version } from '../package.json'
-import { getCookie, Modes, Options, setCookie, SourceResultDict } from './types'
+import { BotDetectorInterface, getCookie, Modes, Options, setCookie, SourceResultDict } from './types'
 
-export default class BotDetector {
+export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
   mode: string
@@ -36,7 +36,7 @@ export default class BotDetector {
       tag: tag,
     }
 
-    return await fetch(this.endpoint + 'detect?token=' + this.token, {
+    return fetch(this.endpoint + 'detect?token=' + this.token, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(body),

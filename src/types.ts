@@ -14,6 +14,11 @@ type Source =
       value: string
     }
 
+export interface BotDetectorInterface {
+  detect(tag?: string): Promise<Record<string, unknown>>
+  collect(): Promise<SourceResultDict>
+}
+
 export interface Options {
   token: string
   mode?: string
