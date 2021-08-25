@@ -20,10 +20,10 @@
   </a>
 </p>
 
-## 🌱 botd
+## 🌱 Botd
 <small><i>currently in beta - API may change</i></small>
 
-**botd** is a browser library for JavaScript bot detection (detecting automation tools, browser spoofing and virtual machines).
+**Botd** is a browser library for JavaScript bot detection (detecting automation tools, browser spoofing and virtual machines).
 
 ### [Try Demo](https://fingerprintjs.github.io/botd/)
 
