@@ -1,4 +1,4 @@
-import { handleAll, SourceResultDict } from './types'
+import { handleAll, ComponentDict } from './types'
 import getUserAgent from './sources/userAgent'
 import hasUserAgentData from './sources/userAgentData'
 import getAppVersion from './sources/appVersion'
@@ -77,7 +77,7 @@ export const enum SignalName {
   BackdropFilter = 's37',
 }
 
-export default async function collect(): Promise<SourceResultDict> {
+export default async function collect(): Promise<ComponentDict> {
   return handleAll({
     [SignalName.UserAgent]: getUserAgent,
     [SignalName.UserAgentData]: hasUserAgentData,

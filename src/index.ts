@@ -1,7 +1,7 @@
 import BotDetector from './detector'
-import { BotDetectorInterface, Options } from './types'
+import { BotDetectorInterface, InitOptions } from './types'
 
-export async function load(options: Options): Promise<BotDetectorInterface> {
+export async function load(options: InitOptions): Promise<BotDetectorInterface> {
   const detector = new BotDetector(options)
   await detector.collect()
   return detector
