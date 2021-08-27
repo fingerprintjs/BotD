@@ -1,6 +1,15 @@
 import collect from './collector'
 import { version } from '../package.json'
-import { BotDetectorInterface, getCookie, Modes, Options, setCookie, SourceResultDict } from './types'
+import {
+  BotDetectorInterface,
+  DetectOptions,
+  getCookie,
+  Modes,
+  InitOptions,
+  setCookie,
+  ComponentDict,
+  ErrorCodes,
+} from './types'
 
 export default class BotDetector implements BotDetectorInterface {
   endpoint: string
@@ -8,9 +17,9 @@ export default class BotDetector implements BotDetectorInterface {
   mode: string
   tag?: string
   performance?: number
-  sources?: SourceResultDict
+  sources?: ComponentDict
 
-  constructor(options: Options) {
+  constructor(options: InitOptions) {
     this.mode = options.mode == undefined ? Modes.RequestID : options.mode
     this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
     if (!this.endpoint.endsWith('/')) {
@@ -19,21 +28,21 @@ export default class BotDetector implements BotDetectorInterface {
     this.token = options.token
   }
 
-  async collect(): Promise<SourceResultDict> {
+  async collect(): Promise<ComponentDict> {
     const timestamp = Date.now()
     this.sources = await collect()
     this.performance = Date.now() - timestamp
     return this.sources
   }
 
-  async detect(tag = ''): Promise<Record<string, unknown>> {
+  async detect(options?: DetectOptions): Promise<Record<string, unknown>> {
     const body = {
       mode: this.mode,
       performance: this.performance,
       signals: this.sources,
       version: version,
       token: this.token,
-      tag: tag,
+      tag: options ? options.tag : '',
     }
 
     return fetch(this.endpoint + 'detect?token=' + this.token, {
@@ -54,7 +63,7 @@ export default class BotDetector implements BotDetectorInterface {
         if (err['error']) throw err
         throw {
           error: {
-            code: 'BotdFailed',
+            code: ErrorCodes.BotdFailed,
             message: err.toString(),
           },
         }
@@ -66,7 +75,7 @@ export default class BotDetector implements BotDetectorInterface {
     if (requestId == null) {
       throw {
         error: {
-          code: 'DetectNotCalled',
+          code: ErrorCodes.DetectNotCalled,
           message: 'Call detect() method first to make a request',
         },
       }
@@ -82,7 +91,7 @@ export default class BotDetector implements BotDetectorInterface {
         if (err['error']) throw err
         throw {
           error: {
-            code: 'BotdFailed',
+            code: ErrorCodes.BotdFailed,
             message: err.toString(),
           },
         }

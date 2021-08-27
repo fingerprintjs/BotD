@@ -1,13 +1,13 @@
-type SimpleSourceResult = string | number | boolean
-type SourceResult = SimpleSourceResult | SimpleSourceResult[]
-type SourceFunction = () => SourceResult | Promise<SourceResult>
-type SourceDict = Record<string, SourceFunction>
-export type SourceResultDict = Record<string, Source>
+type SimpleComponentValue = string | number | boolean
+type ComponentValue = SimpleComponentValue | SimpleComponentValue[]
+type Source = () => ComponentValue | Promise<ComponentValue>
+type SourceDict = Record<string, Source>
+export type ComponentDict = Record<string, Component>
 
-type Source =
+type Component =
   | {
       state: State.Success
-      value: SourceResult
+      value: ComponentValue
     }
   | {
       state: State.Failure
@@ -15,14 +15,19 @@ type Source =
     }
 
 export interface BotDetectorInterface {
-  detect(tag?: string): Promise<Record<string, unknown>>
-  collect(): Promise<SourceResultDict>
+  detect(options?: DetectOptions): Promise<Record<string, unknown>>
+  collect(): Promise<ComponentDict>
+  getResult(): Promise<Record<string, unknown>>
 }
 
-export interface Options {
+export interface InitOptions {
   token: string
   mode?: string
   endpoint?: string
+}
+
+export interface DetectOptions {
+  tag: string
 }
 
 export const enum Modes {
@@ -30,32 +35,33 @@ export const enum Modes {
   AllData = 'allData',
 }
 
+export const enum ErrorCodes {
+  BotdFailed = 'BotdFailed',
+  DetectNotCalled = 'DetectNotCalled',
+}
+
 export const enum State {
   Success = 1,
   Failure = -1,
 }
 
-async function handleSource(sourceFunction: SourceFunction): Promise<Source> {
-  let sourceResult: SourceResult
-  let result: Source
+async function handleSource(sourceFunction: Source): Promise<Component> {
   try {
-    sourceResult = await sourceFunction()
-    result = { state: State.Success, value: sourceResult }
+    return { state: State.Success, value: await sourceFunction() }
   } catch (e) {
-    result = { state: State.Failure, value: e.toString() }
+    return { state: State.Failure, value: e.toString() }
   }
-  return result
 }
 
-export async function handleAll(sources: SourceDict): Promise<SourceResultDict> {
-  const results: SourceResultDict = {}
+export async function handleAll(sources: SourceDict): Promise<ComponentDict> {
+  const components: ComponentDict = {}
   for (const name in sources) {
     if (Object.prototype.hasOwnProperty.call(sources, name)) {
       const sourceFunction = sources[name]
-      results[name] = await handleSource(sourceFunction)
+      components[name] = await handleSource(sourceFunction)
     }
   }
-  return results
+  return components
 }
 
 export function getCookie(name: string): string | undefined {
