@@ -1,3 +1,5 @@
+import { BotdError, State } from '../types'
+
 export default function getHardwareConcurrency(): number {
   try {
     const concurrency = navigator.hardwareConcurrency
@@ -7,6 +9,6 @@ export default function getHardwareConcurrency(): number {
     }
     return concurrency
   } catch (e) {
-    throw new Error('wrong type')
+    throw new BotdError(State.WrongType, 'navigator.hardwareConcurrency wrong type')
   }
 }

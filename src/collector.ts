@@ -1,4 +1,4 @@
-import { handleAll, ComponentDict } from './types'
+import { BotdError, Component, ComponentDict, Source, SourceDict, State } from './types'
 import getUserAgent from './sources/userAgent'
 import hasUserAgentData from './sources/userAgentData'
 import getAppVersion from './sources/appVersion'
@@ -75,6 +75,29 @@ export const enum SignalName {
   AccelerometerPermission = 's35',
   ClientTimestamp = 's36',
   BackdropFilter = 's37',
+}
+
+async function handleSource(sourceFunction: Source): Promise<Component> {
+  try {
+    return { state: State.Success, value: await sourceFunction() }
+  } catch (e) {
+    if (e instanceof BotdError) {
+      return { state: e.state, value: e.toString() }
+    } else {
+      return { state: State.Unexpected, value: e.toString() }
+    }
+  }
+}
+
+async function handleAll(sources: SourceDict): Promise<ComponentDict> {
+  const components: ComponentDict = {}
+  for (const name in sources) {
+    if (Object.prototype.hasOwnProperty.call(sources, name)) {
+      const sourceFunction = sources[name]
+      components[name] = await handleSource(sourceFunction)
+    }
+  }
+  return components
 }
 
 export default async function collect(): Promise<ComponentDict> {

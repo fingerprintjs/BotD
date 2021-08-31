@@ -1,3 +1,5 @@
+import { BotdError, State } from '../types'
+
 export default function getErrorTrace(): string {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -6,5 +8,5 @@ export default function getErrorTrace(): string {
   } catch (error) {
     return error.stack.toString()
   }
-  throw new Error('wrong behaviour')
+  throw new BotdError(State.UnexpectedBehaviour, 'errorTrace signal unexpected behaviour')
 }

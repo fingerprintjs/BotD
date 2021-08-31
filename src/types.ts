@@ -1,28 +1,60 @@
 type SimpleComponentValue = string | number | boolean
 type ComponentValue = SimpleComponentValue | SimpleComponentValue[]
-type Source = () => ComponentValue | Promise<ComponentValue>
-type SourceDict = Record<string, Source>
-export type ComponentDict = Record<string, Component>
 
-type Component =
+export type Source = () => ComponentValue | Promise<ComponentValue>
+export type SourceDict = Record<string, Source>
+
+export type Component =
   | {
       state: State.Success
       value: ComponentValue
     }
   | {
-      state: State.Failure
+      state: State
       value: string
     }
+export type ComponentDict = Record<string, Component>
+
+export type BotdResponse = RequestIdResponse | SuccessResponse | ErrorResponse
+
+type DetectNote = {
+  status: string
+  probability: number
+  type?: string
+}
+
+export interface RequestIdResponse {
+  requestId: string
+}
+
+export interface SuccessResponse {
+  requestId: string
+  ip: string
+  tag: string
+  bot: {
+    automationTools: DetectNote
+    searchEngine: DetectNote
+    browserSpoofing: DetectNote
+  }
+  vm: DetectNote
+}
+
+export interface ErrorResponse {
+  error: {
+    code: ErrorCodes
+    message: string
+  }
+}
 
 export interface BotDetectorInterface {
-  detect(options?: DetectOptions): Promise<Record<string, unknown>>
+  detect(options?: DetectOptions): Promise<BotdResponse>
   collect(): Promise<ComponentDict>
-  getResult(): Promise<Record<string, unknown>>
+  getResult(): Promise<BotdResponse>
 }
 
 export interface InitOptions {
   token: string
-  mode?: string
+  mode?: Modes
   endpoint?: string
 }
 
@@ -30,10 +62,16 @@ export interface DetectOptions {
   tag: string
 }
 
-export const enum Modes {
-  RequestID = 'requestId',
-  AllData = 'allData',
+export interface DetectBody {
+  mode: Modes
+  performance?: number
+  signals?: ComponentDict
+  version: string
+  token: string
+  tag: string
 }
+
+export type Modes = 'requestId' | 'allData'
 
 export const enum ErrorCodes {
   BotdFailed = 'BotdFailed',
@@ -41,37 +79,19 @@ export const enum ErrorCodes {
 }
 
 export const enum State {
+  Unexpected = -1,
   Success = 1,
-  Failure = -1,
+  Undefined = 100,
+  Null = 101,
+  UnexpectedBehaviour = 102,
+  WrongType = 103,
 }
 
-async function handleSource(sourceFunction: Source): Promise<Component> {
-  try {
-    return { state: State.Success, value: await sourceFunction() }
-  } catch (e) {
-    return { state: State.Failure, value: e.toString() }
+export class BotdError extends Error {
+  state: State
+  constructor(state: State, message: string) {
+    super(message)
+    this.state = state
+    this.name = 'BotdError'
   }
-}
-
-export async function handleAll(sources: SourceDict): Promise<ComponentDict> {
-  const components: ComponentDict = {}
-  for (const name in sources) {
-    if (Object.prototype.hasOwnProperty.call(sources, name)) {
-      const sourceFunction = sources[name]
-      components[name] = await handleSource(sourceFunction)
-    }
-  }
-  return components
-}
-
-export function getCookie(name: string): string | undefined {
-  const matches = document.cookie.match(
-    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
-  )
-  return matches ? decodeURIComponent(matches[1]) : undefined
-}
-
-export function setCookie(name: string, value: string): void {
-  value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
 }
