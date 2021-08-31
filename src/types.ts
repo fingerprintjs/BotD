@@ -17,8 +17,10 @@ export type ComponentDict = Record<string, Component>
 
 export type BotdResponse = RequestIdResponse | SuccessResponse | ErrorResponse
 
+type DetectStatus = 'processed' | 'notEnoughData' | 'error'
+
 type DetectNote = {
-  status: string
+  status: DetectStatus
   probability: number
   type?: string
 }
@@ -46,8 +48,15 @@ export interface ErrorResponse {
   }
 }
 
+export const enum ErrorCodes {
+  BotdFailed = 'BotdFailed',
+  DetectNotCalled = 'DetectNotCalled',
+}
+
 export interface BotDetectorInterface {
-  detect(options?: DetectOptions): Promise<BotdResponse>
+  detect(tag?: string): Promise<BotdResponse>
+  detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse>
+
   collect(): Promise<ComponentDict>
   getResult(): Promise<BotdResponse>
 }
@@ -72,11 +81,6 @@ export interface DetectBody {
 }
 
 export type Modes = 'requestId' | 'allData'
-
-export const enum ErrorCodes {
-  BotdFailed = 'BotdFailed',
-  DetectNotCalled = 'DetectNotCalled',
-}
 
 export const enum State {
   Unexpected = -1,
