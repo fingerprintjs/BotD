@@ -35,6 +35,9 @@
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore --max-warnings 0 .",
     "lint:fix": "yarn lint --fix"
   },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-typescript": "^8.2.1",
@@ -49,7 +52,6 @@
     "rollup-plugin-dts": "^3.0.1",
     "rollup-plugin-license": "^2.5.0",
     "rollup-plugin-terser": "^7.0.2",
-    "tslib": "^2.2.0",
     "typescript": "^4.0.0"
   }
 }

@@ -4,6 +4,7 @@ import dtsPlugin from 'rollup-plugin-dts'
 import licensePlugin from 'rollup-plugin-license'
 import { terser as terserPlugin } from 'rollup-plugin-terser'
 import { join } from 'path'
+import { dependencies } from './package.json'
 
 const inputFile = 'src/index.ts'
 const outputDirectory = 'dist'
@@ -24,65 +25,62 @@ const min = {
       },
       safari10: true,
     }),
-    commonBanner,
   ],
 }
 
-const common = {
+const commonInput = {
+  input: inputFile,
+  plugins: [jsonPlugin(), typescript(), commonBanner],
+}
+
+const commonOutput = {
   name: 'Botd',
   exports: 'named',
 }
 
 export default [
   {
-    input: inputFile,
+    ...commonInput,
     output: [
       {
-        ...min,
-        ...common,
-        file: `${outputDirectory}/botd.min.js`,
-        format: 'iife',
-      },
-      {
-        ...min,
-        ...common,
-        file: `${outputDirectory}/botd.umd.min.js`,
-        format: 'umd',
-      },
-      {
-        ...min,
-        ...common,
-        file: `${outputDirectory}/botd.cjs.min.js`,
-        format: 'cjs',
-      },
-      {
-        ...min,
-        ...common,
-        file: `${outputDirectory}/botd.esm.min.js`,
-        format: 'es',
-      },
-      {
-        ...common,
+        ...commonOutput,
         file: `${outputDirectory}/botd.js`,
         format: 'iife',
       },
       {
-        ...common,
+        ...min,
+        ...commonOutput,
+        file: `${outputDirectory}/botd.min.js`,
+        format: 'iife',
+      },
+      {
+        ...commonOutput,
         file: `${outputDirectory}/botd.umd.js`,
         format: 'umd',
       },
       {
-        ...common,
+        ...min,
+        ...commonOutput,
+        file: `${outputDirectory}/botd.umd.min.js`,
+        format: 'umd',
+      },
+    ],
+  },
+  {
+    ...commonInput,
+    external: Object.keys(dependencies),
+    output: [
+      {
+        ...commonOutput,
         file: `${outputDirectory}/botd.cjs.js`,
         format: 'cjs',
       },
       {
-        ...common,
+        ...commonOutput,
         file: `${outputDirectory}/botd.esm.js`,
         format: 'es',
       },
     ],
-    plugins: [typescript(), jsonPlugin()],
   },
   {
     input: inputFile,
