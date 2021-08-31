@@ -28,7 +28,7 @@ export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
   mode: Modes
-  tag?: string
+  tag = ''
   performance?: number
   components?: ComponentDict
 
@@ -61,24 +61,34 @@ export default class BotDetector implements BotDetectorInterface {
     }
   }
 
-  createRequestBody(options?: DetectOptions): DetectBody {
+  createRequestBody(): DetectBody {
     return {
       mode: this.mode,
       performance: this.performance,
       signals: this.components,
       version: version,
       token: this.token,
-      tag: options ? options.tag : '',
+      tag: this.tag,
     }
   }
 
-  // async detect(options?: DetectOptions): Promise<Record<string, unknown>> {
-  async detect(options?: DetectOptions): Promise<BotdResponse> {
+  /**
+   * @deprecated
+   */
+  async detect(tag?: string): Promise<BotdResponse>
+
+  async detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse> {
+    if (optionsOrTag)
+      if (typeof optionsOrTag === 'string') {
+        window.console.warn('Deprecated method detect(tag?: string): Promise<BotdResponse>')
+        this.tag = optionsOrTag
+      } else this.tag = optionsOrTag.tag
+    else this.tag = ''
     try {
       const response = await fetch(this.endpoint + 'detect?token=' + this.token, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(this.createRequestBody(options)),
+        body: JSON.stringify(this.createRequestBody()),
       })
       const responseJSON: BotdResponse = await response.json()
       BotDetector.throwIfError(responseJSON)
