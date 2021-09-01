@@ -31,7 +31,7 @@
     "dist"
   ],
   "scripts": {
-    "build:rollup": "rimraf dist && rimraf dist_dev && rollup -c rollup.config.js",
+    "build:rollup": "rimraf dist && rollup -c rollup.config.js",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore --max-warnings 0 .",
     "lint:fix": "yarn lint --fix"
   },
