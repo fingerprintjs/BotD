@@ -36,6 +36,7 @@ import areMimeTypesConsistent from './sources/mimeTypesConsistence'
 import requiredAccelerometerPermission from './sources/accelerometerPermission'
 import getTimestamp from './sources/timestamp'
 import getBackdropFilter from './sources/backdropFilter'
+import getASTCProfiles from './sources/astcProfiles'
 
 export const enum SignalName {
   UserAgent = 's1',
@@ -75,6 +76,7 @@ export const enum SignalName {
   AccelerometerPermission = 's35',
   ClientTimestamp = 's36',
   BackdropFilter = 's37',
+  ASTCProfiles = 's38',
 }
 
 async function handleSource(sourceFunction: Source): Promise<Component> {
@@ -139,5 +141,6 @@ export default async function collect(): Promise<ComponentDict> {
     [SignalName.AccelerometerPermission]: requiredAccelerometerPermission,
     [SignalName.ClientTimestamp]: getTimestamp,
     [SignalName.BackdropFilter]: getBackdropFilter,
+    [SignalName.ASTCProfiles]: getASTCProfiles,
   })
 }
