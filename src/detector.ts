@@ -49,7 +49,9 @@ export default class BotDetector implements BotDetectorInterface {
   }
 
   static throwIfError(response: BotdResponse): void {
-    if ('error' in response) throw response
+    if ('error' in response) {
+      throw response
+    }
   }
 
   static createError(code: ErrorCodes, msg: string): ErrorResponse {
@@ -72,18 +74,18 @@ export default class BotDetector implements BotDetectorInterface {
     }
   }
 
-  /**
-   * @deprecated
-   */
   async detect(tag?: string): Promise<BotdResponse>
 
   async detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse> {
-    if (optionsOrTag)
+    if (optionsOrTag) {
       if (typeof optionsOrTag === 'string') {
-        window.console.warn('Deprecated method detect(tag?: string): Promise<BotdResponse>')
         this.tag = optionsOrTag
-      } else this.tag = optionsOrTag.tag
-    else this.tag = ''
+      } else {
+        this.tag = optionsOrTag.tag
+      }
+    } else {
+      this.tag = ''
+    }
     try {
       const response = await fetch(this.endpoint + 'detect?token=' + this.token, {
         method: 'POST',
@@ -92,18 +94,23 @@ export default class BotDetector implements BotDetectorInterface {
       })
       const responseJSON: BotdResponse = await response.json()
       BotDetector.throwIfError(responseJSON)
-      if ('requestId' in responseJSON) setCookie('botd-request-id', responseJSON['requestId'])
+      if ('requestId' in responseJSON) {
+        setCookie('botd-request-id', responseJSON['requestId'])
+      }
       return responseJSON
     } catch (err) {
-      if (err['error']) throw err
+      if (err['error']) {
+        throw err
+      }
       throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
     }
   }
 
   async getResult(): Promise<BotdResponse> {
     const requestId = getCookie('botd-request-id')
-    if (requestId == null)
+    if (requestId == null) {
       throw BotDetector.createError(ErrorCodes.DetectNotCalled, 'Call detect() method first to make a request')
+    }
     try {
       const url = `${this.endpoint}results?id=${requestId}&token=${this.token}`
       const response = await fetch(url, { method: 'GET' })
@@ -111,7 +118,9 @@ export default class BotDetector implements BotDetectorInterface {
       BotDetector.throwIfError(responseJSON)
       return responseJSON
     } catch (err) {
-      if (err['error']) throw err
+      if (err['error']) {
+        throw err
+      }
       throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
     }
   }

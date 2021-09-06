@@ -54,8 +54,11 @@ export const enum ErrorCodes {
 }
 
 export interface BotDetectorInterface {
-  detect(tag?: string): Promise<BotdResponse>
   detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse>
+  /**
+   * @deprecated Will be removed in the next major version, use detect(options: DetectOptions) instead
+   */
+  detect(tag?: string): Promise<BotdResponse>
 
   collect(): Promise<ComponentDict>
   getResult(): Promise<BotdResponse>
