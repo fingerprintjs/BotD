@@ -42,7 +42,7 @@
       document.getElementById("result-table").innerHTML = '';
       const botdPromise = Botd.load({ token: '7WZ7tchNxRlEfamx10i', mode: 'allData' })
       const botd = await botdPromise
-      const result = await botd.detect("Playground")
+      const result = await botd.detect({tag: "Playground"})
       let time = performance.now() - t0
 
       document.getElementById('perf').textContent = botd.performance + ' ms'
@@ -51,7 +51,7 @@
       document.getElementById('time').textContent = time.toFixed(0) + ' ms'
       document.getElementById("status").textContent = 'Result:'
       document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ['vm', result.vm]].map(([key, value]) => {
-        let status = '';
+        let status;
         let statusClass = '';
         if (value.status === 'processed') {
           if (value.probability > 0) {
