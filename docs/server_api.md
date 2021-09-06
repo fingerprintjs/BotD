@@ -12,13 +12,13 @@ There are two possible variants how to pass API token:
 
 ### Request headers
 
-```js
+```
 'Content-Type': 'text/plain'
 ```
 
 ### Request body
 
-```js
+```json
 {
     "mode": "<mode>",
     "timestamp": 1623762359,
@@ -143,7 +143,7 @@ You can use method `/results` then to get full detection report by `requestId`.
 
 ### Query parameters
 
-`id` - request id. 
+`id` - request id.
 
 Or you can pass request id through `botd-request-id` variable in cookie.
 
@@ -153,10 +153,12 @@ The response will be the same as `/detect` has for `mode = "allData"`.
 
 ## Error format
 
-```js
+```json
 {
-  "code": "TokenNotFound",
-  "message": "token not found"
+  "error": {
+    "code": "TokenNotFound",
+    "message": "token not found"
+  }
 }
 ```
 
