@@ -86,9 +86,9 @@ export interface DetectBody {
 export type Modes = 'requestId' | 'allData'
 
 export const enum State {
-  Unexpected = -1,
+  Unexpected = -100,
+  Undefined = -1,
   Success = 1,
-  Undefined = 100,
   Null = 101,
   UnexpectedBehaviour = 102,
   WrongType = 103,
