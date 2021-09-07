@@ -1,6 +1,6 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
@@ -14,8 +14,8 @@
     "device detection",
     "privacy"
   ],
-  "main": "dist/botd.cjs.min.js",
-  "module": "dist/botd.esm.min.js",
+  "main": "dist/botd.cjs.js",
+  "module": "dist/botd.esm.js",
   "types": "dist/botd.d.ts",
   "license": "MIT",
   "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
