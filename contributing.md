@@ -43,7 +43,9 @@ Run to fix code style mistakes (not all mistakes can be fixed automatically):
 yarn lint:fix
 ```
 
-### How to make a new signal source
+### Contributing
+**Important**: Bot detection, crawling, and scraping techniques are continuously evolving. Before filing a new issue or discussing detection techniques publicly, consider whether the topic is suitable for the general audience. Please discuss sensitive topics directly with [support@fingerprintjs.com](mailto:support@fingerprintjs.com) or on the [Discord server](https://discord.gg/39EpE2neBg) with the repository maintainers.
+
 One can create a new signal source in this client-side library, however, it needs to be also accepted and processed on the backend side properly. The recommended approach is to  [file an issue in the repository](https://github.com/fingerprintjs/botd/issues) and discuss signal details with the maintainers.
 
 #### How to add a new signal source to the client
