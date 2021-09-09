@@ -12,18 +12,17 @@ import {
   Modes,
 } from './types'
 
-function getCookie(name: string): string | undefined {
-  const matches = document.cookie.match(
-    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'),
-  )
-  return matches ? decodeURIComponent(matches[1]) : undefined
-}
-
 function setCookie(name: string, value: string): void {
   value = encodeURIComponent(value)
   document.cookie = name + '=' + value
 }
 
+/**
+ * Class representing a bot detector.
+ *
+ * @class
+ * @implements {BotDetectorInterface}
+ */
 export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
@@ -41,6 +40,9 @@ export default class BotDetector implements BotDetectorInterface {
     this.token = options.token
   }
 
+  /**
+   * @inheritdoc
+   */
   async collect(): Promise<ComponentDict> {
     const timestamp = Date.now()
     this.components = await collect()
@@ -74,8 +76,14 @@ export default class BotDetector implements BotDetectorInterface {
     }
   }
 
+  /**
+   * @inheritdoc
+   */
   async detect(tag?: string): Promise<BotdResponse>
 
+  /**
+   * @inheritdoc
+   */
   async detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse> {
     if (optionsOrTag) {
       if (typeof optionsOrTag === 'string') {
@@ -97,25 +105,6 @@ export default class BotDetector implements BotDetectorInterface {
       if ('requestId' in responseJSON) {
         setCookie('botd-request-id', responseJSON['requestId'])
       }
-      return responseJSON
-    } catch (err) {
-      if (err['error']) {
-        throw err
-      }
-      throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
-    }
-  }
-
-  async getResult(): Promise<BotdResponse> {
-    const requestId = getCookie('botd-request-id')
-    if (requestId == null) {
-      throw BotDetector.createError(ErrorCodes.DetectNotCalled, 'Call detect() method first to make a request')
-    }
-    try {
-      const url = `${this.endpoint}results?id=${requestId}&token=${this.token}`
-      const response = await fetch(url, { method: 'GET' })
-      const responseJSON: BotdResponse = await response.json()
-      BotDetector.throwIfError(responseJSON)
       return responseJSON
     } catch (err) {
       if (err['error']) {
