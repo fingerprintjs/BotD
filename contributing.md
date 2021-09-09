@@ -23,7 +23,7 @@ To build the distribution files of the library, run:
 
 ```bash
 yarn install
-yarn build
+yarn build:rollup
 ```
 
 The files will appear in the `dist` directory.
