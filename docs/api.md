@@ -4,13 +4,15 @@ _Botd also has a [server-side API](server_api.md). The responses in both JS and 
 ## `Botd.load`
 
 ```ts
-Botd.load({ token: string, mode?: "requestId" | "allData" }): Promise<BotDetector>
+Botd.load(options: InitOptions): Promise<BotDetectorInterface>
 ```
 
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
-`token` is your free account token required to access the server-side bot detection API.
+The `InitOptions` object has three properties:
+
+`token`: is your free account token required to access the server-side bot detection API.
 This is a required parameter.
 
 `mode`: Two modes are supported: `requestId` (default) and `allData`.
@@ -22,32 +24,26 @@ This mode is recommended for production usage.
 When `allData` mode is used, all data from the bot detection result is returned back to the browser.
 This mode is not recommended for production, but can be used during development and testing.
 
+`endpoint`: An optional endpoint for the server-side bot detection API.
+
 ## `BotDetector.detect`
 
 ```ts
-botDetector.detect(options?: DetectOptions): Promise<BotdResponse>
+botDetector.detect(options: DetectOptions): Promise<BotdResponse>
 ```
 
 Performs bot detection. Internally it will make a network request to our server-side bot detection API
 and return back the `requestId` which you can use later to retrieve bot detection results (or `allData` if you configured it this way).
 
-Note that the `requestId` will implicitly be stored in a cookie for future convenience.
+**Note:** It's recommended to use the `DetectOptions` object parameter instead of the string `tag`.
+
+Note that the `requestId` will implicitly be stored in a cookie (`botd-request-id`) for future convenience.
 
 The **`DetectOptions`** object has a single parameter **`tag`** with type **`string`**
 
 **`tag`** is an optional metadata string that you can associate with each bot detection event.
 
-The response object format is described [here](server_api.md#response-body).
-
-
-## `BotDetector.getResult`
-
-```ts
-botDetector.getResult(): Promise<BotdResponse>
-```
-Will retrieve an existing bot detection result by `requestId`, previously stored in cookies as an implicit parameter.
-Internally works by calling the  `/results` endpoint in the [server API](server_api.md#get-results).
-For server-side retrieval, use our server API instead.
+The response object format is described [in the server API documentation](server_api.md#response-body).
 
 ## Error handling:
 
