@@ -6,13 +6,24 @@ Prerequisite: Make sure you have the [Yarn](https://yarnpkg.com) package manager
 
 ### Development playground
 
-The playground is a quick way to run, test, and debug the code. The playground is located in the [playground](playground) directory. The page runs the built library once opened.
+The playground is a quick way to run, test, and debug the code. The playground is located in the [playground](playground) directory.
 
-To prepare playground run:
-```bash
-yarn install # installs dependencies
-yarn build:rollup # builds bot detection client library
-```
+To prepare playground:
+
+1. In the `playground/index.html` replace
+    ```html
+    <script async src='https://cdn.jsdelivr.net/npm/@fpjs-incubator/botd-agent@0/dist/botd.min.js'>
+    ```
+    with
+    ```html
+    <script async src="../dist/botd.js"></script>
+    ```
+
+2. Run:
+    ```bash
+    yarn install # installs dependencies
+    yarn build:rollup # builds bot detection client library
+    ```
 After a successful build, you can open [playground/index.html](playground/index.html) file in your browser.
 
 **Note:** Playground uses a shared hardcoded botd API token.
