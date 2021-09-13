@@ -12,7 +12,7 @@ ideally during application startup. It returns a promise which you can chain on 
 
 The `InitOptions` object has three properties:
 
-`token`: is your free account token required to access the server-side bot detection API.
+`token`: A free account token required to access the server-side bot detection API.
 This is a required parameter.
 
 `mode`: Two modes are supported: `requestId` (default) and `allData`.
