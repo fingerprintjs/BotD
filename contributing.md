@@ -78,8 +78,8 @@ This section is for repository maintainers.
 
 1. Bump the version. Search the current version number in the code to know where to change it.
 2. Build and test the project.
-3. See what's will get into the NPM package, make sure it contains the distributive files and no excess files.
-    To see, run `yarn pack`, an archive will appear in the root, you can open it with any archive browser.
+3. Check the content of the NPM package, make sure it contains the distributive files and no excess files.
+    Run `yarn pack`, an archive will appear in the root, you can open it with any archive browser.
 4. Run
     ```bash
     # Add '--tag beta' (without the quotes) if you release a beta version
