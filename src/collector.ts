@@ -102,6 +102,11 @@ async function handleAll(sources: SourceDict): Promise<ComponentDict> {
   return components
 }
 
+/**
+ * Collects all the components from the browser.
+ *
+ * @returns {Promise<ComponentDict>} A promise to the collected components.
+ */
 export default async function collect(): Promise<ComponentDict> {
   return handleAll({
     [SignalName.UserAgent]: getUserAgent,
