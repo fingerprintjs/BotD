@@ -139,6 +139,10 @@ _The free token is limited to 1M API calls per month while in beta._
 ### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 ### [Full API documentation](docs/api.md)
 
+### Contributing
+
+See the [contributing guidelines](contributing.md) to learn how to start a playground, test, and build.
+
 <p align="center">
 © 2021 FingerprintJS, Inc
 </p>
