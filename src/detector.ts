@@ -12,11 +12,6 @@ import {
   Modes,
 } from './types'
 
-function setCookie(name: string, value: string): void {
-  value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
-}
-
 /**
  * Class representing a bot detector.
  *
@@ -99,12 +94,10 @@ export default class BotDetector implements BotDetectorInterface {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(this.createRequestBody()),
+        credentials: 'include',
       })
       const responseJSON: BotdResponse = await response.json()
       BotDetector.throwIfError(responseJSON)
-      if ('requestId' in responseJSON) {
-        setCookie('botd-request-id', responseJSON['requestId'])
-      }
       return responseJSON
     } catch (err) {
       if (err['error']) {
