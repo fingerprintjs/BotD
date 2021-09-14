@@ -14,7 +14,7 @@ import {
 
 function setCookie(name: string, value: string): void {
   value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
+  document.cookie = name + '=' + value + ';Secure;HttpOnly'
 }
 
 /**
