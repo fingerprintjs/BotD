@@ -202,6 +202,7 @@ export const enum State {
   Null = 101,
   UnexpectedBehaviour = 102,
   WrongType = 103,
+  NotFunction = 104,
 }
 
 /**
