@@ -27,12 +27,14 @@ export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
   mode: Modes
+  isIntegration: boolean
   tag = ''
   performance?: number
   components?: ComponentDict
 
   constructor(options: InitOptions) {
     this.mode = options.mode == undefined ? 'requestId' : options.mode
+    this.isIntegration = options.isIntegration == undefined ? false : options.isIntegration
     this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
     if (!this.endpoint.endsWith('/')) {
       this.endpoint += '/'
@@ -95,14 +97,16 @@ export default class BotDetector implements BotDetectorInterface {
       this.tag = ''
     }
     try {
+      const credentials: RequestCredentials | undefined = this.isIntegration ? 'include' : undefined
       const response = await fetch(this.endpoint + 'detect?token=' + this.token, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(this.createRequestBody()),
+        credentials: credentials,
       })
       const responseJSON: BotdResponse = await response.json()
       BotDetector.throwIfError(responseJSON)
-      if ('requestId' in responseJSON) {
+      if ('requestId' in responseJSON && !this.isIntegration) {
         setCookie('botd-request-id', responseJSON['requestId'])
       }
       return responseJSON
