@@ -1,3 +1,3 @@
 export default function getInstallTrigger(): boolean {
-  return typeof window.InstallTrigger !== 'undefined'
+  return window.InstallTrigger !== undefined
 }
