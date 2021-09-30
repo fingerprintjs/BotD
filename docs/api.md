@@ -10,21 +10,23 @@ Botd.load(options: InitOptions): Promise<BotDetectorInterface>
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
-The `InitOptions` object has three properties:
+The `InitOptions` object has following properties:
 
-`token`: A free account token required to access the server-side bot detection API.
+- `token: string` - A free account token required to access the server-side bot detection API.
 This is a required parameter.
 
-`mode`: Two modes are supported: `requestId` (default) and `allData`.
+- `mode: string` - Two modes are supported: `requestId` (default) and `allData`.
 
-When `requestId` mode is used, only `requestId` field is returned back to the browser.
-It's a safe way to detect a bot server-side without leaking results to the browser.
-This mode is recommended for production usage.
+    When `requestId` mode is used, only `requestId` field is returned back to the browser.
+    It's a safe way to detect a bot server-side without leaking results to the browser.
+    This mode is recommended for production usage.
 
-When `allData` mode is used, all data from the bot detection result is returned back to the browser.
-This mode is not recommended for production, but can be used during development and testing.
+    When `allData` mode is used, all data from the bot detection result is returned back to the browser.
+    This mode is not recommended for production, but can be used during development and testing.
 
-`endpoint`: An optional endpoint for the server-side bot detection API.
+- `isIntegration: boolean` - If botd is used for [cloud integration](https://github.com/fingerprintjs/botd-integrations), you need to pass `true` value. It means `botd-request-id` cookie will be created on middleware with secure and httpOnly flags. Otherwise, cookie will be created by botd javascript library without such flags.
+
+- `endpoint: string` - An optional endpoint for the server-side bot detection API.
 
 ## `BotDetector.detect`
 
