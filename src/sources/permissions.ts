@@ -1,8 +1,8 @@
 import { BotdError, State } from '../types'
 
 export default async function arePermissionsInconsistent(): Promise<boolean> {
-  if (Notification === undefined) {
-    throw new BotdError(State.Undefined, 'Notification is undefined')
+  if (window.Notification === undefined) {
+    throw new BotdError(State.Undefined, 'window.Notification is undefined')
   }
   if (navigator.permissions === undefined) {
     throw new BotdError(State.Undefined, 'navigator.permissions is undefined')
