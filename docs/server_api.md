@@ -1,20 +1,14 @@
-# Server botd API
+# Server BotD API
 
 ### Production endpoint `https://botd.fpapi.io/api/v1`
 
 ## API token
 
-There are two possible variants how to pass API token:
+There are two options of how to pass your API token:
 1) `Auth-Token` header (preflight requests will be sent)
 2) `token` query string parameter.
 
 ## POST `/detect`
-
-### Request headers
-
-```
-'Content-Type': 'text/plain'
-```
 
 ### Request body
 
