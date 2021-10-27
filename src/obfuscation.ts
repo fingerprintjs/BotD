@@ -1,7 +1,11 @@
 import { BotdError, State } from './types'
 
+const enum Type {
+  XorWithIndex = 1,
+}
+
 export interface ObfuscationInterface {
-  type: number
+  type: Type
   paddingSize: number
   padding?: ArrayBuffer
 
@@ -47,12 +51,12 @@ function bufferSourceToBytes(source: BufferSource): Uint8Array {
   return new Uint8Array(source.buffer, source.byteOffset, source.byteLength)
 }
 
-export class SimpleXorObfuscation implements ObfuscationInterface {
-  type: number // byte
-  paddingSize: number // byte
+export class XorWithIndexObfuscation implements ObfuscationInterface {
+  type: Type
+  paddingSize: number
 
   constructor() {
-    this.type = 1 // Simple xor with index
+    this.type = Type.XorWithIndex
     this.paddingSize = 0
   }
 

@@ -143,9 +143,10 @@ export interface InitOptions {
    * @todo Specify the endpoint for the server-side bot detection API once it's available.
    */
   endpoint?: string
+
   isIntegration?: boolean
+  disableObfuscation?: boolean
   disableObfuscationIn?: boolean
-  disableObfuscationOut?: boolean
 }
 
 /**
