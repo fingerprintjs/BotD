@@ -1,6 +1,6 @@
 import collect from './collector'
 import { version } from '../package.json'
-import { ObfuscationInterface, SimpleXorObfuscation } from './obfuscation'
+import { ObfuscationInterface, XorWithIndexObfuscation } from './obfuscation'
 import {
   BotDetectorInterface,
   DetectOptions,
@@ -30,7 +30,7 @@ export default class BotDetector implements BotDetectorInterface {
   mode: Modes
   isIntegration: boolean
   disableObfuscationIn: boolean
-  disableObfuscationOut: boolean
+  disableObfuscation: boolean
   tag = ''
   performance?: number
   components?: ComponentDict
@@ -39,13 +39,13 @@ export default class BotDetector implements BotDetectorInterface {
   constructor(options: InitOptions) {
     this.mode = options.mode == undefined ? 'requestId' : options.mode
     this.isIntegration = options.isIntegration == undefined ? false : options.isIntegration
+    this.disableObfuscation = options.disableObfuscation == undefined ? false : options.disableObfuscation
     this.disableObfuscationIn = options.disableObfuscationIn == undefined ? false : options.disableObfuscationIn
-    this.disableObfuscationOut = options.disableObfuscationOut == undefined ? false : options.disableObfuscationOut
     this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
     if (!this.endpoint.endsWith('/')) {
       this.endpoint += '/'
     }
-    this.obfuscator = new SimpleXorObfuscation()
+    this.obfuscator = new XorWithIndexObfuscation()
     this.token = options.token
   }
 
@@ -99,7 +99,7 @@ export default class BotDetector implements BotDetectorInterface {
       url.searchParams.append('version', version)
       if (this.disableObfuscationIn) url.search += '&deobfuscate'
 
-      const body = this.disableObfuscationOut
+      const body = this.disableObfuscation
         ? JSON.stringify(this.createRequestBody())
         : this.obfuscator.obfuscate(this.createRequestBody())
 
@@ -111,7 +111,7 @@ export default class BotDetector implements BotDetectorInterface {
       })
 
       let responseJSON: BotdResponse
-      if (this.disableObfuscationIn) {
+      if (this.disableObfuscationIn || this.disableObfuscation) {
         responseJSON = await response.json()
       } else {
         responseJSON = this.obfuscator.deobfuscate(await response.arrayBuffer())

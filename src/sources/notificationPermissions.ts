@@ -12,5 +12,5 @@ export default async function arePermissionsInconsistent(): Promise<boolean> {
     throw new BotdError(State.NotFunction, 'navigator.permissions.query is not a function')
   }
   const permissionStatus = await permissions.query({ name: 'notifications' })
-  return Notification.permission === 'denied' && permissionStatus.state === 'prompt'
+  return window.Notification.permission === 'denied' && permissionStatus.state === 'prompt'
 }
