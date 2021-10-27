@@ -14,11 +14,6 @@ type ComponentValue = SimpleComponentValue | SimpleComponentValue[]
 export type Source = () => ComponentValue | Promise<ComponentValue>
 
 /**
- * Dictionary colletion of the sources.
- */
-export type SourceDict = Record<string, Source>
-
-/**
  * Represents a component with state and value.
  */
 export type Component =
@@ -113,15 +108,10 @@ export interface BotDetectorInterface {
   /**
    * Performs bot detection, internally it will make a network request to the server-side bot detection API.
    *
-   * @param {(string|DetectOptions)} optionsOrTag Configuration options for bot detector. It's recommended to use the DetectOptions instead of the string tag.
+   * @param {DetectOptions} options? Configuration options for bot detector.
    * @returns {Promise<BotdResponse>} A promise to the instance of the bot detection response.
    */
-  detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse>
-
-  /**
-   * @deprecated Will be removed in the next major version, use detect(options: DetectOptions) instead.
-   */
-  detect(tag?: string): Promise<BotdResponse>
+  detect(options?: DetectOptions): Promise<BotdResponse>
 
   /**
    * Collects all the components from the browser.
@@ -154,6 +144,8 @@ export interface InitOptions {
    */
   endpoint?: string
   isIntegration?: boolean
+  disableObfuscationIn?: boolean
+  disableObfuscationOut?: boolean
 }
 
 /**
@@ -203,6 +195,7 @@ export const enum State {
   UnexpectedBehaviour = 102,
   WrongType = 103,
   NotFunction = 104,
+  ObfuscationError = 105,
 }
 
 /**
