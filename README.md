@@ -25,7 +25,7 @@
 
 **BotD** is a browser library for JavaScript bot detection (detecting automation tools, browser spoofing and virtual machines).
 
-### [Try Demo](https://fingerprintjs.github.io/botd/)
+### [Try Demo](https://fingerprintjs.github.io/BotD/)
 
 ### Cloud Integrations
 The end-user's browser scripts for bot detection are just one part of the bigger solution. In production, it's essential to handle automation tools even on the backend. In the [botd-integrations](https://github.com/fingerprintjs/botd-integrations) repository you can find an explanation of integration flow together with sample middleware integration examples for various cloud providers like Cloudflare, Fastly, or Amazon.
