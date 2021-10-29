@@ -146,7 +146,7 @@ export interface InitOptions {
 
   isIntegration?: boolean
   disableObfuscation?: boolean
-  disableObfuscationIn?: boolean
+  disableResponseObfuscation?: boolean
 }
 
 /**
@@ -170,7 +170,6 @@ export interface DetectBody {
   mode: Modes
   performance?: number
   signals?: ComponentDict
-  version: string
   token: string
   tag: string
 }
