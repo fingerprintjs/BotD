@@ -28,25 +28,24 @@ export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
   mode: Modes
-  isIntegration: boolean
-  disableObfuscationIn: boolean
-  disableObfuscation: boolean
   tag = ''
   performance?: number
   components?: ComponentDict
   private obfuscator: ObfuscationInterface
+  private readonly isIntegration: boolean
+  private readonly disableObfuscation: boolean
+  private readonly disableResponseObfuscation: boolean
 
   constructor(options: InitOptions) {
+    this.endpoint = options.endpoint == undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
+    this.endpoint += !this.endpoint.endsWith('/') ? '/' : ''
+    this.token = options.token
     this.mode = options.mode == undefined ? 'requestId' : options.mode
+    this.obfuscator = new XorWithIndexObfuscation()
     this.isIntegration = options.isIntegration == undefined ? false : options.isIntegration
     this.disableObfuscation = options.disableObfuscation == undefined ? false : options.disableObfuscation
-    this.disableObfuscationIn = options.disableObfuscationIn == undefined ? false : options.disableObfuscationIn
-    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
-    if (!this.endpoint.endsWith('/')) {
-      this.endpoint += '/'
-    }
-    this.obfuscator = new XorWithIndexObfuscation()
-    this.token = options.token
+    this.disableResponseObfuscation =
+      options.disableResponseObfuscation == undefined ? false : options.disableResponseObfuscation
   }
 
   /**
@@ -79,7 +78,6 @@ export default class BotDetector implements BotDetectorInterface {
       mode: this.mode,
       performance: this.performance,
       signals: this.components,
-      version: version,
       token: this.token,
       tag: this.tag,
     }
@@ -89,7 +87,7 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   async detect(options: DetectOptions = { tag: '' }): Promise<BotdResponse> {
-    this.tag = options ? options.tag : ''
+    this.tag = options.tag
 
     try {
       const credentials: RequestCredentials | undefined = this.isIntegration ? 'include' : undefined
@@ -97,7 +95,7 @@ export default class BotDetector implements BotDetectorInterface {
       url.pathname += 'detect'
       url.searchParams.append('token', this.token)
       url.searchParams.append('version', version)
-      if (this.disableObfuscationIn) url.search += '&deobfuscate'
+      url.search += this.disableResponseObfuscation ? '&deobfuscate' : ''
 
       const body = this.disableObfuscation
         ? JSON.stringify(this.createRequestBody())
@@ -110,12 +108,10 @@ export default class BotDetector implements BotDetectorInterface {
         credentials: credentials,
       })
 
-      let responseJSON: BotdResponse
-      if (this.disableObfuscationIn || this.disableObfuscation) {
-        responseJSON = await response.json()
-      } else {
-        responseJSON = this.obfuscator.deobfuscate(await response.arrayBuffer())
-      }
+      const responseJSON: BotdResponse =
+        this.disableResponseObfuscation || this.disableObfuscation
+          ? await response.json()
+          : this.obfuscator.deobfuscate(await response.arrayBuffer())
 
       BotDetector.throwIfError(responseJSON)
       if ('requestId' in responseJSON && !this.isIntegration) {
