@@ -11,7 +11,11 @@ export default function getASTCProfiles(): string {
       throw new BotdError(State.Null, 'WEBGL_debug_renderer_info extension is null')
     } else {
       const astcExtension = webGLContext.getExtension('WEBGL_compressed_texture_astc')
-      return astcExtension ? astcExtension.getSupportedProfiles().toString() : ''
+      if (!astcExtension) return ''
+      if (typeof astcExtension.getSupportedProfiles !== 'function') {
+        throw new BotdError(State.NotFunction, 'astcExtension.getSupportedProfiles is not a function')
+      }
+      return astcExtension.getSupportedProfiles().toString()
     }
   }
 }
