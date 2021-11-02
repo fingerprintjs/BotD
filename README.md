@@ -31,7 +31,7 @@
 # After
 
 + BotD is a browser library for JavaScript bot detection
-+ Easily add ability to detect automation tools, browser spoofing and virtual machines in seconds
++ Easily add ability to detect automation tools, browser spoofing and virtual machines
 + Requires adding only 3 lines of JavaScript on your website
 ```
 
