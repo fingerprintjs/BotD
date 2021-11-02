@@ -32,7 +32,7 @@ export type Component =
 export type ComponentDict = Record<string, Component>
 
 /**
- * Represents the response of the bot detecton API.
+ * Represents the response of the bot detection API.
  */
 export type BotdResponse = RequestIdResponse | SuccessResponse | ErrorResponse
 
@@ -144,9 +144,12 @@ export interface InitOptions {
    */
   endpoint?: string
 
+  obfuscationMode?: ObfuscationModes
+
+  /**
+   * @deprecated Will be removed in the next major version, use mode='integration' instead.
+   */
   isIntegration?: boolean
-  disableObfuscation?: boolean
-  disableResponseObfuscation?: boolean
 }
 
 /**
@@ -178,8 +181,14 @@ export interface DetectBody {
  * Represents mode for querying API.
  * When `requestId` mode is used, only `requestId` field is returned back to the browser. This mode is recommended for production usage.
  * When `allData` mode is used, all data from the bot detection result is returned back to the browser.
+ * Use `integration` mode only with cloud BotD integrations.
  */
-export type Modes = 'requestId' | 'allData'
+export type Modes = 'requestId' | 'allData' | 'integration'
+
+/**
+ * Represents mode for obfuscation.
+ */
+export type ObfuscationModes = 'all' | 'requestOnly' | 'none'
 
 /**
  * Enum for the source state.
