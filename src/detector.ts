@@ -11,6 +11,7 @@ import {
   ErrorResponse,
   DetectBody,
   Modes,
+  ObfuscationModes,
 } from './types'
 
 function setCookie(name: string, value: string): void {
@@ -32,20 +33,21 @@ export default class BotDetector implements BotDetectorInterface {
   performance?: number
   components?: ComponentDict
   private obfuscator: ObfuscationInterface
-  private readonly isIntegration: boolean
-  private readonly disableObfuscation: boolean
-  private readonly disableResponseObfuscation: boolean
+  private readonly obfuscationMode: ObfuscationModes
+  private readonly integration: boolean
 
   constructor(options: InitOptions) {
     this.endpoint = options.endpoint == undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
-    this.endpoint += !this.endpoint.endsWith('/') ? '/' : ''
+    this.endpoint += this.endpoint.endsWith('/') ? '' : '/'
+    if (this.endpoint.indexOf('://') === -1) {
+      this.endpoint = new URL(this.endpoint, document.baseURI).href
+    }
     this.token = options.token
-    this.mode = options.mode == undefined ? 'requestId' : options.mode
+    this.integration = options.mode == 'integration' || (options.isIntegration != undefined && options.isIntegration)
+    this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
     this.obfuscator = new XorWithIndexObfuscation()
-    this.isIntegration = options.isIntegration == undefined ? false : options.isIntegration
-    this.disableObfuscation = options.disableObfuscation == undefined ? false : options.disableObfuscation
-    this.disableResponseObfuscation =
-      options.disableResponseObfuscation == undefined ? false : options.disableResponseObfuscation
+    this.obfuscationMode =
+      options.obfuscationMode == undefined ? (this.integration ? 'requestOnly' : 'all') : options.obfuscationMode
   }
 
   /**
@@ -90,16 +92,17 @@ export default class BotDetector implements BotDetectorInterface {
     this.tag = options.tag
 
     try {
-      const credentials: RequestCredentials | undefined = this.isIntegration ? 'include' : undefined
+      const credentials: RequestCredentials | undefined = this.integration ? 'include' : undefined
       const url = new URL(this.endpoint)
       url.pathname += 'detect'
       url.searchParams.append('token', this.token)
       url.searchParams.append('version', version)
-      url.search += this.disableResponseObfuscation ? '&deobfuscate' : ''
+      url.search += this.obfuscationMode != 'all' ? '&deobfuscate' : ''
 
-      const body = this.disableObfuscation
-        ? JSON.stringify(this.createRequestBody())
-        : this.obfuscator.obfuscate(this.createRequestBody())
+      const body =
+        this.obfuscationMode == 'none'
+          ? JSON.stringify(this.createRequestBody())
+          : this.obfuscator.obfuscate(this.createRequestBody())
 
       const response = await fetch(url.href, {
         method: 'POST',
@@ -109,12 +112,12 @@ export default class BotDetector implements BotDetectorInterface {
       })
 
       const responseJSON: BotdResponse =
-        this.disableResponseObfuscation || this.disableObfuscation
+        this.obfuscationMode != 'all'
           ? await response.json()
           : this.obfuscator.deobfuscate(await response.arrayBuffer())
 
       BotDetector.throwIfError(responseJSON)
-      if ('requestId' in responseJSON && !this.isIntegration) {
+      if ('requestId' in responseJSON && !this.integration) {
         setCookie('botd-request-id', responseJSON['requestId'])
       }
       return responseJSON
