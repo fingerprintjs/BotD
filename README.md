@@ -20,15 +20,29 @@
   </a>
 </p>
 
-## 🌱 BotD
-<small><i>currently in beta - API may change</i></small>
+## BotD  (currently in beta)
 
-**BotD** is a browser library for JavaScript bot detection (detecting automation tools, browser spoofing and virtual machines).
+```diff
+# Before
 
-### [Try Demo](https://fingerprintjs.github.io/BotD/)
+- 40% of your website traffic is from bots
+- They're taking over accounts, scraping prices and ruining your website reputation
 
-### Cloud Integrations
-The end-user's browser scripts for bot detection are just one part of the bigger solution. In production, it's essential to handle automation tools even on the backend. In the [botd-integrations](https://github.com/fingerprintjs/botd-integrations) repository you can find an explanation of integration flow together with sample middleware integration examples for various cloud providers like Cloudflare, Fastly, or Amazon.
+# After
+
++ BotD is a browser library for JavaScript bot detection
++ Easily add ability to detect automation tools, browser spoofing and virtual machines in seconds
++ Requires adding only 3 lines of JavaScript on your website
+```
+
+### 🔩[Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
+
+### Cloud Integrations ☁️
+In addition to JavaScript bot detection, we offer edge detection for major cloud providers.
+
+* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - bot detection in CloudFlare workers for increased accuracy and security.
+* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - bot detection in Fastly Compute@Edge high-performance WASM edge
+* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - run bot detection as a Next.js edge middlware
 
 ### Install from CDN
 
