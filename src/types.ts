@@ -14,11 +14,6 @@ type ComponentValue = SimpleComponentValue | SimpleComponentValue[]
 export type Source = () => ComponentValue | Promise<ComponentValue>
 
 /**
- * Dictionary colletion of the sources.
- */
-export type SourceDict = Record<string, Source>
-
-/**
  * Represents a component with state and value.
  */
 export type Component =
@@ -37,7 +32,7 @@ export type Component =
 export type ComponentDict = Record<string, Component>
 
 /**
- * Represents the response of the bot detecton API.
+ * Represents the response of the bot detection API.
  */
 export type BotdResponse = RequestIdResponse | SuccessResponse | ErrorResponse
 
@@ -113,15 +108,10 @@ export interface BotDetectorInterface {
   /**
    * Performs bot detection, internally it will make a network request to the server-side bot detection API.
    *
-   * @param {(string|DetectOptions)} optionsOrTag Configuration options for bot detector. It's recommended to use the DetectOptions instead of the string tag.
+   * @param {DetectOptions} options? Configuration options for bot detector.
    * @returns {Promise<BotdResponse>} A promise to the instance of the bot detection response.
    */
-  detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse>
-
-  /**
-   * @deprecated Will be removed in the next major version, use detect(options: DetectOptions) instead.
-   */
-  detect(tag?: string): Promise<BotdResponse>
+  detect(options?: DetectOptions): Promise<BotdResponse>
 
   /**
    * Collects all the components from the browser.
@@ -153,6 +143,12 @@ export interface InitOptions {
    * @todo Specify the endpoint for the server-side bot detection API once it's available.
    */
   endpoint?: string
+
+  obfuscationMode?: ObfuscationModes
+
+  /**
+   * @deprecated Will be removed in the next major version, use mode='integration' instead.
+   */
   isIntegration?: boolean
 }
 
@@ -177,7 +173,6 @@ export interface DetectBody {
   mode: Modes
   performance?: number
   signals?: ComponentDict
-  version: string
   token: string
   tag: string
 }
@@ -186,8 +181,14 @@ export interface DetectBody {
  * Represents mode for querying API.
  * When `requestId` mode is used, only `requestId` field is returned back to the browser. This mode is recommended for production usage.
  * When `allData` mode is used, all data from the bot detection result is returned back to the browser.
+ * Use `integration` mode only with cloud BotD integrations.
  */
-export type Modes = 'requestId' | 'allData'
+export type Modes = 'requestId' | 'allData' | 'integration'
+
+/**
+ * Represents mode for obfuscation.
+ */
+export type ObfuscationModes = 'all' | 'requestOnly' | 'none'
 
 /**
  * Enum for the source state.
@@ -203,6 +204,7 @@ export const enum State {
   UnexpectedBehaviour = 102,
   WrongType = 103,
   NotFunction = 104,
+  ObfuscationError = 105,
 }
 
 /**

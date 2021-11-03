@@ -1,5 +1,6 @@
 import collect from './collector'
 import { version } from '../package.json'
+import { ObfuscationInterface, XorWithIndexObfuscation } from './obfuscation'
 import {
   BotDetectorInterface,
   DetectOptions,
@@ -10,6 +11,7 @@ import {
   ErrorResponse,
   DetectBody,
   Modes,
+  ObfuscationModes,
 } from './types'
 
 function setCookie(name: string, value: string): void {
@@ -27,19 +29,25 @@ export default class BotDetector implements BotDetectorInterface {
   endpoint: string
   token: string
   mode: Modes
-  isIntegration: boolean
   tag = ''
   performance?: number
   components?: ComponentDict
+  private obfuscator: ObfuscationInterface
+  private readonly obfuscationMode: ObfuscationModes
+  private readonly integration: boolean
 
   constructor(options: InitOptions) {
-    this.mode = options.mode == undefined ? 'requestId' : options.mode
-    this.isIntegration = options.isIntegration == undefined ? false : options.isIntegration
-    this.endpoint = options.endpoint === undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
-    if (!this.endpoint.endsWith('/')) {
-      this.endpoint += '/'
+    this.endpoint = options.endpoint == undefined ? 'https://botd.fpapi.io/api/v1/' : options.endpoint
+    this.endpoint += this.endpoint.endsWith('/') ? '' : '/'
+    if (this.endpoint.indexOf('://') === -1) {
+      this.endpoint = new URL(this.endpoint, document.baseURI).href
     }
     this.token = options.token
+    this.integration = options.mode == 'integration' || (options.isIntegration != undefined && options.isIntegration)
+    this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
+    this.obfuscator = new XorWithIndexObfuscation()
+    this.obfuscationMode =
+      options.obfuscationMode == undefined ? (this.integration ? 'requestOnly' : 'all') : options.obfuscationMode
   }
 
   /**
@@ -72,7 +80,6 @@ export default class BotDetector implements BotDetectorInterface {
       mode: this.mode,
       performance: this.performance,
       signals: this.components,
-      version: version,
       token: this.token,
       tag: this.tag,
     }
@@ -81,32 +88,36 @@ export default class BotDetector implements BotDetectorInterface {
   /**
    * @inheritdoc
    */
-  async detect(tag?: string): Promise<BotdResponse>
+  async detect(options: DetectOptions = { tag: '' }): Promise<BotdResponse> {
+    this.tag = options.tag
 
-  /**
-   * @inheritdoc
-   */
-  async detect(optionsOrTag?: string | DetectOptions): Promise<BotdResponse> {
-    if (optionsOrTag) {
-      if (typeof optionsOrTag === 'string') {
-        this.tag = optionsOrTag
-      } else {
-        this.tag = optionsOrTag.tag
-      }
-    } else {
-      this.tag = ''
-    }
     try {
-      const credentials: RequestCredentials | undefined = this.isIntegration ? 'include' : undefined
-      const response = await fetch(this.endpoint + 'detect?token=' + this.token, {
+      const credentials: RequestCredentials | undefined = this.integration ? 'include' : undefined
+      const url = new URL(this.endpoint)
+      url.pathname += 'detect'
+      url.searchParams.append('token', this.token)
+      url.searchParams.append('version', version)
+      url.search += this.obfuscationMode != 'all' ? '&deobfuscate' : ''
+
+      const body =
+        this.obfuscationMode == 'none'
+          ? JSON.stringify(this.createRequestBody())
+          : this.obfuscator.obfuscate(this.createRequestBody())
+
+      const response = await fetch(url.href, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(this.createRequestBody()),
+        body: body,
         credentials: credentials,
       })
-      const responseJSON: BotdResponse = await response.json()
+
+      const responseJSON: BotdResponse =
+        this.obfuscationMode != 'all'
+          ? await response.json()
+          : this.obfuscator.deobfuscate(await response.arrayBuffer())
+
       BotDetector.throwIfError(responseJSON)
-      if ('requestId' in responseJSON && !this.isIntegration) {
+      if ('requestId' in responseJSON && !this.integration) {
         setCookie('botd-request-id', responseJSON['requestId'])
       }
       return responseJSON

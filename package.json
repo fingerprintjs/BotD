@@ -1,6 +1,6 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
