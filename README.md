@@ -37,12 +37,13 @@
 
 ### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
 
-### ☁ Cloud Integrations
-In addition to JavaScript bot detection, we offer open source edge detection for major cloud providers
+BotD runs in the [browser](https://github.com/fingerprintjs/BotD#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
 
-* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - bot detection in CloudFlare workers for increased accuracy and security.
-* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - bot detection in Fastly Compute@Edge high-performance WASM edge
-* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - run bot detection as a Next.js edge middleware
+### Cloud Integrations ☁️
+
+* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - runs in CloudFlare workers for increased accuracy and security.
+* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - runs in Fastly Compute@Edge high-performance WASM edge
+* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - runs as a Next.js edge middleware
 
 ## Install from CDN
 
