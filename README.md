@@ -20,7 +20,7 @@
   </a>
 </p>
 
-## BotD  (currently in beta)
+## BotD <small>_(currently in beta)_</small>
 
 ```diff
 # Before
@@ -35,7 +35,7 @@
 + Requires adding only 3 lines of JavaScript on your website
 ```
 
-### 🔩[Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
+### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
 
 ### ☁ Cloud Integrations
 In addition to JavaScript bot detection, we offer open source edge detection for major cloud providers
@@ -44,7 +44,7 @@ In addition to JavaScript bot detection, we offer open source edge detection for
 * [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - bot detection in Fastly Compute@Edge high-performance WASM edge
 * [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - run bot detection as a Next.js edge middleware
 
-### Install from CDN
+## Install from CDN
 
 ```html
 <script>
@@ -69,7 +69,7 @@ function initBotd() {
 ```
 [Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
 
-### Install from NPM to use with Webpack/Rollup/Browserify
+## Install from NPM to use with Webpack/Rollup/Browserify
 
 ```bash
 npm i @fpjs-incubator/botd-agent
@@ -95,9 +95,9 @@ const botdPromise = Botd.load({
 ```
 [Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.js)
 
-📕 [Full documentation](docs/api.md)
+### 📕 [Full documentation](docs/api.md)
 
-### Authorization
+## Authorization
 
 A **free token** is required to connect to our bot detection API.
 
@@ -106,9 +106,9 @@ _(just type `token` in the email subject, no need to compose a body)_
 <br/>
 _The free token is limited to 1M API calls per month and 3 calls per second while in beta._
 
-### Supported detection scenarios
+## Supported detection scenarios
 
-#### **Automation Tools & Frameworks**
+### **Automation Tools & Frameworks**
 
 - Headless Browsers ([Chrome](https://www.google.com/chrome/), [Firefox](https://www.mozilla.org/en-US/firefox/new/))
 - [SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium) is an umbrella project encapsulating a variety of tools and libraries enabling web browser automation.
@@ -121,33 +121,33 @@ _The free token is limited to 1M API calls per month and 3 calls per second whil
 - [casperjs/casperjs](https://github.com/casperjs/casperjs) is a navigation scripting & testing utility for PhantomJS and SlimerJS.
 - [laurentj/slimerjs](https://github.com/laurentj/slimerjs) is a scriptable browser.
 
-#### **Vulnerability scanners**
+### **Vulnerability scanners**
 
 - [beefproject/beef](https://github.com/beefproject/beef) is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.
 - [ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework](https://github.com/ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework) is an advanced Cross Site Scripting (XSS) vulnerability detection and exploitation framework.
 - [Netflix-Skunkworks/sleepy-puppy](https://github.com/Netflix-Skunkworks/sleepy-puppy) is a cross-site scripting (XSS) payload management framework which simplifies the ability to capture, manage, and track XSS propagation over long periods of time.
 - [echo-devim/xbackdoor](https://github.com/echo-devim/xbackdoor) is a tool to take advantage of a persistent XSS vulnerability.
 
-#### **Browser spoofing**
+### **Browser spoofing**
 
 - User Agent spoofing
 - OS spoofing
 
-#### **Anti-detect browsers**
+### **Anti-detect browsers**
 
 - LinkenSphere
 - AntBrowser
 - Aezakmi
 - Indigo
 
-#### **VM detection**
+### **VM detection**
 
 - VirtualBox
 - VmWare
 - Parallels
 - Hyper-V
 
-#### **Search bots**
+### **Search bots**
 Google Bot, Bing Bot, Baidu Spider, Yahoo Bot, Alexa Bot, Apple Bot, Facebook Bot, Twitter Bot, Pinterest Bot,
 Coccoc Bot, Naver Spider, Petal Bot, Aspiegel Bot,
 Seznam Bot, Sogou Bot, DuckDuckGo Bot, Rackspace Bot, Pingdom Bot, WebPageTest.org crawlers, NewRelicPingerBot,
