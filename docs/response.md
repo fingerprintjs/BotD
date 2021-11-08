@@ -2,8 +2,6 @@
 
 The structure of the response depends on the chosen `mode` and if the server returned an [error](error.md).
 
-***
-
 ### `mode` is `requestId`:
 
 ```json
@@ -12,8 +10,6 @@ The structure of the response depends on the chosen `mode` and if the server ret
 }
 ```
 `requestId` is request identifier, e.x. `01F9XY24VDZ9F4HHR4FSCRYTSH`
-
-***
 
 ### `mode` is `allData`:
 

@@ -1,8 +1,6 @@
 # BotD JavaScript API
 _BotD also has a [server-side API](server_api.md)._
 
-***
-
 ## `Botd.load`
 
 ```ts
@@ -16,7 +14,7 @@ ideally during application startup. It returns a promise which you can chain on 
 The `InitOptions` object has the following properties:
 
 - `token: string` (_required_) - A free account token required to access the bot detection API.
-Instructions on how to get a token can be found [here](README.md#authorization).
+Instructions on how to get a token can be found [here](/README.md#authorization).
 
 - `mode: string` - There are two modes supported:
   - `requestId` (_default_)
@@ -48,5 +46,4 @@ The `DetectOptions` object has a single parameter `tag` with type `string`:
 
 ### `BotdResponse`
 
-The [responses](response.md) in both [JS](api.md) and [server APIs](server_api.md) are identical.
-BotD response format can be found [here](docs/response.md#mode-is-alldata).
+BotD response format can be found [here](response.md#mode-is-alldata).

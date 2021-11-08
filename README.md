@@ -37,7 +37,7 @@
 
 ### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
 
-BotD runs in the [browser](https://github.com/fingerprintjs/BotD#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
+BotD runs in the [browser](#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
 
 ### Cloud Integrations ☁️
 
@@ -131,8 +131,13 @@ _The free token is limited to 1M API calls per month and 3 calls per second whil
 
 ### **Browser spoofing**
 
+Browser spoofing - is a technique that helps users fake that they are using a different browser configuration by changing the browsers features.
+
+The BotD helps to detect the following types of spoofing:
 - User Agent spoofing
-- OS spoofing
+- Operating System spoofing
+- Hardware spoofing
+- etc.
 
 ### **Anti-detect browsers**
 
@@ -143,10 +148,7 @@ _The free token is limited to 1M API calls per month and 3 calls per second whil
 
 ### **VM detection**
 
-- VirtualBox
-- VmWare
-- Parallels
-- Hyper-V
+The BotD helps to detect if the browser is running inside one of the popular virtual machines, like VirtualBox, VmWare, Parallels, Hyper-V, etc.
 
 ### **Search bots**
 Google Bot, Bing Bot, Baidu Spider, Yahoo Bot, Alexa Bot, Apple Bot, Facebook Bot, Twitter Bot, Pinterest Bot,

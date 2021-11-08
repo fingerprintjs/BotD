@@ -17,7 +17,7 @@ Or you can pass `requestId` through `botd-request-id` variable in cookie.
 
 ### API token
 
-Instructions on how to get a token can be found [here](README.md#authorization).
+Instructions on how to get a token can be found [here](/README.md#authorization).
 There are two options of how to pass your API token:
 1) `Auth-Token` header (preflight requests will be sent)
 2) `token` query string parameter.
@@ -34,8 +34,8 @@ curl --request GET 'https://botd.fpapi.io/api/v1/results?id=<YOUR_REQUEST_ID>&to
 >
 > The responses in [JavaScript API](api.md) in `allData` mode and [Server API](server_api.md) are identical.
 
-Response format can be found [here](docs/response.md#mode-is-alldata).
+Response format can be found [here](response.md#mode-is-alldata).
 
 ### Errors
 
-Error format can be found [here](docs/error.md#error-format).
+Error format can be found [here](error.md#error-format).
