@@ -1,5 +1,5 @@
 # BotD JavaScript API
-_BotD also has a [server-side API](server_api.md). The [responses](response.md) in both [JS](api.md) and [server APIs](server_api.md) are identical._
+_BotD also has a [server-side API](server_api.md)._
 
 ***
 
@@ -45,3 +45,8 @@ and return the `requestId` which you can use later to retrieve bot detection res
 The `DetectOptions` object has a single parameter `tag` with type `string`:
 
 -   `tag` (_optional_) is a metadata string that you can associate with each bot detection event.
+
+### `BotdResponse`
+
+The [responses](response.md) in both [JS](api.md) and [server APIs](server_api.md) are identical.
+BotD response format can be found [here](docs/response.md#mode-is-alldata).
