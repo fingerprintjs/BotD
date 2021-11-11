@@ -155,7 +155,7 @@ StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
 - #### [JavaScript API](docs/api.md)
 - #### [Server-Side API](docs/server_api.md)
 - #### [Response Format](docs/response.md)
-- #### [Error Handling](docs/response.md)
+- #### [Error Handling](docs/error.md)
 - #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 
 ### Contributing

@@ -26,7 +26,7 @@ Instructions on how to get a token can be found [here](/README.md#authorization)
 
   When `allData` mode is used, all data from the bot detection result is returned to the browser.
   This mode is not recommended for production, but can be used during development and testing.
-***
+
 ## `BotDetector.detect`
 
 ```ts
@@ -46,4 +46,4 @@ The `DetectOptions` object has a single parameter `tag` with type `string`:
 
 ### `BotdResponse`
 
-BotD response format can be found [here](response.md#mode-is-alldata).
+BotD response formats can be found [here](response.md).
