@@ -139,32 +139,24 @@ The BotD helps to detect the following types of spoofing:
 - Hardware spoofing
 - etc.
 
-### **Anti-detect browsers**
-
-- LinkenSphere
-- AntBrowser
-- Aezakmi
-- Indigo
-
 ### **VM detection**
 
 The BotD helps to detect if the browser is running inside one of the popular virtual machines, like VirtualBox, VmWare, Parallels, Hyper-V, etc.
 
 ### **Search bots**
 Google Bot, Bing Bot, Baidu Spider, Yahoo Bot, Alexa Bot, Apple Bot, Facebook Bot, Twitter Bot, Pinterest Bot,
-Coccoc Bot, Naver Spider, Petal Bot, Aspiegel Bot,
-Seznam Bot, Sogou Bot, DuckDuckGo Bot, Rackspace Bot, Pingdom Bot, WebPageTest.org crawlers, NewRelicPingerBot,
-StatusCakeBot, Yunyun Bot, Zao, Ze List, zgrab, BUbiNG, Nutch-based Bot, Genieo Web filter
+DuckDuckGo Bot, Coccoc Bot, Yandex Bot, Telegram Bot, Kiwi Status Spider, Naver Spider, Sputnik Bot, Petal Bot,
+Aspiegel Bot, Seznam Bot, Sogou Bot, DuckDuckGo Bot, Rackspace Bot, Pingdom Bot, WebPageTest.org crawlers,
+StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
 
 <small><i>Many more tools and configurations are supported</i></small>
 
-### [Server-Side API](docs/server_api.md)
-
-### [Response Format](docs/response.md)
-
-### [Error Handling](docs/response.md)
-
-### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
+### Documentation links:
+- #### [JavaScript API](docs/api.md)
+- #### [Server-Side API](docs/server_api.md)
+- #### [Response Format](docs/response.md)
+- #### [Error Handling](docs/response.md)
+- #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 
 ### Contributing
 
