@@ -49,23 +49,17 @@ BotD runs in the [browser](#install-from-cdn); additionally you can harden it by
 
 ```html
 <script>
-function initBotd() {
-  // Initialize an agent at application startup.
-  const botdPromise = Botd.load({
-      token: "<token>",
-      mode: "allData"
-  });
-  // Get the bot detection result when you need it.
-  botdPromise
-      .then(botd => botd.detect())
-      .then(result => {
-        console.log(result);
-      });
-}
-</script>
-<script async
-        src="https://cdn.jsdelivr.net/npm/@fpjs-incubator/botd-agent@0/dist/botd.min.js"
-        onload="initBotd()">
+    // Initialize an agent at application startup.
+    const botdPromise = import('https://openfpcdn.io/botd/v0.1')
+        .then( Botd => Botd.load({
+            token: '<your-token>',
+            mode: 'allData'
+        }))
+    // Get the bot detection result when you need it.
+    botdPromise
+        .then(botd => botd.detect())
+        .then(result => console.log(result))
+        .catch(error => console.error(error))
 </script>
 ```
 [Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
