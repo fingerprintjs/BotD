@@ -20,7 +20,7 @@
   </a>
 </p>
 
-## BotD  (currently in beta)
+## BotD <small>_(currently in beta)_</small>
 
 ```diff
 # Before
@@ -35,16 +35,17 @@
 + Requires adding only 3 lines of JavaScript on your website
 ```
 
-### 🔩[Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
+### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
+
+BotD runs in the [browser](#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
 
 ### Cloud Integrations ☁️
-In addition to JavaScript bot detection, we offer open source edge detection for major cloud providers
 
-* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - bot detection in CloudFlare workers for increased accuracy and security.
-* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - bot detection in Fastly Compute@Edge high-performance WASM edge
-* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - run bot detection as a Next.js edge middleware
+* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - runs in CloudFlare workers for increased accuracy and security.
+* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - runs in Fastly Compute@Edge high-performance WASM edge
+* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - runs as a Next.js edge middleware
 
-### Install from CDN
+## Install from CDN
 
 ```html
 <script>
@@ -69,7 +70,7 @@ function initBotd() {
 ```
 [Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
 
-### Alternatively you can install from NPM to use with Webpack/Rollup/Browserify
+## Install from NPM to use with Webpack/Rollup/Browserify
 
 ```bash
 npm i @fpjs-incubator/botd-agent
@@ -95,67 +96,75 @@ const botdPromise = Botd.load({
 ```
 [Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.js)
 
+### 📕 [Full documentation](docs/api.md)
+
+## Authorization
+
 A **free token** is required to connect to our bot detection API.
 
 _To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `token` in the email subject, no need to compose a body)_
 <br/>
-_The free token is limited to 1M API calls per month while in beta._
+_The free token is limited to 1M API calls per month and 3 calls per second while in beta._
 
-### Supported detection scenarios
+## Supported detection scenarios
 
-<table>
-<tr>
-  <th>Automation Tools & Frameworks</th>
-</tr>
-<tr>
-  <td>Chrome Headless</td>
-</tr>
-<tr>
-  <td>Playwright</td>
-</tr>
-<tr>
-  <td>PhantomJS</td>
-</tr>
-<tr>
-  <th>Browser spoofing</th>
-</tr>
-<tr>
-  <td>User Agent spoofing</td>
-</tr>
-<tr>
-  <td>OS spoofing</td>
-</tr>
-<tr>
-  <th>VM detection</th>
-</tr>
-<tr>
-  <td>VirtualBox</td>
-</tr>
-<tr>
-  <td>VmWare</td>
-</tr>
-<tr>
-  <td>Parallels</td>
-</tr>
-<tr>
-  <th>Search bots</th>
-</tr>
-<tr>
-  <td>Google Bot</td>
-</tr>
-<tr>
-  <td>Bing Bot</td>
-</tr>
-</table>
+### **Automation Tools & Frameworks**
+
+- Headless Browsers ([Chrome](https://www.google.com/chrome/), [Firefox](https://www.mozilla.org/en-US/firefox/new/))
+- [SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium) is an umbrella project encapsulating a variety of tools and libraries enabling web browser automation.
+- [microsoft/playwright](https://github.com/microsoft/playwright) is a Node.js library to automate Chromium, Firefox and WebKit with a single API.
+- [ariya/phantomjs](https://github.com/ariya/phantomjs)  is a headless WebKit scriptable with JavaScript.
+- [segmentio/nightmare](https://github.com/segmentio/nightmare) is a high-level browser automation library.
+- [electron/electron](https://github.com/electron/electron) framework lets you write cross-platform desktop applications using JavaScript, HTML and CSS.
+- [geb/geb](https://github.com/geb/geb) (pronounced “jeb”) is a browser automation solution.
+- [macbre/phantomas](https://github.com/macbre/phantomas) Headless Chromium-based modular web performance metrics collector.
+- [casperjs/casperjs](https://github.com/casperjs/casperjs) is a navigation scripting & testing utility for PhantomJS and SlimerJS.
+- [laurentj/slimerjs](https://github.com/laurentj/slimerjs) is a scriptable browser.
+
+### **Vulnerability scanners**
+
+- [beefproject/beef](https://github.com/beefproject/beef) is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.
+- [ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework](https://github.com/ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework) is an advanced Cross Site Scripting (XSS) vulnerability detection and exploitation framework.
+- [Netflix-Skunkworks/sleepy-puppy](https://github.com/Netflix-Skunkworks/sleepy-puppy) is a cross-site scripting (XSS) payload management framework which simplifies the ability to capture, manage, and track XSS propagation over long periods of time.
+- [echo-devim/xbackdoor](https://github.com/echo-devim/xbackdoor) is a tool to take advantage of a persistent XSS vulnerability.
+
+### **Browser spoofing**
+
+Browser spoofing - is a technique that helps users fake that they are using a different browser configuration by changing the browsers features.
+
+The BotD helps to detect the following types of spoofing:
+- User Agent spoofing
+- Operating System spoofing
+- Hardware spoofing
+- etc.
+
+### **VM detection**
+
+The BotD helps to detect if the browser is running inside one of the popular virtual machines, like VirtualBox, VmWare, Parallels, Hyper-V, etc.
+
+### **Search bots**
+Google Bot, Bing Bot, Baidu Spider, Yahoo Bot, Alexa Bot, Apple Bot, Facebook Bot, Twitter Bot, Pinterest Bot,
+DuckDuckGo Bot, Coccoc Bot, Yandex Bot, Telegram Bot, Kiwi Status Spider, Naver Spider, Sputnik Bot, Petal Bot,
+Aspiegel Bot, Seznam Bot, Sogou Bot, DuckDuckGo Bot, Rackspace Bot, Pingdom Bot, WebPageTest.org crawlers,
+StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
+
 <small><i>Many more tools and configurations are supported</i></small>
 
-### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
-### [Full API documentation](docs/api.md)
+### Documentation links:
+- #### [JavaScript API](docs/api.md)
+- #### [Server-Side API](docs/server_api.md)
+- #### [Response Format](docs/response.md)
+- #### [Error Handling](docs/error.md)
+- #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 
 ### Contributing
 
 See the [contributing guidelines](contributing.md) to learn how to start a playground, test, and build.
+
+### License
+
+[MIT](LICENSE)
 
 <p align="center">
 © 2021 FingerprintJS, Inc
