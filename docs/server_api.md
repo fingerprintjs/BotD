@@ -2,29 +2,29 @@
 
 > NOTE
 >
-> The safest way to work with BotD is to load agent in [`requestId` mode](response.md#mode-is-requestid) and request detection results from server-side using [`/results` endpoint](#get-results).
+> The safest way to get bot detection results is to load agent in [`requestId` mode](response.md#mode-is-requestid) and request detection results from the server using [`/results` endpoint](#get-results).
 
 ### Production endpoint https://botd.fpapi.io/api/v1
 
 ## GET `/results`
-You can use method `/results` then to get full detection report by `requestId`.
+Use GET on `/results` to get bot detection detection results by `requestId`.
 
 ### Query parameters
 
 `id` - `requestId`.
 
-Or you can pass `requestId` through `botd-request-id` variable in cookie.
+Or you can pass `requestId` as the `botd-request-id` cookie value.
 
 ### API token
 
-Instructions on how to get a token can be found [here](/README.md#authorization).
+Instructions on how to get your token can be found [here](/README.md#authentication).
 There are two options of how to pass your API token:
-1) `Auth-Token` header (preflight requests will be sent)
+1) `Auth-Token` header (recommended).
 2) `token` query string parameter.
 
 ### Example
 
-```shell
+```sh
 curl --request GET 'https://botd.fpapi.io/api/v1/results?id=<YOUR_REQUEST_ID>&token=<YOUR_TOKEN>'
 ```
 
