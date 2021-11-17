@@ -1,5 +1,5 @@
-# BotD JavaScript API
-_BotD also has a [server-side API](server_api.md)._
+# BotD Browser API
+_BotD also has a [Server API](server_api.md)._
 
 ## `Botd.load`
 
