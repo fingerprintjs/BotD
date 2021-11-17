@@ -1,8 +1,12 @@
 ## BotD Response
 
-The structure of the response depends on the chosen `mode` and if the server returned an [error](error.md).
+The format of the response in the Browser API depends on the chosen [`mode`](api.md#initoptions).
 
-### `mode` is `requestId`:
+If you use the Server API, you response will always be in `allData` mode (i.e. contain all fields).
+
+For errors see [error docs](error.md).
+
+### Browser API `mode` is `requestId`:
 
 ```json
 {
@@ -11,7 +15,7 @@ The structure of the response depends on the chosen `mode` and if the server ret
 ```
 `requestId` is request identifier, e.g. **`01F9XY24VDZ9F4HHR4FSCRYTSH`**
 
-### `mode` is `allData`:
+### Browser API `mode` is `allData` (or when using the Server API):
 
 ```json
 {
