@@ -1,161 +1,41 @@
 # Server BotD API
 
-### Production endpoint `https://botd.fpapi.io/api/v1`
+> NOTE
+>
+> The safest way to work with BotD is to load agent in [`requestId` mode](response.md#mode-is-requestid) and request detection results from server-side using [`/results` endpoint](#get-results).
 
-## API token
+### Production endpoint https://botd.fpapi.io/api/v1
 
+## GET `/results`
+You can use method `/results` then to get full detection report by `requestId`.
+
+### Query parameters
+
+`id` - `requestId`.
+
+Or you can pass `requestId` through `botd-request-id` variable in cookie.
+
+### API token
+
+Instructions on how to get a token can be found [here](/README.md#authorization).
 There are two options of how to pass your API token:
 1) `Auth-Token` header (preflight requests will be sent)
 2) `token` query string parameter.
 
-## POST `/detect`
+### Example
 
-### Request body
-
-```json
-{
-    "mode": "<mode>",
-    "timestamp": 1623762359,
-    "performance": 12767,
-    "version": "0.0.1",
-    "signals": {
-        "s1": {
-            "state": 1,
-            "value": <object>,
-        },
-        ...
-    }
-}
+```shell
+curl --request GET 'https://botd.fpapi.io/api/v1/results?id=<YOUR_REQUEST_ID>&token=<YOUR_TOKEN>'
 ```
 
-Receives all needed data from client and builds a report.
+### Response
 
-`mode` - two modes are supported: `requestId` and `allData`.
+> NOTE
+>
+> The responses in [JavaScript API](api.md) in `allData` mode and [Server API](server_api.md) are identical.
 
-Other data are user properties to make an analysis.
+Response format can be found [here](response.md#mode-is-alldata).
 
-### Response body
+### Errors
 
-### `mode` is `allData`:
-
-```json
-{
-    "bot": {
-        "automationTool": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        },
-        "browserSpoofing": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        },
-        "searchEngine": {
-            "status": "processed",
-            "probability": 0,
-            "type": "<type>"
-        }
-    },
-    "vm": {
-        "status": "processed",
-        "probability": 0,
-        "type": "<type>"
-    },
-    "requestId": "<requestId>",
-    "ip": "<ipAddress>",
-    "tag": "<tag>"
-}
-```
-
-### `bot.automationTool`
-
-Results of detecting possible browser automation tools.
-
-`automationTool.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`automationTool.probability` - if `automationTool.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
-
-`automationTool.type` - optional field, possible values = `"phantomjs" | "headlessChrome" | ...`
-
-### `bot.browserSpoofing`
-
-Results of detecting possible browser spoofing.
-For example user agent string says it's Chrome on Windows, but other signals tell it is
-Safari on MacOS.
-
-`browserSpoofing.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`browserSpoofing.probability` - if `browserSpoofing.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
-
-`browserSpoofing.type` - optional field, possible values = `"userAgent" | "os" | ...`
-
-### `bot.searchEngine`
-
-Results of detecting a legitimate search engine, e.g. Google or Bing.
-
-`searchEngine.status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`searchEngine.probability` - if `searchEngine.status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
-
-`searchEngine.type` - optional field, possible values = `"google" | "bing" | ... `
-
-### `vm`
-
-Results of detecting a virtual machine.
-
-`status` - possible values = `"processed" | "error" | "notEnoughData"`
-
-`probability` - if `status` is `processed` possible values = `0.0 - 1.0`, otherwise the field won't be presented
-
-`type` - optional field, possible values = `"vmware" | "parallels" | "virtualBox" | ... `
-
-### `requestId`
-
-Request identifier, e.x. `01F9XY24VDZ9F4HHR4FSCRYTSH`
-
-### `ip`
-
-Client ip address, e.x. `82.200.40.10`
-
-### `tag`
-
-String which associated with the request. It's set up by Botd user.
-
-***
-### `mode` is `requestId`:
-
-```json
-{
-    "requestId": "<requestId>"
-}
-```
-
-You can use method `/results` then to get full detection report by `requestId`.
-
-## GET `/results`
-
-### Query parameters
-
-`id` - request id.
-
-Or you can pass request id through `botd-request-id` variable in cookie.
-
-### Response format
-
-The response will be the same as `/detect` has for `mode = "allData"`.
-
-## Error format
-
-```json
-{
-  "error": {
-    "code": "TokenNotFound",
-    "message": "token not found"
-  }
-}
-```
-
-`code` - error code, possible values = `"BotdApiFailed", "TokenRequired", "TokenNotFound", "RequestCannotBeParsed"`.
-
-`message` - error description.
+Error format can be found [here](error.md#error-format).

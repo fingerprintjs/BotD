@@ -1,72 +1,63 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-  <meta charset='UTF-8'>
+  <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <link rel='preconnect' href='https://cdn.jsdelivr.net'>
-  <link rel='preconnect' href='https://botd.fpapi.io'>
+  <link rel="preconnect" href="https://openfpcdn.io">
+  <link rel="preconnect" href="https://botd.fpapi.io">
   <link rel="stylesheet" href="style.css">
-  <link rel='icon' type='image/ico' href='./img/favicon.ico'>
+  <link rel="icon" type="image/ico" href="./img/favicon.ico">
   <title>FingerprintJS bot detection demo</title>
-  <!--  <script async src="../dist/botd.js"></script>-->
-  <script async src='https://cdn.jsdelivr.net/npm/@fpjs-incubator/botd-agent@0/dist/botd.min.js'></script>
 </head>
-<body onload='getResults()'>
-<div class='content'>
-  <a class='logo' href='https://fingerprintjs.com/'>
-    <img src='https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg' alt='FingerprintJS'>
+<body>
+<div class="content">
+  <a class="logo" href="https://fingerprintjs.com/">
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="FingerprintJS">
   </a>
   <h1>Bot Detect Playground</h1>
   <h2 id="status">Loading...</h2>
   <table class="result-table" id="result-table"></table>
-  <form class='url_form'>
-    <button id='button' type='button' onclick='getResults()'>Start detect</button>
+  <form class="url_form">
+    <button id="button" type="button" onclick="run()">Start detect</button>
   </form>
-  <div class='output_holder'>
-    <section class='output'>
+  <div class="output_holder">
+    <section class="output">
       <h5>Time to get result:</h5>
-      <pre class='output_div' id='time'></pre>
+      <pre class="output_div" id="time"></pre>
       <h5>Time to collect signals:</h5>
-      <pre class='output_div' id='perf'></pre>
+      <pre class="output_div" id="perf"></pre>
       <h5>Detector result:</h5>
-      <pre class='output_div' id='result'></pre>
+      <pre class="output_div" id="result"></pre>
       <h5>Collected data:</h5>
-      <pre class='output_div' id='sources'></pre>
+      <pre class="output_div" id="sources"></pre>
     </section>
   </div>
   <script>
-    async function getResults() {
-      let t0 = performance.now()
+    (async function run() {
+      let t0 = performance.now();
 
-      document.getElementById("status").textContent = 'Loading...'
-      document.getElementById("result-table").innerHTML = '';
-      const botdPromise = Botd.load({ token: '7WZ7tchNxRlEfamx10i', mode: 'allData' })
-      const botd = await botdPromise
-      const result = await botd.detect()
-      let time = performance.now() - t0
+      document.getElementById("status").textContent = "Loading...";
+      document.getElementById("result-table").innerHTML = "";
 
-      document.getElementById('perf').textContent = botd.performance + ' ms'
-      document.getElementById('sources').textContent = JSON.stringify(botd.components, null, 4)
-      document.getElementById('result').textContent = JSON.stringify(result, null, 4)
-      document.getElementById('time').textContent = time.toFixed(0) + ' ms'
-      document.getElementById("status").textContent = 'Result:'
-      document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ['vm', result.vm]].map(([key, value]) => {
-        let status;
-        let statusClass = '';
-        if (value.status === 'processed') {
-          if (value.probability > 0) {
-            status = `<b>detected</b> (probability ${value.probability.toFixed(2)})`;
-            statusClass = 'green';
-          } else {
-            status = 'not detected';
-          }
-        } else {
-          status = `<b>${value.status}</b>`;
-          statusClass = 'red';
-        }
-        return `<tr><td style='width: 25%'>${key}</td><td class="${statusClass}">${status}</td><td>${value.type || ''}</td></tr>`
-      }).join('');
-    }
+      // const botdPromise = await import('../dist/botd.esm.js')
+      const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
+      const botd = await botdPromise.load({ token: "7WZ7tchNxRlEfamx10i", mode: "allData" });
+      const result = await botd.detect();
+      let time = performance.now() - t0;
+
+      document.getElementById("perf").textContent = botd.performance + " ms";
+      document.getElementById("sources").textContent = JSON.stringify(botd.components, null, 4);
+      document.getElementById("result").textContent = JSON.stringify(result, null, 4);
+      document.getElementById("time").textContent = time.toFixed(0) + " ms";
+      document.getElementById("status").textContent = "Result:";
+      document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ["vm", result.vm]].map(([key, value]) => {
+        let style = value.status === "processed" ?
+          value.probability > 0 ? { class: "green", innerHTML: `<b>detected</b> (probability ${value.probability.toFixed(2)})` }
+            : { class: "", innerHTML: "not detected" }
+          : { class: "red", innerHTML: `<b>${value.status}</b>` };
+        return `<tr><td style="width: 25%">${key}</td><td class="${style.class}">${style.innerHTML}</td><td>${value.type || ""}</td></tr>`;
+      }).join("");
+    })();
   </script>
 </div>
 </body>

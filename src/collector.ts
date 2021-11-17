@@ -37,6 +37,10 @@ import requiredAccelerometerPermission from './sources/accelerometerPermission'
 import getTimestamp from './sources/timestamp'
 import getBackdropFilter from './sources/backdropFilter'
 import getASTCProfiles from './sources/astcProfiles'
+import getHairlines from './sources/hairlines'
+import isHiDPI from './sources/dpi'
+import isDarkTheme from './sources/darkTheme'
+import getSABByteLength from './sources/sab'
 
 async function handleSource(sourceFunction: Source): Promise<Component> {
   try {
@@ -105,5 +109,9 @@ export default async function collect(): Promise<ComponentDict> {
     getTimestamp, // s36
     getBackdropFilter, // s37
     getASTCProfiles, // s38
+    getHairlines, // s39
+    isHiDPI, // s40
+    isDarkTheme, // s41
+    getSABByteLength, // s42
   ])
 }
