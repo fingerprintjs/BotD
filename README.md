@@ -92,9 +92,9 @@ const botdPromise = Botd.load({
 
 ### 📕 [Full documentation](docs/api.md)
 
-## Authorization
+## Authentication
 
-A **free token** is required to connect to our bot detection API.
+A **free token** is required to authenticate with our server-side bot detection API.
 
 _To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `token` in the email subject, no need to compose a body)_
