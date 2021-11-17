@@ -33,7 +33,7 @@
     </section>
   </div>
   <script>
-    (async function run() {
+    async function run() {
       let t0 = performance.now();
 
       document.getElementById("status").textContent = "Loading...";
@@ -57,7 +57,8 @@
           : { class: "red", innerHTML: `<b>${value.status}</b>` };
         return `<tr><td style="width: 25%">${key}</td><td class="${style.class}">${style.innerHTML}</td><td>${value.type || ""}</td></tr>`;
       }).join("");
-    })();
+    }
+    run()
   </script>
 </div>
 </body>
