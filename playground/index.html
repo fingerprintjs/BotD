@@ -21,7 +21,7 @@
     <button id="button" type="button" onclick="run()">Start detect</button>
   </form>
   <div class="output_holder">
-    <section class="output">
+    <section id="result_section" class="output">
       <h5>Time to get result:</h5>
       <pre class="output_div" id="time"></pre>
       <h5>Time to collect signals:</h5>
@@ -31,6 +31,10 @@
       <h5>Collected data:</h5>
       <pre class="output_div" id="sources"></pre>
     </section>
+    <section id="error_section" class="output">
+      <h5>Error:</h5>
+      <pre class="output_div" id="error"></pre>
+    </section>
   </div>
   <script>
     async function run() {
@@ -39,24 +43,33 @@
       document.getElementById("status").textContent = "Loading...";
       document.getElementById("result-table").innerHTML = "";
 
-      // const botdPromise = await import('../dist/botd.esm.js')
-      const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
-      const botd = await botdPromise.load({ token: "7WZ7tchNxRlEfamx10i", mode: "allData" });
-      const result = await botd.detect();
-      let time = performance.now() - t0;
+      try {
+        // const botdPromise = await import('../dist/botd.esm.js')
+        const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
+        const botd = await botdPromise.load({ token: "7WZ7tchNxRlEfamx10i", mode: "allData" });
+        const result = await botd.detect();
+        let time = performance.now() - t0;
 
-      document.getElementById("perf").textContent = botd.performance + " ms";
-      document.getElementById("sources").textContent = JSON.stringify(botd.components, null, 4);
-      document.getElementById("result").textContent = JSON.stringify(result, null, 4);
-      document.getElementById("time").textContent = time.toFixed(0) + " ms";
-      document.getElementById("status").textContent = "Result:";
-      document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ["vm", result.vm]].map(([key, value]) => {
-        let style = value.status === "processed" ?
-          value.probability > 0 ? { class: "green", innerHTML: `<b>detected</b> (probability ${value.probability.toFixed(2)})` }
-            : { class: "", innerHTML: "not detected" }
-          : { class: "red", innerHTML: `<b>${value.status}</b>` };
-        return `<tr><td style="width: 25%">${key}</td><td class="${style.class}">${style.innerHTML}</td><td>${value.type || ""}</td></tr>`;
-      }).join("");
+        document.getElementById("error_section").style.display = "none"
+        document.getElementById("result_section").style.display = "block"
+        document.getElementById("perf").textContent = botd.performance + " ms";
+        document.getElementById("sources").textContent = JSON.stringify(botd.components, null, 4);
+        document.getElementById("result").textContent = JSON.stringify(result, null, 4);
+        document.getElementById("time").textContent = time.toFixed(0) + " ms";
+        document.getElementById("status").textContent = "Result:";
+        document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ["vm", result.vm]].map(([key, value]) => {
+          let style = value.status === "processed" ?
+            value.probability > 0 ? { class: "green", innerHTML: `<b>detected</b> (probability ${value.probability.toFixed(2)})` }
+              : { class: "", innerHTML: "not detected" }
+            : { class: "red", innerHTML: `<b>${value.status}</b>` };
+          return `<tr><td style="width: 25%">${key}</td><td class="${style.class}">${style.innerHTML}</td><td>${value.type || ""}</td></tr>`;
+        }).join("");
+      } catch (e) {
+        document.getElementById("result_section").style.display = "none"
+        document.getElementById("error_section").style.display = "block"
+        document.getElementById("status").textContent = "Error!";
+        document.getElementById("error").textContent = JSON.stringify(e, null, 4);
+      }
     }
     run()
   </script>
