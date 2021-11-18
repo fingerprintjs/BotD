@@ -14,11 +14,11 @@ ideally during application startup. It returns a promise which you can chain on 
 The `InitOptions` object has the following properties:
 
 - `token: string` (_required_) - A free account token required to access the bot detection API.
-Instructions on how to get a token can be found [here](/README.md#authorization).
+Instructions on how to get a token can be found [here](/README.md#authentication).
 
 - `mode: string` - There are two modes supported:
   - `requestId` (_default_)
-  - `allData`.
+  - `allData`
 
   When `requestId` mode is used, only `requestId` field is returned to the browser.
   It's a safe way to detect a bot server-side without leaking results to the browser.
@@ -36,7 +36,10 @@ botDetector.detect(options: DetectOptions): Promise<BotdResponse>
 Performs bot detection. Internally it will make a network request to our server-side bot detection API
 and return the `requestId` which you can use later to retrieve bot detection results (or `allData` if you configured it this way).
 
-**Note:** the `requestId` will implicitly be stored in a cookie (`botd-request-id`) for future convenience.
+> ### NOTE
+>
+> The `requestId` will implicitly be stored in a cookie (`botd-request-id`) for future convenience
+
 
 ### `DetectOptions`
 

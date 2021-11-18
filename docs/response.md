@@ -2,7 +2,7 @@
 
 The format of the response in the Browser API depends on the chosen [`mode`](api.md#initoptions).
 
-If you use the Server API, you response will always be in `allData` mode (i.e. contain all fields).
+If you use the Server API, your response will always be in `allData` mode (i.e. contain all fields).
 
 For errors see [error docs](error.md).
 
@@ -70,6 +70,6 @@ Safari on macOS.
 
 `requestId` is request identifier, e.g. **`01F9XY24VDZ9F4HHR4FSCRYTSH`**
 
-`ip` is a client ip address, e.x. **`82.200.40.10`**
+`ip` is a client ip address, e.g. **`82.200.40.10`**
 
 `tag` string contains information associated with the request. It's set up by BotD user

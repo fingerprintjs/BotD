@@ -2,7 +2,7 @@
 
 > ### NOTE
 >
-> The most secure way to get bot detection results is by loading the browser agent in [`requestId` mode](response.md#mode-is-requestid), 
+> The most secure way to get bot detection results is by loading the browser agent in [`requestId` mode](response.md#browser-api-mode-is-requestid),
 > calling [`detect`](api.md#botdetectordetect) in the browser and then getting the detection results on the server using [`/results` endpoint](#get-results).
 
 ### Production endpoint https://botd.fpapi.io/api/v1
@@ -15,6 +15,9 @@ Use GET on `/results` to get bot detection results by `requestId`.
 `id` - `requestId`.
 
 Alternatively you can pass the `requestId` as a `botd-request-id` cookie value.
+
+> ### NOTE
+> BotD results for the `requestId` is stored for 30 days
 
 ### API token
 
@@ -35,7 +38,7 @@ curl --request GET 'https://botd.fpapi.io/api/v1/results?id=<YOUR_REQUEST_ID>&to
 >
 > The response format in [Browser API](api.md) in `allData` mode and [Server API](server_api.md) is identical.
 
-Response format can be found [here](response.md#mode-is-alldata).
+Response format can be found [here](response.md#browser-api-mode-is-alldata-or-when-using-the-server-api).
 
 ### Errors
 
