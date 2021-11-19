@@ -42,6 +42,8 @@
 
       document.getElementById("status").textContent = "Loading...";
       document.getElementById("result-table").innerHTML = "";
+      document.getElementById("error_section").style.display = "none"
+      document.getElementById("result_section").style.display = "none"
 
       try {
         // const botdPromise = await import('../dist/botd.esm.js')
