@@ -39,11 +39,11 @@ The error message has the following structure:
 
 ## Possible error codes
 
-| Error code            | HTTP Status Code          | Description                              |
-| --------------------- | ------------------------- | ---------------------------------------- |
-| tokenRequired         | 401 Unauthorized          | Token specified incorrectly              |
-| tokenInvalid          | 401 Unauthorized          | Token not found                          |
-| requestCannotBeParsed | 400 Bad request           | Error during body parsing                |
-| badRequest            | 400 Bad request           | Error in the request, details in message |
-| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#authentication) exceeded               |
-| botdApiFailed         | 500 Internal Server Error | Other errors                             |
+| Error code            | HTTP Status Code          | Description                                         |
+| --------------------- | ------------------------- | --------------------------------------------------- |
+| tokenRequired         | 401 Unauthorized          | Token specified incorrectly                         |
+| tokenInvalid          | 401 Unauthorized          | Token not found                                     |
+| requestCannotBeParsed | 422 Unprocessable Entity  | Error during body parsing                           |
+| badRequest            | 400 Bad request           | Error in the request, details in message            |
+| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#authentication) exceeded |
+| botdApiFailed         | 500 Internal Server Error | Other errors                                        |
