@@ -16,7 +16,7 @@ import {
 
 function setCookie(name: string, value: string): void {
   value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
+  document.cookie = `${name}=${value};SameSite=None;Secure`
 }
 
 /**
@@ -43,7 +43,7 @@ export default class BotDetector implements BotDetectorInterface {
       this.endpoint = new URL(this.endpoint, document.baseURI).href
     }
     this.token = options.token
-    this.integration = options.mode == 'integration' || (options.isIntegration != undefined && options.isIntegration)
+    this.integration = options.mode == 'integration'
     this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
     this.obfuscator = new XorWithIndexObfuscation()
     this.obfuscationMode =
@@ -60,7 +60,7 @@ export default class BotDetector implements BotDetectorInterface {
     return this.components
   }
 
-  static throwIfError(response: BotdResponse): void {
+  static throwIfBotDError(response: BotdResponse): void {
     if ('error' in response) {
       throw response
     }
@@ -116,15 +116,13 @@ export default class BotDetector implements BotDetectorInterface {
           ? await response.json()
           : this.obfuscator.deobfuscate(await response.arrayBuffer())
 
-      BotDetector.throwIfError(responseJSON)
+      BotDetector.throwIfBotDError(responseJSON)
       if ('requestId' in responseJSON && !this.integration) {
         setCookie('botd-request-id', responseJSON['requestId'])
       }
       return responseJSON
     } catch (err) {
-      if (err['error']) {
-        throw err
-      }
+      BotDetector.throwIfBotDError(err)
       throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
     }
   }
