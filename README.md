@@ -94,12 +94,14 @@ const botdPromise = Botd.load({
 
 ## Authentication
 
-A **free token** is required to authenticate with our server-side bot detection API.
+You need a key pair for using BotD:
+- `publicKey` is for making a bot detection from browser
+- `secret` is for achieving detection results from your server
 
-_To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
-_(just type `token` in the email subject, no need to compose a body)_
+_Please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
+_(just type `access` in the email subject, no need to compose a body)_
 <br/>
-_The free token is limited to 1M API calls per month and 3 calls per second while in beta._
+_The key pair is limited to 1M API calls per month and 3 calls per second while in beta._
 
 ## Supported detection scenarios
 
@@ -148,7 +150,6 @@ StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
 ### Documentation links:
 - #### [Browser API](docs/api.md)
 - #### [Server API](docs/server_api.md)
-- #### [Response Format](docs/response.md)
 - #### [Error Handling](docs/error.md)
 - #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 

@@ -15,7 +15,7 @@ botdPromise
 ## Error handling in Server API
 
 > ### NOTE
-> Server API response without error has status code `200 Ok`
+> Successful server API response has status code `200 Ok`
 
 The description of the server API error will be contained in the response body.
 The error format can be found [below](error.md#error-format)
@@ -27,13 +27,13 @@ The error message has the following structure:
 ```json
 {
   "error": {
-    "code": "tokenInvalid",
-    "message": "token not found"
+    "code": "publicKeyInvalid",
+    "message": "publicKey not found"
   }
 }
 ```
 
-`code` - [error code](error.md#possible-error-codes), e.g. `"tokenInvalid"`.
+`code` - [error code](error.md#possible-error-codes), e.g. `publicKeyInvalid`.
 
 `message` - error description.
 
@@ -41,8 +41,10 @@ The error message has the following structure:
 
 | Error code            | HTTP Status Code          | Description                              |
 | --------------------- | ------------------------- | ---------------------------------------- |
-| tokenRequired         | 401 Unauthorized          | Token specified incorrectly              |
-| tokenInvalid          | 401 Unauthorized          | Token not found                          |
+| publicKeyRequired     | 401 Unauthorized          | PublicKey specified incorrectly          |
+| publicKeyInvalid      | 401 Unauthorized          | PublicKey not found                      |
+| secretKeyRequired     | 401 Unauthorized          | SecretKey specified incorrectly          |
+| secretKeyInvalid      | 401 Unauthorized          | SecretKey not found                      |
 | requestCannotBeParsed | 400 Bad request           | Error during body parsing                |
 | badRequest            | 400 Bad request           | Error in the request, details in message |
 | tooManyRequests       | 429 Too many request      | [Request limit](/README.md#authentication) exceeded               |

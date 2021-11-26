@@ -13,19 +13,12 @@ ideally during application startup. It returns a promise which you can chain on 
 ### `InitOptions`
 The `InitOptions` object has the following properties:
 
-- `token: string` (_required_) - A free account token required to access the bot detection API.
+- `publicKey: string` (_required_) - A free account publicKey required to make the bot detection.
 Instructions on how to get a token can be found [here](/README.md#authentication).
 
 - `mode: string` - There are two modes supported:
   - `requestId` (_default_)
-  - `allData`
-
-  When `requestId` mode is used, only `requestId` field is returned to the browser.
-  It's a safe way to detect a bot server-side without leaking results to the browser.
-  This mode is recommended for production usage.
-
-  When `allData` mode is used, all data from the bot detection result is returned to the browser.
-  This mode is not recommended for production, but can be used during development and testing.
+  - `integration` (only for [botd-integrations](https://github.com/fingerprintjs/botd-integrations))
 
 ## `BotDetector.detect`
 
@@ -34,7 +27,7 @@ botDetector.detect(options: DetectOptions): Promise<BotdResponse>
 ```
 
 Performs bot detection. Internally it will make a network request to our server-side bot detection API
-and return the `requestId` which you can use later to retrieve bot detection results (or `allData` if you configured it this way).
+and return the `requestId` which you can use later to retrieve bot detection results.
 
 > ### NOTE
 >
@@ -49,4 +42,10 @@ The `DetectOptions` object has a single parameter `tag` with type `string`:
 
 ### `BotdResponse`
 
-BotD response formats can be found [here](response.md).
+```json
+{
+    "requestId": "<requestId>" // request identifier, e.g. 01F9XY24VDZ9F4HHR4FSCRYTSH
+}
+```
+
+For errors see [error docs](error.md).
