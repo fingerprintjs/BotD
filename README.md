@@ -99,7 +99,9 @@ A **free token** is required to authenticate with our server-side bot detection 
 _To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `token` in the email subject, no need to compose a body)_
 <br/>
-_The free token is limited to 1M API calls per month and 3 calls per second while in beta._
+
+### **Request Limit**
+_The free token is soft-limited to 1M API calls per month and 3 calls per second while in beta._
 
 ## Supported detection scenarios
 
