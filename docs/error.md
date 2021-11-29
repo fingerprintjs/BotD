@@ -45,5 +45,5 @@ The error message has the following structure:
 | tokenInvalid          | 401 Unauthorized          | Token not found                                     |
 | requestCannotBeParsed | 422 Unprocessable Entity  | Error during body parsing                           |
 | badRequest            | 400 Bad request           | Error in the request, details in message            |
-| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#authentication) exceeded |
+| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#request-limit) exceeded |
 | botdApiFailed         | 500 Internal Server Error | Other errors                                        |
