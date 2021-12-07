@@ -16,7 +16,7 @@ import {
 
 function setCookie(name: string, value: string): void {
   value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
+  document.cookie = `${name}=${value};SameSite=None;Secure`
 }
 
 /**
@@ -27,7 +27,7 @@ function setCookie(name: string, value: string): void {
  */
 export default class BotDetector implements BotDetectorInterface {
   endpoint: string
-  token: string
+  publicKey: string
   mode: Modes
   tag = ''
   performance?: number
@@ -42,8 +42,15 @@ export default class BotDetector implements BotDetectorInterface {
     if (this.endpoint.indexOf('://') === -1) {
       this.endpoint = new URL(this.endpoint, document.baseURI).href
     }
-    this.token = options.token
-    this.integration = options.mode == 'integration' || (options.isIntegration != undefined && options.isIntegration)
+    // TODO: Get rid of token
+    const token = options.token == undefined ? '' : options.token
+    const publicKey = options.publicKey == undefined ? '' : options.publicKey
+    if (publicKey == '' && token == '') {
+      throw BotDetector.createError(ErrorCodes.PublicKeyRequired, 'publicKey required')
+    }
+    this.publicKey = publicKey == '' ? token : publicKey
+
+    this.integration = options.mode == 'integration'
     this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
     this.obfuscator = new XorWithIndexObfuscation()
     this.obfuscationMode =
@@ -80,7 +87,7 @@ export default class BotDetector implements BotDetectorInterface {
       mode: this.mode,
       performance: this.performance,
       signals: this.components,
-      token: this.token,
+      publicKey: this.publicKey,
       tag: this.tag,
     }
   }
@@ -95,7 +102,6 @@ export default class BotDetector implements BotDetectorInterface {
       const credentials: RequestCredentials | undefined = this.integration ? 'include' : undefined
       const url = new URL(this.endpoint)
       url.pathname += 'detect'
-      url.searchParams.append('token', this.token)
       url.searchParams.append('version', version)
       url.search += this.obfuscationMode != 'all' ? '&deobfuscate' : ''
 
@@ -122,9 +128,7 @@ export default class BotDetector implements BotDetectorInterface {
       }
       return responseJSON
     } catch (err) {
-      if (err['error']) {
-        throw err
-      }
+      BotDetector.throwIfError(err)
       throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
     }
   }

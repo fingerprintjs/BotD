@@ -51,10 +51,7 @@ BotD runs in the [browser](#install-from-cdn); additionally you can harden it by
 <script>
     // Initialize an agent at application startup.
     const botdPromise = import('https://openfpcdn.io/botd/v0.1')
-        .then( Botd => Botd.load({
-            token: '<your-token>',
-            mode: 'allData'
-        }))
+        .then( Botd => Botd.load({ publicKey: '<your-public-key>' }))
     // Get the bot detection result when you need it.
     botdPromise
         .then(botd => botd.detect())
@@ -76,10 +73,7 @@ yarn add @fpjs-incubator/botd-agent
 import Botd from '@fpjs-incubator/botd-agent';
 
 // Initialize an agent at application startup.
-const botdPromise = Botd.load({
-    token: "<token>",
-    mode: "allData"
-});
+const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
 
 (async () => {
   // Get the bot detection result when you need it.
@@ -94,10 +88,12 @@ const botdPromise = Botd.load({
 
 ## Authentication
 
-A **free token** is required to authenticate with our server-side bot detection API.
+You need a key pair for using BotD:
+- `publicKey` is for making a bot detection from browser
+- `secretKey` is for achieving detection results from your server
 
-_To get your token, please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
-_(just type `token` in the email subject, no need to compose a body)_
+_Please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
+_(just type `access` in the email subject, no need to compose a body)_
 <br/>
 
 ### **Request Limit**
@@ -150,7 +146,6 @@ StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
 ### Documentation links:
 - #### [Browser API](docs/api.md)
 - #### [Server API](docs/server_api.md)
-- #### [Response Format](docs/response.md)
 - #### [Error Handling](docs/error.md)
 - #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 

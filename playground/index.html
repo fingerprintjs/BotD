@@ -48,8 +48,21 @@
       try {
         // const botdPromise = await import('../dist/botd.esm.js')
         const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
-        const botd = await botdPromise.load({ token: "7WZ7tchNxRlEfamx10i", mode: "allData" });
-        const result = await botd.detect();
+        const botd = await botdPromise.load({ publicKey: "kd9aAM09vW3kX3TZFHC" });
+        const detectResponse = await botd.detect();
+
+        // FOR SECURITY REASONS CALL /verify METHOD ON YOUR SERVER!
+        const botdServerAPI = "https://botd.fpapi.io/api/v1"
+        const verifyBody = JSON.stringify({
+          "secretKey": "3JrB1QEWeEszVKwHz5I",
+          "requestId": detectResponse.requestId
+        })
+        const result = await fetch(`${botdServerAPI}/verify`, {
+          body: verifyBody,
+          method: "POST"
+        })
+          .then(response => response.json())
+
         let time = performance.now() - t0;
 
         document.getElementById("error_section").style.display = "none"

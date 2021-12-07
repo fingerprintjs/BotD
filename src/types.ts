@@ -95,8 +95,8 @@ export interface ErrorResponse {
  * @enum {string}
  */
 export const enum ErrorCodes {
-  BotdFailed = 'BotdFailed',
-  DetectNotCalled = 'DetectNotCalled',
+  BotdFailed = 'botdFailed',
+  PublicKeyRequired = 'publicKeyRequired',
 }
 
 /**
@@ -128,9 +128,14 @@ export interface BotDetectorInterface {
  */
 export interface InitOptions {
   /**
-   * A token required to access the server-side bot detection API.
+   * A public key required to access the server-side bot detection API.
    */
-  token: string
+  publicKey?: string
+
+  /**
+   * @deprecated Use publicKey instead
+   */
+  token?: string
 
   /**
    * Represents mode for querying API. Default is 'requestId'.
@@ -139,17 +144,10 @@ export interface InitOptions {
 
   /**
    * Optional endpoint for the server-side bot detection API.
-   *
-   * @todo Specify the endpoint for the server-side bot detection API once it's available.
    */
   endpoint?: string
 
   obfuscationMode?: ObfuscationModes
-
-  /**
-   * @deprecated Will be removed in the next major version, use mode='integration' instead.
-   */
-  isIntegration?: boolean
 }
 
 /**
@@ -173,17 +171,16 @@ export interface DetectBody {
   mode: Modes
   performance?: number
   signals?: ComponentDict
-  token: string
+  publicKey: string
   tag: string
 }
 
 /**
  * Represents mode for querying API.
- * When `requestId` mode is used, only `requestId` field is returned back to the browser. This mode is recommended for production usage.
- * When `allData` mode is used, all data from the bot detection result is returned back to the browser.
+ * When `requestId` mode is used, only `requestId` field is returned to the browser. This mode is recommended for production usage.
  * Use `integration` mode only with cloud BotD integrations.
  */
-export type Modes = 'requestId' | 'allData' | 'integration'
+export type Modes = 'requestId' | 'integration'
 
 /**
  * Represents mode for obfuscation.
