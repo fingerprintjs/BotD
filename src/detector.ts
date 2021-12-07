@@ -16,7 +16,7 @@ import {
 
 function setCookie(name: string, value: string): void {
   value = encodeURIComponent(value)
-  document.cookie = name + '=' + value
+  document.cookie = `${name}=${value};SameSite=None;Secure`
 }
 
 /**
@@ -121,9 +121,7 @@ export default class BotDetector implements BotDetectorInterface {
       }
       return responseJSON
     } catch (err) {
-      if (err['error']) {
-        throw err
-      }
+      BotDetector.throwIfError(err)
       throw BotDetector.createError(ErrorCodes.BotdFailed, err.toString())
     }
   }

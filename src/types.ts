@@ -139,8 +139,6 @@ export interface InitOptions {
 
   /**
    * Optional endpoint for the server-side bot detection API.
-   *
-   * @todo Specify the endpoint for the server-side bot detection API once it's available.
    */
   endpoint?: string
 
