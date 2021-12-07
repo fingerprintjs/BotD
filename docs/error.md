@@ -39,13 +39,13 @@ The error message has the following structure:
 
 ## Possible error codes
 
-| Error code            | HTTP Status Code          | Description                              |
-| --------------------- | ------------------------- | ---------------------------------------- |
+| Error code            | HTTP Status Code          | Description                                         |
+| --------------------- | ------------------------- | --------------------------------------------------- |
 | publicKeyRequired     | 401 Unauthorized          | PublicKey specified incorrectly          |
 | publicKeyInvalid      | 401 Unauthorized          | PublicKey not found                      |
 | secretKeyRequired     | 401 Unauthorized          | SecretKey specified incorrectly          |
 | secretKeyInvalid      | 401 Unauthorized          | SecretKey not found                      |
 | requestCannotBeParsed | 400 Bad request           | Error during body parsing                |
 | badRequest            | 400 Bad request           | Error in the request, details in message |
-| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#authentication) exceeded               |
+| tooManyRequests       | 429 Too many request      | [Request limit](/README.md#request-limit) exceeded               |
 | botdApiFailed         | 500 Internal Server Error | Other errors                             |
