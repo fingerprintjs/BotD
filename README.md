@@ -51,10 +51,7 @@ BotD runs in the [browser](#install-from-cdn); additionally you can harden it by
 <script>
     // Initialize an agent at application startup.
     const botdPromise = import('https://openfpcdn.io/botd/v0.1')
-        .then( Botd => Botd.load({
-            token: '<your-token>',
-            mode: 'allData'
-        }))
+        .then( Botd => Botd.load({ publicKey: '<your-public-key>' }))
     // Get the bot detection result when you need it.
     botdPromise
         .then(botd => botd.detect())
@@ -76,10 +73,7 @@ yarn add @fpjs-incubator/botd-agent
 import Botd from '@fpjs-incubator/botd-agent';
 
 // Initialize an agent at application startup.
-const botdPromise = Botd.load({
-    token: "<token>",
-    mode: "allData"
-});
+const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
 
 (async () => {
   // Get the bot detection result when you need it.

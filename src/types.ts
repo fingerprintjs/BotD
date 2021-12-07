@@ -95,8 +95,8 @@ export interface ErrorResponse {
  * @enum {string}
  */
 export const enum ErrorCodes {
-  BotdFailed = 'BotdFailed',
-  DetectNotCalled = 'DetectNotCalled',
+  BotdFailed = 'botdFailed',
+  PublicKeyRequired = 'publicKeyRequired',
 }
 
 /**
@@ -130,7 +130,12 @@ export interface InitOptions {
   /**
    * A public key required to access the server-side bot detection API.
    */
-  publicKey: string
+  publicKey?: string
+
+  /**
+   * @deprecated Use publicKey instead
+   */
+  token?: string
 
   /**
    * Represents mode for querying API. Default is 'requestId'.
@@ -172,7 +177,7 @@ export interface DetectBody {
 
 /**
  * Represents mode for querying API.
- * When `requestId` mode is used, only `requestId` field is returned back to the browser. This mode is recommended for production usage.
+ * When `requestId` mode is used, only `requestId` field is returned to the browser. This mode is recommended for production usage.
  * Use `integration` mode only with cloud BotD integrations.
  */
 export type Modes = 'requestId' | 'integration'

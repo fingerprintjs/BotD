@@ -42,7 +42,14 @@ export default class BotDetector implements BotDetectorInterface {
     if (this.endpoint.indexOf('://') === -1) {
       this.endpoint = new URL(this.endpoint, document.baseURI).href
     }
-    this.publicKey = options.publicKey
+    // TODO: Get rid of token
+    const token = options.token == undefined ? '' : options.token
+    const publicKey = options.publicKey == undefined ? '' : options.publicKey
+    if (publicKey == '' && token == '') {
+      throw BotDetector.createError(ErrorCodes.PublicKeyRequired, 'publicKey required')
+    }
+    this.publicKey = publicKey == '' ? token : publicKey
+
     this.integration = options.mode == 'integration'
     this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
     this.obfuscator = new XorWithIndexObfuscation()

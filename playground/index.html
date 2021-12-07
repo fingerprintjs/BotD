@@ -46,19 +46,22 @@
       document.getElementById("result_section").style.display = "none"
 
       try {
-        //const botdServerAPI = "http://localhost:5000/api/v1"
-        const botdServerAPI = "https://botd.fpapi.io/api/v1"
-
-        //const botdPromise = await import('../dist/botd.esm.js')
+        // const botdPromise = await import('../dist/botd.esm.js')
         const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
-
-        const botd = await botdPromise.load({ publicKey: "7WZ7tchNxRlEfamx10i", mode: "requestId", endpoint: botdServerAPI });
+        const botd = await botdPromise.load({ publicKey: "kd9aAM09vW3kX3TZFHC" });
         const detectResponse = await botd.detect();
 
         // FOR SECURITY REASONS CALL /verify METHOD ON YOUR SERVER!
-        const verifyBody = JSON.stringify({"secretKey": "7WZ7tchNxRlEfamx10i", "requestId": detectResponse.requestId})
-        const result = await fetch(botdServerAPI + "/verify", {body: verifyBody, method: "POST"})
-            .then(response => response.json())
+        const botdServerAPI = "https://botd.fpapi.io/api/v1"
+        const verifyBody = JSON.stringify({
+          "secretKey": "3JrB1QEWeEszVKwHz5I",
+          "requestId": detectResponse.requestId
+        })
+        const result = await fetch(`${botdServerAPI}/verify`, {
+          body: verifyBody,
+          method: "POST"
+        })
+          .then(response => response.json())
 
         let time = performance.now() - t0;
 
