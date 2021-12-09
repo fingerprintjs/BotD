@@ -53,6 +53,7 @@ BotD runs in the [browser](#install-from-cdn); additionally you can harden it by
     const botdPromise = import('https://openfpcdn.io/botd/v0.1')
         .then( Botd => Botd.load({ publicKey: '<your-public-key>' }))
     // Get the bot detection result when you need it.
+    // Result will contain the `requestId` property, that you can securely verify on the server.
     botdPromise
         .then(botd => botd.detect())
         .then(result => console.log(result))
@@ -77,6 +78,7 @@ const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
 
 (async () => {
   // Get the bot detection result when you need it.
+  // Result will contain the `requestId` property, that you can securely verify on the server.
   const botd = await botdPromise
   const result = await botd.detect();
   console.log(result);
