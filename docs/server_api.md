@@ -1,20 +1,20 @@
 # Server BotD API
 
 > ### NOTE
-> The secure way to use BotD is to provide your `publicKey` to the browser agent for making a bot detection and, then,
-> getting the detection results on your server using [`/verify` endpoint](#get-verify).
+> The secure way to use BotD is to provide your `publicKey` to the browser agent when making bot detection and then
+> getting the detection results on the server using the [`/verify` endpoint](#get-verify).
 
 ### Production endpoint https://botd.fpapi.io/api/v1
 
 ## POST `/verify`
-Use POST on `/verify` to get bot detection results by `requestId`.
+Use POST on `/verify` to get the bot detection results by `requestId`.
 
 > ### NOTE
-> BotD results for the `requestId` is stored for 30 days.
+> BotD results for the `requestId` are stored for 30 days.
 
 ### POST body parameters
 
-- `requestId` - request id which is provided by BotD Browser API.
+- `requestId` - request id which is provided by the BotD Browser API.
 - `secretKey` - your secret key.
 
 ### Example
@@ -78,11 +78,11 @@ Safari on macOS.
 - `vm.probability` - if `status` is `processed` possible values = `0.0 - 1.0`, otherwise the field will not be present.
 - `vm.type` - optional field, possible values = `"vmware" | "parallels" | "virtualBox" | ... `.
 
-`requestId` - request identifier, e.g. **`01F9XY24VDZ9F4HHR4FSCRYTSH`**.
+`requestId` - request identifier, e.g. **`01F9XY24VDZ9F4HHR4FSCRYTSH`**. Used to verify bot detection requests on the server.
 
 `ip` - client ip address, e.g. **`82.200.40.10`**.
 
-`tag` - string contains information associated with the request. It's set up by BotD user.
+`tag` - string containing information associated with each request. Should be provided by BotD users in the browser API.
 
 ### Errors
 
