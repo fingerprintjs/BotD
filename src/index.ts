@@ -1,6 +1,8 @@
 import BotDetector from './detector'
 import { BotDetectorInterface, InitOptions } from './types'
 
+export { BotdResponse } from './types'
+
 /**
  * Builds an instance of the BotDetector. It's recommended to call it as early as possible, ideally during application startup.
  *

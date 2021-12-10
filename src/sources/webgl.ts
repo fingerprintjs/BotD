@@ -7,6 +7,9 @@ export default function getWebGL(): string[] {
   if (webGLContext == null) {
     throw new BotdError(State.Null, 'WebGLRenderingContext is null')
   } else {
+    if (typeof webGLContext.getParameter !== 'function') {
+      throw new BotdError(State.NotFunction, 'WebGLRenderingContext.getParameter is not a function')
+    }
     const vendor = webGLContext.getParameter(webGLContext.VENDOR)
     const renderer = webGLContext.getParameter(webGLContext.RENDERER)
     const version = webGLContext.getParameter(webGLContext.VERSION)
