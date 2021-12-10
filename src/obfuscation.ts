@@ -83,7 +83,7 @@ export class XorWithIndexObfuscation implements ObfuscationInterface {
     const type = encodedBytes[0]
     const paddingSize = encodedBytes[1]
 
-    if (type != this.type || paddingSize != this.paddingSize) {
+    if (type !== this.type || paddingSize !== this.paddingSize) {
       throw new BotdError(State.ObfuscationError, 'Wrong type or padding size')
     }
 
