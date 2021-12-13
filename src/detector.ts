@@ -45,12 +45,12 @@ export default class BotDetector implements BotDetectorInterface {
     // TODO: Get rid of token
     const token = options.token == undefined ? '' : options.token
     const publicKey = options.publicKey == undefined ? '' : options.publicKey
-    if (publicKey == '' && token == '') {
+    if (publicKey === '' && token === '') {
       throw BotDetector.createError(ErrorCodes.PublicKeyRequired, 'publicKey required')
     }
-    this.publicKey = publicKey == '' ? token : publicKey
+    this.publicKey = publicKey === '' ? token : publicKey
 
-    this.integration = options.mode == 'integration'
+    this.integration = options.mode === 'integration'
     this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
     this.obfuscator = new XorWithIndexObfuscation()
     this.obfuscationMode =
@@ -103,10 +103,10 @@ export default class BotDetector implements BotDetectorInterface {
       const url = new URL(this.endpoint)
       url.pathname += 'detect'
       url.searchParams.append('version', version)
-      url.search += this.obfuscationMode != 'all' ? '&deobfuscate' : ''
+      url.search += this.obfuscationMode !== 'all' ? '&deobfuscate' : ''
 
       const body =
-        this.obfuscationMode == 'none'
+        this.obfuscationMode === 'none'
           ? JSON.stringify(this.createRequestBody())
           : this.obfuscator.obfuscate(this.createRequestBody())
 
@@ -118,7 +118,7 @@ export default class BotDetector implements BotDetectorInterface {
       })
 
       const responseJSON: BotdResponse =
-        this.obfuscationMode != 'all'
+        this.obfuscationMode !== 'all'
           ? await response.json()
           : this.obfuscator.deobfuscate(await response.arrayBuffer())
 
