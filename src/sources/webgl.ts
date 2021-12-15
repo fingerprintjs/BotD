@@ -3,6 +3,9 @@ import getInstallTrigger from './installTrigger'
 
 export default function getWebGL(): string[] {
   const canvasElement = document.createElement('canvas')
+  if (typeof canvasElement.getContext !== 'function') {
+    throw new BotdError(State.NotFunction, 'HTMLCanvasElement.getContext is not a function')
+  }
   const webGLContext = canvasElement.getContext('webgl')
   if (webGLContext == null) {
     throw new BotdError(State.Null, 'WebGLRenderingContext is null')

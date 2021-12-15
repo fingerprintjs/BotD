@@ -69,7 +69,7 @@ export interface SuccessResponse {
   ip: string
   tag: string
   bot: {
-    automationTools: DetectNote
+    automationTool: DetectNote
     searchEngine: DetectNote
     browserSpoofing: DetectNote
   }
