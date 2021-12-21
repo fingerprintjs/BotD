@@ -116,6 +116,12 @@ _The free keys are limited to 3M API calls per month and 10 calls per second whi
 - [casperjs/casperjs](https://github.com/casperjs/casperjs) is a navigation scripting & testing utility for PhantomJS and SlimerJS.
 - [laurentj/slimerjs](https://github.com/laurentj/slimerjs) is a scriptable browser.
 
+### **Stealth plugins**
+
+- [berstend/puppeteer-extra/packages/puppeteer-extra-plugin-stealth](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth) a plugin for puppeteer-extra to prevent detection.
+- [ultrafunkamsterdam/undetected-chromedriver](https://github.com/ultrafunkamsterdam/undetected-chromedriver) Optimized Selenium Chromedriver patch which does not trigger anti-bot services.
+- [MeiK2333/pyppeteer_stealth](https://github.com/MeiK2333/pyppeteer_stealth) is a stealth plugin for [pyppeteer](https://github.com/miyakogi/pyppeteer)
+
 ### **Vulnerability scanners**
 
 - [beefproject/beef](https://github.com/beefproject/beef) is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.
