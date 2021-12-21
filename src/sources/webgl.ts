@@ -7,7 +7,7 @@ export default function getWebGL(): string[] {
     throw new BotdError(State.NotFunction, 'HTMLCanvasElement.getContext is not a function')
   }
   const webGLContext = canvasElement.getContext('webgl')
-  if (webGLContext == null) {
+  if (webGLContext === null) {
     throw new BotdError(State.Null, 'WebGLRenderingContext is null')
   } else {
     if (typeof webGLContext.getParameter !== 'function') {
@@ -20,7 +20,7 @@ export default function getWebGL(): string[] {
       return [vendor, renderer, version]
     } else {
       const webGLDebugInfo = webGLContext.getExtension('WEBGL_debug_renderer_info')
-      if (webGLDebugInfo == null) {
+      if (webGLDebugInfo === null) {
         throw new BotdError(State.Null, 'WEBGL_debug_renderer_info extension is null')
       } else {
         const unmaskedVendor = webGLContext.getParameter(webGLDebugInfo.UNMASKED_VENDOR_WEBGL)

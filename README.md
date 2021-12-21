@@ -53,6 +53,7 @@ BotD runs in the [browser](#install-from-cdn); additionally you can harden it by
     const botdPromise = import('https://openfpcdn.io/botd/v0.1')
         .then( Botd => Botd.load({ publicKey: '<your-public-key>' }))
     // Get the bot detection result when you need it.
+    // Result will contain the `requestId` property, that you can securely verify on the server.
     botdPromise
         .then(botd => botd.detect())
         .then(result => console.log(result))
@@ -77,6 +78,7 @@ const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
 
 (async () => {
   // Get the bot detection result when you need it.
+  // Result will contain the `requestId` property, that you can securely verify on the server.
   const botd = await botdPromise
   const result = await botd.detect();
   console.log(result);
@@ -88,16 +90,16 @@ const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
 
 ## Authentication
 
-You need a key pair for using BotD:
-- `publicKey` is for making a bot detection from browser
-- `secretKey` is for achieving detection results from your server
+You need a pair of keys to use BotD:
+- `publicKey` for making bot detection requests from browser. This key can be used publicly on your websites.
+- `secretKey` for verifying bot detection requests on the server. This key must be kept secret.
 
 _Please ping us on [Discord](https://discord.com/invite/P6Ya76HkbF) or email us at botd@fingerprintjs.com_
 _(just type `access` in the email subject, no need to compose a body)_
 <br/>
 
 ### **Request Limit**
-_The free token is soft-limited to 1M API calls per month and 3 calls per second while in beta._
+_The free keys are limited to 3M API calls per month and 10 calls per second while in beta._
 
 ## Supported detection scenarios
 

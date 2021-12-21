@@ -10,7 +10,7 @@ export default function getASTCProfiles(): string {
     throw new BotdError(State.Null, 'WebGLRenderingContext is null')
   } else {
     const astcExtension = webGLContext.getExtension('WEBGL_compressed_texture_astc')
-    if (astcExtension == null) return ''
+    if (astcExtension === null) return ''
     if (typeof astcExtension.getSupportedProfiles !== 'function') {
       throw new BotdError(State.NotFunction, 'WEBGL_compressed_texture_astc.getSupportedProfiles is not a function')
     }
