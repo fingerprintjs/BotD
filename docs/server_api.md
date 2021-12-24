@@ -20,8 +20,8 @@ Use POST on `/verify` to get the bot detection results by `requestId`.
 ### Example
 
 ```sh
-curl --request POST 'https://botd.fpapi.io/api/v1/verify \
---data '{"requestId": "<CLIENT_REQUEST_ID", "secretKey": "<YOUR_SECRET>"}'
+curl --request POST 'https://botd.fpapi.io/api/v1/verify' \
+--data '{"requestId": "<CLIENT_REQUEST_ID", "secretKey": "<YOUR_SECRET>"}' -H "Content-Type: application/json"
 ```
 
 ### Response (success scenario)
