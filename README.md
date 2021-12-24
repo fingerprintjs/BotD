@@ -35,7 +35,7 @@
 + Requires adding only 3 lines of JavaScript on your website
 ```
 
-### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
+### 🔩 [Try Demo](https://fingerprintjs.com/products/bot-detection/) - see the live demo running in your browser
 
 BotD runs in the [browser](#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
 
@@ -94,7 +94,7 @@ You need a pair of keys to use BotD:
 - `publicKey` for making bot detection requests from browser. This key can be used publicly on your websites.
 - `secretKey` for verifying bot detection requests on the server. This key must be kept secret.
 
-_Please use the "Generate my API keys" section on our [BotD product page](https://fingerprintjs.com/products/bot-detection/) to generate keys._
+_Please use the "Get Started For Free" button on our [BotD product page](https://fingerprintjs.com/products/bot-detection/) to generate your keys._
 <br/>
 
 ### **Request Limit**
