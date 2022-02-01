@@ -94,7 +94,7 @@ You need a pair of keys to use BotD:
 - `publicKey` for making bot detection requests from browser. This key can be used publicly on your websites.
 - `secretKey` for verifying bot detection requests on the server. This key must be kept secret.
 
-_Please use the "Get Started For Free" button on our [BotD product page](https://fingerprintjs.com/products/bot-detection/) to generate your keys._
+_Please use [the following form](https://fingerprintjs.com/botd#generateKeySection) on our [BotD product page](https://fingerprintjs.com/products/bot-detection/) to generate your keys._
 <br/>
 
 ### **Request Limit**
