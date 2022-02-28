@@ -1,6 +1,6 @@
 import collect from './collector'
 import { version } from '../package.json'
-import { ObfuscationInterface, XorWithIndexObfuscation } from './obfuscation'
+import { ObfuscationInterface, CompressedXorWithIndexObfuscation } from './obfuscation'
 import {
   BotDetectorInterface,
   DetectOptions,
@@ -52,7 +52,7 @@ export default class BotDetector implements BotDetectorInterface {
 
     this.integration = options.mode === 'integration'
     this.mode = options.mode == undefined ? 'requestId' : this.integration ? 'requestId' : options.mode
-    this.obfuscator = new XorWithIndexObfuscation()
+    this.obfuscator = new CompressedXorWithIndexObfuscation()
     this.obfuscationMode =
       options.obfuscationMode == undefined ? (this.integration ? 'requestOnly' : 'all') : options.obfuscationMode
   }

@@ -1,5 +1,6 @@
-import { getProperties } from './misc'
+import { getProperties, re } from './misc'
 
 export default function getDocumentProperties(): string[] {
-  return getProperties(window.document)
+  const raw = getProperties(window.document)
+  return raw.filter((el) => el.match(re) != null)
 }
