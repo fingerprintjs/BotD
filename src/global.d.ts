@@ -17,4 +17,5 @@ interface Navigator {
 interface Window {
   readonly chrome?: unknown
   readonly InstallTrigger?: unknown
+  readonly SharedArrayBuffer?: function
 }

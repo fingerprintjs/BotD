@@ -2,6 +2,8 @@ import typescript from '@rollup/plugin-typescript'
 import jsonPlugin from '@rollup/plugin-json'
 import dtsPlugin from 'rollup-plugin-dts'
 import licensePlugin from 'rollup-plugin-license'
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
 import { join } from 'path'
 
 const inputFile = 'src/index.ts'
@@ -17,7 +19,7 @@ const commonBanner = licensePlugin({
 
 const commonInput = {
   input: inputFile,
-  plugins: [jsonPlugin(), typescript(), commonBanner],
+  plugins: [resolve(), commonjs(), jsonPlugin(), typescript(), commonBanner],
 }
 
 const commonOutput = {

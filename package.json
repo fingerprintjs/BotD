@@ -1,6 +1,6 @@
 {
   "name": "@fpjs-incubator/botd-agent",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
@@ -36,10 +36,13 @@
     "lint:fix": "yarn lint --fix"
   },
   "dependencies": {
+    "fflate": "^0.7.3",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-typescript": "^8.2.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",

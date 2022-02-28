@@ -1,7 +1,8 @@
 import { BotdError, State } from './types'
+import { gzipSync } from 'fflate'
 
 const enum Type {
-  XorWithIndex = 1,
+  CompressedXorWithIndex = 2,
 }
 
 export interface ObfuscationInterface {
@@ -51,18 +52,19 @@ function bufferSourceToBytes(source: BufferSource): Uint8Array {
   return new Uint8Array(source.buffer, source.byteOffset, source.byteLength)
 }
 
-export class XorWithIndexObfuscation implements ObfuscationInterface {
+export class CompressedXorWithIndexObfuscation implements ObfuscationInterface {
   type: Type
   paddingSize: number
 
   constructor() {
-    this.type = Type.XorWithIndex
+    this.type = Type.CompressedXorWithIndex
     this.paddingSize = 0
   }
 
   obfuscate(payload: unknown): ArrayBuffer {
     const payloadBytes = getUTF8Bytes(JSON.stringify(payload))
-    const resultSize = 2 + payloadBytes.length // Type + padding size + padding + payload
+    const compressed = gzipSync(payloadBytes)
+    const resultSize = 2 + compressed.length // Type + padding size + padding + payload
     const result = new ArrayBuffer(resultSize)
     const resultBytes = new Uint8Array(result)
     let resultOffset = 0
@@ -71,8 +73,8 @@ export class XorWithIndexObfuscation implements ObfuscationInterface {
     resultBytes[resultOffset++] = this.paddingSize
     // No padding
 
-    for (let i = 0; i < payloadBytes.length; ++i) {
-      resultBytes[resultOffset++] = payloadBytes[i] ^ i
+    for (let i = 0; i < compressed.length; ++i) {
+      resultBytes[resultOffset++] = compressed[i] ^ i
     }
 
     return resultBytes
