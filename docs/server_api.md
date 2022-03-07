@@ -53,6 +53,7 @@ curl --request POST 'https://botd.fpapi.io/api/v1/verify' \
     },
     "requestId": "<requestId>",
     "ip": "<ipAddress>",
+    "verifyCounter": 1,
     "tag": "<tag>"
 }
 ```
@@ -82,7 +83,20 @@ Safari on macOS.
 
 `ip` - client ip address, e.g. **`82.200.40.10`**.
 
+`verifyCounter` - number of `/verify` calls for the request id. You can use it to prevent [replay-attack](https://github.com/fingerprintjs/BotD/discussions/54).
+
 `tag` - string containing information associated with each request. Should be provided by BotD users in the browser API.
+
+### Probability meaning
+
+We can divide range [0.0 - 1.0] into 4 blocks:
+
+* [0.0, 0.25) - human
+* [0.25, 0.5) - possibly human
+* [0.5, 0.75) - possibly bot
+* [0.75, 1.0] - bot
+
+Then, you can make your decision depends on your use case.
 
 ### Errors
 
