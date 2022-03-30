@@ -83,7 +83,7 @@ Safari on macOS.
 
 `ip` - client ip address, e.g. **`82.200.40.10`**.
 
-`verifyCounter` - number of `/verify` calls for the request id. You can use it to prevent [replay-attack](https://github.com/fingerprintjs/BotD/discussions/54).
+`verifyCounter` - number of `/verify` calls for the `requestId`. You can use it to prevent [replay attacks](https://github.com/fingerprintjs/BotD/discussions/54).
 
 `tag` - string containing information associated with each request. Should be provided by BotD users in the browser API.
 
