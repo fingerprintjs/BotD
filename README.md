@@ -118,6 +118,7 @@ _The free keys are limited to 3M API calls per month and 10 calls per second whi
 ### **Stealth plugins**
 
 - [berstend/puppeteer-extra/packages/puppeteer-extra-plugin-stealth](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth) a plugin for puppeteer-extra to prevent detection.
+- [microlinkhq/browserless](https://github.com/microlinkhq/browserless) is an efficient driver for controlling headless browsers built on top of [puppeteer](https://github.com/puppeteer/puppeteer) developed for scenarios where performance matters.
 - [ultrafunkamsterdam/undetected-chromedriver](https://github.com/ultrafunkamsterdam/undetected-chromedriver) Optimized Selenium Chromedriver patch which does not trigger anti-bot services.
 - [MeiK2333/pyppeteer_stealth](https://github.com/MeiK2333/pyppeteer_stealth) is a stealth plugin for [pyppeteer](https://github.com/miyakogi/pyppeteer)
 
