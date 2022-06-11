@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="https://fingerprintjs.com">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="FingerprintJS" width="312px" />
+  <a href="https://fingerprint.com">
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="Fingerprint" width="312px" />
   </a>
 </p>
 <p align="center">
@@ -35,7 +35,7 @@
 + Requires adding only 3 lines of JavaScript on your website
 ```
 
-### 🔩 [Try Demo](https://fingerprintjs.com/products/bot-detection/) - see the live demo running in your browser
+### 🔩 [Try Demo](https://fingerprint.com/products/bot-detection/) - see the live demo running in your browser
 
 BotD runs in the [browser](#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
 
