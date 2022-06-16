@@ -18,7 +18,7 @@
   "module": "dist/botd.esm.js",
   "types": "dist/botd.d.ts",
   "license": "MIT",
-  "author": "FingerprintJS, Inc (https://fingerprintjs.com)",
+  "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/fingerprintjs/botd.git"
@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/fingerprintjs/botd/issues"
   },
-  "homepage": "https://github.com/fingerprintjs/botd",
+  "homepage": "https://fingerprint.com/products/bot-detection/",
   "files": [
     "dist"
   ],

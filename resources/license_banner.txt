@@ -1,2 +1,2 @@
-FingerprintJS Botd v<%= pkg.version %> - Copyright (c) FingerprintJS, Inc, <%= new Date().getFullYear() %> (https://fingerprintjs.com)
+Fingerprint BotD v<%= pkg.version %> - Copyright (c) FingerprintJS, Inc, <%= new Date().getFullYear() %> (https://fingerprint.com)
 Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
