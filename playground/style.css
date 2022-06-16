@@ -6,6 +6,10 @@ body {
   font-family: sans-serif;
 }
 
+.logo_ref {
+  width: max-content;
+}
+
 .logo {
   width: 300px;
   height: auto;
@@ -156,11 +160,5 @@ h5 {
 
   .output_holder {
     margin: 10px 0 0 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    width: 100%;
   }
 }
