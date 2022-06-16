@@ -1,6 +1,10 @@
 <p align="center">
   <a href="https://fingerprint.com">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="Fingerprint" width="312px" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_white.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_blue.svg">
+      <img alt="Fingerprint" width="312px" src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_orange_blue.svg">
+    </picture>
   </a>
 </p>
 <p align="center">
