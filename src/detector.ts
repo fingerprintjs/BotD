@@ -1,11 +1,15 @@
 import getDetectors from './detection'
 import getSources from './sources'
-import { BotDetectionResult, BotDetectorInterface, BotKind, ComponentDict, State } from './types'
+import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component, ComponentDict, State } from './types'
 
 export default class BotDetector implements BotDetectorInterface {
-  private components: ComponentDict = {}
+  private components: ComponentDict | undefined = undefined
 
   public detect(): BotDetectionResult {
+    if (this.components == null) {
+      throw new Error("BotDetector.detect can't be called before BotDetector.collect")
+    }
+
     const components = this.components
     const detectors = getDetectors()
 
@@ -13,7 +17,7 @@ export default class BotDetector implements BotDetectorInterface {
       const detectorRes = detector(components)
 
       if (typeof detectorRes === 'string') {
-        return { bot: true, botKind: BotKind[detectorRes] }
+        return { bot: true, botKind: detectorRes }
       } else if (detectorRes) {
         return { bot: true, botKind: BotKind.Unrecognized }
       }
@@ -24,32 +28,34 @@ export default class BotDetector implements BotDetectorInterface {
 
   public async collect(): Promise<void> {
     const sources = getSources()
-    const components: ComponentDict = {}
+    const components = {} as ComponentDict
 
-    let k: keyof typeof sources
+    const keys = Object.keys(sources) as (keyof typeof sources)[]
 
-    for (k in sources) {
-      try {
-        if (Object.prototype.hasOwnProperty.call(sources, k)) {
-          components[k] = {
+    await Promise.all(
+      keys.map(async (key) => {
+        const source = sources[key]
+
+        try {
+          components[key] = {
+            value: await source(),
             state: State.Success,
-            value: await sources[k](),
+          } as Component<any> as any
+        } catch (error) {
+          if (error instanceof BotdError) {
+            components[key] = {
+              state: error.state,
+              error: `${error.name}: ${error.message}`,
+            }
+          } else {
+            components[key] = {
+              state: State.UnexpectedBehaviour,
+              error: error instanceof Error ? `${error.name}: ${error.message}` : String(error),
+            }
           }
         }
-      } catch (error) {
-        if (error instanceof Error) {
-          components[k] = {
-            state: State.UnexpectedBehaviour,
-            value: `${error.name}: ${error.message}`,
-          }
-        } else {
-          components[k] = {
-            state: State.UnexpectedBehaviour,
-            value: String(error),
-          }
-        }
-      }
-    }
+      }),
+    )
 
     this.components = components
   }

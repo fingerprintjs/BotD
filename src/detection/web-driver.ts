@@ -1,10 +1,9 @@
 import { SignalKind } from '../signals'
-import { ComponentDict, DetectionResponse } from '../types'
+import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
 
-export function detectWebDriver(components: ComponentDict): DetectionResponse {
-  if (components[SignalKind.WebDriver].value) {
-    // BotKind.HeadlessChrome
-    return true
+export function detectWebDriver({ [SignalKind.WebDriver]: webDriver }: ComponentDict): DetectionResponse {
+  if (webDriver.state === State.Success && webDriver.value) {
+    return BotKind.HeadlessChrome
   }
   return false
 }
