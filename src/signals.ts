@@ -12,4 +12,5 @@ export enum SignalKind {
   WebGL = 'webgl',
   Permissions = 'permissions',
   ErrorTrace = 'error_trace',
+  ElectronProcessProps = 'electron_process_props',
 }

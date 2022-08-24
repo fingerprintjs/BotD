@@ -26,6 +26,7 @@ export enum BotKind {
   PhantomJS = 'phantomjs',
   Nightmare = 'nightmare',
   Selenium = 'selenium',
+  Electron = 'electron',
 }
 
 export type DetectionResponse = boolean | BotKind

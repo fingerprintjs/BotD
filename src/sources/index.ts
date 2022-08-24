@@ -1,5 +1,6 @@
 import { SignalKind } from '../signals'
 import getBrowserKind from './browser-kind'
+import getElectronProcessProps from './electron'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getLanguages from './languages'
@@ -29,5 +30,6 @@ export default function getSources() {
     [SignalKind.WebGL]: getWebGL,
     [SignalKind.Permissions]: getPermissions,
     [SignalKind.ErrorTrace]: getErrorTrace,
+    [SignalKind.ElectronProcessProps]: getElectronProcessProps,
   }
 }

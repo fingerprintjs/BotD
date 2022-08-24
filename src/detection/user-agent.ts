@@ -5,5 +5,6 @@ export function detectUserAgent({ [SignalKind.UserAgent]: userAgent }: Component
   if (userAgent.state !== State.Success) return false
   if (/PhantomJS/i.test(userAgent.value)) return BotKind.PhantomJS
   if (/HeadlessChrome/i.test(userAgent.value)) return BotKind.HeadlessChrome
+  if (/Electron/i.test(userAgent.value)) return BotKind.Electron
   return false
 }

@@ -1,3 +1,4 @@
+import { detectElectronProcessProps } from './electron'
 import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
@@ -23,5 +24,6 @@ export default function getDetectors() {
     detectWebGL,
     detectPermissions,
     detectErrorTrace,
+    detectElectronProcessProps,
   ]
 }

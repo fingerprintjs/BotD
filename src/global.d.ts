@@ -22,6 +22,7 @@ interface Window {
   readonly _phantom?: function
   readonly phantom?: function
   readonly __nightmare?: unknown
+  readonly process?: NodeJS.Process & { type?: string }
 }
 
 interface Document {
