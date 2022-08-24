@@ -1,5 +1,6 @@
 import { SignalKind } from '../signals'
 import getBrowserKind from './browser-kind'
+import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getLanguages from './languages'
 import getNightmareWindowProps from './nightmare'
@@ -27,5 +28,6 @@ export default function getSources() {
     [SignalKind.Languages]: getLanguages,
     [SignalKind.WebGL]: getWebGL,
     [SignalKind.Permissions]: getPermissions,
+    [SignalKind.ErrorTrace]: getErrorTrace,
   }
 }

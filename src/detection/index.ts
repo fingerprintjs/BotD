@@ -1,3 +1,4 @@
+import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
 import { detectNightmare } from './nightmare'
@@ -21,5 +22,6 @@ export default function getDetectors() {
     detectEvalLengthInconsistency,
     detectWebGL,
     detectPermissions,
+    detectErrorTrace,
   ]
 }

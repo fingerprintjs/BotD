@@ -11,4 +11,5 @@ export enum SignalKind {
   Languages = 'languages',
   WebGL = 'webgl',
   Permissions = 'permissions',
+  ErrorTrace = 'error_trace',
 }

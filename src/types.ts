@@ -21,8 +21,8 @@ export enum State {
 }
 
 export enum BotKind {
-  HeadlessChrome = 'headless_chrome',
   Unrecognized = 'unrecognized',
+  HeadlessChrome = 'headless_chrome',
   PhantomJS = 'phantomjs',
   Nightmare = 'nightmare',
   Selenium = 'selenium',
