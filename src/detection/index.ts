@@ -7,6 +7,7 @@ import { detectNightmare } from './nightmare'
 import { detectPermissions } from './permissions'
 import { detectPhantom } from './phantom'
 import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
+import { detectRTT } from './rtt'
 import { detectSelenium } from './selenium'
 import { detectUserAgent } from './user-agent'
 import { detectWebDriver } from './web-driver'
@@ -27,5 +28,6 @@ export default function getDetectors() {
     detectErrorTrace,
     detectElectronProcessProps,
     detectAppVersion,
+    detectRTT,
   ]
 }

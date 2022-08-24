@@ -9,6 +9,7 @@ import getNightmareWindowProps from './nightmare'
 import getPermissions from './permissions'
 import getPhantomWindowProps from './phantom'
 import getPluginsLength from './plugins-length'
+import getRTT from './rtt'
 import getSeleniumDocumentProps from './selenium'
 import getUserAgent from './user-agent'
 import hasUserAgentData from './user-agent-data'
@@ -33,5 +34,6 @@ export default function getSources() {
     [SignalKind.ErrorTrace]: getErrorTrace,
     [SignalKind.ElectronProcessProps]: getElectronProcessProps,
     [SignalKind.AppVersion]: getAppVersion,
+    [SignalKind.RTT]: getRTT,
   }
 }

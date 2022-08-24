@@ -14,4 +14,5 @@ export enum SignalKind {
   ErrorTrace = 'error_trace',
   ElectronProcessProps = 'electron_process_props',
   AppVersion = 'app_version',
+  RTT = 'rtt',
 }
