@@ -1,3 +1,4 @@
+import { detectAppVersion } from './app-version'
 import { detectElectronProcessProps } from './electron'
 import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
@@ -25,5 +26,6 @@ export default function getDetectors() {
     detectPermissions,
     detectErrorTrace,
     detectElectronProcessProps,
+    detectAppVersion,
   ]
 }

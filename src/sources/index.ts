@@ -1,4 +1,5 @@
 import { SignalKind } from '../signals'
+import getAppVersion from './app-version'
 import getBrowserKind from './browser-kind'
 import getElectronProcessProps from './electron'
 import getErrorTrace from './error-trace'
@@ -31,5 +32,6 @@ export default function getSources() {
     [SignalKind.Permissions]: getPermissions,
     [SignalKind.ErrorTrace]: getErrorTrace,
     [SignalKind.ElectronProcessProps]: getElectronProcessProps,
+    [SignalKind.AppVersion]: getAppVersion,
   }
 }
