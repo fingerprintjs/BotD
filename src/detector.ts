@@ -19,7 +19,7 @@ export default class BotDetector implements BotDetectorInterface {
       if (typeof detectorRes === 'string') {
         return { bot: true, botKind: detectorRes }
       } else if (detectorRes) {
-        return { bot: true, botKind: BotKind.Unrecognized }
+        return { bot: true, botKind: BotKind.Unknown }
       }
     }
 

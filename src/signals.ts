@@ -1,7 +1,7 @@
 export enum SignalKind {
   WebDriver = 'web_driver',
   EvalLength = 'eval_length',
-  HasUserAgentData = 'has_user_agent_data',
+  UserAgentData = 'user_agent_data',
   UserAgent = 'user_agent',
   BrowserKind = 'browser_kind',
   PluginsLength = 'plugins_length',
@@ -16,4 +16,9 @@ export enum SignalKind {
   WindowClose = 'window_close',
   Process = 'process',
   DocumentProps = 'document_props',
+  DocumentAttributes = 'document_attributes',
+  PluginsArray = 'plugins_array',
+  FunctionBind = 'function_bind',
+  WindowSize = 'window_size',
+  WindowExternal = 'window_external',
 }

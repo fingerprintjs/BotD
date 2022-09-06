@@ -5,5 +5,6 @@ export function detectAppVersion({ [SignalKind.AppVersion]: appVersion }: Compon
   if (appVersion.state !== State.Success) return false
   if (/headless/i.test(appVersion.value)) return BotKind.HeadlessChrome
   if (/electron/i.test(appVersion.value)) return BotKind.Electron
+  if (/slimerjs/i.test(appVersion.value)) return BotKind.SlimerJS
   return false
 }

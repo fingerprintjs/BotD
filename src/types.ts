@@ -21,12 +21,17 @@ export enum State {
 }
 
 export enum BotKind {
-  Unrecognized = 'unrecognized',
+  Unknown = 'unknown',
   HeadlessChrome = 'headless_chrome',
   PhantomJS = 'phantomjs',
   Nightmare = 'nightmare',
   Selenium = 'selenium',
   Electron = 'electron',
+  NodeJS = 'nodejs',
+  Rhino = 'rhino',
+  CouchJS = 'couchjs',
+  Sequentum = 'sequentum',
+  SlimerJS = 'slimerjs',
 }
 
 export type DetectionResponse = boolean | BotKind
