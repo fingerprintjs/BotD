@@ -14,28 +14,30 @@ import { detectUserAgent } from './user-agent'
 import { detectWebDriver } from './web-driver'
 import { detectWebGL } from './webgl'
 import { detectWindowClose } from './window-close'
+import { detectWindowExternal } from './window-external'
 import { detectWindowProperties } from './window-properties'
 import { detectWindowSize } from './window-size'
 
 export default function getDetectors() {
   return [
-    detectUserAgent,
-    detectPluginsLengthInconsistency,
-    detectLanguagesLengthInconsistency,
-    detectWebDriver,
-    detectEvalLengthInconsistency,
-    detectWebGL,
-    detectPermissions,
-    detectErrorTrace,
     detectAppVersion,
-    detectRTT,
-    detectWindowProperties,
-    detectWindowClose,
-    detectProcess,
-    detectDocumentProperties,
-    detectPluginsArray,
-    detectFunctionBind,
-    detectWindowSize,
     detectDocumentAttributes,
+    detectDocumentProperties,
+    detectErrorTrace,
+    detectEvalLengthInconsistency,
+    detectFunctionBind,
+    detectLanguagesLengthInconsistency,
+    detectPermissions,
+    detectPluginsArray,
+    detectPluginsLengthInconsistency,
+    detectProcess,
+    detectRTT,
+    detectUserAgent,
+    detectWebDriver,
+    detectWebGL,
+    detectWindowClose,
+    detectWindowExternal,
+    detectWindowProperties,
+    detectWindowSize,
   ]
 }
