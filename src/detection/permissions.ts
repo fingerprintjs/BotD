@@ -5,5 +5,4 @@ export function detectPermissions({ [SignalKind.Permissions]: permissions }: Com
   if (permissions.state === State.Success && permissions.value) {
     return BotKind.HeadlessChrome
   }
-  return false
 }

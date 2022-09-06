@@ -8,6 +8,4 @@ export function detectWebGL({ [SignalKind.WebGL]: webGL }: ComponentDict): Detec
       return BotKind.HeadlessChrome
     }
   }
-
-  return false
 }

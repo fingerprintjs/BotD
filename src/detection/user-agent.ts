@@ -7,5 +7,4 @@ export function detectUserAgent({ [SignalKind.UserAgent]: userAgent }: Component
   if (/Headless/i.test(userAgent.value)) return BotKind.HeadlessChrome
   if (/Electron/i.test(userAgent.value)) return BotKind.Electron
   if (/slimerjs/i.test(userAgent.value)) return BotKind.SlimerJS
-  return false
 }

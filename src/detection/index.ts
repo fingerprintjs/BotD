@@ -18,6 +18,7 @@ import { detectWindowExternal } from './window-external'
 import { detectWindowProperties } from './window-properties'
 import { detectWindowSize } from './window-size'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function getDetectors() {
   return [
     detectAppVersion,

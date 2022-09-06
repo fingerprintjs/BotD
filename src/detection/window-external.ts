@@ -6,5 +6,4 @@ export function detectWindowExternal({
 }: ComponentDict): DetectionResponse {
   if (windowExternal.state !== State.Success) return false
   if (/Sequentum/i.test(windowExternal.value)) return BotKind.Sequentum
-  return false
 }

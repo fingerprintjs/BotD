@@ -13,5 +13,4 @@ export function detectWindowProperties({ [SignalKind.WindowProps]: windowProps }
   if (includes(windowProps.value, 'emit')) return BotKind.CouchJS
   if (includes(windowProps.value, 'spawn')) return BotKind.Rhino
   // if (includes(windowProps.value, 'Buffer')) return BotKind.NodeJS
-  return false
 }

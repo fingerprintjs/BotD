@@ -14,5 +14,4 @@ export function detectEvalLengthInconsistency({
       (length === 33 && ![BrowserKind.Chrome, BrowserKind.Opera].includes(browser))
     )
   }
-  return false
 }

@@ -9,5 +9,4 @@ export function detectDocumentAttributes({
   if (includes(documentAttributes.value, 'selenium', 'webdriver', 'driver')) {
     return BotKind.Selenium
   }
-  return false
 }

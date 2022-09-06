@@ -34,7 +34,7 @@ export enum BotKind {
   SlimerJS = 'slimerjs',
 }
 
-export type DetectionResponse = boolean | BotKind
+export type DetectionResponse = boolean | BotKind | undefined
 
 export type Component<T> =
   | {

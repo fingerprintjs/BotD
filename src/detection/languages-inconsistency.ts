@@ -7,5 +7,4 @@ export function detectLanguagesLengthInconsistency({
   if (languages.state === State.Success && languages.value.length === 0) {
     return BotKind.HeadlessChrome
   }
-  return false
 }

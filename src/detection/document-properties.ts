@@ -36,5 +36,4 @@ export function detectDocumentProperties({
   ) {
     return BotKind.Selenium
   }
-  return false
 }
