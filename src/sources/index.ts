@@ -1,6 +1,7 @@
 import { SignalKind } from '../signals'
 import getAppVersion from './app-version'
 import getBrowserKind from './browser-kind'
+import getDocumentProperties from './document-properties'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getLanguages from './languages'
@@ -8,7 +9,6 @@ import getPermissions from './permissions'
 import getPluginsLength from './plugins-length'
 import getProcess from './process'
 import getRTT from './rtt'
-import getSeleniumDocumentProps from './selenium'
 import getUserAgent from './user-agent'
 import hasUserAgentData from './user-agent-data'
 import { getWebDriver } from './web-driver'
@@ -20,7 +20,6 @@ import getWindowProperties from './window-properties'
 export default function getSources() {
   return {
     [SignalKind.WebDriver]: getWebDriver,
-    [SignalKind.SeleniumDocumentProps]: getSeleniumDocumentProps,
     [SignalKind.EvalLength]: getEvalLength,
     [SignalKind.HasUserAgentData]: hasUserAgentData,
     [SignalKind.UserAgent]: getUserAgent,
@@ -35,5 +34,6 @@ export default function getSources() {
     [SignalKind.WindowProps]: getWindowProperties,
     [SignalKind.WindowClose]: getWindowClose,
     [SignalKind.Process]: getProcess,
+    [SignalKind.DocumentProps]: getDocumentProperties,
   }
 }

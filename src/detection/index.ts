@@ -1,4 +1,5 @@
 import { detectAppVersion } from './app-version'
+import { detectDocumentProperties } from './document-properties'
 import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
@@ -6,7 +7,6 @@ import { detectPermissions } from './permissions'
 import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
 import { detectProcess } from './process'
 import { detectRTT } from './rtt'
-import { detectSelenium } from './selenium'
 import { detectUserAgent } from './user-agent'
 import { detectWebDriver } from './web-driver'
 import { detectWebGL } from './webgl'
@@ -18,7 +18,6 @@ export default function getDetectors() {
     detectPluginsLengthInconsistency,
     detectLanguagesLengthInconsistency,
     detectWebDriver,
-    detectSelenium,
     detectEvalLengthInconsistency,
     detectWebGL,
     detectPermissions,
@@ -27,5 +26,6 @@ export default function getDetectors() {
     detectRTT,
     detectWindowProperties,
     detectProcess,
+    detectDocumentProperties,
   ]
 }
