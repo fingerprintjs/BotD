@@ -5,9 +5,7 @@ import getElectronProcessProps from './electron'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getLanguages from './languages'
-import getNightmareWindowProps from './nightmare'
 import getPermissions from './permissions'
-import getPhantomWindowProps from './phantom'
 import getPluginsLength from './plugins-length'
 import getRTT from './rtt'
 import getSeleniumDocumentProps from './selenium'
@@ -15,13 +13,12 @@ import getUserAgent from './user-agent'
 import hasUserAgentData from './user-agent-data'
 import { getWebDriver } from './web-driver'
 import getWebGL from './webgl'
+import getWindowProperties from './window-properties'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function getSources() {
   return {
     [SignalKind.WebDriver]: getWebDriver,
-    [SignalKind.PhantomWindowProps]: getPhantomWindowProps,
-    [SignalKind.NightmareWindowProps]: getNightmareWindowProps,
     [SignalKind.SeleniumDocumentProps]: getSeleniumDocumentProps,
     [SignalKind.EvalLength]: getEvalLength,
     [SignalKind.HasUserAgentData]: hasUserAgentData,
@@ -35,5 +32,6 @@ export default function getSources() {
     [SignalKind.ElectronProcessProps]: getElectronProcessProps,
     [SignalKind.AppVersion]: getAppVersion,
     [SignalKind.RTT]: getRTT,
+    [SignalKind.WindowProps]: getWindowProperties,
   }
 }

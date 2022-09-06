@@ -3,24 +3,21 @@ import { detectElectronProcessProps } from './electron'
 import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
-import { detectNightmare } from './nightmare'
 import { detectPermissions } from './permissions'
-import { detectPhantom } from './phantom'
 import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
 import { detectRTT } from './rtt'
 import { detectSelenium } from './selenium'
 import { detectUserAgent } from './user-agent'
 import { detectWebDriver } from './web-driver'
 import { detectWebGL } from './webgl'
+import { detectWindowProperties } from './window-properties'
 
 export default function getDetectors() {
   return [
     detectUserAgent,
     detectPluginsLengthInconsistency,
     detectLanguagesLengthInconsistency,
-    detectPhantom,
     detectWebDriver,
-    detectNightmare,
     detectSelenium,
     detectEvalLengthInconsistency,
     detectWebGL,
@@ -29,5 +26,6 @@ export default function getDetectors() {
     detectElectronProcessProps,
     detectAppVersion,
     detectRTT,
+    detectWindowProperties,
   ]
 }
