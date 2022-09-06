@@ -5,13 +5,21 @@ import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component
 export default class BotDetector implements BotDetectorInterface {
   private components: ComponentDict | undefined = undefined
 
+  protected getDetectors() {
+    return getDetectors()
+  }
+
+  protected getSources() {
+    return getSources()
+  }
+
   public detect(): BotDetectionResult {
     if (this.components == null) {
       throw new Error("BotDetector.detect can't be called before BotDetector.collect")
     }
 
     const components = this.components
-    const detectors = getDetectors()
+    const detectors = this.getDetectors()
 
     for (const detector of detectors) {
       const detectorRes = detector(components)
@@ -27,7 +35,7 @@ export default class BotDetector implements BotDetectorInterface {
   }
 
   public async collect(): Promise<void> {
-    const sources = getSources()
+    const sources = this.getSources()
     const components = {} as ComponentDict
 
     const keys = Object.keys(sources) as (keyof typeof sources)[]
