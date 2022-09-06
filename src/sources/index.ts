@@ -1,12 +1,12 @@
 import { SignalKind } from '../signals'
 import getAppVersion from './app-version'
 import getBrowserKind from './browser-kind'
-import getElectronProcessProps from './electron'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getLanguages from './languages'
 import getPermissions from './permissions'
 import getPluginsLength from './plugins-length'
+import getProcess from './process'
 import getRTT from './rtt'
 import getSeleniumDocumentProps from './selenium'
 import getUserAgent from './user-agent'
@@ -30,10 +30,10 @@ export default function getSources() {
     [SignalKind.WebGL]: getWebGL,
     [SignalKind.Permissions]: getPermissions,
     [SignalKind.ErrorTrace]: getErrorTrace,
-    [SignalKind.ElectronProcessProps]: getElectronProcessProps,
     [SignalKind.AppVersion]: getAppVersion,
     [SignalKind.RTT]: getRTT,
     [SignalKind.WindowProps]: getWindowProperties,
     [SignalKind.WindowClose]: getWindowClose,
+    [SignalKind.Process]: getProcess,
   }
 }

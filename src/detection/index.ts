@@ -1,10 +1,10 @@
 import { detectAppVersion } from './app-version'
-import { detectElectronProcessProps } from './electron'
 import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
 import { detectPermissions } from './permissions'
 import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
+import { detectProcess } from './process'
 import { detectRTT } from './rtt'
 import { detectSelenium } from './selenium'
 import { detectUserAgent } from './user-agent'
@@ -23,9 +23,9 @@ export default function getDetectors() {
     detectWebGL,
     detectPermissions,
     detectErrorTrace,
-    detectElectronProcessProps,
     detectAppVersion,
     detectRTT,
     detectWindowProperties,
+    detectProcess,
   ]
 }

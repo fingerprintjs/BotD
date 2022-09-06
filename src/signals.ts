@@ -15,4 +15,5 @@ export enum SignalKind {
   RTT = 'rtt',
   WindowProps = 'window_props',
   WindowClose = 'window_close',
+  Process = 'process',
 }
