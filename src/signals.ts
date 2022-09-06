@@ -1,6 +1,5 @@
 export enum SignalKind {
   WebDriver = 'web_driver',
-  WindowProps = 'window_props',
   SeleniumDocumentProps = 'selenium_props',
   EvalLength = 'eval_length',
   HasUserAgentData = 'has_user_agent_data',
@@ -14,4 +13,6 @@ export enum SignalKind {
   ElectronProcessProps = 'electron_process_props',
   AppVersion = 'app_version',
   RTT = 'rtt',
+  WindowProps = 'window_props',
+  WindowClose = 'window_close',
 }
