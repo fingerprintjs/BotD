@@ -24,9 +24,3 @@ interface Window {
   readonly __nightmare?: unknown
   readonly process?: NodeJS.Process & { type?: string }
 }
-
-interface Document {
-  readonly __selenium_unwrapped?: unknown
-  readonly __webdriver_evaluate?: unknown
-  readonly __driver_evaluate?: unknown
-}

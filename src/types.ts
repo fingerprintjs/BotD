@@ -1,5 +1,8 @@
 import getSources from './sources'
 
+/**
+ * Final output of bot detection.
+ */
 export type BotDetectionResult =
   | {
       bot: true
@@ -9,6 +12,12 @@ export type BotDetectionResult =
       bot: false
     }
 
+/**
+ * Enum for the source state.
+ *
+ * @readonly
+ * @enum {number}
+ */
 export enum State {
   Unexpected = -100,
   Undefined = -1,
@@ -20,6 +29,12 @@ export enum State {
   ObfuscationError = 105,
 }
 
+/**
+ * Enum for types of bots.
+ *
+ * @readonly
+ * @enum {string}
+ */
 export enum BotKind {
   Unknown = 'unknown',
   HeadlessChrome = 'headless_chrome',
@@ -36,6 +51,9 @@ export enum BotKind {
 
 export type DetectionResponse = boolean | BotKind | undefined
 
+/**
+ * Represents a component with state and value.
+ */
 export type Component<T> =
   | {
       state: State.Success
@@ -46,19 +64,35 @@ export type Component<T> =
       error: string
     }
 
+/**
+ * Dictionary of default sources and their respective return types.
+ */
+export type DefaultSourcesDict = ReturnType<typeof getSources>
+
+/**
+ * Represents a single signal response type.
+ */
 export type SignalType<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
-export type ComponentDict<T = ReturnType<typeof getSources>> = {
+/**
+ * Dictionary of components.
+ */
+export type ComponentDict<T extends DefaultSourcesDict = DefaultSourcesDict> = {
   [K in keyof T]: Component<SignalType<T[K]>>
 }
 
+/**
+ * Interface for classes that represent a bot detector.
+ *
+ * @interface BotDetectorInterface
+ */
 export interface BotDetectorInterface {
   detect(): BotDetectionResult
   collect(): Promise<void>
 }
 
 /**
- * Represents the bot detection error.
+ * Bot detection error.
  */
 export class BotdError extends Error {
   state: Exclude<State, State.Success>
