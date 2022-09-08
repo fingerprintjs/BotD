@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <link rel="preconnect" href="https://openfpcdn.io">
-  <link rel="preconnect" href="https://botd.fpapi.io">
-  <link rel="icon" href="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <title>BotD Playground</title>
 </head>
 <body>
 <div class="content">
   <a class="logo_ref" href="https://fingerprint.com/">
-    <img class="logo" src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_orange_blue.svg" alt="Fingerprint">
+    <img class="logo" src="/fp_logo_orange_blue.svg" alt="Fingerprint">
   </a>
   <h1>BotD Playground</h1>
   <h2 id="status">Loading...</h2>
   <table class="result-table" id="result-table"></table>
   <form class="url_form">
-    <button id="button" type="button" onclick="run()">Start detect</button>
+    <button id="detect-button" type="button">Start detect</button>
   </form>
   <div class="output_holder">
     <section id="result_section" class="output">
@@ -35,58 +33,6 @@
       <pre class="output_div" id="error"></pre>
     </section>
   </div>
-  <!-- <script>
-    async function run() {
-      let t0 = performance.now();
-
-      document.getElementById("status").textContent = "Loading...";
-      document.getElementById("result-table").innerHTML = "";
-      document.getElementById("error_section").style.display = "none"
-      document.getElementById("result_section").style.display = "none"
-
-      try {
-        // const botdPromise = await import('../dist/botd.esm.js')
-        const botdPromise = await import("https://openfpcdn.io/botd/v0.1");
-        const botd = await botdPromise.load({ publicKey: "kd9aAM09vW3kX3TZFHC" });
-        const detectResponse = await botd.detect();
-
-        // FOR SECURITY REASONS CALL /verify METHOD ON YOUR SERVER!
-        const botdServerAPI = "https://botd.fpapi.io/api/v1"
-        const verifyBody = JSON.stringify({
-          "secretKey": "3JrB1QEWeEszVKwHz5I",
-          "requestId": detectResponse.requestId
-        })
-        const result = await fetch(`${botdServerAPI}/verify`, {
-          body: verifyBody,
-          method: "POST"
-        })
-          .then(response => response.json())
-
-        let time = performance.now() - t0;
-
-        document.getElementById("error_section").style.display = "none"
-        document.getElementById("result_section").style.display = "block"
-        document.getElementById("perf").textContent = botd.performance + " ms";
-        document.getElementById("sources").textContent = JSON.stringify(botd.components, null, 4);
-        document.getElementById("result").textContent = JSON.stringify(result, null, 4);
-        document.getElementById("time").textContent = time.toFixed(0) + " ms";
-        document.getElementById("status").textContent = "Result:";
-        document.getElementById("result-table").innerHTML = [...Object.entries(result.bot), ["vm", result.vm]].map(([key, value]) => {
-          let style = value.status === "processed" ?
-            value.probability > 0 ? { class: "green", innerHTML: `<b>detected</b> (probability ${value.probability.toFixed(2)})` }
-              : { class: "", innerHTML: "not detected" }
-            : { class: "red", innerHTML: `<b>${value.status}</b>` };
-          return `<tr><td style="width: 25%">${key}</td><td class="${style.class}">${style.innerHTML}</td><td>${value.type || ""}</td></tr>`;
-        }).join("");
-      } catch (e) {
-        document.getElementById("result_section").style.display = "none"
-        document.getElementById("error_section").style.display = "block"
-        document.getElementById("status").textContent = "Error!";
-        document.getElementById("error").textContent = JSON.stringify(e, null, 4);
-      }
-    }
-    run()
-  </script> -->
 </div>
 </body>
 </html>

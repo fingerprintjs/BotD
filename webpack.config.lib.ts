@@ -4,7 +4,7 @@ import { merge } from 'webpack-merge'
 
 const INCLUDE = resolve(__dirname, 'src')
 
-const baseConfig: Configuration = {
+const baseConfig = (tsConfigPath: string): Configuration => ({
   mode: 'production',
   target: 'web',
   devtool: 'hidden-source-map',
@@ -13,6 +13,8 @@ const baseConfig: Configuration = {
 
   output: {
     path: resolve(__dirname, 'build'),
+    // libraryTarget: 'commonjs',
+    // globalObject: 'this',
   },
 
   module: {
@@ -23,7 +25,7 @@ const baseConfig: Configuration = {
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
-          configFile: resolve(__dirname, 'tsconfig.lib.json'),
+          configFile: tsConfigPath,
         },
       },
     ],
@@ -33,21 +35,24 @@ const baseConfig: Configuration = {
     modules: ['node_modules'],
     extensions: ['.js', '.ts', '.json'],
   },
-}
+})
 
-const cjsConfig = merge(baseConfig, {
+const cjsConfig = merge(baseConfig(resolve(__dirname, 'tsconfig.lib.json')), {
   output: {
     filename: '[name].cjs.js',
+    libraryTarget: 'commonjs',
   },
 } as Configuration)
 
-const esmConfig = merge(baseConfig, {
+const esmConfig = merge(baseConfig(resolve(__dirname, 'tsconfig.lib.esm.json')), {
   experiments: {
     outputModule: true,
   },
 
   output: {
     filename: '[name].esm.js',
+    module: true,
+    libraryTarget: 'module',
   },
 } as Configuration)
 

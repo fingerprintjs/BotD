@@ -14,7 +14,7 @@
     "device detection",
     "privacy"
   ],
-  "main": "build/main.cjs.js",
+  "main": "build/main.esm.js",
   "module": "build/main.esm.js",
   "types": "build/index.d.ts",
   "license": "MIT",
@@ -52,6 +52,7 @@
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "eslint": "^7.24.0",

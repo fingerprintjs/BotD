@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { Configuration } from 'webpack'
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 const isDev = process.env.DEV === '1'
 
@@ -36,6 +37,9 @@ const config: Configuration & DevServerConfiguration = {
     new HtmlWebpackPlugin({
       template: `playground/index.html`,
     }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'static' }],
+    }),
   ],
 
   resolve: {
@@ -45,7 +49,7 @@ const config: Configuration & DevServerConfiguration = {
 
   devServer: {
     compress: !isDev,
-    port: 3001,
+    port: 3000,
   },
 
   performance: {
