@@ -13,7 +13,6 @@ export enum SignalKind {
   AppVersion = "app_version",
   RTT = "rtt",
   WindowProps = "window_props",
-  WindowClose = "window_close",
   Process = "process",
   DocumentProps = "document_props",
   DocumentAttributes = "document_attributes",

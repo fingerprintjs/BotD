@@ -16,7 +16,6 @@ import getUserAgent from "./user-agent";
 import getUserAgentData from "./user-agent-data";
 import { getWebDriver } from "./web-driver";
 import getWebGL from "./webgl";
-import getWindowClose from "./window-close";
 import getWindowExternal from "./window-external";
 import getWindowProperties from "./window-properties";
 import getWindowSize from "./window-size";
@@ -41,7 +40,6 @@ export default function getSources() {
     [SignalKind.UserAgentData]: getUserAgentData,
     [SignalKind.WebDriver]: getWebDriver,
     [SignalKind.WebGL]: getWebGL,
-    [SignalKind.WindowClose]: getWindowClose,
     [SignalKind.WindowExternal]: getWindowExternal,
     [SignalKind.WindowProps]: getWindowProperties,
     [SignalKind.WindowSize]: getWindowSize,

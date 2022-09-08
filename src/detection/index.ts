@@ -13,7 +13,6 @@ import { detectRTT } from "./rtt";
 import { detectUserAgent } from "./user-agent";
 import { detectWebDriver } from "./web-driver";
 import { detectWebGL } from "./webgl";
-import { detectWindowClose } from "./window-close";
 import { detectWindowExternal } from "./window-external";
 import { detectWindowProperties } from "./window-properties";
 import { detectWindowSize } from "./window-size";
@@ -36,7 +35,6 @@ export default function getDetectors() {
     detectUserAgent,
     detectWebDriver,
     detectWebGL,
-    detectWindowClose,
     detectWindowExternal,
     detectWindowProperties,
     detectWindowSize,
