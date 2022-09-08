@@ -1,8 +1,8 @@
-import { BotdError, State } from '../types'
+import { BotdError, State } from "../types";
 
-export default function getWindowExternal() {
+export default function getWindowExternal(): string {
   if (window.external === undefined) {
-    throw new BotdError(State.Undefined, 'window.external is undefined')
+    throw new BotdError(State.Undefined, "window.external is undefined");
   }
-  return window.external.toString()
+  return window.external.toString();
 }

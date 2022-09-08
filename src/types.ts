@@ -1,16 +1,16 @@
-import getSources from './sources'
+import getSources from "./sources";
 
 /**
  * Final output of bot detection.
  */
 export type BotDetectionResult =
   | {
-      bot: true
-      botKind: BotKind
+      bot: true;
+      botKind: BotKind;
     }
   | {
-      bot: false
-    }
+      bot: false;
+    };
 
 /**
  * Enum for the source state.
@@ -36,50 +36,52 @@ export enum State {
  * @enum {string}
  */
 export enum BotKind {
-  Unknown = 'unknown',
-  HeadlessChrome = 'headless_chrome',
-  PhantomJS = 'phantomjs',
-  Nightmare = 'nightmare',
-  Selenium = 'selenium',
-  Electron = 'electron',
-  NodeJS = 'nodejs',
-  Rhino = 'rhino',
-  CouchJS = 'couchjs',
-  Sequentum = 'sequentum',
-  SlimerJS = 'slimerjs',
+  Unknown = "unknown",
+  HeadlessChrome = "headless_chrome",
+  PhantomJS = "phantomjs",
+  Nightmare = "nightmare",
+  Selenium = "selenium",
+  Electron = "electron",
+  NodeJS = "nodejs",
+  Rhino = "rhino",
+  CouchJS = "couchjs",
+  Sequentum = "sequentum",
+  SlimerJS = "slimerjs",
 }
 
-export type DetectionResponse = boolean | BotKind | undefined
+export type DetectionResponse = boolean | BotKind | undefined;
 
 /**
  * Represents a component with state and value.
  */
 export type Component<T> =
   | {
-      state: State.Success
-      value: T
+      state: State.Success;
+      value: T;
     }
   | {
-      state: Exclude<State, State.Success>
-      error: string
-    }
+      state: Exclude<State, State.Success>;
+      error: string;
+    };
 
 /**
  * Dictionary of default sources and their respective return types.
  */
-export type DefaultSourcesDict = ReturnType<typeof getSources>
+export type DefaultSourcesDict = ReturnType<typeof getSources>;
 
 /**
  * Represents a single signal response type.
  */
-export type SignalType<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
+export type SignalType<T> = T extends (...args: any[]) => any
+  ? Awaited<ReturnType<T>>
+  : T;
 
 /**
  * Dictionary of components.
  */
 export type ComponentDict<T extends DefaultSourcesDict = DefaultSourcesDict> = {
-  [K in keyof T]: Component<SignalType<T[K]>>
-}
+  [K in keyof T]: Component<SignalType<T[K]>>;
+};
 
 /**
  * Interface for classes that represent a bot detector.
@@ -87,15 +89,15 @@ export type ComponentDict<T extends DefaultSourcesDict = DefaultSourcesDict> = {
  * @interface BotDetectorInterface
  */
 export interface BotDetectorInterface {
-  detect(): BotDetectionResult
-  collect(): Promise<void>
+  detect(): BotDetectionResult;
+  collect(): Promise<void>;
 }
 
 /**
  * Bot detection error.
  */
 export class BotdError extends Error {
-  state: Exclude<State, State.Success>
+  state: Exclude<State, State.Success>;
 
   /**
    * Creates a new BotdError.
@@ -103,18 +105,18 @@ export class BotdError extends Error {
    * @class
    */
   constructor(state: Exclude<State, State.Success>, message: string) {
-    super(message)
-    this.state = state
-    this.name = 'BotdError'
-    Object.setPrototypeOf(this, BotdError.prototype)
+    super(message);
+    this.state = state;
+    this.name = "BotdError";
+    Object.setPrototypeOf(this, BotdError.prototype);
   }
 }
 
 export enum BrowserKind {
-  Unknown = 'unknown',
-  Chrome = 'chrome',
-  Firefox = 'firefox',
-  Opera = 'opera',
-  Safari = 'safari',
-  IE = 'internet_explorer',
+  Unknown = "unknown",
+  Chrome = "chrome",
+  Firefox = "firefox",
+  Opera = "opera",
+  Safari = "safari",
+  IE = "internet_explorer",
 }

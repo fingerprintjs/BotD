@@ -1,10 +1,10 @@
-import BotDetector from './detector'
-import { BotDetectorInterface } from './types'
+import BotDetector from "./detector";
+import { BotDetectorInterface } from "./types";
 
 export async function load(): Promise<BotDetectorInterface> {
-  const detector = new BotDetector()
-  await detector.collect()
-  return detector
+  const detector = new BotDetector();
+  await detector.collect();
+  return detector;
 }
 
-export default { load }
+export default { load };

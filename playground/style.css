@@ -15,7 +15,8 @@ body {
   height: auto;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin: 20px 50px;
   font-weight: 700;
   color: #0d102b;
@@ -47,9 +48,9 @@ h2 {
 
 label {
   flex: 1 1;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 10px 0 0 10px;
-  border: 2px solid rgba(13, 16, 43, .5);
+  border: 2px solid rgba(13, 16, 43, 0.5);
   border-right: none;
   display: flex;
   align-items: center;
@@ -57,7 +58,7 @@ label {
   min-width: 100px;
 }
 
-input[type=text] {
+input[type="text"] {
   padding: 0 2rem;
   width: 100%;
   height: 100%;
@@ -66,7 +67,7 @@ input[type=text] {
   border: none;
 }
 
-input[type=checkbox] {
+input[type="checkbox"] {
   margin-right: 10px;
 }
 
@@ -145,15 +146,17 @@ h5 {
     padding: 10px 10px 0 10px;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     margin: 10px 0 10px 0;
   }
 
-  label[for=modes] {
+  label[for="modes"] {
     padding-left: 0;
   }
 
-  .url_form, .result-table {
+  .url_form,
+  .result-table {
     margin-left: 0;
     margin-right: 0;
   }

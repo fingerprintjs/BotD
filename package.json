@@ -36,8 +36,8 @@
     "build:playground": "yarn clean && webpack --config webpack.config.ts",
     "clean": "rimraf build",
     "build:rollup": "rimraf dist && rollup -c rollup.config.js",
-    "lint": "eslint --ext .js,.ts --ignore-path .gitignore --max-warnings 0 .",
-    "lint:fix": "yarn lint --fix"
+    "lint": "eslint src playground",
+    "lint:fix": "yarn lint --fix && prettier --write src playground"
   },
   "dependencies": {
     "fflate": "^0.7.3",
