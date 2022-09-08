@@ -1,8 +1,8 @@
-name: CI
+name: Demo
 
 on:
   pull_request:
-  # push:
+  push:
   #   branches:
   #     - main
 
