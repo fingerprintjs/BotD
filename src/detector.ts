@@ -11,10 +11,12 @@ import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component
 export default class BotDetector implements BotDetectorInterface {
   private components: ComponentDict | undefined = undefined
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   protected getDetectors() {
     return getDetectors()
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   protected getSources() {
     return getSources()
   }

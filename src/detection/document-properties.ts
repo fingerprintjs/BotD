@@ -9,7 +9,6 @@ export function detectDocumentProperties({
   if (
     includes(
       documentProps.value,
-      /^([a-z]){3}_.*_(Array|Promise|Symbol)$/,
       'selenium',
       '__fxdriver_unwrapped',
       '__selenium_unwrapped',
@@ -32,6 +31,7 @@ export function detectDocumentProperties({
       'ChromeDriverw',
       'selenium-evaluate',
       '_Selenium_IDE_Recorder',
+      /^([a-z]){3}_.*_(Array|Promise|Symbol)$/,
     )
   ) {
     return BotKind.Selenium
