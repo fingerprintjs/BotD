@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    # branches:
+    #   - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: actions/cache@v3.0.2
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+        env:
+          ADBLOCK: true
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build

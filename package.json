@@ -32,16 +32,12 @@
   ],
   "scripts": {
     "dev": "cross-env DEV=1 webpack serve --config webpack.config.ts",
-    "build:lib": "yarn clean && webpack --config webpack.config.lib.ts",
+    "build": "yarn clean && webpack --config webpack.config.lib.ts",
     "build:playground": "yarn clean && webpack --config webpack.config.ts",
     "clean": "rimraf build",
     "build:rollup": "rimraf dist && rollup -c rollup.config.js",
     "lint": "eslint src playground",
     "lint:fix": "yarn lint --fix && prettier --write src playground"
-  },
-  "dependencies": {
-    "fflate": "^0.7.3",
-    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",
@@ -73,5 +69,6 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.0",
     "webpack-merge": "^5.8.0"
-  }
+  },
+  "dependencies": {}
 }
