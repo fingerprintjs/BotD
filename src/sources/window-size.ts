@@ -5,5 +5,5 @@ export default function getWindowSize() {
     outerHeight: window.outerHeight,
     innerWidth: window.innerWidth,
     innerHeight: window.innerHeight,
-  };
+  }
 }
