@@ -14,9 +14,9 @@
     "device detection",
     "privacy"
   ],
-  "main": "build/main.esm.js",
-  "module": "build/main.esm.js",
-  "types": "build/index.d.ts",
+  "main": "dist/main.esm.js",
+  "module": "dist/main.esm.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "repository": {
@@ -28,14 +28,13 @@
   },
   "homepage": "https://fingerprint.com/products/bot-detection/",
   "files": [
-    "build",
+    "dist",
     "code_of_conduct.md"
   ],
   "scripts": {
     "dev": "cross-env DEV=1 webpack serve --config webpack.config.ts",
-    "build": "yarn clean && webpack --config webpack.config.lib.ts",
-    "build:playground": "yarn clean && webpack --config webpack.config.ts",
-    "clean": "rimraf build",
+    "build": "rimraf dist && webpack --config webpack.config.lib.ts",
+    "build:playground": "rimraf build && webpack --config webpack.config.ts",
     "lint": "eslint src playground",
     "lint:fix": "yarn lint --fix && prettier --write src playground"
   },

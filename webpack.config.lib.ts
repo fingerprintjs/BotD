@@ -13,7 +13,7 @@ const baseConfig = (tsConfigPath: string): Configuration => ({
   entry: "./src/index.ts",
 
   output: {
-    path: resolve(__dirname, "build"),
+    path: resolve(__dirname, "dist"),
   },
 
   plugins: [
