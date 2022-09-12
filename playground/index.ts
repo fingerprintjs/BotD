@@ -1,5 +1,4 @@
 import { load } from '../src'
-import BotDetector from '../src/detector'
 import './style.css'
 
 const runDetection = async () => {
