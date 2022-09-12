@@ -25,7 +25,7 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public detect(): BotDetectionResult {
-    if (this.components == null) {
+    if (this.components === undefined) {
       throw new Error("BotDetector.detect can't be called before BotDetector.collect")
     }
 
