@@ -9,15 +9,19 @@ import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component
  * @implements {BotDetectorInterface}
  */
 export default class BotDetector implements BotDetectorInterface {
-  private components: ComponentDict | undefined = undefined
+  private componentsDict: ComponentDict | undefined = undefined
+
+  public getComponents(): ComponentDict | undefined {
+    return this.componentsDict
+  }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getDetectors() {
+  protected getDetectorsList() {
     return getDetectors()
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getComponents() {
+  protected getComponentsList() {
     return getComponents()
   }
 
@@ -25,12 +29,12 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public detect(): BotDetectionResult {
-    if (this.components === undefined) {
+    if (this.componentsDict === undefined) {
       throw new Error("BotDetector.detect can't be called before BotDetector.collect")
     }
 
-    const components = this.components
-    const detectors = this.getDetectors()
+    const components = this.componentsDict
+    const detectors = this.getDetectorsList()
 
     for (const detector of detectors) {
       const detectorRes = detector(components)
@@ -49,7 +53,7 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public async collect(): Promise<void> {
-    const components = this.getComponents()
+    const components = this.getComponentsList()
     const resMap = {} as ComponentDict
 
     const keys = Object.keys(components) as (keyof typeof components)[]
@@ -79,6 +83,6 @@ export default class BotDetector implements BotDetectorInterface {
       }),
     )
 
-    this.components = resMap
+    this.componentsDict = resMap
   }
 }

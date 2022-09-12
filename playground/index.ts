@@ -33,7 +33,7 @@ const runDetection = async () => {
     perfEl!.textContent = collectTime.toFixed(0) + ' ms'
     timeEl!.textContent = processTime.toFixed(0) + ' ms'
 
-    const components = (instance as BotDetector)['components']
+    const components = instance.getComponents()
     sourcesEl!.textContent = JSON.stringify(components, null, 4)
 
     statusEl!.textContent = 'Result:'
