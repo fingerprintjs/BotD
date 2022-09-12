@@ -30,6 +30,9 @@
   "files": [
     "dist"
   ],
+  "browserslist": [
+    "cover 96% in us, not IE < 11"
+  ],
   "scripts": {
     "dev": "cross-env DEV=1 webpack serve --config webpack.config.ts",
     "build": "rimraf dist && webpack --config webpack.config.lib.ts",
