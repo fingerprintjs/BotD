@@ -63,5 +63,7 @@
     "webpack-dev-server": "^4.11.0",
     "webpack-merge": "^5.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "tslib": "^2.4.0"
+  }
 }
