@@ -1,8 +1,7 @@
-import { SignalKind } from '../signals'
 import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
 import { includes } from '../utils'
 
-export function detectWindowProperties({ [SignalKind.WindowProps]: windowProps }: ComponentDict): DetectionResponse {
+export function detectWindowProperties({ windowProps }: ComponentDict): DetectionResponse {
   if (windowProps.state !== State.Success) return false
   if (includes(windowProps.value, 'webdriver', 'domAutomation', 'domAutomationController')) {
     return BotKind.HeadlessChrome

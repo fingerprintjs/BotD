@@ -1,10 +1,6 @@
-import { SignalKind } from '../signals'
 import { BrowserKind, ComponentDict, DetectionResponse, State } from '../types'
 
-export function detectEvalLengthInconsistency({
-  [SignalKind.EvalLength]: evalLength,
-  [SignalKind.BrowserKind]: browserKind,
-}: ComponentDict): DetectionResponse {
+export function detectEvalLengthInconsistency({ evalLength, browserKind }: ComponentDict): DetectionResponse {
   if (evalLength.state === State.Success && browserKind.state === State.Success) {
     const length = evalLength.value
     const browser = browserKind.value

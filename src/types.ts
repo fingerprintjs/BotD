@@ -1,4 +1,4 @@
-import getSources from './sources'
+import getComponents from './components'
 
 /**
  * Final output of bot detection.
@@ -65,20 +65,20 @@ export type Component<T> =
     }
 
 /**
- * Dictionary of default sources and their respective return types.
+ * Dictionary of default components and their respective return types.
  */
-export type DefaultSourcesDict = ReturnType<typeof getSources>
+export type DefaultComponentsDict = ReturnType<typeof getComponents>
 
 /**
- * Represents a single signal response type.
+ * Represents a single component response type.
  */
-export type SignalType<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
+export type ComponentResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
 /**
  * Dictionary of components.
  */
-export type ComponentDict<T extends DefaultSourcesDict = DefaultSourcesDict> = {
-  [K in keyof T]: Component<SignalType<T[K]>>
+export type ComponentDict<T extends Record<string, ComponentResponse<any>> = DefaultComponentsDict> = {
+  [K in keyof T]: Component<ComponentResponse<T[K]>>
 }
 
 /**

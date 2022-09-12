@@ -1,10 +1,7 @@
-import { SignalKind } from '../signals'
 import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
 import { includes } from '../utils'
 
-export function detectDocumentProperties({
-  [SignalKind.DocumentProps]: documentProps,
-}: ComponentDict): DetectionResponse {
+export function detectDocumentProperties({ documentProps }: ComponentDict): DetectionResponse {
   if (documentProps.state !== State.Success) return false
   if (
     includes(

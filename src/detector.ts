@@ -1,5 +1,5 @@
+import getComponents from './components'
 import getDetectors from './detection'
-import getSources from './sources'
 import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component, ComponentDict, State } from './types'
 
 /**
@@ -17,8 +17,8 @@ export default class BotDetector implements BotDetectorInterface {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getSources() {
-    return getSources()
+  protected getComponents() {
+    return getComponents()
   }
 
   /**
@@ -49,28 +49,28 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public async collect(): Promise<void> {
-    const sources = this.getSources()
-    const components = {} as ComponentDict
+    const components = this.getComponents()
+    const resMap = {} as ComponentDict
 
-    const keys = Object.keys(sources) as (keyof typeof sources)[]
+    const keys = Object.keys(components) as (keyof typeof components)[]
 
     await Promise.all(
       keys.map(async (key) => {
-        const source = sources[key]
+        const res = components[key]
 
         try {
-          components[key] = ({
-            value: await source(),
+          resMap[key] = {
+            value: await res(),
             state: State.Success,
-          } as Component<any>) as any
+          } as Component<any> as any
         } catch (error) {
           if (error instanceof BotdError) {
-            components[key] = {
+            resMap[key] = {
               state: error.state,
               error: `${error.name}: ${error.message}`,
             }
           } else {
-            components[key] = {
+            resMap[key] = {
               state: State.UnexpectedBehaviour,
               error: error instanceof Error ? `${error.name}: ${error.message}` : String(error),
             }
@@ -79,6 +79,6 @@ export default class BotDetector implements BotDetectorInterface {
       }),
     )
 
-    this.components = components
+    this.components = resMap
   }
 }
