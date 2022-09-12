@@ -52,7 +52,7 @@ export default class BotDetector implements BotDetectorInterface {
   /**
    * @inheritdoc
    */
-  public async collect(): Promise<void> {
+  public async collect(): Promise<ComponentDict> {
     const components = this.getComponents()
     const resMap = {} as ComponentDict
 
@@ -84,5 +84,6 @@ export default class BotDetector implements BotDetectorInterface {
     )
 
     this.componentsDict = resMap
+    return resMap
   }
 }
