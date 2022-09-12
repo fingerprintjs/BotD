@@ -28,8 +28,7 @@
   },
   "homepage": "https://fingerprint.com/products/bot-detection/",
   "files": [
-    "dist",
-    "code_of_conduct.md"
+    "dist"
   ],
   "scripts": {
     "dev": "cross-env DEV=1 webpack serve --config webpack.config.ts",
