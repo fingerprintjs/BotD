@@ -88,8 +88,8 @@ export type ComponentDict<T extends Record<string, ComponentResponse<any>> = Def
  */
 export interface BotDetectorInterface {
   detect(): BotDetectionResult
-  collect(): Promise<void>
-  getComponents(): ComponentDict | undefined
+  collect(): Promise<ComponentDict>
+  get(): ComponentDict | undefined
 }
 
 /**

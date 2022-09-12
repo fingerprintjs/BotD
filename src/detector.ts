@@ -11,17 +11,17 @@ import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component
 export default class BotDetector implements BotDetectorInterface {
   private componentsDict: ComponentDict | undefined = undefined
 
-  public getComponents(): ComponentDict | undefined {
+  public get(): ComponentDict | undefined {
     return this.componentsDict
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getDetectorsList() {
+  protected getDetectors() {
     return getDetectors()
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getComponentsList() {
+  protected getComponents() {
     return getComponents()
   }
 
@@ -34,7 +34,7 @@ export default class BotDetector implements BotDetectorInterface {
     }
 
     const components = this.componentsDict
-    const detectors = this.getDetectorsList()
+    const detectors = this.getDetectors()
 
     for (const detector of detectors) {
       const detectorRes = detector(components)
@@ -53,7 +53,7 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public async collect(): Promise<void> {
-    const components = this.getComponentsList()
+    const components = this.getComponents()
     const resMap = {} as ComponentDict
 
     const keys = Object.keys(components) as (keyof typeof components)[]
