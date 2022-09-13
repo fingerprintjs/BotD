@@ -74,10 +74,12 @@ export type DefaultComponentsDict = ReturnType<typeof getComponents>
  */
 export type ComponentResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
+export type AbstractComponentDict = Record<string, ComponentResponse<any>>
+
 /**
  * Dictionary of components.
  */
-export type ComponentDict<T extends Record<string, ComponentResponse<any>> = DefaultComponentsDict> = {
+export type ComponentDict<T extends AbstractComponentDict = DefaultComponentsDict> = {
   [K in keyof T]: Component<ComponentResponse<T[K]>>
 }
 
@@ -88,8 +90,8 @@ export type ComponentDict<T extends Record<string, ComponentResponse<any>> = Def
  */
 export interface BotDetectorInterface {
   detect(): BotDetectionResult
-  collect(): Promise<ComponentDict>
-  get(): Record<string, ComponentResponse<any>> | undefined
+  collect(): Promise<AbstractComponentDict>
+  get(): AbstractComponentDict | undefined
 }
 
 /**
