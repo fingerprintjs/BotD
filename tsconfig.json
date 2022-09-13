@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "importHelpers": true,
+    "noEmitHelpers": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",

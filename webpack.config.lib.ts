@@ -48,6 +48,10 @@ const baseConfig = (tsConfigPath: string): Configuration => ({
     modules: ['node_modules'],
     extensions: ['.js', '.ts', '.json'],
   },
+
+  externals: {
+    tslib: 'tslib',
+  },
 })
 
 const cjsConfig = merge(baseConfig(resolve(__dirname, 'tsconfig.lib.json')), {
