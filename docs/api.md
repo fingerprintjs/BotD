@@ -1,4 +1,5 @@
 # BotD Browser API
+
 _BotD also has a [Server API](server_api.md)._
 
 ## `Botd.load`
@@ -11,14 +12,15 @@ Builds an instance of `BotDetector`. We recommend calling it as early as possibl
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
 ### `InitOptions`
+
 The `InitOptions` object has the following properties:
 
-- `publicKey: string` (_required_) - A free account publicKey required to make the bot detection.
-Instructions on how to get a token can be found [here](/README.md#authentication).
+-   `publicKey: string` (_required_) - A free account publicKey required to make the bot detection.
+    Instructions on how to get a token can be found [here](/README.md#authentication).
 
-- `mode: string` - There are two modes supported:
-  - `requestId` (_default_)
-  - `integration` (only for [botd-integrations](https://github.com/fingerprintjs/botd-integrations))
+-   `mode: string` - There are two modes supported:
+    -   `requestId` (_default_)
+    -   `integration` (only for [botd-integrations](https://github.com/fingerprintjs/botd-integrations))
 
 ## `BotDetector.detect`
 
@@ -32,7 +34,6 @@ and return the `requestId` which you can use later to retrieve bot detection res
 > ### NOTE
 >
 > The `requestId` will implicitly be stored in a cookie (`botd-request-id`) for future convenience
-
 
 ### `DetectOptions`
 
