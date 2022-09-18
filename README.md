@@ -79,7 +79,7 @@ load()
 
 ### Documentation links:
 
--   #### [Browser API](docs/api.md)
+-   #### [API](docs/api.md)
 -   #### [Error Handling](docs/error.md)
 
 ### Contributing
