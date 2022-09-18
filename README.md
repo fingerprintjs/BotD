@@ -60,7 +60,6 @@ import { load } from '@fpjs-incubator/botd-agent'
 
 // Initialize an agent at application startup.
 load()
-    // Get the bot detection result when you need it.
     .then((botd) => botd.detect())
     .then((result) => console.log(result))
     .catch((error) => console.error(error))
