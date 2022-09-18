@@ -81,7 +81,6 @@ load()
 
 -   #### [Browser API](docs/api.md)
 -   #### [Error Handling](docs/error.md)
--   #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
 
 ### Contributing
 
