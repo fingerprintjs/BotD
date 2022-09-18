@@ -11,6 +11,7 @@ import getPermissions from './permissions'
 import getPluginsArray from './plugins-array'
 import getPluginsLength from './plugins-length'
 import getProcess from './process'
+import getProductSub from './product-sub'
 import getRTT from './rtt'
 import getUserAgent from './user-agent'
 import getUserAgentData from './user-agent-data'
@@ -44,5 +45,6 @@ export default function getComponents() {
     windowProps: getWindowProperties,
     windowSize: getWindowSize,
     mimeTypesConsistent: areMimeTypesConsistent,
+    productSub: getProductSub,
   }
 }
