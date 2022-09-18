@@ -48,6 +48,7 @@ export enum BotKind {
   CouchJS = 'couchjs',
   Sequentum = 'sequentum',
   SlimerJS = 'slimerjs',
+  CefSharp = 'cefsharp',
 }
 
 export type DetectionResponse = boolean | BotKind | undefined
