@@ -1,6 +1,15 @@
 import getComponents from './components'
 import getDetectors from './detection'
-import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component, ComponentDict, State } from './types'
+import {
+  BotdError,
+  BotDetectionResult,
+  BotDetectorInterface,
+  BotKind,
+  Component,
+  ComponentDict,
+  DetectorsResponsesDict,
+  State,
+} from './types'
 
 /**
  * Class representing a bot detector.
@@ -11,8 +20,14 @@ import { BotdError, BotDetectionResult, BotDetectorInterface, BotKind, Component
 export default class BotDetector implements BotDetectorInterface {
   private componentsDict: ComponentDict | undefined = undefined
 
+  private detectorsResponsesDict: DetectorsResponsesDict | undefined = undefined
+
   public get(): ComponentDict | undefined {
     return this.componentsDict
+  }
+
+  public getDetectorsResponses(): DetectorsResponsesDict | undefined {
+    return this.detectorsResponsesDict
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -35,18 +50,26 @@ export default class BotDetector implements BotDetectorInterface {
 
     const components = this.componentsDict
     const detectors = this.getDetectors()
+    const detectorsResponsesDict = {} as DetectorsResponsesDict
 
-    for (const detector of detectors) {
+    for (const detectorName in detectors) {
+      const detector = detectors[detectorName as keyof typeof detectors]
       const detectorRes = detector(components)
 
+      let detectionRes: BotDetectionResult = { bot: false }
+
       if (typeof detectorRes === 'string') {
-        return { bot: true, botKind: detectorRes }
+        detectionRes = { bot: true, botKind: detectorRes }
       } else if (detectorRes) {
-        return { bot: true, botKind: BotKind.Unknown }
+        detectionRes = { bot: true, botKind: BotKind.Unknown }
       }
+
+      detectorsResponsesDict[detectorName as keyof typeof detectors] = detectionRes
     }
 
-    return { bot: false }
+    this.detectorsResponsesDict = detectorsResponsesDict
+
+    return Object.values(detectorsResponsesDict).find((r) => r.bot) ?? { bot: false }
   }
 
   /**

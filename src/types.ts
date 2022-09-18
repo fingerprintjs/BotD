@@ -1,4 +1,5 @@
 import getComponents from './components'
+import getDetectors from './detection'
 
 /**
  * Final output of bot detection.
@@ -70,11 +71,28 @@ export type Component<T> =
 export type DefaultComponentsDict = ReturnType<typeof getComponents>
 
 /**
+ * Dictionary of default detectors and their respective types.
+ */
+export type DefaultDetectorsDict = ReturnType<typeof getDetectors>
+
+/**
  * Represents a single component response type.
  */
 export type ComponentResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
 export type AbstractComponentDict = Record<string, ComponentResponse<any>>
+
+export type AbstractDetectorsResponsesDict = Record<string, BotDetectionResult>
+
+export type AbstractDetector = (...args: any[]) => DetectionResponse
+
+/**
+ * Dictionary of detectors responses.
+ */
+export type DetectorsResponsesDict<T extends Record<string, AbstractDetector> = DefaultDetectorsDict> = Record<
+  keyof T,
+  BotDetectionResult
+>
 
 /**
  * Dictionary of components.
@@ -92,6 +110,7 @@ export interface BotDetectorInterface {
   detect(): BotDetectionResult
   collect(): Promise<AbstractComponentDict>
   get(): AbstractComponentDict | undefined
+  getDetectorsResponses(): AbstractDetectorsResponsesDict | undefined
 }
 
 /**

@@ -11,6 +11,7 @@ const runDetection = async () => {
   const timeEl = document.getElementById('time')
   const sourcesEl = document.getElementById('sources')
   const resultEl = document.getElementById('result')
+  const detailedResultsEl = document.getElementById('detailed-results')
 
   statusEl!.textContent = 'Loading...'
   resultTableEl!.innerHTML = ''
@@ -37,6 +38,9 @@ const runDetection = async () => {
 
     statusEl!.textContent = 'Result:'
     resultEl!.textContent = JSON.stringify(result, null, 4)
+
+    detailedResultsEl!.textContent = 'Detailed results:'
+    detailedResultsEl!.textContent = JSON.stringify(instance.getDetectorsResponses(), null, 4)
 
     const resultTableEntries = [
       [
