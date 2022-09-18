@@ -6,6 +6,7 @@ import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getFunctionBind from './function-bind'
 import getLanguages from './languages'
+import areMimeTypesConsistent from './mime-types-consistence'
 import getPermissions from './permissions'
 import getPluginsArray from './plugins-array'
 import getPluginsLength from './plugins-length'
@@ -42,5 +43,6 @@ export default function getComponents() {
     windowExternal: getWindowExternal,
     windowProps: getWindowProperties,
     windowSize: getWindowSize,
+    mimeTypesConsistent: areMimeTypesConsistent,
   }
 }
