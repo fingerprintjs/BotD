@@ -67,6 +67,10 @@ load()
 
 ### 📕 [Full documentation](docs/api.md)
 
+### 📙 [Migration guide](docs/migration-guide.md) from `0.1`
+
+<br />
+
 ### **Detectable Automation Tools & Frameworks**
 
 -   Headless Browsers ([Chrome](https://www.google.com/chrome/), [Firefox](https://www.mozilla.org/en-US/firefox/new/))

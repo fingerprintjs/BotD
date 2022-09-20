@@ -1,5 +1,7 @@
 # BotD API
 
+## [Migration guide](docs/migration-guide.md) from `0.1`
+
 ## method `Botd.load`
 
 ```ts
