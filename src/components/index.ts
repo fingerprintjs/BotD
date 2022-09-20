@@ -7,6 +7,7 @@ import getEvalLength from './eval-length'
 import getFunctionBind from './function-bind'
 import getLanguages from './languages'
 import areMimeTypesConsistent from './mime-types-consistence'
+import { getMozAppearanceSupport } from './moz-appearance'
 import getPermissions from './permissions'
 import getPluginsArray from './plugins-array'
 import getPluginsLength from './plugins-length'
@@ -46,5 +47,6 @@ export default function getComponents() {
     windowSize: getWindowSize,
     mimeTypesConsistent: areMimeTypesConsistent,
     productSub: getProductSub,
+    mozAppearanceSupport: getMozAppearanceSupport,
   }
 }
