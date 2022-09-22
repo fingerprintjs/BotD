@@ -45,15 +45,29 @@ BotD runs in the [browser](#install); additionally you can harden it by using ou
 
 ## 🤖 **_Check for more advanced and accurate bot detection [here](https://fingerprint.com/products/bot-detection/)_**
 
-## Install
+## Install from CDN
+
+```html
+<script>
+    // Initialize an agent at application startup.
+    const botdPromise = import('https://openfpcdn.io/botd/v1.0').then((Botd) => Botd.load())
+
+    botdPromise
+        .then((botd) => botd.detect())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error))
+</script>
+```
+
+[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
+
+## Install from NPM to use with Webpack/Rollup/Browserify
 
 ```bash
 npm i @fpjs-incubator/botd-agent
 # or
 yarn add @fpjs-incubator/botd-agent
 ```
-
-## Quick start
 
 ```js
 import { load } from '@fpjs-incubator/botd-agent'
