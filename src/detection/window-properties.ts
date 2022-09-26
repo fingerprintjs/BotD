@@ -15,4 +15,5 @@ export function detectWindowProperties({ windowProps }: ComponentDict): Detectio
   if (includes(windowProps.value, '__nightmare')) return BotKind.Nightmare
   if (includes(windowProps.value, 'emit')) return BotKind.CouchJS
   if (includes(windowProps.value, 'spawn')) return BotKind.Rhino
+  if (includes(windowProps.value, 'CefSharp')) return BotKind.CefSharp
 }

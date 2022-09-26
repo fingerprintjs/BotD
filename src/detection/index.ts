@@ -5,10 +5,12 @@ import { detectErrorTrace } from './error-trace'
 import { detectEvalLengthInconsistency } from './eval-length'
 import { detectFunctionBind } from './function-bind'
 import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
+import detectMimeTypesConsistent from './mime-types-consistence'
 import { detectPermissions } from './permissions'
 import { detectPluginsArray } from './plugins-array'
 import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
 import { detectProcess } from './process'
+import detectProductSub from './product-sub'
 import { detectRTT } from './rtt'
 import { detectUserAgent } from './user-agent'
 import { detectWebDriver } from './web-driver'
@@ -38,5 +40,7 @@ export default function getDetectors() {
     detectWindowExternal,
     detectWindowProperties,
     detectWindowSize,
+    detectMimeTypesConsistent,
+    detectProductSub,
   }
 }

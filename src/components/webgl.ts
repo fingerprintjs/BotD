@@ -1,5 +1,5 @@
 import { BotdError, State } from '../types'
-import getInstallTrigger from './install-trigger'
+import { getMozAppearanceSupport } from './moz-appearance'
 
 export default function getWebGL(): string[] {
   const canvasElement = document.createElement('canvas')
@@ -22,7 +22,7 @@ export default function getWebGL(): string[] {
   const renderer = webGLContext.getParameter(webGLContext.RENDERER)
   const version = webGLContext.getParameter(webGLContext.VERSION)
 
-  if (getInstallTrigger()) return [vendor, renderer, version]
+  if (getMozAppearanceSupport()) return [vendor, renderer, version]
 
   const webGLDebugInfo = webGLContext.getExtension('WEBGL_debug_renderer_info')
 
