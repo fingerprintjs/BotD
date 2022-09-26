@@ -34,13 +34,17 @@
     "cover 96% in us, not IE < 11"
   ],
   "scripts": {
-    "dev": "cross-env DEV=1 webpack serve --config webpack.config.ts",
-    "build": "rimraf dist && webpack --config webpack.config.lib.ts",
-    "build:playground": "rimraf build && webpack --config webpack.config.ts",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "dev:playground": "cross-env DEV=1 webpack serve",
+    "build:playground": "rimraf build && webpack",
     "lint": "eslint src playground",
     "lint:fix": "yarn lint --fix && prettier --write src playground"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
@@ -54,6 +58,9 @@
     "license-webpack-plugin": "^4.0.2",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.79.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-license": "^2.8.1",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
     "ts-node": "^10.9.1",
