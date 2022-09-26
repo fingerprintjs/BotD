@@ -44,3 +44,6 @@ jobs:
 
       - name: Build
         run: yarn build
+
+      - name: Build Playground
+        run: yarn build:playground
