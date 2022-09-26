@@ -39,7 +39,7 @@
 + Requires adding only a few lines of JavaScript on your website
 ```
 
-#### 🔩 [Try Demo](https://fingerprint.com/products/bot-detection/) - see the live demo running in your browser
+#### 🔩 [Try Demo](https://fingerprintjs.github.io/BotD/) - see the live demo running in your browser
 
 BotD runs in the [browser](#install); additionally you can harden it by using our open source cloud integrations.
 

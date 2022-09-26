@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/fingerprintjs/botd/issues"
   },
-  "homepage": "https://fingerprint.com/products/bot-detection/",
+  "homepage": "https://fingerprintjs.github.io/BotD/",
   "files": [
     "dist"
   ],
