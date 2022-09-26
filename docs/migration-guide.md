@@ -12,7 +12,7 @@ In the new version, we have implemented detection logic on the client side, mean
 -   const botdPromise = import('https://openfpcdn.io/botd/v0.1').then((Botd) =>
 -       Botd.load({ publicKey: '<your-public-key>' }),
 -   )
-+   const botdPromise = import('https://openfpcdn.io/botd/v1.0').then((Botd) =>
++   const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) =>
 +       Botd.load(),
 +   )
     // Get the bot detection result when you need it.

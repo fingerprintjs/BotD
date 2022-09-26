@@ -50,7 +50,7 @@ BotD runs in the [browser](#install); additionally you can harden it by using ou
 ```html
 <script>
     // Initialize an agent at application startup.
-    const botdPromise = import('https://openfpcdn.io/botd/v1.0').then((Botd) => Botd.load())
+    const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
 
     botdPromise
         .then((botd) => botd.detect())
