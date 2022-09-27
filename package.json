@@ -14,7 +14,7 @@
     "device detection",
     "privacy"
   ],
-  "main": "dist/botd.esm.js",
+  "main": "dist/botd.cjs.js",
   "module": "dist/botd.esm.js",
   "types": "dist/botd.d.ts",
   "license": "MIT",
