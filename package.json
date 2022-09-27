@@ -14,9 +14,9 @@
     "device detection",
     "privacy"
   ],
-  "main": "dist/main.esm.js",
-  "module": "dist/main.esm.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/botd.esm.js",
+  "module": "dist/botd.esm.js",
+  "types": "dist/botd.d.ts",
   "license": "MIT",
   "author": "FingerprintJS, Inc (https://fingerprint.com)",
   "repository": {
