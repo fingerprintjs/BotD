@@ -1,6 +1,7 @@
 import getAppVersion from './app-version'
 import getBrowserKind from './browser-kind'
 import getDocumentAttributes from './document-attributes'
+import getDocumentFocus from './document-focus'
 import getDocumentProperties from './document-properties'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
@@ -48,5 +49,6 @@ export default function getComponents() {
     mimeTypesConsistent: areMimeTypesConsistent,
     productSub: getProductSub,
     mozAppearanceSupport: getMozAppearanceSupport,
+    documentFocus: getDocumentFocus,
   }
 }
