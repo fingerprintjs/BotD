@@ -6,6 +6,7 @@ import getDocumentProperties from './document-properties'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getFunctionBind from './function-bind'
+import isIPad from './is-ipad'
 import getLanguages from './languages'
 import areMimeTypesConsistent from './mime-types-consistence'
 import { getMozAppearanceSupport } from './moz-appearance'
@@ -50,5 +51,6 @@ export default function getComponents() {
     productSub: getProductSub,
     mozAppearanceSupport: getMozAppearanceSupport,
     documentFocus: getDocumentFocus,
+    isIPad: isIPad,
   }
 }

@@ -14,3 +14,7 @@ export function includes(arr: string[], ...keys: (string | RegExp)[]): boolean {
   }
   return false
 }
+
+export function countTruthy(values: unknown[]): number {
+  return values.reduce<number>((sum, value) => sum + (value ? 1 : 0), 0)
+}

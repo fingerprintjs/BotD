@@ -24,3 +24,7 @@ interface Window {
   readonly __nightmare?: unknown
   readonly process?: NodeJS.Process & { type?: string }
 }
+
+interface Element {
+  webkitRequestFullscreen?: unknown
+}
