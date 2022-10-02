@@ -6,6 +6,7 @@ import getDocumentProperties from './document-properties'
 import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getFunctionBind from './function-bind'
+import isAndroid from './is-android'
 import isIPad from './is-ipad'
 import getLanguages from './languages'
 import areMimeTypesConsistent from './mime-types-consistence'
@@ -52,5 +53,6 @@ export default function getComponents() {
     mozAppearanceSupport: getMozAppearanceSupport,
     documentFocus: getDocumentFocus,
     isIPad: isIPad,
+    isAndroid: isAndroid,
   }
 }

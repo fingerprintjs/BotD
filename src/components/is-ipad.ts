@@ -1,7 +1,6 @@
 import { countTruthy } from '../utils'
 
-// Source: FingerprintJS OSS library
-// https://github.com/fingerprintjs/fingerprintjs/blob/master/src/utils/browser.ts#L177
+// Source: https://github.com/fingerprintjs/fingerprintjs/blob/master/src/utils/browser.ts#L177
 
 /**
  * Checks whether the device is an iPad.
