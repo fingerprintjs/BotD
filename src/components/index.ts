@@ -1,4 +1,5 @@
 import getAppVersion from './app-version'
+import getBrowserEngineKind from './browser-engine-kind'
 import getBrowserKind from './browser-kind'
 import getDocumentAttributes from './document-attributes'
 import getDocumentFocus from './document-focus'
@@ -7,7 +8,7 @@ import getErrorTrace from './error-trace'
 import getEvalLength from './eval-length'
 import getFunctionBind from './function-bind'
 import isAndroid from './is-android'
-import isIPad from './is-ipad'
+import isDesktopSafari from './is-desktop-safari'
 import getLanguages from './languages'
 import areMimeTypesConsistent from './mime-types-consistence'
 import { getMozAppearanceSupport } from './moz-appearance'
@@ -52,7 +53,8 @@ export default function getComponents() {
     productSub: getProductSub,
     mozAppearanceSupport: getMozAppearanceSupport,
     documentFocus: getDocumentFocus,
-    isIPad: isIPad,
     isAndroid: isAndroid,
+    browserEngineKind: getBrowserEngineKind,
+    isDesktopSafari: isDesktopSafari,
   }
 }

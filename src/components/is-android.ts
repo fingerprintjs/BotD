@@ -1,19 +1,17 @@
-import { BrowserKind } from '../types'
+import { BrowserEngineKind } from '../types'
 import { countTruthy } from '../utils'
-import getBrowserKind from './browser-kind'
+import getBrowserEngineKind from './browser-engine-kind'
 
 // Source: https://github.com/fingerprintjs/fingerprintjs/blob/master/src/utils/browser.ts#L223
 
 export default function isAndroid(): boolean {
-  const browserKind = getBrowserKind()
-  const isChromium = browserKind === BrowserKind.Chrome
-  const isGecko = browserKind === BrowserKind.Firefox
+  const browserEngineKind = getBrowserEngineKind()
+  const isItChromium = browserEngineKind === BrowserEngineKind.Chromium
+  const isItGecko = browserEngineKind === BrowserEngineKind.Gecko
 
   // Only 2 browser engines are presented on Android.
   // Actually, there is also Android 4.1 browser, but it's not worth detecting it at the moment.
-  if (!isChromium && !isGecko) {
-    return false
-  }
+  if (!isItChromium && !isItGecko) return false
 
   const w = window
 
@@ -23,8 +21,8 @@ export default function isAndroid(): boolean {
     countTruthy([
       'onorientationchange' in w,
       'orientation' in w,
-      isChromium && !('SharedWorker' in w),
-      isGecko && /android/i.test(navigator.appVersion),
+      isItChromium && !('SharedWorker' in w),
+      isItGecko && /android/i.test(navigator.appVersion),
     ]) >= 2
   )
 }

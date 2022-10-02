@@ -133,6 +133,13 @@ export class BotdError extends Error {
   }
 }
 
+export enum BrowserEngineKind {
+  Unknown = 'unknown',
+  Chromium = 'chromium',
+  Gecko = 'gecko',
+  Webkit = 'webkit',
+}
+
 export enum BrowserKind {
   Unknown = 'unknown',
   Chrome = 'chrome',
