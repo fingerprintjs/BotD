@@ -12,7 +12,7 @@ const config = {
   entry: './playground/index.ts',
 
   output: {
-    path: resolve(__dirname, 'build'),
+    path: resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
   },
 
@@ -36,7 +36,7 @@ const config = {
       template: `playground/index.html`,
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'static' }],
+      patterns: [{ from: 'playground/static' }],
     }),
   ],
 

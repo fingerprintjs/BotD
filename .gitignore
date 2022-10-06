@@ -3,6 +3,7 @@
 /build
 /coverage/
 /node_modules/
+/playground/dist/
 
 # Random excess stuff
 .DS_Store

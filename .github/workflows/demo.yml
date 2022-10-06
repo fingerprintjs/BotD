@@ -47,7 +47,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/
+          FOLDER: playground/dist
           CLEAN: true
           SINGLE_COMMIT: true
       - name: Print the demo URL
