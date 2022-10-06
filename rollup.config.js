@@ -5,6 +5,7 @@ import licensePlugin from 'rollup-plugin-license'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import { join } from 'path'
+import { dependencies } from './package.json'
 
 const inputFile = 'src/index.ts'
 const outputDirectory = 'dist'
@@ -27,9 +28,11 @@ const commonOutput = {
   exports: 'named',
 }
 
+// NPM bundles. They have all the dependencies excluded for end code size optimization.
 export default [
   {
     ...commonInput,
+    external: Object.keys(dependencies),
     output: [
       {
         ...commonOutput,
