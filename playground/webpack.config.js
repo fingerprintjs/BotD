@@ -36,7 +36,7 @@ const config = {
       template: `playground/index.html`,
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'playground/static' }],
+      patterns: [{ from: 'resources' }],
     }),
   ],
 
