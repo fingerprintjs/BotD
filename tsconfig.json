@@ -13,6 +13,11 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
   },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "playground/dist"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"
