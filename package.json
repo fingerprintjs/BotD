@@ -35,8 +35,8 @@
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
-    "dev:playground": "cross-env DEV=1 webpack serve --config ./playground/webpack.config.js",
-    "build:playground": "rimraf ./playground/dist && webpack --config ./playground/webpack.config.js",
+    "dev:playground": "cross-env DEV=1 webpack serve --config ./playground/webpack.config.ts",
+    "build:playground": "rimraf ./playground/dist && webpack --config ./playground/webpack.config.ts",
     "lint": "eslint src playground",
     "lint:fix": "yarn lint --fix && prettier --write src playground"
   },

@@ -13,4 +13,9 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
 }

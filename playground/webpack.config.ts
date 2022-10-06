@@ -1,10 +1,12 @@
-const { resolve } = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+import { resolve } from 'path'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { Configuration } from 'webpack'
+import 'webpack-dev-server'
 
 const isDev = process.env.DEV === '1'
 
-const config = {
+const config: Configuration = {
   mode: isDev ? 'development' : 'production',
   target: 'web',
   devtool: 'inline-source-map',
