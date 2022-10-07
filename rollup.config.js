@@ -18,7 +18,7 @@ const commonBanner = licensePlugin({
   },
 })
 
-const commonInput = {
+export const commonInput = {
   input: inputFile,
   plugins: [resolve(), commonjs(), jsonPlugin(), typescript(), commonBanner],
 }
@@ -28,23 +28,20 @@ const commonOutput = {
   exports: 'named',
 }
 
+export const createBundle = (filename, format) => {
+  return {
+    ...commonOutput,
+    file: `${outputDirectory}/${filename}`,
+    format,
+  }
+}
+
 // NPM bundles. They have all the dependencies excluded for end code size optimization.
 export default [
   {
     ...commonInput,
     external: Object.keys(dependencies),
-    output: [
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.cjs.js`,
-        format: 'cjs',
-      },
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.esm.js`,
-        format: 'es',
-      },
-    ],
+    output: [createBundle('botd.cjs.js', 'cjs'), createBundle('botd.esm.js', 'es')],
   },
   {
     input: inputFile,
