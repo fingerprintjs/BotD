@@ -93,10 +93,10 @@ export default class BotDetector implements BotDetectorInterface {
         const res = components[key]
 
         try {
-          resMap[key] = {
+          resMap[key] = ({
             value: await res(),
             state: State.Success,
-          } as Component<any> as any
+          } as Component<any>) as any
         } catch (error) {
           if (error instanceof BotdError) {
             resMap[key] = {

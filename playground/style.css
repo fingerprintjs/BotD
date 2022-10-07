@@ -16,7 +16,8 @@ body {
   height: auto;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: 700;
   color: #0d102b;
 }
@@ -120,7 +121,7 @@ h5 {
   h2 {
     margin: 10px 0 10px 0;
   }
-  
+
   .result-table {
     margin-left: 0;
     margin-right: 0;
