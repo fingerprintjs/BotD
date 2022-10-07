@@ -51,6 +51,9 @@ export default class BotDetector implements BotDetectorInterface {
     const components = this.componentsDict
     const detectors = this.getDetectors()
     const detectorsResponsesDict = {} as DetectorsResponsesDict
+    let finalDetectionRes: BotDetectionResult = {
+      bot: false,
+    }
 
     for (const detectorName in detectors) {
       const detector = detectors[detectorName as keyof typeof detectors]
@@ -65,11 +68,15 @@ export default class BotDetector implements BotDetectorInterface {
       }
 
       detectorsResponsesDict[detectorName as keyof typeof detectors] = detectionRes
+
+      if (detectionRes.bot) {
+        finalDetectionRes = detectionRes
+      }
     }
 
     this.detectorsResponsesDict = detectorsResponsesDict
 
-    return Object.values(detectorsResponsesDict).find((r) => r.bot) ?? { bot: false }
+    return finalDetectionRes
   }
 
   /**
