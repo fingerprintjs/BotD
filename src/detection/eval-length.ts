@@ -1,3 +1,4 @@
+import { arrayIncludes } from '../ponyfills'
 import { BrowserKind, ComponentDict, DetectionResponse, State } from '../types'
 
 export function detectEvalLengthInconsistency({ evalLength, browserKind }: ComponentDict): DetectionResponse {
@@ -10,8 +11,8 @@ export function detectEvalLengthInconsistency({ evalLength, browserKind }: Compo
   const length = evalLength.value
   const browser = browserKind.value
   return (
-    (length === 37 && ![BrowserKind.Firefox, BrowserKind.Safari].includes(browser)) ||
-    (length === 39 && ![BrowserKind.IE].includes(browser)) ||
-    (length === 33 && ![BrowserKind.Chrome, BrowserKind.Opera].includes(browser))
+    (length === 37 && !arrayIncludes([BrowserKind.Firefox, BrowserKind.Safari], browser)) ||
+    (length === 39 && !arrayIncludes([BrowserKind.IE], browser)) ||
+    (length === 33 && !arrayIncludes([BrowserKind.Chrome, BrowserKind.Opera], browser))
   )
 }

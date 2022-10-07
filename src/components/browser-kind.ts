@@ -1,3 +1,4 @@
+import { strIncludes } from '../ponyfills'
 import { BotdError, BrowserKind, State } from '../types'
 
 export default function getBrowserKind(): BrowserKind {
@@ -6,15 +7,15 @@ export default function getBrowserKind(): BrowserKind {
     throw new BotdError(State.Undefined, 'navigator.userAgent is undefined')
   }
 
-  if (userAgent.includes('firefox')) {
+  if (strIncludes(userAgent, 'firefox')) {
     return BrowserKind.Firefox
-  } else if (userAgent.includes('opera') || userAgent.includes('opr')) {
+  } else if (strIncludes(userAgent, 'opera') || strIncludes(userAgent, 'opr')) {
     return BrowserKind.Opera
-  } else if (userAgent.includes('chrome')) {
+  } else if (strIncludes(userAgent, 'chrome')) {
     return BrowserKind.Chrome
-  } else if (userAgent.includes('safari')) {
+  } else if (strIncludes(userAgent, 'safari')) {
     return BrowserKind.Safari
-  } else if (userAgent.includes('trident') || userAgent.includes('msie')) {
+  } else if (strIncludes(userAgent, 'trident') || strIncludes(userAgent, 'msie')) {
     return BrowserKind.IE
   }
 
