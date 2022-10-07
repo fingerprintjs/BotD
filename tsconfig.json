@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
-    "noEmitOnError": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "importHelpers": true,
-    "noEmitHelpers": true,
+    "target": "es5",
+    "removeComments": false,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
+    "importHelpers": true,
+    "noErrorTruncation": true,
+    "declaration": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "exclude": [
     "dist",
@@ -22,5 +21,5 @@
     "compilerOptions": {
       "module": "commonjs"
     }
-  },
+  }
 }

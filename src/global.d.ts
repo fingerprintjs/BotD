@@ -17,10 +17,10 @@ interface Navigator {
 interface Window {
   readonly chrome?: unknown
   readonly InstallTrigger?: unknown
-  readonly SharedArrayBuffer?: function
-  readonly callPhantom?: function
-  readonly _phantom?: function
-  readonly phantom?: function
+  readonly SharedArrayBuffer?: unknown
+  readonly callPhantom?: unknown
+  readonly _phantom?: unknown
+  readonly phantom?: unknown
   readonly __nightmare?: unknown
   readonly process?: NodeJS.Process & { type?: string }
 }

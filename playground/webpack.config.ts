@@ -1,6 +1,6 @@
 import { resolve } from 'path'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import CopyWebpackPlugin from 'copy-webpack-plugin'
+import * as HtmlWebpackPlugin from 'html-webpack-plugin'
+import * as CopyWebpackPlugin from 'copy-webpack-plugin'
 import { Configuration } from 'webpack'
 import 'webpack-dev-server'
 

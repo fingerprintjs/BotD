@@ -9,5 +9,6 @@
 .DS_Store
 .idea/
 .vscode/
-
 yarn-error.log
+.env
+local.log
