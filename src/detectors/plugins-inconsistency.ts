@@ -1,11 +1,11 @@
-import { BotKind, BrowserKind, ComponentDict, DetectionResponse, State } from '../types'
+import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '../types'
 
 export function detectPluginsLengthInconsistency({
   browserKind,
   isAndroid,
   isDesktopSafari,
   pluginsLength,
-}: ComponentDict): DetectionResponse {
+}: ComponentDict): DetectorResponse {
   if (pluginsLength.state !== State.Success || browserKind.state !== State.Success || isAndroid.state !== State.Success)
     return
   // We need to additionally check for mobile Safari, as it has 0 plugins. Same with mobile opera.

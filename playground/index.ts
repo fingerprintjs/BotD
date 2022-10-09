@@ -37,15 +37,15 @@ const runDetection = async () => {
     const detectionResult = instance.detect()
     const processTime = performance.now() - t0
 
-    const components = instance.get() ?? {}
-    const detectors = instance.getDetectorsResponses() ?? {}
+    const components = instance.getComponents() ?? {}
+    const detections = instance.getDetections() ?? {}
 
     result = {
       timeToGetResults: collectTime.toFixed(0) + ' ms',
       timeToCollectSignals: processTime.toFixed(0) + ' ms',
       detectionResult,
       collectedData: components,
-      detailedResults: detectors,
+      detailedResults: detections,
     }
 
     sourcesEl!.textContent = JSON.stringify(result.collectedData, null, 4)

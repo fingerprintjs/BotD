@@ -1,5 +1,5 @@
-import getComponents from './components'
-import getDetectors from './detection'
+import getDetectors from './detectors'
+import getSources from './sources'
 
 /**
  * Final output of bot detection.
@@ -51,7 +51,7 @@ export enum BotKind {
   CefSharp = 'cefsharp',
 }
 
-export type DetectionResponse = boolean | BotKind | undefined
+export type DetectorResponse = boolean | BotKind | undefined
 
 /**
  * Represents a component with state and value.
@@ -67,39 +67,40 @@ export type Component<T> =
     }
 
 /**
- * Dictionary of default components and their respective return types.
+ * Dictionary of default sources and their respective return types.
  */
-export type DefaultComponentsDict = ReturnType<typeof getComponents>
+export type DefaultSourceDict = ReturnType<typeof getSources>
 
 /**
  * Dictionary of default detectors and their respective types.
  */
-export type DefaultDetectorsDict = ReturnType<typeof getDetectors>
+export type DefaultDetectorDict = ReturnType<typeof getDetectors>
 
 /**
- * Represents a single component response type.
+ * Represents a single source response type.
  */
-export type ComponentResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
+export type SourceResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
-export type AbstractComponentDict = Record<string, ComponentResponse<any>>
+export type AbstractDetector = (...args: any[]) => DetectorResponse
 
-export type AbstractDetectorsResponsesDict = Record<string, BotDetectionResult>
+export type AbstractSourceDict = Record<string, SourceResponse<any>>
 
-export type AbstractDetector = (...args: any[]) => DetectionResponse
+export type AbstractDetectorDict = Record<string, AbstractDetector>
+
+export type AbstractComponentDict = Record<string, Component<any>>
+
+export type AbstractDetectionsDict = Record<string, BotDetectionResult>
 
 /**
- * Dictionary of detectors responses.
+ * Represents a dictionary of detectors detection.
  */
-export type DetectorsResponsesDict<T extends Record<string, AbstractDetector> = DefaultDetectorsDict> = Record<
-  keyof T,
-  BotDetectionResult
->
+export type DetectionDict<T extends AbstractDetectorDict = DefaultDetectorDict> = Record<keyof T, BotDetectionResult>
 
 /**
  * Dictionary of components.
  */
-export type ComponentDict<T extends AbstractComponentDict = DefaultComponentsDict> = {
-  [K in keyof T]: Component<ComponentResponse<T[K]>>
+export type ComponentDict<T extends AbstractSourceDict = DefaultSourceDict> = {
+  [K in keyof T]: Component<SourceResponse<T[K]>>
 }
 
 /**
@@ -108,10 +109,22 @@ export type ComponentDict<T extends AbstractComponentDict = DefaultComponentsDic
  * @interface BotDetectorInterface
  */
 export interface BotDetectorInterface {
+  /**
+   * Performs bot detection. Should be called after `collect()`.
+   */
   detect(): BotDetectionResult
+  /**
+   * Collects data from sources. You can retrieve the data using `getComponents()`.
+   */
   collect(): Promise<AbstractComponentDict>
-  get(): AbstractComponentDict | undefined
-  getDetectorsResponses(): AbstractDetectorsResponsesDict | undefined
+  /**
+   * Returns the collected data. Should be called after `collect()`.
+   */
+  getComponents(): AbstractComponentDict | undefined
+  /**
+   * Returns detection result for each detector. Should be called after `detect()`.
+   */
+  getDetections(): AbstractDetectionsDict | undefined
 }
 
 /**

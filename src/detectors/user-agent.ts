@@ -1,6 +1,6 @@
-import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
+import { BotKind, ComponentDict, DetectorResponse, State } from '../types'
 
-export function detectUserAgent({ userAgent }: ComponentDict): DetectionResponse {
+export function detectUserAgent({ userAgent }: ComponentDict): DetectorResponse {
   if (userAgent.state !== State.Success) return false
   if (/PhantomJS/i.test(userAgent.value)) return BotKind.PhantomJS
   if (/Headless/i.test(userAgent.value)) return BotKind.HeadlessChrome

@@ -1,7 +1,7 @@
 import { arrayIncludes } from '../ponyfills'
-import { BrowserKind, ComponentDict, DetectionResponse, State } from '../types'
+import { BrowserKind, ComponentDict, DetectorResponse, State } from '../types'
 
-export function detectEvalLengthInconsistency({ evalLength, browserKind }: ComponentDict): DetectionResponse {
+export function detectEvalLengthInconsistency({ evalLength, browserKind }: ComponentDict): DetectorResponse {
   if (
     evalLength.state !== State.Success ||
     browserKind.state !== State.Success ||

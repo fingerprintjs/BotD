@@ -1,6 +1,6 @@
-import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
+import { BotKind, ComponentDict, DetectorResponse, State } from '../types'
 
-export function detectRTT({ rtt, isAndroid }: ComponentDict): DetectionResponse {
+export function detectRTT({ rtt, isAndroid }: ComponentDict): DetectorResponse {
   if (rtt.state !== State.Success || isAndroid.state !== State.Success) return
   // Rtt is 0 on android webview
   if (isAndroid.value) return

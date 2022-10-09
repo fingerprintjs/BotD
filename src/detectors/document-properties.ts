@@ -1,7 +1,7 @@
-import { BotKind, ComponentDict, DetectionResponse, State } from '../types'
+import { BotKind, ComponentDict, DetectorResponse, State } from '../types'
 import { includes } from '../utils'
 
-export function detectDocumentProperties({ documentProps }: ComponentDict): DetectionResponse {
+export function detectDocumentProperties({ documentProps }: ComponentDict): DetectorResponse {
   if (documentProps.state !== State.Success) return false
   if (
     includes(

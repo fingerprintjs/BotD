@@ -15,10 +15,10 @@ describe('Integration', () => {
     expect(detectionResult).toBeInstanceOf(Object)
     expect(typeof detectionResult.bot).toBe('boolean')
 
-    const components = instance.get()
+    const components = instance.getComponents()
     expect(components).toBeInstanceOf(Object)
 
-    const detectorsResponses = instance.getDetectorsResponses()
-    expect(detectorsResponses).toBeInstanceOf(Object)
+    const detections = instance.getDetections()
+    expect(detections).toBeInstanceOf(Object)
   }, 10000) // Such tests can take too much time to complete on BrowserStack
 })

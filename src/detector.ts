@@ -1,5 +1,5 @@
-import getComponents from './components'
-import getDetectors from './detection'
+import getDetectors from './detectors'
+import getSources from './sources'
 import {
   BotdError,
   BotDetectionResult,
@@ -7,7 +7,7 @@ import {
   BotKind,
   Component,
   ComponentDict,
-  DetectorsResponsesDict,
+  DetectionDict,
   State,
 } from './types'
 
@@ -18,16 +18,21 @@ import {
  * @implements {BotDetectorInterface}
  */
 export default class BotDetector implements BotDetectorInterface {
-  private componentsDict: ComponentDict | undefined = undefined
+  protected components: ComponentDict | undefined = undefined
 
-  private detectorsResponsesDict: DetectorsResponsesDict | undefined = undefined
+  protected detections: DetectionDict | undefined = undefined
 
-  public get(): ComponentDict | undefined {
-    return this.componentsDict
+  public getComponents(): ComponentDict | undefined {
+    return this.components
   }
 
-  public getDetectorsResponses(): DetectorsResponsesDict | undefined {
-    return this.detectorsResponsesDict
+  public getDetections(): DetectionDict | undefined {
+    return this.detections
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  protected getSources() {
+    return getSources()
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -35,23 +40,19 @@ export default class BotDetector implements BotDetectorInterface {
     return getDetectors()
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  protected getComponents() {
-    return getComponents()
-  }
-
   /**
    * @inheritdoc
    */
   public detect(): BotDetectionResult {
-    if (this.componentsDict === undefined) {
+    if (this.components === undefined) {
       throw new Error("BotDetector.detect can't be called before BotDetector.collect")
     }
 
-    const components = this.componentsDict
+    const components = this.components
     const detectors = this.getDetectors()
-    const detectorsResponsesDict = {} as DetectorsResponsesDict
-    let finalDetectionRes: BotDetectionResult = {
+
+    const detections = {} as DetectionDict
+    let finalDetection: BotDetectionResult = {
       bot: false,
     }
 
@@ -59,52 +60,52 @@ export default class BotDetector implements BotDetectorInterface {
       const detector = detectors[detectorName as keyof typeof detectors]
       const detectorRes = detector(components)
 
-      let detectionRes: BotDetectionResult = { bot: false }
+      let detection: BotDetectionResult = { bot: false }
 
       if (typeof detectorRes === 'string') {
-        detectionRes = { bot: true, botKind: detectorRes }
+        detection = { bot: true, botKind: detectorRes }
       } else if (detectorRes) {
-        detectionRes = { bot: true, botKind: BotKind.Unknown }
+        detection = { bot: true, botKind: BotKind.Unknown }
       }
 
-      detectorsResponsesDict[detectorName as keyof typeof detectors] = detectionRes
+      detections[detectorName as keyof typeof detectors] = detection
 
-      if (detectionRes.bot) {
-        finalDetectionRes = detectionRes
+      if (detection.bot) {
+        finalDetection = detection
       }
     }
 
-    this.detectorsResponsesDict = detectorsResponsesDict
+    this.detections = detections
 
-    return finalDetectionRes
+    return finalDetection
   }
 
   /**
    * @inheritdoc
    */
   public async collect(): Promise<ComponentDict> {
-    const components = this.getComponents()
-    const resMap = {} as ComponentDict
+    const sources = this.getSources()
+    const components = {} as ComponentDict
 
-    const keys = Object.keys(components) as (keyof typeof components)[]
+    const sourcesKeys = Object.keys(sources) as (keyof typeof sources)[]
 
     await Promise.all(
-      keys.map(async (key) => {
-        const res = components[key]
+      sourcesKeys.map(async (sourceKey) => {
+        const res = sources[sourceKey]
 
         try {
-          resMap[key] = ({
+          components[sourceKey] = ({
             value: await res(),
             state: State.Success,
           } as Component<any>) as any
         } catch (error) {
           if (error instanceof BotdError) {
-            resMap[key] = {
+            components[sourceKey] = {
               state: error.state,
               error: `${error.name}: ${error.message}`,
             }
           } else {
-            resMap[key] = {
+            components[sourceKey] = {
               state: State.UnexpectedBehaviour,
               error: error instanceof Error ? `${error.name}: ${error.message}` : String(error),
             }
@@ -113,7 +114,7 @@ export default class BotDetector implements BotDetectorInterface {
       }),
     )
 
-    this.componentsDict = resMap
-    return resMap
+    this.components = components
+    return this.components
   }
 }

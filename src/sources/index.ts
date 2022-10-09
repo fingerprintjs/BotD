@@ -20,14 +20,14 @@ import getProductSub from './product-sub'
 import getRTT from './rtt'
 import getUserAgent from './user-agent'
 import getUserAgentData from './user-agent-data'
-import { getWebDriver } from './web-driver'
+import getWebDriver from './web-driver'
 import getWebGL from './webgl'
 import getWindowExternal from './window-external'
 import getWindowProperties from './window-properties'
 import getWindowSize from './window-size'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default function getComponents() {
+export default function getSources() {
   return {
     appVersion: getAppVersion,
     browserKind: getBrowserKind,
