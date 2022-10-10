@@ -1,9 +1,6 @@
 import getDetectors from './detectors'
 import getSources from './sources'
 
-/**
- * Final output of bot detection.
- */
 export type BotDetectionResult =
   | {
       bot: true

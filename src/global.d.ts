@@ -23,6 +23,7 @@ interface Window {
   readonly phantom?: unknown
   readonly __nightmare?: unknown
   readonly process?: NodeJS.Process & { type?: string }
+  readonly __fpjs_d_m?: unknown
 }
 
 interface Element {
