@@ -124,7 +124,7 @@ function setupBrowserstack(config) {
       // https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
       build: process.env.GITHUB_RUN_ID || makeBuildNumber(),
       // The timeout is reduced for testing sessions to not hold the BrowserStack queue long in case of problems.
-      timeout: 120,
+      timeout: 5 * 60,
     },
   })
 }
