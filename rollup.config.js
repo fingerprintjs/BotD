@@ -24,7 +24,7 @@ export const commonInput = {
 }
 
 export const commonOutput = {
-  name: 'Botd',
+  name: 'BotD',
   exports: 'named',
 }
 
