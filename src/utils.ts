@@ -1,4 +1,4 @@
-import { arrayFind, arrayIncludes, arrayReduce } from './ponyfills'
+import { arrayFind, arrayIncludes } from './ponyfills'
 
 export function getObjectProps(obj: Record<string, any>, props: string[] = []): string[] {
   if (Object.getPrototypeOf(obj) == null) return props
@@ -18,5 +18,5 @@ export function includes(arr: string[], ...keys: (string | RegExp)[]): boolean {
 }
 
 export function countTruthy(values: unknown[]): number {
-  return arrayReduce<unknown[], number>(values, (sum, value) => sum + (value ? 1 : 0), 0)
+  return values.reduce<number>((sum, value) => sum + (value ? 1 : 0), 0)
 }
