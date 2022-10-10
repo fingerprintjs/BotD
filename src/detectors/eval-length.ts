@@ -13,6 +13,6 @@ export function detectEvalLengthInconsistency({ evalLength, browserKind }: Compo
   return (
     (length === 37 && !arrayIncludes([BrowserKind.Firefox, BrowserKind.Safari], browser)) ||
     (length === 39 && !arrayIncludes([BrowserKind.IE], browser)) ||
-    (length === 33 && !arrayIncludes([BrowserKind.Chrome, BrowserKind.Opera], browser))
+    (length === 33 && !arrayIncludes([BrowserKind.Chrome, BrowserKind.Opera, BrowserKind.WeChat], browser))
   )
 }

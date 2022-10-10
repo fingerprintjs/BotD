@@ -3,9 +3,10 @@ import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '..
 export default function detectProductSub({ browserKind, productSub }: ComponentDict): DetectorResponse {
   if (productSub.state !== State.Success || browserKind.state !== State.Success) return false
   if (
-    (browserKind.value == BrowserKind.Chrome ||
-      browserKind.value == BrowserKind.Safari ||
-      browserKind.value == BrowserKind.Opera) &&
+    (browserKind.value === BrowserKind.Chrome ||
+      browserKind.value === BrowserKind.Safari ||
+      browserKind.value === BrowserKind.Opera ||
+      browserKind.value === BrowserKind.WeChat) &&
     productSub.value !== '20030107'
   )
     return BotKind.Unknown
