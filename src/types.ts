@@ -160,4 +160,5 @@ export enum BrowserKind {
   Opera = 'opera',
   Safari = 'safari',
   IE = 'internet_explorer',
+  WeChat = 'wechat',
 }

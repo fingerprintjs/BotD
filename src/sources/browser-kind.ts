@@ -7,7 +7,9 @@ export default function getBrowserKind(): BrowserKind {
     throw new BotdError(State.Undefined, 'navigator.userAgent is undefined')
   }
 
-  if (strIncludes(userAgent, 'firefox')) {
+  if (strIncludes(userAgent, 'wechat')) {
+    return BrowserKind.WeChat
+  } else if (strIncludes(userAgent, 'firefox')) {
     return BrowserKind.Firefox
   } else if (strIncludes(userAgent, 'opera') || strIncludes(userAgent, 'opr')) {
     return BrowserKind.Opera

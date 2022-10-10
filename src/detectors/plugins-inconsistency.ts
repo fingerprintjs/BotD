@@ -11,7 +11,8 @@ export function detectPluginsLengthInconsistency({
   // We need to additionally check for mobile Safari, as it has 0 plugins. Same with mobile opera.
   if (
     (isDesktopSafari.state === State.Success && !isDesktopSafari.value) ||
-    (browserKind.value === BrowserKind.Opera && isAndroid.value)
+    (browserKind.value === BrowserKind.Opera && isAndroid.value) ||
+    (browserKind.value === BrowserKind.WeChat && isAndroid.value)
   )
     return
   if (pluginsLength.value === 0) return BotKind.HeadlessChrome
