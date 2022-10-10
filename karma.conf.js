@@ -68,7 +68,7 @@ function setupLocal(config) {
 
       'src/**/*.ts',
       'tests/**/*.ts',
-      'dist/botd.min.js',
+      'test-dist/botd.min.js',
     ],
     preprocessors: {
       '**/*.ts': 'karma-typescript',

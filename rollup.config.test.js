@@ -1,8 +1,16 @@
-import { commonInput, createBundle } from './rollup.config'
+import { commonInput, commonOutput } from './rollup.config'
+
+const outputDirectory = 'test-dist'
 
 export default [
   {
     ...commonInput,
-    output: [createBundle('botd.min.js', 'iife')],
+    output: [
+      {
+        ...commonOutput,
+        file: `${outputDirectory}/botd.min.js`,
+        format: 'iife',
+      },
+    ],
   },
 ]

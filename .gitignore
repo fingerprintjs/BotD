@@ -4,6 +4,7 @@
 /coverage/
 /node_modules/
 /playground/dist/
+/test-dist/
 
 # Random excess stuff
 .DS_Store

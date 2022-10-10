@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
-    "build:test": "rimraf dist && rollup -c rollup.config.test.js",
+    "build:test": "rimraf test-dist && rollup -c rollup.config.test.js",
     "dev:playground": "cross-env DEV=1 webpack serve --config ./playground/webpack.config.ts",
     "build:playground": "rimraf ./playground/dist && webpack --config ./playground/webpack.config.ts",
     "lint": "eslint src playground",
