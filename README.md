@@ -97,8 +97,9 @@ load()
 
 ### Documentation links:
 
--   #### [API](docs/api.md)
--   #### [Error Handling](docs/error.md)
+-   #### [API Reference](docs/api.md)
+-   #### [Browser Support](docs/browser_support.md)
+-   #### [Migration Guide](docs/migration_guide.md)
 
 ### Contributing
 
