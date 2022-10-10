@@ -49,8 +49,7 @@ const browserstackBrowsers = {
   iOS12_Safari: { device: 'iPhone XS', os: 'iOS', os_version: '12', browser: 'Safari' },
   iOS13_Safari: { device: 'iPhone 11 Pro', os: 'iOS', os_version: '13', browser: 'Safari' },
   iOS14_Safari: { device: 'iPhone 11', os: 'iOS', os_version: '14', browser: 'Safari' },
-  // iOS15_Safari: { device: 'iPhone 11 Pro', os: 'iOS', os_version: '15', browser: 'Safari' },
-  
+  iOS15_Safari: { device: 'iPhone 11 Pro', os: 'iOS', os_version: '15', browser: 'Safari' }
 }
 /* eslint-enable max-len */
 
