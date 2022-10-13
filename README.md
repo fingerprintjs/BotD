@@ -86,11 +86,16 @@ Pro combines vast amounts of auxiliary data that bots leak (cursor movements, ne
 
 **Pro plans start at $0/month - no credit card required.**
 
+<br />
+
 <p align="center">
   <a href="https://fingerprint.com/products/bot-detection/">
-    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="697px" />
+    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="512px" />
   </a>
 </p>
+
+<br />
+<br />
 
 Full product comparison:
 
