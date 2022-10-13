@@ -10,7 +10,8 @@
     "declaration": false,
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "dist",
