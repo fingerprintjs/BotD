@@ -1,6 +1,7 @@
 import { version } from '../package.json'
 import BotDetector from './detector'
 import { BotDetectorInterface } from './types'
+import getSources from './sources'
 export * from './sources'
 
 /**
@@ -43,3 +44,4 @@ export async function load({ monitoring = true }: Readonly<LoadOptions> = {}): P
 }
 
 export default { load }
+export { getSources }

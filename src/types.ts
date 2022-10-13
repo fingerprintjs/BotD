@@ -22,9 +22,7 @@ export enum State {
   Success = 1,
   Null = 101,
   UnexpectedBehaviour = 102,
-  WrongType = 103,
   NotFunction = 104,
-  ObfuscationError = 105,
 }
 
 /**
@@ -40,7 +38,6 @@ export enum BotKind {
   Nightmare = 'nightmare',
   Selenium = 'selenium',
   Electron = 'electron',
-  NodeJS = 'nodejs',
   Rhino = 'rhino',
   CouchJS = 'couchjs',
   Sequentum = 'sequentum',

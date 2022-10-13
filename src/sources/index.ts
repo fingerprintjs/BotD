@@ -1,60 +1,46 @@
-import getAppVersion from './app-version'
-import getBrowserEngineKind from './browser-engine-kind'
-import getBrowserKind from './browser-kind'
-import getDocumentAttributes from './document-attributes'
-import getDocumentFocus from './document-focus'
-import getDocumentProperties from './document-properties'
-import getErrorTrace from './error-trace'
-import getEvalLength from './eval-length'
-import getFunctionBind from './function-bind'
-import isAndroid from './is-android'
-import isDesktopSafari from './is-desktop-safari'
+import getAppVersion from './app_version'
+import getDocumentAttributes from './document_element_attributes'
+import getDocumentProperties from './document_properties'
+import getErrorTrace from './error_trace'
+import getEvalLength from './eval_length'
+import getFunctionBind from './function_bind'
 import getLanguages from './languages'
-import areMimeTypesConsistent from './mime-types-consistence'
-import { getMozAppearanceSupport } from './moz-appearance'
-import getPermissions from './permissions'
-import getPluginsArray from './plugins-array'
-import getPluginsLength from './plugins-length'
+import areMimeTypesConsistent from './mime_types_consistence'
+import getNotificationPermissions from './notification_permissions'
+import getPluginsArray from './plugins_array'
+import getPluginsLength from './plugins_length'
 import getProcess from './process'
-import getProductSub from './product-sub'
+import getProductSub from './product_sub'
 import getRTT from './rtt'
-import getUserAgent from './user-agent'
-import getUserAgentData from './user-agent-data'
-import getWebDriver from './web-driver'
+import getUserAgent from './user_agent'
+import getWebDriver from './webdriver'
 import getWebGL from './webgl'
-import getWindowExternal from './window-external'
-import getWindowProperties from './window-properties'
-import getWindowSize from './window-size'
+import getWindowExternal from './window_external'
+import getWindowProperties from './window_properties'
+import getWindowSize from './window_size'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function getSources() {
   return {
-    appVersion: getAppVersion,
-    browserKind: getBrowserKind,
-    documentAttributes: getDocumentAttributes,
-    documentProps: getDocumentProperties,
-    errorTrace: getErrorTrace,
-    evalLength: getEvalLength,
-    functionBind: getFunctionBind,
-    languages: getLanguages,
-    permissions: getPermissions,
-    pluginsArray: getPluginsArray,
-    pluginsLength: getPluginsLength,
-    process: getProcess,
-    rtt: getRTT,
     userAgent: getUserAgent,
-    userAgentData: getUserAgentData,
-    webDriver: getWebDriver,
-    webGL: getWebGL,
-    windowExternal: getWindowExternal,
-    windowProps: getWindowProperties,
+    appVersion: getAppVersion,
+    rtt: getRTT,
     windowSize: getWindowSize,
-    mimeTypesConsistent: areMimeTypesConsistent,
+    pluginsLength: getPluginsLength,
+    pluginsArray: getPluginsArray,
+    errorTrace: getErrorTrace,
     productSub: getProductSub,
-    mozAppearanceSupport: getMozAppearanceSupport,
-    documentFocus: getDocumentFocus,
-    isAndroid: isAndroid,
-    browserEngineKind: getBrowserEngineKind,
-    isDesktopSafari: isDesktopSafari,
+    windowExternal: getWindowExternal,
+    mimeTypesConsistent: areMimeTypesConsistent,
+    evalLength: getEvalLength,
+    webGL: getWebGL,
+    webDriver: getWebDriver,
+    languages: getLanguages,
+    notificationPermissions: getNotificationPermissions,
+    documentAttributes: getDocumentAttributes,
+    functionBind: getFunctionBind,
+    process: getProcess,
+    documentProps: getDocumentProperties,
+    windowProps: getWindowProperties,
   }
 }

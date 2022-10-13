@@ -1,8 +1,9 @@
 import { BotKind, ComponentDict, DetectorResponse, State } from '../types'
+import { isAndroid } from '../utils/browser'
 
-export function detectRTT({ rtt, isAndroid }: ComponentDict): DetectorResponse {
-  if (rtt.state !== State.Success || isAndroid.state !== State.Success) return
+export function detectRTT({ rtt }: ComponentDict): DetectorResponse {
+  if (rtt.state !== State.Success) return
   // Rtt is 0 on android webview
-  if (isAndroid.value) return
+  if (isAndroid()) return
   if (rtt.value === 0) return BotKind.HeadlessChrome
 }
