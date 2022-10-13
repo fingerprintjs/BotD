@@ -1,4 +1,6 @@
-# 📙 BotD API Migration Guide
+# Migrating BotD v0 to v1
+
+This guide shows how to migrate your code from BotD version 0 to version 1.
 
 The API has changed, and **you need to update your code**.
 
