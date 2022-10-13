@@ -81,7 +81,7 @@ load()
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
-### `botDetector.detect(): Promise<BotDetectionResult>`
+#### `botDetector.detect(): Promise<BotDetectionResult>`
 
 Performs bot detection. Returns an object that contains information if it's a bot and it's name.
 
