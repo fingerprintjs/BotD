@@ -1,4 +1,4 @@
-import { BotdError, State } from '@fpjs-incubator/botd-agent/src/types'
+import { BotdError, State } from '../types'
 
 export default function getNotificationPermissions(): Promise<boolean> {
   if (window.Notification === undefined) {
