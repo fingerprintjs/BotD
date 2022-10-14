@@ -193,7 +193,7 @@ See the [contributing guidelines](contributing.md) to learn how to start a playg
 
 ## Other products by Fingerprint
 
--   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://fingerprintjs.github.io/fingerprintjs/)
+-   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://github.com/fingerprintjs/fingerprintjs)
 -   [AEV -- Android App Environment Verification API](https://github.com/fingerprintjs/aev)
 
 ### License
