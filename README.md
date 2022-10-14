@@ -155,7 +155,7 @@ Pro result example:
 {
     "bot": {
         "result": "bad"
-        "type": "webdriver"
+        "type": "selenium"
     }
 }
 ```
