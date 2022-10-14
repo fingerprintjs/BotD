@@ -1,8 +1,7 @@
 import packageInfo from '../package.json'
 import BotDetector from './detector'
-import { BotDetectorInterface } from './types'
 import getSources from './sources'
-export * from './sources'
+import { BotdError, BotDetectorInterface } from './types'
 
 /**
  * Options for BotD loading
@@ -19,7 +18,7 @@ export interface LoadOptions {
  * Sends an unpersonalized AJAX request to collect installation statistics
  */
 function monitor() {
-  // The FingerprintJS CDN (https://github.com/f ingerprintjs/cdn) replaces `window.__fpjs_d_m` with `true`
+  // The FingerprintJS CDN (https://github.com/fingerprintjs/cdn) replaces `window.__fpjs_d_m` with `true`
   if (window.__fpjs_d_m || Math.random() >= 0.001) {
     return
   }
@@ -44,4 +43,7 @@ export async function load({ monitoring = true }: Readonly<LoadOptions> = {}): P
 }
 
 export default { load }
-export { getSources }
+
+// The exports below are for private usage. They may change unexpectedly. Use them at your own risk.
+/** Not documented, out of Semantic Versioning, usage is at your own risk */
+export { getSources, BotdError }
