@@ -1,15 +1,8 @@
 import { BotdError, State } from '../types'
 
-export interface ProcessPayload {
-  type?: string
-  versions?: {
-    electron?: string
-  }
-}
-
-export default function getProcess(): ProcessPayload {
+export default function getProcess(): typeof window.process {
   if (window.process === undefined) {
     throw new BotdError(State.Undefined, 'window.process is undefined')
   }
-  return window.process as ProcessPayload
+  return window.process
 }

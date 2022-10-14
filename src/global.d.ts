@@ -20,7 +20,12 @@ interface Window {
   readonly _phantom?: unknown
   readonly phantom?: unknown
   readonly __nightmare?: unknown
-  readonly process?: NodeJS.Process & { type?: string }
+  readonly process?: {
+    type?: string
+    versions?: {
+      electron?: string
+    }
+  }
   readonly __fpjs_d_m?: unknown
 }
 
