@@ -183,7 +183,7 @@ See more details and learn how to run the library in old browsers in the [browse
 
 ## Where to get support
 
-Thanks to our [series B funding](https://fingerprint.com/blog/series-b/), we are happy to provide technical support for our open-source FingerprintJS library. We recommend using GitHub [Issues](https://github.com/fingerprintjs/fingerprintjs/issues) to submit bugs or [Discussions](https://github.com/fingerprintjs/fingerprintjs/discussions) to ask questions.
+Thanks to our [series B funding](https://fingerprint.com/blog/series-b/), we are happy to provide technical support for our open-source BotD library. We recommend using GitHub [Issues](https://github.com/fingerprintjs/BotD/issues) to submit bugs or [Discussions](https://github.com/fingerprintjs/BotD/discussions) to ask questions.
 Using issues and discussions publicly will help the open-source community and other users with similar issues.
 However, if you require private support, please email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
 
