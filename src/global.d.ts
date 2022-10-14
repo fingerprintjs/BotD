@@ -1,5 +1,3 @@
-import { ProcessPayload } from './sources/process'
-
 interface NetworkInformation extends EventTarget {
   readonly rtt: number
 }
@@ -22,7 +20,7 @@ interface Window {
   readonly _phantom?: unknown
   readonly phantom?: unknown
   readonly __nightmare?: unknown
-  readonly process?: ProcessPayload
+  readonly process?: unknown
   readonly __fpjs_d_m?: unknown
 }
 
