@@ -1,17 +1,11 @@
 import { BotdError, State } from '../types'
-import { getMozAppearanceSupport } from '../utils/browser'
 
 export interface WebGLPayload {
   vendor: string
   renderer: string
 }
 
-export interface WebGLMozPayload {
-  vendor: string
-  renderer: string
-}
-
-export default function getWebGL(): WebGLPayload | WebGLMozPayload {
+export default function getWebGL(): WebGLPayload {
   const canvasElement = document.createElement('canvas')
 
   if (typeof canvasElement.getContext !== 'function') {
@@ -30,16 +24,6 @@ export default function getWebGL(): WebGLPayload | WebGLMozPayload {
 
   const vendor = webGLContext.getParameter(webGLContext.VENDOR)
   const renderer = webGLContext.getParameter(webGLContext.RENDERER)
-
-  if (getMozAppearanceSupport()) {
-    return { vendor: vendor, renderer: renderer }
-  }
-
-  const webGLDebugInfo = webGLContext.getExtension('WEBGL_debug_renderer_info')
-
-  if (webGLDebugInfo === null) {
-    throw new BotdError(State.Null, 'WEBGL_debug_renderer_info extension is null')
-  }
 
   return { vendor: vendor, renderer: renderer }
 }
