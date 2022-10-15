@@ -81,9 +81,17 @@ load()
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
+#### `botDetector.collect(): Promise<AbstractSourceDict>`
+
+Performs data collection. Returns a promise which resolves to a dictionary of collected sources.
+
+> You should not call this method directly if you called `BotD.load` previously.
+
 #### `botDetector.detect(): Promise<BotDetectionResult>`
 
 Performs bot detection. Returns an object that contains information if it's a bot and it's name.
+
+> If you used `BotD.load` previously, you can call this method directly, otherwise you should call `botDetector.collect` first.
 
 ```ts
 type BotDetectionResult =
