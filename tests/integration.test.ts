@@ -1,4 +1,11 @@
-import * as BotD from '../src'
+import * as BotDModule from '../src'
+
+/*
+ * Checks that the distributive file works in a browser.
+ * Build the minified script before running this test.
+ */
+
+declare const BotD: typeof BotDModule
 
 describe('Integration', () => {
   it('performs bot detection', async () => {
