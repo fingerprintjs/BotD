@@ -60,13 +60,13 @@
 ### NPM
 
 ```bash
-npm i @fingerprintjs/botd-agent
+npm i @fingerprintjs/botd
 # or
-yarn add @fingerprintjs/botd-agent
+yarn add @fingerprintjs/botd
 ```
 
 ```js
-import { load } from '@fingerprintjs/botd-agent'
+import { load } from '@fingerprintjs/botd'
 
 // Initialize an agent at application startup.
 load()

@@ -58,7 +58,7 @@ yarn add promise-polyfill
 
 ```diff
 + import 'promise-polyfill/src/polyfill'
-  import BotD from '@fingerprintjs/botd-agent'
+  import BotD from '@fingerprintjs/botd'
 
   // ...
 ```
@@ -81,7 +81,7 @@ yarn add promise-polyfill
 
 ```diff
 + require('promise-polyfill/src/polyfill')
-  const BotD = require('@fingerprintjs/botd-agent')
+  const BotD = require('@fingerprintjs/botd')
 
   // ...
 ```

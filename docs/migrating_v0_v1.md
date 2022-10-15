@@ -30,7 +30,7 @@ In the new version, we have implemented detection logic on the client side, mean
 
 ```diff
 - import Botd from '@fpjs-incubator/botd-agent';
-+ import Botd from '@fingerprintjs/botd-agent';
++ import Botd from '@fingerprintjs/botd';
 
 // Initialize an agent at application startup.
 - const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
