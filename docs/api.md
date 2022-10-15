@@ -26,13 +26,13 @@ see the [browser support guide](browser_support.md#import-support).
 
 ```bash
 # Install the package first:
-npm i @fpjs-incubator/botd-agent
+npm i @fingerprintjs/botd-agent
 # or
-yarn add @fpjs-incubator/botd-agent
+yarn add @fingerprintjs/botd-agent
 ```
 
 ```js
-import { load } from '@fpjs-incubator/botd-agent'
+import { load } from '@fingerprintjs/botd-agent'
 
 // Initialize an agent at application startup.
 load()
@@ -65,7 +65,7 @@ const botdPromise = BotD.load({
 ### CommonJS syntax:
 
 ```js
-const { load } = require('@fpjs-incubator/botd-agent')
+const { load } = require('@fingerprintjs/botd-agent')
 
 // Initialize an agent at application startup.
 load()

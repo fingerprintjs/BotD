@@ -29,7 +29,8 @@ In the new version, we have implemented detection logic on the client side, mean
 ## NPM
 
 ```diff
-import Botd from '@fpjs-incubator/botd-agent';
+- import Botd from '@fpjs-incubator/botd-agent';
++ import Botd from '@fingerprintjs/botd-agent';
 
 // Initialize an agent at application startup.
 - const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
