@@ -47,9 +47,9 @@
 
 ```html
 <script>
-    // Initialize the agent at application startup.
+    // Initialize an agent at application startup, once per page/app.
     const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
-
+    // Get detection results when you need them.
     botdPromise
         .then((botd) => botd.detect())
         .then((result) => console.log(result))
@@ -68,8 +68,10 @@ yarn add @fingerprintjs/botd
 ```js
 import { load } from '@fingerprintjs/botd'
 
-// Initialize an agent at application startup.
-load()
+// Initialize an agent at application startup, once per page/app.
+const botdPromise = load()
+// Get detection results when you need them.
+botdPromise
     .then((botd) => botd.detect())
     .then((result) => console.log(result))
     .catch((error) => console.error(error))

@@ -81,6 +81,8 @@ load()
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.
 
+> It's needed only once per page/app. Then you can get detection results when you need them.
+
 #### `botDetector.collect(): Promise<AbstractSourceDict>`
 
 Performs data collection. Returns a promise which resolves to a dictionary of collected sources.
