@@ -89,16 +89,11 @@ botdPromise
 
 Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
 
-<br />
-
 <p align="center">
   <a href="https://fingerprint.com/products/bot-detection/">
-    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="512px" />
+    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="700px" />
   </a>
 </p>
-
-<br />
-<br />
 
 Full product comparison:
 
