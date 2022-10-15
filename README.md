@@ -79,12 +79,13 @@ load()
 
 📕 [Full documentation](docs/api.md)
 
-## 🤖 Use the free Pro version to get sophisticated bot detection
+## 🤖 Upgrade to Fingerprint Pro bot detection to detect sophisticated bots easily
+
+**Always free for developers, unlimited free trials available, no credit card needed.**
 
 [Fingerprint Pro](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
-Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
 
-**Pro plans start at $0/month - no credit card required.**
+Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
 
 <br />
 
