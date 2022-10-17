@@ -2,8 +2,8 @@ name: Demo
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 
 jobs:
   build:
