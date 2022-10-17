@@ -9,7 +9,7 @@ import areMimeTypesConsistent from './mime_types_consistence'
 import getNotificationPermissions from './notification_permissions'
 import getPluginsArray from './plugins_array'
 import getPluginsLength from './plugins_length'
-import getProcess from './process'
+import getProcess, { ProcessPayload } from './process'
 import getProductSub from './product_sub'
 import getRTT from './rtt'
 import getUserAgent from './user_agent'
@@ -17,7 +17,7 @@ import getWebDriver from './webdriver'
 import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowProperties from './window_properties'
-import getWindowSize from './window_size'
+import getWindowSize, { WindowSizePayload } from './window_size'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function getSources() {
@@ -44,3 +44,5 @@ export default function getSources() {
     windowProps: getWindowProperties,
   }
 }
+
+export { WindowSizePayload, ProcessPayload }
