@@ -1,8 +1,7 @@
 import { arrayFind, arrayIncludes } from './ponyfills'
 
-export function getObjectProps(obj: Record<string, any>, props: string[] = []): string[] {
-  if (Object.getPrototypeOf(obj) == null) return props
-  return getObjectProps(Object.getPrototypeOf(obj), props.concat(Object.getOwnPropertyNames(obj)))
+export function getObjectProps(obj: Record<string, any>): string[] {
+  return Object.getOwnPropertyNames(obj)
 }
 
 export function includes(arr: string[], ...keys: (string | RegExp)[]): boolean {

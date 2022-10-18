@@ -1,4 +1,12 @@
 import { load } from '../src'
+import {
+  getBrowserEngineKind,
+  getBrowserKind,
+  getDocumentFocus,
+  getMozAppearanceSupport,
+  isAndroid,
+  isDesktopSafari,
+} from '../src/utils/browser'
 import './style.css'
 
 interface Result {
@@ -22,6 +30,7 @@ const runDetection = async () => {
   const sourcesEl = document.getElementById('sources')
   const resultEl = document.getElementById('result')
   const detailedResultsEl = document.getElementById('detailed-results')
+  const debugDataEl = document.getElementById('debug-data')
 
   statusEl!.textContent = 'Loading...'
   resultTableEl!.innerHTML = ''
@@ -60,6 +69,18 @@ const runDetection = async () => {
 
     detailedResultsEl!.textContent = 'Detailed results:'
     detailedResultsEl!.textContent = JSON.stringify(result.detailedResults, null, 4)
+
+    const debugData = {
+      browserEngineKind: getBrowserEngineKind(),
+      browserKind: getBrowserKind(),
+      documentFocus: getDocumentFocus(),
+      mozAppearanceSupport: getMozAppearanceSupport(),
+      isAndroid: isAndroid(),
+      isDesktopSafari: isDesktopSafari(),
+    }
+
+    debugDataEl!.textContent = 'Debug data:'
+    debugDataEl!.textContent = JSON.stringify(debugData, null, 4)
 
     const resultTableEntries = [
       [

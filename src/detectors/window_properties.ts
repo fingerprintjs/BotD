@@ -1,5 +1,5 @@
 import { BotKind, ComponentDict, DetectorResponse, State } from '../types'
-import { includes } from '../utils'
+import { includes } from '../utils/misc'
 
 export function detectWindowProperties({ windowProps }: ComponentDict): DetectorResponse {
   if (windowProps.state !== State.Success) return false

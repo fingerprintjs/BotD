@@ -18,13 +18,11 @@ export type BotDetectionResult =
  */
 export enum State {
   Unexpected = -100,
+  Success = 0,
   Undefined = -1,
-  Success = 1,
-  Null = 101,
-  UnexpectedBehaviour = 102,
-  WrongType = 103,
-  NotFunction = 104,
-  ObfuscationError = 105,
+  NotFunction = -2,
+  UnexpectedBehaviour = -3,
+  Null = -4,
 }
 
 /**
@@ -40,7 +38,6 @@ export enum BotKind {
   Nightmare = 'nightmare',
   Selenium = 'selenium',
   Electron = 'electron',
-  NodeJS = 'nodejs',
   Rhino = 'rhino',
   CouchJS = 'couchjs',
   Sequentum = 'sequentum',

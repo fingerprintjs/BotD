@@ -1,23 +1,23 @@
-import { detectAppVersion } from './app-version'
-import { detectDocumentAttributes } from './document-attributes'
-import { detectDocumentProperties } from './document-properties'
-import { detectErrorTrace } from './error-trace'
-import { detectEvalLengthInconsistency } from './eval-length'
-import { detectFunctionBind } from './function-bind'
-import { detectLanguagesLengthInconsistency } from './languages-inconsistency'
-import detectMimeTypesConsistent from './mime-types-consistence'
-import { detectPermissions } from './permissions'
-import { detectPluginsArray } from './plugins-array'
-import { detectPluginsLengthInconsistency } from './plugins-inconsistency'
+import { detectAppVersion } from './app_version'
+import { detectDocumentAttributes } from './document_attributes'
+import { detectDocumentProperties } from './document_properties'
+import { detectErrorTrace } from './error_trace'
+import { detectEvalLengthInconsistency } from './eval_length'
+import { detectFunctionBind } from './function_bind'
+import { detectLanguagesLengthInconsistency } from './languages_inconsistency'
+import detectMimeTypesConsistent from './mime_types_consistence'
+import { detectNotificationPermissions } from './notification_permissions'
+import { detectPluginsArray } from './plugins_array'
+import { detectPluginsLengthInconsistency } from './plugins_inconsistency'
 import { detectProcess } from './process'
-import detectProductSub from './product-sub'
+import detectProductSub from './product_sub'
 import { detectRTT } from './rtt'
-import { detectUserAgent } from './user-agent'
-import { detectWebDriver } from './web-driver'
+import { detectUserAgent } from './user_agent'
+import { detectWebDriver } from './webdriver'
 import { detectWebGL } from './webgl'
-import { detectWindowExternal } from './window-external'
-import { detectWindowProperties } from './window-properties'
-import { detectWindowSize } from './window-size'
+import { detectWindowExternal } from './window_external'
+import { detectWindowProperties } from './window_properties'
+import { detectWindowSize } from './window_size'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function getDetectors() {
@@ -29,7 +29,7 @@ export default function getDetectors() {
     detectEvalLengthInconsistency,
     detectFunctionBind,
     detectLanguagesLengthInconsistency,
-    detectPermissions,
+    detectNotificationPermissions,
     detectPluginsArray,
     detectPluginsLengthInconsistency,
     detectProcess,

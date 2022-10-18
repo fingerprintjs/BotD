@@ -1,7 +1,11 @@
 import { BotdError, State } from '../types'
-import { getMozAppearanceSupport } from './moz-appearance'
 
-export default function getWebGL(): string[] {
+export interface WebGLPayload {
+  vendor: string
+  renderer: string
+}
+
+export default function getWebGL(): WebGLPayload {
   const canvasElement = document.createElement('canvas')
 
   if (typeof canvasElement.getContext !== 'function') {
@@ -20,18 +24,6 @@ export default function getWebGL(): string[] {
 
   const vendor = webGLContext.getParameter(webGLContext.VENDOR)
   const renderer = webGLContext.getParameter(webGLContext.RENDERER)
-  const version = webGLContext.getParameter(webGLContext.VERSION)
 
-  if (getMozAppearanceSupport()) return [vendor, renderer, version]
-
-  const webGLDebugInfo = webGLContext.getExtension('WEBGL_debug_renderer_info')
-
-  if (webGLDebugInfo === null) {
-    throw new BotdError(State.Null, 'WEBGL_debug_renderer_info extension is null')
-  }
-
-  const unmaskedVendor = webGLContext.getParameter(webGLDebugInfo.UNMASKED_VENDOR_WEBGL)
-  const unmaskedRenderer = webGLContext.getParameter(webGLDebugInfo.UNMASKED_RENDERER_WEBGL)
-
-  return [vendor, renderer, version, unmaskedVendor, unmaskedRenderer]
+  return { vendor: vendor, renderer: renderer }
 }

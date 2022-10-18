@@ -10,8 +10,6 @@ interface NavigatorUAData {
 interface Navigator {
   readonly connection?: NetworkInformation
   readonly userAgentData?: NavigatorUAData
-  readonly deviceMemory?: number
-  readonly oscpu?: string
 }
 
 interface Window {
@@ -22,7 +20,7 @@ interface Window {
   readonly _phantom?: unknown
   readonly phantom?: unknown
   readonly __nightmare?: unknown
-  readonly process?: NodeJS.Process & { type?: string }
+  readonly process?: unknown
   readonly __fpjs_d_m?: unknown
 }
 
