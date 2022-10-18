@@ -29,7 +29,7 @@ export default function getDetectors() {
     detectEvalLengthInconsistency,
     detectFunctionBind,
     detectLanguagesLengthInconsistency,
-    detectPermissions: detectNotificationPermissions,
+    detectNotificationPermissions,
     detectPluginsArray,
     detectPluginsLengthInconsistency,
     detectProcess,

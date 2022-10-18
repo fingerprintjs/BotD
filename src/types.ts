@@ -18,11 +18,11 @@ export type BotDetectionResult =
  */
 export enum State {
   Unexpected = -100,
+  Success = 0,
   Undefined = -1,
-  Success = 1,
-  Null = 101,
-  UnexpectedBehaviour = 102,
-  NotFunction = 104,
+  NotFunction = -2,
+  UnexpectedBehaviour = -3,
+  Null = -4,
 }
 
 /**
