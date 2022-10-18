@@ -9,7 +9,7 @@ const isDev = process.env.DEV === '1'
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
   target: 'web',
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
 
   entry: './playground/index.ts',
 
