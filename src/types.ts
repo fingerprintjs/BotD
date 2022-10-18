@@ -1,5 +1,5 @@
-import getDetectors from './detectors'
-import getSources from './sources'
+import { detectors } from './detectors'
+import { sources } from './sources'
 
 export type BotDetectionResult =
   | {
@@ -63,12 +63,12 @@ export type Component<T> =
 /**
  * Dictionary of default sources and their respective return types.
  */
-export type DefaultSourceDict = ReturnType<typeof getSources>
+export type DefaultSourceDict = typeof sources
 
 /**
  * Dictionary of default detectors and their respective types.
  */
-export type DefaultDetectorDict = ReturnType<typeof getDetectors>
+export type DefaultDetectorDict = typeof detectors
 
 /**
  * Represents a single source response type.

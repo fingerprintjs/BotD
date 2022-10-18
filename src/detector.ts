@@ -1,5 +1,5 @@
-import getDetectors from './detectors'
-import getSources from './sources'
+import { detectors } from './detectors'
+import { sources } from './sources'
 import {
   BotdError,
   BotDetectionResult,
@@ -32,12 +32,12 @@ export default class BotDetector implements BotDetectorInterface {
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   protected getSources() {
-    return getSources()
+    return sources
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   protected getDetectors() {
-    return getDetectors()
+    return detectors
   }
 
   /**

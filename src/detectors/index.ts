@@ -20,27 +20,25 @@ import { detectWindowProperties } from './window_properties'
 import { detectWindowSize } from './window_size'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default function getDetectors() {
-  return {
-    detectAppVersion,
-    detectDocumentAttributes,
-    detectDocumentProperties,
-    detectErrorTrace,
-    detectEvalLengthInconsistency,
-    detectFunctionBind,
-    detectLanguagesLengthInconsistency,
-    detectNotificationPermissions,
-    detectPluginsArray,
-    detectPluginsLengthInconsistency,
-    detectProcess,
-    detectRTT,
-    detectUserAgent,
-    detectWebDriver,
-    detectWebGL,
-    detectWindowExternal,
-    detectWindowProperties,
-    detectWindowSize,
-    detectMimeTypesConsistent,
-    detectProductSub,
-  }
+export const detectors = {
+  detectAppVersion,
+  detectDocumentAttributes,
+  detectDocumentProperties,
+  detectErrorTrace,
+  detectEvalLengthInconsistency,
+  detectFunctionBind,
+  detectLanguagesLengthInconsistency,
+  detectNotificationPermissions,
+  detectPluginsArray,
+  detectPluginsLengthInconsistency,
+  detectProcess,
+  detectRTT,
+  detectUserAgent,
+  detectWebDriver,
+  detectWebGL,
+  detectWindowExternal,
+  detectWindowProperties,
+  detectWindowSize,
+  detectMimeTypesConsistent,
+  detectProductSub,
 }

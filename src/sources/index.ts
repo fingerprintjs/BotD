@@ -19,30 +19,27 @@ import getWindowExternal from './window_external'
 import getWindowProperties from './window_properties'
 import getWindowSize, { WindowSizePayload } from './window_size'
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default function getSources() {
-  return {
-    userAgent: getUserAgent,
-    appVersion: getAppVersion,
-    rtt: getRTT,
-    windowSize: getWindowSize,
-    pluginsLength: getPluginsLength,
-    pluginsArray: getPluginsArray,
-    errorTrace: getErrorTrace,
-    productSub: getProductSub,
-    windowExternal: getWindowExternal,
-    mimeTypesConsistent: areMimeTypesConsistent,
-    evalLength: getEvalLength,
-    webGL: getWebGL,
-    webDriver: getWebDriver,
-    languages: getLanguages,
-    notificationPermissions: getNotificationPermissions,
-    documentAttributes: getDocumentAttributes,
-    functionBind: getFunctionBind,
-    process: getProcess,
-    documentProps: getDocumentProperties,
-    windowProps: getWindowProperties,
-  }
+export const sources = {
+  userAgent: getUserAgent,
+  appVersion: getAppVersion,
+  rtt: getRTT,
+  windowSize: getWindowSize,
+  pluginsLength: getPluginsLength,
+  pluginsArray: getPluginsArray,
+  errorTrace: getErrorTrace,
+  productSub: getProductSub,
+  windowExternal: getWindowExternal,
+  mimeTypesConsistent: areMimeTypesConsistent,
+  evalLength: getEvalLength,
+  webGL: getWebGL,
+  webDriver: getWebDriver,
+  languages: getLanguages,
+  notificationPermissions: getNotificationPermissions,
+  documentAttributes: getDocumentAttributes,
+  functionBind: getFunctionBind,
+  process: getProcess,
+  documentProps: getDocumentProperties,
+  windowProps: getWindowProperties,
 }
 
 export { WindowSizePayload, ProcessPayload }
