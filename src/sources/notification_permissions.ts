@@ -11,6 +11,10 @@ export default async function getNotificationPermissions(): Promise<boolean> {
   if (typeof permissions.query !== 'function') {
     throw new BotdError(State.NotFunction, 'navigator.permissions.query is not a function')
   }
-  const permissionStatus = await permissions.query({ name: 'notifications' })
-  return window.Notification.permission === 'denied' && permissionStatus.state === 'prompt'
+  try {
+    const permissionStatus = await permissions.query({ name: 'notifications' })
+    return window.Notification.permission === 'denied' && permissionStatus.state === 'prompt'
+  } catch (e) {
+    throw new BotdError(State.UnexpectedBehaviour, 'notificationPermissions signal unexpected behaviour')
+  }
 }
