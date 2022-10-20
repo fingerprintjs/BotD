@@ -29,12 +29,12 @@ In the new version, we have implemented detection logic on the client side, mean
 ## NPM
 
 ```diff
-- import Botd from '@fpjs-incubator/botd-agent';
-+ import Botd from '@fingerprintjs/botd';
+- import BotD from '@fpjs-incubator/botd-agent';
++ import BotD from '@fingerprintjs/botd';
 
 // Initialize an agent at application startup.
-- const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
-+ const botdPromise = Botd.load();
+- const botdPromise = BotD.load({ publicKey: '<your-public-key>' });
++ const botdPromise = BotD.load();
 
 (async () => {
   // Get the bot detection result when you need it.
