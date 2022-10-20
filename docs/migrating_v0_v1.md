@@ -11,11 +11,11 @@ In the new version, we have implemented detection logic on the client side, mean
 ```diff
 <script>
     // Initialize an agent at application startup.
--   const botdPromise = import('https://openfpcdn.io/botd/v0.1').then((Botd) =>
--       Botd.load({ publicKey: '<your-public-key>' }),
+-   const botdPromise = import('https://openfpcdn.io/botd/v0.1').then((BotD) =>
+-       BotD.load({ publicKey: '<your-public-key>' }),
 -   )
-+   const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) =>
-+       Botd.load(),
++   const botdPromise = import('https://openfpcdn.io/botd/v1').then((BotD) =>
++       BotD.load(),
 +   )
     // Get the bot detection result when you need it.
 -   // Result will contain the `requestId` property, that you can securely verify on the server.
