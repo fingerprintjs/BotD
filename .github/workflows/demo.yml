@@ -1,30 +1,53 @@
-# Reference on this file: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
-# To make it work, go to the repository settings, then Options, GitHub Pages and select `gh-pages` under Source.
-name: Publish the demo
+name: Demo
+
 on:
   push:
     branches:
-      - main
+      - 1.0.0
+
 jobs:
-  publish:
-    name: Publish the demo
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
     timeout-minutes: 5
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cache
-        uses: actions/cache@v2
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
-          path: node_modules
-          key: nodemodules-${{ hashFiles('yarn.lock') }}
-          restore-keys: nodemodules-
+          access_token: ${{ github.token }}
+
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: actions/cache@v3.0.2
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+        env:
+          ADBLOCK: true
+
+      - name: Build Playground
+        run: yarn build:playground
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: playground/
+          FOLDER: playground/dist
           CLEAN: true
           SINGLE_COMMIT: true
       - name: Print the demo URL

@@ -1,9 +1,15 @@
 # Project artifacts
 /dist/
+/build
 /coverage/
 /node_modules/
+/playground/dist/
+/test-dist/
 
 # Random excess stuff
 .DS_Store
 .idea/
 .vscode/
+yarn-error.log
+.env
+local.log

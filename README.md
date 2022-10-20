@@ -1,6 +1,10 @@
 <p align="center">
-  <a href="https://fingerprintjs.com">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/logo.svg" alt="FingerprintJS" width="312px" />
+  <a href="https://fingerprint.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_white.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_blue.svg">
+      <img alt="Fingerprint" width="312px" src="https://raw.githubusercontent.com/fingerprintjs/botd/main/resources/fp_logo_orange_blue.svg">
+    </picture>
   </a>
 </p>
 <p align="center">
@@ -20,7 +24,7 @@
   </a>
 </p>
 
-## BotD <small>_(currently in beta)_</small>
+## BotD
 
 ```diff
 # Before
@@ -31,134 +35,164 @@
 # After
 
 + BotD is a browser library for JavaScript bot detection
-+ Easily add ability to detect automation tools, browser spoofing and virtual machines
-+ Requires adding only 3 lines of JavaScript on your website
++ Easily add ability to detect automation tools
++ Requires adding only a few lines of JavaScript on your website
 ```
 
-### 🔩 [Try Demo](https://fingerprintjs.com/products/bot-detection/) - see the live demo running in your browser
+[⚡ View Our Demo](https://fingerprintjs.github.io/BotD).
 
-BotD runs in the [browser](#install-from-cdn); additionally you can harden it by using our open source cloud integrations.
+## Quick start
 
-### Cloud Integrations ☁️
-
-* [CloudFlare](https://github.com/fingerprintjs/botd-integrations/tree/main/cloudflare) - runs in CloudFlare workers for increased accuracy and security.
-* [Fastly](https://github.com/fingerprintjs/botd-integrations/tree/main/fastly/wasm) - runs in Fastly Compute@Edge high-performance WASM edge
-* [Next.js/Vercel](https://github.com/vercel/examples/tree/main/edge-functions/bot-protection-botd)<sup>3rd party</sup> - runs as a Next.js edge middleware
-
-## Install from CDN
+### CDN
 
 ```html
 <script>
-    // Initialize an agent at application startup.
-    const botdPromise = import('https://openfpcdn.io/botd/v0.1')
-        .then( Botd => Botd.load({ publicKey: '<your-public-key>' }))
-    // Get the bot detection result when you need it.
-    // Result will contain the `requestId` property, that you can securely verify on the server.
+    // Initialize an agent at application startup, once per page/app.
+    const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
+    // Get detection results when you need them.
     botdPromise
-        .then(botd => botd.detect())
-        .then(result => console.log(result))
-        .catch(error => console.error(error))
+        .then((botd) => botd.detect())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error))
 </script>
 ```
-[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
 
-## Install from NPM to use with Webpack/Rollup/Browserify
+### NPM
 
 ```bash
-npm i @fpjs-incubator/botd-agent
+npm i @fingerprintjs/botd
 # or
-yarn add @fpjs-incubator/botd-agent
+yarn add @fingerprintjs/botd
 ```
 
 ```js
-import Botd from '@fpjs-incubator/botd-agent';
+import { load } from '@fingerprintjs/botd'
 
-// Initialize an agent at application startup.
-const botdPromise = Botd.load({ publicKey: '<your-public-key>' });
-
-(async () => {
-  // Get the bot detection result when you need it.
-  // Result will contain the `requestId` property, that you can securely verify on the server.
-  const botd = await botdPromise;
-  const result = await botd.detect();
-  console.log(result);
-})();
+// Initialize an agent at application startup, once per page/app.
+const botdPromise = load()
+// Get detection results when you need them.
+botdPromise
+    .then((botd) => botd.detect())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error))
 ```
-[Run this code](https://stackblitz.com/edit/botd-npm?devtoolsheight=100&file=index.js)
 
-### 📕 [Full documentation](docs/api.md)
+[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
 
-## Authentication
+📕 [Full documentation](docs/api.md)
 
-You need a pair of keys to use BotD:
-- `publicKey` for making bot detection requests from browser. This key can be used publicly on your websites.
-- `secretKey` for verifying bot detection requests on the server. This key must be kept secret.
+## 🤖 Upgrade to Fingerprint Pro bot detection to detect sophisticated bots easily
 
-_Please use the "Get Started For Free" button on our [BotD product page](https://fingerprintjs.com/products/bot-detection/) to generate your keys._
-<br/>
+**Always free for developers, unlimited free trials available, no credit card needed.**
 
-### **Request Limit**
-_The free keys are limited to 3M API calls per month and 10 calls per second while in beta._
+[Fingerprint Pro](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
 
-## Supported detection scenarios
+Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
 
-### **Automation Tools & Frameworks**
+<p align="center">
+  <a href="https://fingerprint.com/products/bot-detection/">
+    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="700px" />
+  </a>
+</p>
 
-- Headless Browsers ([Chrome](https://www.google.com/chrome/), [Firefox](https://www.mozilla.org/en-US/firefox/new/))
-- [SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium) is an umbrella project encapsulating a variety of tools and libraries enabling web browser automation.
-- [microsoft/playwright](https://github.com/microsoft/playwright) is a Node.js library to automate Chromium, Firefox and WebKit with a single API.
-- [ariya/phantomjs](https://github.com/ariya/phantomjs)  is a headless WebKit scriptable with JavaScript.
-- [segmentio/nightmare](https://github.com/segmentio/nightmare) is a high-level browser automation library.
-- [electron/electron](https://github.com/electron/electron) framework lets you write cross-platform desktop applications using JavaScript, HTML and CSS.
-- [geb/geb](https://github.com/geb/geb) (pronounced “jeb”) is a browser automation solution.
-- [macbre/phantomas](https://github.com/macbre/phantomas) Headless Chromium-based modular web performance metrics collector.
-- [casperjs/casperjs](https://github.com/casperjs/casperjs) is a navigation scripting & testing utility for PhantomJS and SlimerJS.
-- [laurentj/slimerjs](https://github.com/laurentj/slimerjs) is a scriptable browser.
+Full product comparison:
 
-### **Stealth plugins**
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th align="center">Open Source</th>
+      <th align="center">Pro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="3"><h4>Core Features</h4></td></tr>
+    <tr><td>100% open source</td><td align="center">yes</td><td align="center">no<sup>1</sup></td></tr>
+    <!-- <tr><td>Accuracy</td><td align="center">up to 60%</td><td align="center"><b>99.5%</b></td></tr> -->
+    <tr><td><b>Search engine detection</b><br/><i>works in all modern browsers - see our full list of <a href="https://dev.fingerprint.com/docs/browser-support/" target="_blank">browsers supported</a></i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td>Automation web services detection</td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td>Automation browser extensions detection</td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td colspan="3"><h4>Detectable automation tools & frameworks</h4></td></tr>
+    <tr><td>Headless Browsers (<a href="https://www.google.com/chrome">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>)</td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/SeleniumHQ/selenium">seleniumHQ/selenium</a></b><br/><i>umbrella project encapsulating a variety of tools and libraries enabling web browser automation</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/microsoft/playwright">microsoft/playwright</a></b><br/><i>Node.js library to automate Chromium, Firefox and WebKit with a single API</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/ariya/phantomjs">ariya/phantomjs</a></b><br/><i>headless WebKit scriptable with JavaScript</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/segmentio/nightmare">segmentio/nightmare</a></b><br/><i>high-level browser automation library</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/electron/electron">electron/electron</a></b><br/><i>framework lets you write cross-platform desktop applications using JavaScript, HTML and CSS</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/laurentj/slimerjs">laurentj/slimerjs</a></b><br/><i>scriptable browser</i></td><td align="center">✓</td><td align="center">✓</td></tr>
+    <!-- -->
+    <tr><td colspan="3"><h4>Detectable stealth plugins</h4></td></tr>
+    <tr><td><b><a href="https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth">berstend/puppeteer-extra/packages/puppeteer-extra-plugin-stealth</a></b><br/><i>plugin for puppeteer-extra to prevent detection.</i></td><td align="center">-</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/microlinkhq/browserless">microlinkhq/browserless</a></b><br/><i>efficient driver for controlling headless browsers built on top of <a href="https://github.com/puppeteer/puppeteer">puppeteer</a> developed for scenarios where performance matters</i></td><td align="center">-</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/ultrafunkamsterdam/undetected-chromedriver">ultrafunkamsterdam/undetected-chromedriver</a></b><br/><i>optimized Selenium Chromedriver patch which does not trigger anti-bot services</i></td><td align="center">-</td><td align="center">✓</td></tr>
+    <tr><td><b><a href="https://github.com/MeiK2333/pyppeteer_stealth">MeiK2333/pyppeteer_stealth</a></b><br/><i>stealth plugin for <a href="https://github.com/miyakogi/pyppeteer">pyppeteer</a></i></td><td align="center">-</td><td align="center">✓</td></tr>
+    <!-- <tr><td><a href="______">______</a><br/><i>____________</i></td><td align="center">✓</td><td align="center">✓</td></tr> -->
+    <!-- -->
+    <tr><td colspan="3"><h4>Additional Features</h4></td></tr>
+    <tr><td><b>Server-side accuracy increase</b><br/><i>based on additional server-side signals, such as TLS crypto support, ipv4/v6 data and others</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Query API & realtime Webhooks</b><br/><i>build flexible workflows</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <!-- -->
+    <tr><td colspan="3"><h4>Operations</h4></td></tr>
+    <tr><td><b>Data security</b></td><td align="center">Your infrastructure</td><td align="center">Encrypted at rest</td></tr>
+    <tr><td><b>Storage</b></td><td align="center">Your infrastructure</td><td align="center">Unlimited up to 1 yr</td></tr>
+    <tr><td><b>Regions</b></td><td align="center">Your infrastructure</td><td align="center">Hosting in US, EU and Mumbai</td></tr>
+    <tr><td><b>Compliance</b></td><td align="center">Your infrastructure</td><td align="center">GDPR, CCPA compliant<sup>2</sup></td></tr>
+    <tr><td><b>SLA</b></td><td align="center">No SLA</td><td align="center">99.9% Uptime</td></tr>
+    <tr><td><b>Support</b></td><td align="center">GitHub community</td><td align="center">Support team via email, chat, and call-back within 1 business day</td></tr>
+   
+  </tbody>
+</table>
 
-- [berstend/puppeteer-extra/packages/puppeteer-extra-plugin-stealth](https://github.com/berstend/puppeteer-extra/tree/master/packages/puppeteer-extra-plugin-stealth) a plugin for puppeteer-extra to prevent detection.
-- [ultrafunkamsterdam/undetected-chromedriver](https://github.com/ultrafunkamsterdam/undetected-chromedriver) Optimized Selenium Chromedriver patch which does not trigger anti-bot services.
-- [MeiK2333/pyppeteer_stealth](https://github.com/MeiK2333/pyppeteer_stealth) is a stealth plugin for [pyppeteer](https://github.com/miyakogi/pyppeteer)
+<sub>1. Pro uses the open source BotD library as well as proprietary technology for increased accuracy and identifier stability.</sub>
 
-### **Vulnerability scanners**
+<sub>2. Fingerprint Pro is GDPR and CCPA compliant as the data processor. You still need to be compliant as the data controller and use the identification for fraud prevention under legitimate interest or ask for user consent.</sub>
 
-- [beefproject/beef](https://github.com/beefproject/beef) is short for The Browser Exploitation Framework. It is a penetration testing tool that focuses on the web browser.
-- [ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework](https://github.com/ajinabraham/OWASP-Xenotix-XSS-Exploit-Framework) is an advanced Cross Site Scripting (XSS) vulnerability detection and exploitation framework.
-- [Netflix-Skunkworks/sleepy-puppy](https://github.com/Netflix-Skunkworks/sleepy-puppy) is a cross-site scripting (XSS) payload management framework which simplifies the ability to capture, manage, and track XSS propagation over long periods of time.
-- [echo-devim/xbackdoor](https://github.com/echo-devim/xbackdoor) is a tool to take advantage of a persistent XSS vulnerability.
+Pro result example:
 
-### **Browser spoofing**
+```js
+{
+    "bot": {
+        "result": "bad"
+        "type": "selenium"
+    }
+}
+```
 
-Browser spoofing - is a technique that helps users fake that they are using a different browser configuration by changing the browsers features.
+🍿 [Live demo](https://fingerprint.com/products/bot-detection/)
 
-The BotD helps to detect the following types of spoofing:
-- User Agent spoofing
-- Operating System spoofing
-- Hardware spoofing
-- etc.
+⏱ [How to upgrade from Open Source to Pro in 30 seconds](https://dev.fingerprint.com/v3/docs/migrating-from-open-source-v3)
 
-### **VM detection**
+📕 [Fingerprint Pro documentation](https://dev.fingerprint.com)
 
-The BotD helps to detect if the browser is running inside one of the popular virtual machines, like VirtualBox, VmWare, Parallels, Hyper-V, etc.
+<!--
+▶️ [Video: use Fingerprint Pro to prevent multiple signups](https://www.youtube.com/watch?v=jWX9P5_jZn8) -->
 
-### **Search bots**
-Google Bot, Bing Bot, Baidu Spider, Yahoo Bot, Alexa Bot, Apple Bot, Facebook Bot, Twitter Bot, Pinterest Bot,
-DuckDuckGo Bot, Coccoc Bot, Yandex Bot, Telegram Bot, Kiwi Status Spider, Naver Spider, Sputnik Bot, Petal Bot,
-Aspiegel Bot, Seznam Bot, Sogou Bot, DuckDuckGo Bot, Rackspace Bot, Pingdom Bot, WebPageTest.org crawlers,
-StatusCakeBot, Nutch-based Bot, Genieo Web filter, etc.
+<!-- 🤖 [Sample usage with React on the StackBlitz platform](https://stackblitz.com/edit/fingerprintjs-react-demo) -->
 
-<small><i>Many more tools and configurations are supported</i></small>
+## Migrating from v0
 
-### Documentation links:
-- #### [Browser API](docs/api.md)
-- #### [Server API](docs/server_api.md)
-- #### [Error Handling](docs/error.md)
-- #### [FAQ](https://github.com/fingerprintjs/botd/wiki/FAQ)
+-   [Migration guide](docs/migrating_v0_v1.md)
+-   [V0 documentation](https://github.com/fingerprintjs/BotD/tree/v0)
 
-### Contributing
+## Supported browsers
 
-See the [contributing guidelines](contributing.md) to learn how to start a playground, test, and build.
+The library supports all popular browsers.
+See more details and learn how to run the library in old browsers in the [browser support guide](docs/browser_support.md).
+
+## Where to get support
+
+Thanks to our [series B funding](https://fingerprint.com/blog/series-b/), we are happy to provide technical support for our open-source BotD library. We recommend using GitHub [Issues](https://github.com/fingerprintjs/BotD/issues) to submit bugs or [Discussions](https://github.com/fingerprintjs/BotD/discussions) to ask questions.
+Using issues and discussions publicly will help the open-source community and other users with similar issues.
+However, if you require private support, please email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
+
+## Contributing
+
+See the [contributing guidelines](contributing.md) to learn how to start a playground, test and build.
+
+## Other products by Fingerprint
+
+-   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://github.com/fingerprintjs/fingerprintjs)
+-   [AEV -- Android App Environment Verification API](https://github.com/fingerprintjs/aev)
 
 ### License
 
