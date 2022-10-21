@@ -3,7 +3,8 @@ name: Demo
 on:
   push:
     branches:
-      - 1.0.0
+      - dev
+      - main
 
 jobs:
   build:
