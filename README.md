@@ -57,6 +57,8 @@
 </script>
 ```
 
+[Run this code](https://stackblitz.com/edit/botd-cdn-tkdie9?devtoolsheight=100&file=index.html)
+
 ### NPM
 
 ```bash
@@ -77,7 +79,7 @@ botdPromise
     .catch((error) => console.error(error))
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-cdn-jwtcvu?devtoolsheight=100&file=index.js)
 
 📕 [Full documentation](docs/api.md)
 
@@ -163,11 +165,6 @@ Pro result example:
 ⏱ [How to upgrade from Open Source to Pro in 30 seconds](https://dev.fingerprint.com/v3/docs/migrating-from-open-source-v3)
 
 📕 [Fingerprint Pro documentation](https://dev.fingerprint.com)
-
-<!--
-▶️ [Video: use Fingerprint Pro to prevent multiple signups](https://www.youtube.com/watch?v=jWX9P5_jZn8) -->
-
-<!-- 🤖 [Sample usage with React on the StackBlitz platform](https://stackblitz.com/edit/fingerprintjs-react-demo) -->
 
 ## Migrating from v0
 
