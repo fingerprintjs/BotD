@@ -10,6 +10,7 @@
 <script>
     // Initialize the agent at application startup.
     const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
+    // Get detection results when you need them.
     botdPromise
         .then((botd) => botd.detect())
         .then((result) => console.log(result))
@@ -17,7 +18,7 @@
 </script>
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-cdn-tkdie9?devtoolsheight=100&file=index.html)
 
 For browsers that don't support [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 see the [browser support guide](browser_support.md#import-support).
@@ -41,7 +42,7 @@ load()
     .catch((error) => console.error(error))
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-cdn-jwtcvu?devtoolsheight=100&file=index.js)
 
 **When you run BotD installed with NPM or Yarn, the library will send AJAX requests to FingerprintJS servers to collect usage statistics.**
 When the `load` function runs, there is a 0.1% chance of sending a request.
