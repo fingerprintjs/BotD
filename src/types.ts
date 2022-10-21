@@ -16,7 +16,7 @@ export type BotDetectionResult =
  * @readonly
  * @enum {number}
  */
-export enum State {
+export const enum State {
   Unexpected = -100,
   Success = 0,
   Undefined = -1,
@@ -31,7 +31,7 @@ export enum State {
  * @readonly
  * @enum {string}
  */
-export enum BotKind {
+export const enum BotKind {
   Unknown = 'unknown',
   HeadlessChrome = 'headless_chrome',
   PhantomJS = 'phantomjs',
@@ -140,14 +140,14 @@ export class BotdError extends Error {
   }
 }
 
-export enum BrowserEngineKind {
+export const enum BrowserEngineKind {
   Unknown = 'unknown',
   Chromium = 'chromium',
   Gecko = 'gecko',
   Webkit = 'webkit',
 }
 
-export enum BrowserKind {
+export const enum BrowserKind {
   Unknown = 'unknown',
   Chrome = 'chrome',
   Firefox = 'firefox',
