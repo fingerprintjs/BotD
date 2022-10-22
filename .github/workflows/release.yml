@@ -9,9 +9,10 @@ on:
       - '**.md'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
+    environment: production
 
     steps:
       - name: Check out Git repository
