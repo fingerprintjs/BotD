@@ -1,4 +1,4 @@
-name: release
+name: Release
 
 on:
   push:
@@ -9,9 +9,10 @@ on:
       - '**.md'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-20.04
     timeout-minutes: 5
+    environment: main
 
     steps:
       - name: Check out Git repository
@@ -37,8 +38,23 @@ jobs:
         env:
           ADBLOCK: true
 
+      - name: Lint
+        run: yarn lint
+
       - name: Build
         run: yarn build
+
+      - name: Check the distributive TypeScript declarations
+        run: yarn check:dts
+
+      - name: Build test bundle
+        run: yarn build:test
+
+      - name: Test on BrowserStack
+        env:
+          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+        run: yarn test:browserstack
 
       - name: Publish if version has been updated
         uses: pascalgn/npm-publish-action@1.3.9
