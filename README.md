@@ -93,7 +93,7 @@ Pro combines vast amounts of auxiliary data that bots leak (cursor movements, ne
 
 <p align="center">
   <a href="https://fingerprint.com/products/bot-detection/">
-    <img src="resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="700px" />
+    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/dev/resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="700px" />
   </a>
 </p>
 
