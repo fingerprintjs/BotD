@@ -3,9 +3,11 @@ name: Lint and test
 on:
   pull_request:
   push:
-    branches:
+    branches-ignore:
       - main
       - dev
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
@@ -55,10 +57,3 @@ jobs:
 
       - name: Build test bundle
         run: yarn build:test
-
-      - name: Test on BrowserStack
-        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
-        env:
-          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-        run: yarn test:browserstack
