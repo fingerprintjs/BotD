@@ -1,13 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "es2015",
+    "module": "esnext",
     "moduleResolution": "node",
-    "noEmitOnError": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "target": "es5",
+    "removeComments": false,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "noErrorTruncation": true,
+    "declaration": false,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "playground/dist"
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }

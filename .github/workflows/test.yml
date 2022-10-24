@@ -1,15 +1,18 @@
-name: Demo
+name: Lint and test
 
 on:
+  pull_request:
   push:
-    branches:
-      - dev
+    branches-ignore:
       - main
+      - dev
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
     runs-on: ubuntu-20.04
-    timeout-minutes: 5
+    timeout-minutes: 15
 
     steps:
       - name: Cancel Previous Runs
@@ -40,16 +43,17 @@ jobs:
         env:
           ADBLOCK: true
 
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build
+
+      - name: Check the distributive TypeScript declarations
+        run: yarn check:dts
+
       - name: Build Playground
         run: yarn build:playground
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: playground/dist
-          CLEAN: true
-          SINGLE_COMMIT: true
-      - name: Print the demo URL
-        run: echo "✅ The demo has been deployed to https://$(cut -d'/' -f1 <<< $GITHUB_REPOSITORY).github.io/$(cut -d'/' -f2 <<< $GITHUB_REPOSITORY)/"
+      - name: Build test bundle
+        run: yarn build:test

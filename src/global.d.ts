@@ -10,12 +10,20 @@ interface NavigatorUAData {
 interface Navigator {
   readonly connection?: NetworkInformation
   readonly userAgentData?: NavigatorUAData
-  readonly deviceMemory?: number
-  readonly oscpu?: string
 }
 
 interface Window {
   readonly chrome?: unknown
   readonly InstallTrigger?: unknown
-  readonly SharedArrayBuffer?: function
+  readonly SharedArrayBuffer?: unknown
+  readonly callPhantom?: unknown
+  readonly _phantom?: unknown
+  readonly phantom?: unknown
+  readonly __nightmare?: unknown
+  readonly process?: unknown
+  readonly __fpjs_d_m?: unknown
+}
+
+interface Element {
+  webkitRequestFullscreen?: unknown
 }

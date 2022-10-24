@@ -1,191 +1,14 @@
-/**
- * Represents a simple component value. Component value is a result of the source evaluation.
- */
-type SimpleComponentValue = string | number | boolean
+import { detectors } from './detectors'
+import { sources } from './sources'
 
-/**
- * Represents a component value. Component value is a result of the source evaluation.
- */
-type ComponentValue = SimpleComponentValue | SimpleComponentValue[]
-
-/**
- * Represents a source. The source is a function that returns a component value.
- */
-export type Source = () => ComponentValue | Promise<ComponentValue>
-
-/**
- * Represents a component with state and value.
- */
-export type Component =
+export type BotDetectionResult =
   | {
-      state: State.Success
-      value: ComponentValue
+      bot: true
+      botKind: BotKind
     }
   | {
-      state: State
-      value: string
+      bot: false
     }
-
-/**
- * Dictionary of components.
- */
-export type ComponentDict = Record<string, Component>
-
-/**
- * Represents the response of the bot detection API.
- */
-export type BotdResponse = RequestIdResponse | SuccessResponse | ErrorResponse
-
-/**
- * Status of the bot detection.
- */
-type DetectStatus = 'processed' | 'notEnoughData' | 'error'
-
-/**
- * Detection result note.
- */
-type DetectNote = {
-  status: DetectStatus
-  probability: number
-  type?: string
-}
-
-/**
- * Interface for request identifier response of the bot detection API.
- *
- * @interface RequestIdResponse
- */
-export interface RequestIdResponse {
-  requestId: string
-}
-
-/**
- * Interface for success response of the bot detection API.
- *
- * @interface SuccessResponse
- */
-export interface SuccessResponse {
-  requestId: string
-  ip: string
-  tag: string
-  bot: {
-    automationTool: DetectNote
-    searchEngine: DetectNote
-    browserSpoofing: DetectNote
-  }
-  vm: DetectNote
-}
-
-/**
- * Interface for error response of the bot detection API.
- *
- * @interface ErrorResponse
- */
-export interface ErrorResponse {
-  error: {
-    code: ErrorCodes
-    message: string
-  }
-}
-
-/**
- * Enum for bot detection error codes.
- *
- * @readonly
- * @enum {string}
- */
-export const enum ErrorCodes {
-  BotdFailed = 'botdFailed',
-  PublicKeyRequired = 'publicKeyRequired',
-}
-
-/**
- * Interface for classes that represent a bot detector.
- *
- * @interface BotDetectorInterface
- */
-export interface BotDetectorInterface {
-  /**
-   * Performs bot detection, internally it will make a network request to the server-side bot detection API.
-   *
-   * @param {DetectOptions} options? Configuration options for bot detector.
-   * @returns {Promise<BotdResponse>} A promise to the instance of the bot detection response.
-   */
-  detect(options?: DetectOptions): Promise<BotdResponse>
-
-  /**
-   * Collects all the components from the browser.
-   *
-   * @returns {Promise<ComponentDict>} A promise to the collected components.
-   */
-  collect(): Promise<ComponentDict>
-}
-
-/**
- * Interface for configuration for the bot detector.
- *
- * @interface InitOptions
- */
-export interface InitOptions {
-  /**
-   * A public key required to access the server-side bot detection API.
-   */
-  publicKey?: string
-
-  /**
-   * @deprecated Use publicKey instead
-   */
-  token?: string
-
-  /**
-   * Represents mode for querying API. Default is 'requestId'.
-   */
-  mode?: Modes
-
-  /**
-   * Optional endpoint for the server-side bot detection API.
-   */
-  endpoint?: string
-
-  obfuscationMode?: ObfuscationModes
-}
-
-/**
- * Interface for configuration for detect options.
- *
- * @interface DetectOptions
- */
-export interface DetectOptions {
-  /**
-   * Represents metadata string that you can associate with each bot detection event.
-   */
-  tag: string
-}
-
-/**
- * Interface for classes that represent the request body for the bot detection detect request.
- *
- * @interface DetectBody
- */
-export interface DetectBody {
-  mode: Modes
-  performance?: number
-  signals?: ComponentDict
-  publicKey: string
-  tag: string
-}
-
-/**
- * Represents mode for querying API.
- * When `requestId` mode is used, only `requestId` field is returned to the browser. This mode is recommended for production usage.
- * Use `integration` mode only with cloud BotD integrations.
- */
-export type Modes = 'requestId' | 'integration'
-
-/**
- * Represents mode for obfuscation.
- */
-export type ObfuscationModes = 'all' | 'requestOnly' | 'none'
 
 /**
  * Enum for the source state.
@@ -195,29 +18,141 @@ export type ObfuscationModes = 'all' | 'requestOnly' | 'none'
  */
 export const enum State {
   Unexpected = -100,
+  Success = 0,
   Undefined = -1,
-  Success = 1,
-  Null = 101,
-  UnexpectedBehaviour = 102,
-  WrongType = 103,
-  NotFunction = 104,
-  ObfuscationError = 105,
+  NotFunction = -2,
+  UnexpectedBehaviour = -3,
+  Null = -4,
 }
 
 /**
- * Represents the bot detection error.
+ * Enum for types of bots.
+ *
+ * @readonly
+ * @enum {string}
+ */
+export const enum BotKind {
+  Unknown = 'unknown',
+  HeadlessChrome = 'headless_chrome',
+  PhantomJS = 'phantomjs',
+  Nightmare = 'nightmare',
+  Selenium = 'selenium',
+  Electron = 'electron',
+  Rhino = 'rhino',
+  CouchJS = 'couchjs',
+  Sequentum = 'sequentum',
+  SlimerJS = 'slimerjs',
+  CefSharp = 'cefsharp',
+}
+
+export type DetectorResponse = boolean | BotKind | undefined
+
+/**
+ * Represents a component with state and value.
+ */
+export type Component<T> =
+  | {
+      state: State.Success
+      value: T
+    }
+  | {
+      state: Exclude<State, State.Success>
+      error: string
+    }
+
+/**
+ * Dictionary of default sources and their respective return types.
+ */
+export type DefaultSourceDict = typeof sources
+
+/**
+ * Dictionary of default detectors and their respective types.
+ */
+export type DefaultDetectorDict = typeof detectors
+
+/**
+ * Represents a single source response type.
+ */
+export type SourceResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
+
+export type AbstractDetector = (...args: any[]) => DetectorResponse
+
+export type AbstractSourceDict = Record<string, SourceResponse<any>>
+
+export type AbstractDetectorDict = Record<string, AbstractDetector>
+
+export type AbstractComponentDict = Record<string, Component<any>>
+
+export type AbstractDetectionsDict = Record<string, BotDetectionResult>
+
+/**
+ * Represents a dictionary of detectors detection.
+ */
+export type DetectionDict<T extends AbstractDetectorDict = DefaultDetectorDict> = Record<keyof T, BotDetectionResult>
+
+/**
+ * Dictionary of components.
+ */
+export type ComponentDict<T extends AbstractSourceDict = DefaultSourceDict> = {
+  [K in keyof T]: Component<SourceResponse<T[K]>>
+}
+
+/**
+ * Interface for classes that represent a bot detector.
+ *
+ * @interface BotDetectorInterface
+ */
+export interface BotDetectorInterface {
+  /**
+   * Performs bot detection. Should be called after `collect()`.
+   */
+  detect(): BotDetectionResult
+  /**
+   * Collects data from sources. You can retrieve the data using `getComponents()`.
+   */
+  collect(): Promise<AbstractComponentDict>
+  /**
+   * Returns the collected data. Should be called after `collect()`.
+   */
+  getComponents(): AbstractComponentDict | undefined
+  /**
+   * Returns detection result for each detector. Should be called after `detect()`.
+   */
+  getDetections(): AbstractDetectionsDict | undefined
+}
+
+/**
+ * Bot detection error.
  */
 export class BotdError extends Error {
-  state: State
+  state: Exclude<State, State.Success>
 
   /**
    * Creates a new BotdError.
    *
    * @class
    */
-  constructor(state: State, message: string) {
+  constructor(state: Exclude<State, State.Success>, message: string) {
     super(message)
     this.state = state
     this.name = 'BotdError'
+    Object.setPrototypeOf(this, BotdError.prototype)
   }
+}
+
+export const enum BrowserEngineKind {
+  Unknown = 'unknown',
+  Chromium = 'chromium',
+  Gecko = 'gecko',
+  Webkit = 'webkit',
+}
+
+export const enum BrowserKind {
+  Unknown = 'unknown',
+  Chrome = 'chrome',
+  Firefox = 'firefox',
+  Opera = 'opera',
+  Safari = 'safari',
+  IE = 'internet_explorer',
+  WeChat = 'wechat',
 }
