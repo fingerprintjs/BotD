@@ -11,9 +11,6 @@
   <a href="https://www.npmjs.com/package/@fingerprintjs/botd">
     <img src="https://img.shields.io/npm/v/@fingerprintjs/botd.svg" alt="Current NPM version">
   </a>
-  <a href="https://www.npmjs.com/package/@fingerprintjs/botd">
-    <img src="https://img.shields.io/npm/dm/@fingerprintjs/botd.svg" alt="Monthly downloads from NPM">
-  </a>
 </p>
 <p align="center">
   <a href="https://discord.gg/P6Ya76HkbF">
