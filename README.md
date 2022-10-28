@@ -16,7 +16,9 @@
   <a href="https://discord.gg/P6Ya76HkbF">
     <img src="https://img.shields.io/discord/852099967190433792?style=for-the-badge&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
   </a>
-</p>
+</p>]
+]
+
 
 ## BotD
 
