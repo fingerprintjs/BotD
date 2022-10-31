@@ -100,8 +100,11 @@ h5 {
   color: #f0470a;
 }
 
-.result-table {
-  line-height: 20px;
+#results-list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 24px;
+  margin-bottom: 16px;
 }
 
 .green {
@@ -120,10 +123,5 @@ h5 {
   h1,
   h2 {
     margin: 10px 0 10px 0;
-  }
-
-  .result-table {
-    margin-left: 0;
-    margin-right: 0;
   }
 }
