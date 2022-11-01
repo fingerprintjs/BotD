@@ -43,6 +43,21 @@ jobs:
       - name: Build Playground
         run: yarn build:playground
 
+      - name: Echo release type
+        run: echo ${{ github.ref }}
+
+      - name: Echo release type
+        run: echo ${{ github.base_ref }}
+
+      - name: Echo release type
+        run: echo ${{ github.head_ref }}
+
+      - name: Echo release type
+        run: echo ${{ github.ref_name }}
+
+      - name: Echo release type
+        run: echo ${{ github.ref_type }}
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
