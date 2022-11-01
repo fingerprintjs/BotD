@@ -51,6 +51,6 @@ jobs:
           FOLDER: playground/dist
           CLEAN: true
           SINGLE_COMMIT: true
-          target-folder: 'main'
+          TARGET_FOLDER: 'main'
       - name: Print the demo URL
         run: echo "✅ The demo has been deployed to https://$(cut -d'/' -f1 <<< $GITHUB_REPOSITORY).github.io/$(cut -d'/' -f2 <<< $GITHUB_REPOSITORY)/"
