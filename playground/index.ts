@@ -21,7 +21,7 @@ let result: Result | undefined = undefined
 
 const runDetection = async () => {
   const statusEl = document.getElementById('status')
-  const resultTableEl = document.getElementById('result-table')
+  const resultsListEl = document.getElementById('results-list')
   const errorSectionEl = document.getElementById('error_section')
   const resultsSectionEl = document.getElementById('result_section')
   const errorEl = document.getElementById('error')
@@ -33,7 +33,7 @@ const runDetection = async () => {
   const debugDataEl = document.getElementById('debug-data')
 
   statusEl!.textContent = 'Loading...'
-  resultTableEl!.innerHTML = ''
+  resultsListEl!.innerHTML = ''
   errorSectionEl!.style.display = 'none'
   resultsSectionEl!.style.display = 'none'
 
@@ -82,26 +82,11 @@ const runDetection = async () => {
     debugDataEl!.textContent = 'Debug data:'
     debugDataEl!.textContent = JSON.stringify(debugData, null, 4)
 
-    const resultTableEntries = [
-      [
-        { text: 'automationTool' },
-        detectionResult.bot ? { text: '<b>Detected</b>', class: 'green' } : { text: '<b>Not detected</b>' },
-        detectionResult.bot ? { text: `<b>${detectionResult.botKind}</b>`, class: 'green' } : null,
-      ],
-    ]
-
-    resultTableEl!.innerHTML = resultTableEntries
-      .map(
-        (row) =>
-          `<tr>${row
-            .filter((column) => column != null)
-            .map(
-              (column) =>
-                `<td style="width: 25%" ${column?.class != null ? `class=${column.class}` : ''}>${column?.text}</td>`,
-            )
-            .join('')}</tr>`,
-      )
-      .join('')
+    resultsListEl!.innerHTML = `<span>Automation tool: ${
+      detectionResult.bot
+        ? `<span class="green"><b>Detected (${detectionResult.botKind})</b></span>`
+        : '<span><b>Not detected</b></span>'
+    }</span>`
   } catch (e) {
     resultsSectionEl!.style.display = 'none'
     errorSectionEl!.style.display = 'block'
