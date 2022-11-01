@@ -45,5 +45,17 @@ jobs:
         env:
           ADBLOCK: true
 
+      - name: Lint
+        run: yarn lint
+
       - name: Build
         run: yarn build
+
+      - name: Check the distributive TypeScript declarations
+        run: yarn check:dts
+
+      - name: Build Playground
+        run: yarn build:playground
+
+      - name: Build test bundle
+        run: yarn build:test
