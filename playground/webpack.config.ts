@@ -42,6 +42,9 @@ const config: Configuration = {
     }),
   ],
 
+  // https://stackoverflow.com/questions/64993118/error-should-not-import-the-named-export-version-imported-as-version
+  ignoreWarnings: [/only default export is available soon/],
+
   resolve: {
     modules: ['node_modules'],
     extensions: ['.js', '.ts', '.json'],
