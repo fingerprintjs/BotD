@@ -83,7 +83,9 @@ botdPromise
 
 [Fingerprint Pro](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
 
-Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
+The Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins. 
+
+A big advantage of the Pro is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
 
 <p align="center">
   <a href="https://fingerprint.com/products/bot-detection/">
@@ -125,7 +127,7 @@ Full product comparison:
     <!-- <tr><td><a href="______">______</a><br/><i>____________</i></td><td align="center">✓</td><td align="center">✓</td></tr> -->
     <!-- -->
     <tr><td colspan="3"><h4>Additional Features</h4></td></tr>
-    <tr><td><b>Server-side accuracy increase</b><br/><i>based on additional server-side signals, such as TLS crypto support, ipv4/v6 data and others</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Server-side accuracy increase</b><br/><i>based on additional server-side data, such as TLS crypto support, ipv4/v6 data and others</i></td><td align="center">–</td><td align="center">✓</td></tr>
     <tr><td><b>Query API & realtime Webhooks</b><br/><i>build flexible workflows</i></td><td align="center">–</td><td align="center">✓</td></tr>
     <!-- -->
     <tr><td colspan="3"><h4>Operations</h4></td></tr>
@@ -139,9 +141,9 @@ Full product comparison:
   </tbody>
 </table>
 
-<sub>1. Pro uses the open source BotD library as well as proprietary technology for increased accuracy and identifier stability.</sub>
+<sub>1. Pro uses the open source BotD library as well as proprietary technology for increased accuracy and result stability.</sub>
 
-<sub>2. Fingerprint Pro is GDPR and CCPA compliant as the data processor. You still need to be compliant as the data controller and use the identification for fraud prevention under legitimate interest or ask for user consent.</sub>
+<sub>2. Fingerprint Pro is GDPR and CCPA compliant as the data processor. You still need to be compliant as the data controller and use the bot detection for fraud prevention under legitimate interest or ask for user consent.</sub>
 
 Pro result example:
 
