@@ -52,6 +52,9 @@ jobs:
       - name: Check the distributive TypeScript declarations
         run: yarn check:dts
 
+      - name: Check the ability to work with server side rendering
+        run: yarn check:ssr
+
       - name: Build Playground
         run: yarn build:playground
 
