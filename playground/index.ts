@@ -111,7 +111,7 @@ window.onload = () => {
   const copyLogsButton = document.getElementById('copy-logs-button')!
 
   detectButtonEl.addEventListener('click', () => {
-    runDetection()
+    runAndRender()
   })
 
   copyLogsButton.addEventListener('click', () => {
