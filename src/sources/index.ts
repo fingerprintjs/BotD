@@ -7,7 +7,6 @@ import getEvalLength from './eval_length'
 import getFunctionBind from './function_bind'
 import getHardwareConcurrency from './hardware_concurrency'
 import getLanguages from './languages'
-import getLanguages2 from './languages_2'
 import areMimeTypesConsistent from './mime_types_consistence'
 import getNotificationPermissions from './notification_permissions'
 import getOsCpu from './os_cpu'
@@ -48,7 +47,6 @@ export const sources = {
   process: getProcess,
   documentProps: getDocumentProperties,
   windowProps: getWindowProperties,
-  languages2: getLanguages2,
   osCpu: getOsCpu,
   deviceMemory: getDeviceMemory,
   screenResolution: getScreenResolution,
