@@ -40,9 +40,10 @@
     "build:playground": "rimraf ./playground/dist && webpack --config ./playground/webpack.config.ts",
     "lint": "eslint src playground",
     "lint:fix": "yarn lint --fix && prettier --write src playground",
-    "check:dts": "tsc --isolatedModules --noEmit dist/botd.d.ts",
     "test:local": "karma start --preset local --single-run",
-    "test:browserstack": "karma start --preset browserstack --single-run"
+    "test:browserstack": "karma start --preset browserstack --single-run",
+    "check:dts": "tsc --isolatedModules --noEmit dist/botd.d.ts",
+    "check:ssr": "node --require ./dist/botd.cjs.js --eval '' || (echo \"The distributive files can't be used with server side rendering. Make sure the code doesn't use browser API until an exported function is called.\" && exit 1)"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
