@@ -9,66 +9,33 @@ import {
 } from '../src/utils/browser'
 import './style.css'
 
-interface Result {
-  timeToGetResults: string
-  timeToCollectSignals: string
-  detectionResult: Record<string, any>
-  detailedResults: Record<string, any>
-  collectedData: Record<string, any>
-}
-
-let result: Result | undefined = undefined
-
-const runDetection = async () => {
-  const statusEl = document.getElementById('status')
-  const resultsListEl = document.getElementById('results-list')
-  const errorSectionEl = document.getElementById('error_section')
-  const resultsSectionEl = document.getElementById('result_section')
-  const errorEl = document.getElementById('error')
-  const perfEl = document.getElementById('perf')
-  const timeEl = document.getElementById('time')
-  const sourcesEl = document.getElementById('sources')
-  const resultEl = document.getElementById('result')
-  const detailedResultsEl = document.getElementById('detailed-results')
-  const debugDataEl = document.getElementById('debug-data')
-
-  statusEl!.textContent = 'Loading...'
-  resultsListEl!.innerHTML = ''
-  errorSectionEl!.style.display = 'none'
-  resultsSectionEl!.style.display = 'none'
-
-  try {
-    const t0 = performance.now()
-
-    const instance = await load()
-    const collectTime = performance.now() - t0
-
-    const detectionResult = instance.detect()
-    const processTime = performance.now() - t0
-
-    const components = instance.getComponents() ?? {}
-    const detections = instance.getDetections() ?? {}
-
-    result = {
-      timeToGetResults: collectTime.toFixed(0) + ' ms',
-      timeToCollectSignals: processTime.toFixed(0) + ' ms',
-      detectionResult,
-      collectedData: components,
-      detailedResults: detections,
+type DetectionResult =
+  | {
+      isError: false
+      collectionTime: number
+      detectionTime: number
+      detectedBot?: string
+      detectionResult: Record<string, any>
+      collectedData: Record<string, any>
+      detectorsResults: Record<string, any>
+      debugData: Record<string, any>
+    }
+  | {
+      isError: true
+      error: any
     }
 
-    sourcesEl!.textContent = JSON.stringify(result.collectedData, null, 4)
-    errorSectionEl!.style.display = 'none'
-    resultsSectionEl!.style.display = 'block'
+let _result: DetectionResult | undefined = undefined
 
-    perfEl!.textContent = result.timeToGetResults
-    timeEl!.textContent = result.timeToCollectSignals
-
-    statusEl!.textContent = 'Result:'
-    resultEl!.textContent = JSON.stringify(result.detectionResult, null, 4)
-
-    detailedResultsEl!.textContent = 'Detailed results:'
-    detailedResultsEl!.textContent = JSON.stringify(result.detailedResults, null, 4)
+const runDetection = async (): Promise<DetectionResult> => {
+  try {
+    const t0 = performance.now()
+    const instance = await load()
+    const collectionTime = performance.now() - t0
+    const detectionResult = instance.detect()
+    const detectionTime = performance.now() - t0
+    const components = instance.getComponents() ?? {}
+    const detections = instance.getDetections() ?? {}
 
     const debugData = {
       browserEngineKind: getBrowserEngineKind(),
@@ -79,30 +46,79 @@ const runDetection = async () => {
       isDesktopSafari: isDesktopSafari(),
     }
 
-    debugDataEl!.textContent = 'Debug data:'
-    debugDataEl!.textContent = JSON.stringify(debugData, null, 4)
-
-    resultsListEl!.innerHTML = `<span>Automation tool: ${
-      detectionResult.bot
-        ? `<span class="green"><b>Detected (${detectionResult.botKind})</b></span>`
-        : '<span><b>Not detected</b></span>'
-    }</span>`
+    return {
+      isError: false,
+      collectionTime,
+      detectionTime,
+      detectionResult,
+      detectedBot: detectionResult?.bot ? detectionResult.botKind : undefined,
+      collectedData: components,
+      detectorsResults: detections,
+      debugData,
+    }
   } catch (e) {
-    resultsSectionEl!.style.display = 'none'
-    errorSectionEl!.style.display = 'block'
-    statusEl!.textContent = 'Error!'
-    errorEl!.textContent = JSON.stringify(e, null, 4)
+    return { isError: true, error: e }
   }
 }
 
-window.onload = async () => {
-  document.getElementById('detect-button')!.addEventListener('click', () => runDetection())
+const renderDetectionResult = (result: DetectionResult) => {
+  const resultEl = document.getElementById('result')!
+  const resultTextEl = document.getElementById('result-text')!
+  const collectionTimeEl = document.getElementById('collection-time')!
+  const detectionTimeEl = document.getElementById('detection-time')!
+  const detectionResultEl = document.getElementById('detection-result')!
+  const detectorsEl = document.getElementById('detectors')!
+  const debugData = document.getElementById('debug-data')!
+  const collectedData = document.getElementById('collected-data')!
+  const errorContainerEl = document.getElementById('error-container')!
+  const errorMessageEl = document.getElementById('error-message')!
 
-  document.getElementById('copy-logs-button')!.addEventListener('click', () => {
-    navigator.clipboard.writeText(JSON.stringify(result)).then(() => {
-      alert('Copied to clipboard')
+  resultEl.classList.remove('result-detected', 'result-error')
+
+  if (result.isError) {
+    resultTextEl.innerHTML = 'An error occured'
+    resultEl.classList.add('result-error')
+    errorContainerEl.classList.add('error-container-visible')
+    errorMessageEl.textContent = result.error.message
+    return
+  }
+
+  errorContainerEl.classList.remove('error-container-visible')
+
+  if (result.detectedBot != null) {
+    resultTextEl.innerHTML = `${result.detectedBot} detected.`
+    resultEl.classList.add('result-detected')
+  } else {
+    resultTextEl.innerHTML = 'You are not a bot.'
+  }
+
+  collectionTimeEl.textContent = `${result.collectionTime.toFixed(2)}ms`
+  detectionTimeEl.textContent = `${result.detectionTime.toFixed(2)}ms`
+  detectionResultEl.textContent = JSON.stringify(result.detectionResult, null, 4)
+  detectorsEl.textContent = JSON.stringify(result.detectorsResults, null, 4)
+  debugData.textContent = JSON.stringify(result.debugData, null, 4)
+  collectedData.textContent = JSON.stringify(result.collectedData, null, 4)
+}
+
+const runAndRender = async () => {
+  const result = await runDetection()
+  _result = result
+  renderDetectionResult(result)
+}
+
+window.onload = () => {
+  const detectButtonEl = document.getElementById('detect-button')!
+  const copyLogsButton = document.getElementById('copy-logs-button')!
+
+  detectButtonEl.addEventListener('click', () => {
+    runAndRender()
+  })
+
+  copyLogsButton.addEventListener('click', () => {
+    navigator.clipboard.writeText(JSON.stringify(_result)).then(() => {
+      alert('BotD logs copied to clipboard')
     })
   })
 
-  runDetection()
+  runAndRender()
 }
