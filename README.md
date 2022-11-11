@@ -11,10 +11,14 @@
   <a href="https://www.npmjs.com/package/@fingerprintjs/botd">
     <img src="https://img.shields.io/npm/v/@fingerprintjs/botd.svg" alt="Current NPM version">
   </a>
-</p>
-<p align="center">
-  <a href="https://discord.gg/P6Ya76HkbF">
-    <img src="https://img.shields.io/discord/852099967190433792?style=for-the-badge&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
+   <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/:license-mit-blue.svg?style=flat"/>
+  </a>
+  <a href="https://discord.gg/39EpE2neBg">
+    <img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server">
+  </a>
+  <a href="https://github.com/fingerprintjs/BotD/blob/main/docs/api.md">
+    <img src="https://img.shields.io/badge/-Documentation-green" alt="BotD documentation">
   </a>
 </p>
 
@@ -79,11 +83,11 @@ botdPromise
 
 ## 🤖 Upgrade to Fingerprint Pro bot detection to detect sophisticated bots easily
 
-**Always free for developers, unlimited free trials available, no credit card needed.**
+**Free for developers (up to 20K API calls / mo), unlimited free trials available, no credit card needed.**
 
 [Fingerprint Pro](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
 
-The Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins. 
+The Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
 
 A big advantage of the Pro is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
 
