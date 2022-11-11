@@ -9,7 +9,7 @@ export function detectWindowProperties({ windowProps }: ComponentDict): Detector
   if (includes(windowProps.value, '_selenium', '_Selenium_IDE_Recorder', 'callSelenium')) {
     return BotKind.Selenium
   }
-  if (includes(windowProps.value, 'callPhantom', '_phantom', 'phantom')) {
+  if (includes(windowProps.value, 'callPhantom', '_phantom')) {
     return BotKind.PhantomJS
   }
   if (includes(windowProps.value, '__nightmare')) return BotKind.Nightmare
