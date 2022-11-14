@@ -1,9 +1,11 @@
-name: Lint and test
+name: Build and test
 
 on:
   pull_request:
+    paths-ignore:
+      - '**.md'
   push:
-    branches-ignore:
+    branches:
       - main
       - dev
     paths-ignore:
@@ -52,7 +54,10 @@ jobs:
       - name: Check the distributive TypeScript declarations
         run: yarn check:dts
 
-      - name: Build Playground
+      - name: Check the ability to work with server side rendering
+        run: yarn check:ssr
+
+      - name: Build playground
         run: yarn build:playground
 
       - name: Build test bundle

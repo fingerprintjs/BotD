@@ -1,12 +1,8 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-    paths-ignore:
-      - '**.md'
+  release:
+    types: [published]
 
 jobs:
   release:
@@ -15,6 +11,11 @@ jobs:
     environment: main
 
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
       - name: Check out Git repository
         uses: actions/checkout@v3
 
@@ -38,14 +39,8 @@ jobs:
         env:
           ADBLOCK: true
 
-      - name: Lint
-        run: yarn lint
-
       - name: Build
         run: yarn build
-
-      - name: Check the distributive TypeScript declarations
-        run: yarn check:dts
 
       - name: Build test bundle
         run: yarn build:test
@@ -56,14 +51,11 @@ jobs:
           BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
         run: yarn test:browserstack
 
-      - name: Publish if version has been updated
-        uses: pascalgn/npm-publish-action@1.3.9
-        with:
-          tag_name: 'v%s'
-          tag_message: 'v%s'
-          commit_pattern: "^v?(\\d+\\.\\d+\\.\\d+(?:-(?:alpha|beta)\\.\\d+)?)$"
-          publish_command: 'yarn'
-          publish_args: '--non-interactive --access=public --new-version'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Authenticate npm
+        run: |
+          npm config set @fingerprintjs:registry https://registry.npmjs.org/
+          npm config set -- '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_AUTH_TOKEN }}"
+
+      - name: Publish
+        run: |
+          yarn publish --non-interactive --access=public

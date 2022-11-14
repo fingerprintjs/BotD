@@ -10,6 +10,12 @@ interface NavigatorUAData {
 interface Navigator {
   readonly connection?: NetworkInformation
   readonly userAgentData?: NavigatorUAData
+  readonly oscpu?: string
+  readonly userLanguage?: string
+  readonly browserLanguage?: string
+  readonly systemLanguage?: string
+  readonly deviceMemory?: number
+  readonly msMaxTouchPoints?: number
 }
 
 interface Window {

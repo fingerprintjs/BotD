@@ -1,4 +1,4 @@
-import packageInfo from '../package.json'
+import { version } from '../package.json'
 import BotDetector from './detector'
 import { sources, WindowSizePayload, ProcessPayload } from './sources'
 import { BotdError, BotDetectorInterface } from './types'
@@ -24,7 +24,7 @@ function monitor() {
   }
   try {
     const request = new XMLHttpRequest()
-    request.open('get', `https://m1.openfpcdn.io/botd/v${packageInfo.version}/npm-monitoring`, true)
+    request.open('get', `https://m1.openfpcdn.io/botd/v${version}/npm-monitoring`, true)
     request.send()
   } catch (error) {
     // console.error is ok here because it's an unexpected error handler

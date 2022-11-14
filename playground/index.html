@@ -5,38 +5,66 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>BotD Playground</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div class="content">
-      <a class="logo_ref" href="https://fingerprint.com/">
-        <img class="logo" src="logo_dark.svg" alt="Fingerprint" />
-      </a>
-      <h1>BotD Playground</h1>
-      <h2 id="status">Loading...</h2>
-      <div id="results-list"></div>
-      <form class="buttons-container">
-        <button class="button" id="detect-button" type="button">Start detect</button>
-        <button class="button" id="copy-logs-button" type="button">Copy logs</button>
-      </form>
-      <div class="output_holder">
-        <section id="result_section" class="output">
-          <h5>Time to get result:</h5>
-          <pre class="output_div" id="time"></pre>
-          <h5>Time to collect signals:</h5>
-          <pre class="output_div" id="perf"></pre>
-          <h5>Detection result:</h5>
-          <pre class="output_div" id="result"></pre>
-          <h5>Detailed detection results:</h5>
-          <pre class="output_div" id="detailed-results"></pre>
-          <h5>Collected data:</h5>
-          <pre class="output_div" id="sources"></pre>
-          <h5>Debug data:</h5>
-          <pre class="output_div" id="debug-data"></pre>
-        </section>
-        <section id="error_section" class="output">
-          <h5>Error:</h5>
-          <pre class="output_div" id="error"></pre>
-        </section>
+    <nav id="navbar">
+      <div class="container">
+        <a class="logo-ref" href="https://fingerprint.com/" target="_blank">
+          <img class="logo" src="logo_dark.svg" alt="Fingerprint" />
+        </a>
+        <div id="navbar-chevron"></div>
+        <a class="github-card" href="https://github.com/fingerprintjs/BotD" target="_blank">
+          <span>fingerprintjs/BotD</span>
+        </a>
+        <div id="playground-actions">
+          <button id="detect-button" class="button orange-button">Detect</button>
+        </div>
+      </div>
+    </nav>
+    <div id="result">
+      <div class="result-bot-icon-container">
+        <div class="result-bot-icon"></div>
+      </div>
+      <div id="result-text">Detecting...</div>
+    </div>
+    <div id="error-container" class="medium-container">
+      <pre id="error-message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, suscipit assumenda dicta, iste, eius possimus sunt asperiores debitis quam voluptatum deleniti obcaecati facere nisi deserunt reprehenderit nobis sapiente explicabo non.</pre>
+    </div>
+    <div class="medium-container content-card">
+      <div class="logs-top-bar">
+        <div class="content-card-header">Logs</div>
+        <div class="logs-buttons-list">
+          <button id="copy-logs-button" class="button orange-button-outlined">Copy logs</button>
+        </div>
+      </div>
+      <div class="logs-content">
+        <div class="logs-section">
+          <div class="logs-section-header">Collection time:</div>
+          <pre class="logs-section-content" id="collection-time"></pre>
+        </div>
+        <div class="logs-section">
+          <div class="logs-section-header">Detection time:</div>
+          <pre class="logs-section-content" id="detection-time"></pre>
+        </div>
+        <div class="logs-section">
+          <div class="logs-section-header">Detection result:</div>
+          <pre class="logs-section-content" id="detection-result"></pre>
+        </div>
+        <div class="logs-section">
+          <div class="logs-section-header">Detectors:</div>
+          <pre class="logs-section-content" id="detectors"></pre>
+        </div>
+        <div class="logs-section">
+          <div class="logs-section-header">Debug data:</div>
+          <pre class="logs-section-content" id="debug-data"></pre>
+        </div>
+        <div class="logs-section">
+          <div class="logs-section-header">Collected data:</div>
+          <pre class="logs-section-content" id="collected-data"></pre>
+        </div>
       </div>
     </div>
   </body>
