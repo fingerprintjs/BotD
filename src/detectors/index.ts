@@ -11,7 +11,6 @@ import { detectPluginsArray } from './plugins_array'
 import { detectPluginsLengthInconsistency } from './plugins_inconsistency'
 import { detectProcess } from './process'
 import { detectProductSub } from './product_sub'
-import { detectRTT } from './rtt'
 import { detectUserAgent } from './user_agent'
 import { detectWebDriver } from './webdriver'
 import { detectWebGL } from './webgl'
@@ -32,7 +31,6 @@ export const detectors = {
   detectPluginsArray,
   detectPluginsLengthInconsistency,
   detectProcess,
-  detectRTT,
   detectUserAgent,
   detectWebDriver,
   detectWebGL,
