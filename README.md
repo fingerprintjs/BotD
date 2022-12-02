@@ -24,18 +24,11 @@
 
 ## BotD
 
-```diff
-# Before
+BotD is an open source library that we created to make it easy for  every developer to detect basic bots in their web apps. 
 
-- 40% of your website traffic is from bots
-- They're taking over accounts, scraping prices and ruining your website reputation
+It is available under a permissive MIT license and will is always be free for developers and commercial use.
 
-# After
-
-+ BotD is a browser library for JavaScript bot detection
-+ Easily add ability to detect automation tools
-+ Requires adding only a few lines of JavaScript on your website
-```
+For more demanding applications we created a professional API-based bot detection software that is called [Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/).
 
 [⚡ View Our Demo](https://fingerprintjs.github.io/BotD).
 
@@ -81,15 +74,17 @@ botdPromise
 
 📕 [Full documentation](docs/api.md)
 
-## 🤖 Upgrade to Fingerprint Pro bot detection to detect sophisticated bots easily
+## 🤖 Upgrade to Fingerprint Pro Bot Detection to detect sophisticated bots with confidence.
 
 **Free for developers (up to 20K API calls / mo), unlimited free trials available, no credit card needed.**
 
-[Fingerprint Pro](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
+[Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
 
-The Pro combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
+Fingerprint Pro Bot Detection provides both browser and server-side APIs that make the process of bot detection fast and secure. When using the Pro Bot Detection, use the browser JavaScript SDK to obtain the requestID value and then verify this value using our server API.
 
-A big advantage of the Pro is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
+The Pro product combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
+
+A big advantage of the Pro detection is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
 
 <p align="center">
   <a href="https://fingerprint.com/products/bot-detection/">
@@ -132,7 +127,7 @@ Full product comparison:
     <!-- -->
     <tr><td colspan="3"><h4>Additional Features</h4></td></tr>
     <tr><td><b>Server-side accuracy increase</b><br/><i>based on additional server-side data, such as TLS crypto support, ipv4/v6 data and others</i></td><td align="center">–</td><td align="center">✓</td></tr>
-    <tr><td><b>Query API & realtime Webhooks</b><br/><i>build flexible workflows</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Query API</b><br/><i>build flexible workflows</i></td><td align="center">–</td><td align="center">✓</td></tr>
     <!-- -->
     <tr><td colspan="3"><h4>Operations</h4></td></tr>
     <tr><td><b>Data security</b></td><td align="center">Your infrastructure</td><td align="center">Encrypted at rest</td></tr>
@@ -162,11 +157,9 @@ Pro result example:
 
 🍿 [Live demo](https://fingerprint.com/products/bot-detection/)
 
-⏱ [How to upgrade from Open Source to Pro in 30 seconds](https://dev.fingerprint.com/v3/docs/migrating-from-open-source-v3)
-
 📕 [Fingerprint Pro documentation](https://dev.fingerprint.com)
 
-## Migrating from v0
+## Migrating from <code>v0</code>
 
 -   [Migration guide](docs/migrating_v0_v1.md)
 -   [V0 documentation](https://github.com/fingerprintjs/BotD/tree/v0)
