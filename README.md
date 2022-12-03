@@ -26,7 +26,7 @@
 
 BotD is an open source library that we created to make it easy for  every developer to detect basic bots in their web apps. 
 
-It is available under a permissive MIT license and will is always be free for developers and commercial use.
+It is available under a permissive MIT license and will always be free for developers and commercial use.
 
 For more demanding applications we created a professional API-based bot detection software that is called [Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/).
 
