@@ -1,6 +1,6 @@
 import getAppVersion from './app_version'
 import getDeviceMemory from './device_memory'
-import getDocumentAttributes from './document_element_attributes'
+import getDocumentElementKeys from './document_element_keys'
 import getDocumentProperties from './document_properties'
 import getErrorTrace from './error_trace'
 import getEvalLength from './eval_length'
@@ -16,8 +16,8 @@ import getPluginsLength from './plugins_length'
 import getProcess, { ProcessPayload } from './process'
 import getProductSub from './product_sub'
 import getRTT from './rtt'
-import getScreenResolution from './screen_resolution'
-import getTouchSupport from './touch_support'
+import getScreenResolution, { ScreenResolutionPayload } from './screen_resolution'
+import getTouchSupport, { TouchSupportPayload } from './touch_support'
 import getUserAgent from './user_agent'
 import getVendor from './vendor'
 import getWebDriver from './webdriver'
@@ -42,7 +42,7 @@ export const sources = {
   webDriver: getWebDriver,
   languages: getLanguages,
   notificationPermissions: getNotificationPermissions,
-  documentAttributes: getDocumentAttributes,
+  documentElementKeys: getDocumentElementKeys,
   functionBind: getFunctionBind,
   process: getProcess,
   documentProps: getDocumentProperties,
@@ -56,4 +56,4 @@ export const sources = {
   vendor: getVendor,
 }
 
-export { WindowSizePayload, ProcessPayload }
+export { WindowSizePayload, ProcessPayload, ScreenResolutionPayload, TouchSupportPayload }

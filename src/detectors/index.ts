@@ -1,5 +1,5 @@
 import { detectAppVersion } from './app_version'
-import { detectDocumentAttributes } from './document_attributes'
+import { detectDocumentAttributes } from './document_element_keys'
 import { detectDocumentProperties } from './document_properties'
 import { detectErrorTrace } from './error_trace'
 import { detectEvalLengthInconsistency } from './eval_length'
