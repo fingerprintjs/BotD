@@ -3,9 +3,8 @@
   --accent-dark-color: rgb(140, 39, 3);
   --error-color: #b3261e;
   --font-family: 'Fira Mono', monospace;
-  --font-family-consolas: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  --font-family-consolas: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
-
 
 body {
   width: 100%;
@@ -26,7 +25,6 @@ body {
 * {
   box-sizing: border-box;
 }
-
 
 .container {
   width: calc(100% - 128px);
@@ -90,7 +88,7 @@ body {
     margin-top: 32px;
   }
 
-  #navbar .logo  {
+  #navbar .logo {
     margin-top: 0;
     width: 256px;
   }
@@ -98,7 +96,7 @@ body {
   #navbar #navbar-chevron {
     transform: rotate(90deg);
   }
-  
+
   #navbar #playground-actions {
     margin-left: 0;
     margin: 32px 0px;
@@ -139,14 +137,15 @@ h2 {
   transition: 0.15s;
 }
 
-.github-card:active, .github-card:focus {
+.github-card:active,
+.github-card:focus {
   background-color: rgba(0, 0, 0, 0.12);
   transition: 0.15s;
 }
 
 .github-card::before {
   display: block;
-  content: "";
+  content: '';
   width: 32px;
   height: 32px;
   background-image: url(../resources/github_icon.svg);
@@ -177,7 +176,6 @@ h2 {
   font-weight: 600;
 }
 
-
 .orange-button {
   background-color: var(--accent-color);
   color: #fff;
@@ -190,11 +188,15 @@ h2 {
   background-color: transparent;
 }
 
-.orange-button:hover, .orange-button:active, .orange-button:focus {
+.orange-button:hover,
+.orange-button:active,
+.orange-button:focus {
   background-color: var(--accent-dark-color);
 }
 
-.orange-button-outlined:hover, .orange-button-outlined:active, .orange-button-outlined:focus {
+.orange-button-outlined:hover,
+.orange-button-outlined:active,
+.orange-button-outlined:focus {
   background-color: rgba(240, 68, 5, 0.12);
 }
 
@@ -208,7 +210,6 @@ h2 {
   padding: var(--content-card-padding);
 }
 
-
 #result {
   overflow: hidden;
   margin: 96px auto;
@@ -218,7 +219,6 @@ h2 {
   --bot-icon-color: #4caf50;
   --bot-icon-url: url(../resources/robot-off-outline.svg);
 }
-
 
 .result-detected {
   --bot-icon-color: #f44336 !important;
@@ -230,7 +230,6 @@ h2 {
   --bot-icon-url: url(../resources/alert-circle-outline.svg) !important;
 }
 
-
 .result-bot-icon-container {
   width: 128px;
   height: 128px;
@@ -241,7 +240,7 @@ h2 {
 }
 
 .result-bot-icon-container::before {
-  content: "";
+  content: '';
   display: block;
   background-color: var(--bot-icon-color);
   opacity: 0.08;
@@ -275,7 +274,6 @@ h2 {
   color: var(--bot-icon-color);
   transition: 0.2s color;
 }
-
 
 .logs-content {
   background-color: #282c34;
