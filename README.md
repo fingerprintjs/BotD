@@ -76,8 +76,6 @@ botdPromise
 
 ## 🤖 Upgrade to Fingerprint Pro Bot Detection to detect sophisticated bots with confidence.
 
-**Free for developers (up to 20K API calls / mo), unlimited free trials available, no credit card needed.**
-
 [Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
 
 Fingerprint Pro Bot Detection provides both browser and server-side APIs that make the process of bot detection fast and secure. When using the Pro Bot Detection, use the browser JavaScript SDK to obtain the requestID value and then verify this value using our server API.
