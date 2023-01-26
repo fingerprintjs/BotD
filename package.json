@@ -49,6 +49,7 @@
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-typescript": "^8.5.0",
     "@types/jasmine": "^3.5.14",
     "@types/webpack": "^5.28.0",

@@ -4,6 +4,7 @@ import dtsPlugin from 'rollup-plugin-dts'
 import licensePlugin from 'rollup-plugin-license'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
 import { join } from 'path'
 import { dependencies } from './package.json'
 
@@ -53,5 +54,22 @@ export default [
       format: 'es',
     },
     plugins: [dtsPlugin(), commonBanner],
+  },
+  {
+    input: inputFile,
+    plugins: [resolve(), commonjs(), jsonPlugin(), typescript(), terser()],
+    external: Object.keys(dependencies),
+    output: [
+      {
+        ...commonOutput,
+        file: `${outputDirectory}/botd.cjs.min.js`,
+        format: 'cjs',
+      },
+      {
+        ...commonOutput,
+        file: `${outputDirectory}/botd.esm.min.js`,
+        format: 'es',
+      },
+    ],
   },
 ]
