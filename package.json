@@ -1,6 +1,6 @@
 {
   "name": "@krisseck/botd-extra",
-  "version": "1.3.1+krisseck.1",
+  "version": "1.0.0",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
