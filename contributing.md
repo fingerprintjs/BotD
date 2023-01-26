@@ -1,4 +1,4 @@
-# Contributing to Botd
+# Contributing to Botd Extra
 
 ## Working with the code
 

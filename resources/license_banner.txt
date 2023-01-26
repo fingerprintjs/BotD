@@ -1,2 +1,2 @@
-Fingerprint BotD v<%= pkg.version %> - Copyright (c) FingerprintJS, Inc, <%= new Date().getFullYear() %> (https://fingerprint.com)
+Krisseck BotD Extra v<%= pkg.version %> - Copyright (c) Kristian Polso, <%= new Date().getFullYear() %> (https://polso.info)
 Licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) license.
