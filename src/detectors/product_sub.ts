@@ -10,6 +10,9 @@ export function detectProductSub({ productSub }: ComponentDict): DetectorRespons
       browserKind === BrowserKind.Opera ||
       browserKind === BrowserKind.WeChat) &&
     productSub.value !== '20030107'
-  )
+  ) {
     return BotKind.Unknown
+  } else if (browserKind == BrowserKind.Firefox && productSub.value === '20030107') {
+    return BotKind.Unknown
+  }
 }

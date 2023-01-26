@@ -17,6 +17,9 @@ import { detectWebGL } from './webgl'
 import { detectWindowExternal } from './window_external'
 import { detectWindowProperties } from './window_properties'
 import { detectWindowSize } from './window_size'
+import { detectPlatform } from './platform'
+import { detectPluginInconsistencyFirefox } from './plugins_inconsistency_ff'
+import { detectVmFromMemoryScreenDimensions } from './memory_screen_dimensions'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const detectors = {
@@ -39,4 +42,7 @@ export const detectors = {
   detectWindowSize,
   detectMimeTypesConsistent,
   detectProductSub,
+  detectPlatform,
+  detectPluginInconsistencyFirefox,
+  detectVmFromMemoryScreenDimensions,
 }

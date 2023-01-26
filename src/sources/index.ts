@@ -18,6 +18,10 @@ import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowProperties from './window_properties'
 import getWindowSize, { WindowSizePayload } from './window_size'
+import getPlatform from './platform'
+import getPluginNamesArray from './plugin_names_array'
+import getDeviceMemory from './device_memory'
+import getScreenDimensions from './screen_dimensions'
 
 export const sources = {
   userAgent: getUserAgent,
@@ -40,6 +44,10 @@ export const sources = {
   process: getProcess,
   documentProps: getDocumentProperties,
   windowProps: getWindowProperties,
+  platform: getPlatform,
+  pluginsNameArray: getPluginNamesArray,
+  deviceMemory: getDeviceMemory,
+  screenDimensions: getScreenDimensions,
 }
 
 export { WindowSizePayload, ProcessPayload }
