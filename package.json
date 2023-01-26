@@ -1,5 +1,5 @@
 {
-  "name": "@fingerprintjs/botd",
+  "name": "@krisseck/botd-extra",
   "version": "1.3.1",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
@@ -18,15 +18,15 @@
   "module": "dist/botd.esm.js",
   "types": "dist/botd.d.ts",
   "license": "MIT",
-  "author": "FingerprintJS, Inc (https://fingerprint.com)",
+  "author": "Kristian Polso (https://polso.info)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fingerprintjs/botd.git"
+    "url": "https://github.com/Krisseck/BotD-extra.git"
   },
   "bugs": {
-    "url": "https://github.com/fingerprintjs/botd/issues"
+    "url": "https://github.com/Krisseck/BotD-extra/issues"
   },
-  "homepage": "https://fingerprintjs.github.io/BotD/",
+  "homepage": "https://github.com/Krisseck/BotD-extra",
   "files": [
     "dist"
   ],
