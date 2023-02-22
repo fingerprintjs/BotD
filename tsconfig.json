@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "target": "es5",
     "removeComments": false,
     "resolveJsonModule": true,
@@ -18,9 +18,4 @@
     "node_modules",
     "playground/dist"
   ],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
 }
