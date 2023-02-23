@@ -24,9 +24,6 @@ const config: Configuration = {
         test: /\.ts?$/,
         loader: 'ts-loader',
         exclude: /node_modules/,
-        options: {
-          configFile: '../tsconfig.browser.json',
-        },
       },
       {
         test: /\.css$/i,

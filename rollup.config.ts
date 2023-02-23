@@ -11,11 +11,10 @@ import terserConfig from './terser.config'
 const { dependencies } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 
 const outputDirectory = 'dist'
-const tsconfig = 'tsconfig.browser.json'
 
 export const commonInput = {
   input: 'src/index.ts',
-  plugins: [nodeResolvePlugin(), jsonPlugin(), typescriptPlugin({ tsconfig })],
+  plugins: [nodeResolvePlugin(), jsonPlugin(), typescriptPlugin()],
 }
 
 export const commonOutput = {
@@ -35,38 +34,6 @@ export const commonOutput = {
 const commonTerser = terserPlugin(terserConfig)
 
 const config: RollupOptions[] = [
-  // Browser bundles. They have all the dependencies included for convenience.
-  {
-    ...commonInput,
-    output: [
-      // IIFE for users who use Require.js or Electron and want to just call `window.FingerprintJS.load()`
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.js`,
-        format: 'iife',
-      },
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.min.js`,
-        format: 'iife',
-        plugins: [commonTerser, ...commonOutput.plugins],
-      },
-
-      // UMD for users who use Require.js or Electron and want to leverage them
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.umd.js`,
-        format: 'umd',
-      },
-      {
-        ...commonOutput,
-        file: `${outputDirectory}/botd.umd.min.js`,
-        format: 'umd',
-        plugins: [commonTerser, ...commonOutput.plugins],
-      },
-    ],
-  },
-
   // NPM bundles. They have all the dependencies excluded for end code size optimization.
   {
     ...commonInput,
@@ -91,7 +58,7 @@ const config: RollupOptions[] = [
   // TypeScript definition
   {
     ...commonInput,
-    plugins: [dtsPlugin({ tsconfig })],
+    plugins: [dtsPlugin()],
     output: {
       ...commonOutput,
       file: `${outputDirectory}/botd.d.ts`,

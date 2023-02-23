@@ -103,19 +103,19 @@ function makeBuildNumber() {
 }
 
 function setupLocal(config: Config) {
-  const files = ['src/**/*.ts', 'tests/**/*.ts', 'dist/fp.min.js']
+  const files = [
+    // The polyfills are required for old supported browsers.
+    // They should be removed when the old browser support is dropped.
+    'node_modules/promise-polyfill/dist/polyfill.js',
+
+    'src/**/*.ts',
+    'tests/**/*.ts',
+    'test-dist/botd.min.js',
+  ]
 
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],
-    files: [
-      // The polyfills are required for old supported browsers.
-      // They should be removed when the old browser support is dropped.
-      'node_modules/promise-polyfill/dist/polyfill.js',
-
-      'src/**/*.ts',
-      'tests/**/*.ts',
-      'test-dist/botd.min.js',
-    ],
+    files,
     preprocessors: {
       '**/*.ts': 'karma-typescript',
     },
@@ -124,7 +124,7 @@ function setupLocal(config: Config) {
     concurrency: 3,
 
     karmaTypescriptConfig: {
-      tsconfig: 'tsconfig.browser.json',
+      tsconfig: 'tsconfig.json',
       compilerOptions: {
         module: 'commonjs',
         sourceMap: true,
