@@ -18,4 +18,10 @@
     "node_modules",
     "playground/dist"
   ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2021"    
+    },
+  }
 }

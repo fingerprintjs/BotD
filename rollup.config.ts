@@ -13,13 +13,13 @@ const { dependencies } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 const outputDirectory = 'dist'
 const tsconfig = 'tsconfig.browser.json'
 
-const commonInput = {
+export const commonInput = {
   input: 'src/index.ts',
   plugins: [nodeResolvePlugin(), jsonPlugin(), typescriptPlugin({ tsconfig })],
 }
 
-const commonOutput = {
-  name: 'FingerprintJS',
+export const commonOutput = {
+  name: 'BotD',
   exports: 'named' as const,
   plugins: [
     licensePlugin({
