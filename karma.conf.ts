@@ -40,35 +40,6 @@ const firefoxIncognitoCapabilities = {
  */
 /* eslint-disable max-len */
 // prettier-ignore
-/*
-const browserstackBrowsers = {
-  IE11: { platform: 'Windows', osVersion: '7', browserName: 'IE', browserVersion: '11.0', useHttps: true },
-  Windows11_EdgeLatest: { platform: 'Windows', osVersion: '11', browserName: 'Edge', browserVersion: 'latest-beta', useHttps: true },
-  Windows10_Chrome49: { platform: 'Windows', osVersion: '10', browserName: 'Chrome', browserVersion: '49.0', useHttps: true },
-  // Windows10_Chrome49_Incognito: { platform: 'Windows', osVersion: '10', browserName: 'Chrome', browserVersion: '49.0', ...chromeIncognitoCapabilities },
-  Windows11_ChromeLatest: { platform: 'Windows', osVersion: '11', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true },
-  // Windows11_ChromeLatest_Incognito: { platform: 'Windows', osVersion: '11', browserName: 'Chrome', browserVersion: 'latest-beta, ...chromeIncognitoCapabilities },
-  Windows10_Firefox52: { platform: 'Windows', osVersion: '10', browserName: 'Firefox', browserVersion: '52.0', useHttps: true },
-  // Windows10_Firefox52_Incognito: { platform: 'Windows', osVersion: '10', browserName: 'Firefox', browserVersion: '52.0', ...firefoxIncognitoCapabilities },
-  Windows11_FirefoxLatest: { platform: 'Windows', osVersion: '11', browserName: 'Firefox', browserVersion: 'latest-beta', useHttps: true },
-  // Windows11_FirefoxLatest_Incognito: { platform: 'Windows', osVersion: '11', browserName: 'Firefox', browserVersion: 'latest-beta, ...firefoxIncognitoCapabilities },
-  OSXMojave_Safari12: { platform: 'OS X', osVersion: 'Mojave', browserName: 'Safari', browserVersion: '12.1', useHttps: true },
-  OSXMonterey_Safari15: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Safari', browserVersion: '15.0', useHttps: false },
-  OSXMonterey_ChromeLatest: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true },
-  // OSXMonterey_ChromeLatest_Incognito: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Chrome', browserVersion: 'latest-beta, ...chromeIncognitoCapabilities },
-  OSXMonterey_FirefoxLatest: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Firefox', browserVersion: 'latest-beta', useHttps: true },
-  // OSXMonterey_FirefoxLatest_Incognito: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Firefox', browserVersion: 'latest-beta, ...firefoxIncognitoCapabilities },
-  OSXMonterey_EdgeLatest: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Edge', browserVersion: 'latest-beta', useHttps: true },
-  Android11_ChromeLatest: { deviceName: 'Google Pixel 4', os: 'Android', osVersion: '11.0', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true },
-  iOS10_Safari: { deviceName: 'iPhone 7', os: 'iOS', osVersion: '10', browserName: 'Safari' , useHttps: true},
-  iOS11_Safari: { deviceName: 'iPhone 8 Plus', os: 'iOS', osVersion: '11', browserName: 'Safari', useHttps: true },
-  iOS12_Safari: { deviceName: 'iPhone XS', os: 'iOS', osVersion: '12', browserName: 'Safari', useHttps: true },
-  iOS13_Safari: { deviceName: 'iPhone 11 Pro', os: 'iOS', osVersion: '13', browserName: 'Safari', useHttps: true },
-  iOS14_Safari: { deviceName: 'iPhone 11', os: 'iOS', osVersion: '14', browserName: 'Safari', useHttps: true },
-  // iOS15_Safari: { deviceName: 'iPhone 11 Pro', os: 'iOS', osVersion: '15', browserName: 'Safari' }
-}
-*/
-
 const browserstackBrowsers = {
   Windows10_Chrome57: { platform: 'Windows', osVersion: '10', browserName: 'Chrome', browserVersion: '57', useHttps: true },
   // Windows10_Chrome57_Incognito: { platform: 'Windows', osVersion: '10', browserName: 'Chrome', browserVersion: '57', ...chromeIncognitoCapabilities },
@@ -103,15 +74,7 @@ function makeBuildNumber() {
 }
 
 function setupLocal(config: Config) {
-  const files = [
-    // The polyfills are required for old supported browsers.
-    // They should be removed when the old browser support is dropped.
-    'node_modules/promise-polyfill/dist/polyfill.js',
-
-    'src/**/*.ts',
-    'tests/**/*.ts',
-    'test-dist/botd.min.js',
-  ]
+  const files = ['src/**/*.ts', 'tests/**/*.ts', 'test-dist/botd.min.js']
 
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],
