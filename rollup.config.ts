@@ -3,10 +3,8 @@ import type { RollupOptions } from 'rollup'
 import jsonPlugin from '@rollup/plugin-json'
 import nodeResolvePlugin from '@rollup/plugin-node-resolve'
 import typescriptPlugin from '@rollup/plugin-typescript'
-import terserPlugin from '@rollup/plugin-terser'
 import dtsPlugin from 'rollup-plugin-dts'
 import licensePlugin from 'rollup-plugin-license'
-import terserConfig from './terser.config'
 
 const { dependencies } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 
