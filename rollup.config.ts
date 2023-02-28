@@ -31,8 +31,6 @@ export const commonOutput = {
   ],
 }
 
-const commonTerser = terserPlugin(terserConfig)
-
 const config: RollupOptions[] = [
   // NPM bundles. They have all the dependencies excluded for end code size optimization.
   {
