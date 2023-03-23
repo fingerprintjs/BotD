@@ -15,7 +15,7 @@ import { detectWebDriver } from './webdriver'
 import { detectWebGL } from './webgl'
 import { detectWindowExternal } from './window_external'
 import { detectWindowSize } from './window_size'
-import { detectSuspiciousProperties } from './suspicious_properties'
+import { detectDistinctiveProperties } from './distinctive_properties'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const detectors = {
@@ -36,5 +36,5 @@ export const detectors = {
   detectWindowSize,
   detectMimeTypesConsistent,
   detectProductSub,
-  detectSuspiciousProperties,
+  detectDistinctiveProperties,
 }

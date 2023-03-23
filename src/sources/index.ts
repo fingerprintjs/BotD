@@ -16,7 +16,7 @@ import getWebDriver from './webdriver'
 import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowSize, { WindowSizePayload } from './window_size'
-import checkSuspiciousProperties from './suspicious_properties'
+import checkDistinctiveProperties from './distinctive_properties'
 
 export const sources = {
   userAgent: getUserAgent,
@@ -37,7 +37,7 @@ export const sources = {
   documentElementKeys: getDocumentElementKeys,
   functionBind: getFunctionBind,
   process: getProcess,
-  suspiciousProps: checkSuspiciousProperties,
+  distinctiveProps: checkDistinctiveProperties,
 }
 
 export { WindowSizePayload, ProcessPayload }

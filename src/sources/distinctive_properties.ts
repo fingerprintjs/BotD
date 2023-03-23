@@ -1,12 +1,12 @@
 import { BotKind } from '../types'
 import { getObjectProps, includes } from '../utils/misc'
 
-export type SuspiciousPropertiesPayload = Partial<Record<BotKind, boolean>>
+export type DistinctivePropertiesPayload = Partial<Record<BotKind, boolean>>
 
-export default function checkSuspiciousProperties(): SuspiciousPropertiesPayload {
+export default function checkDistinctiveProperties(): DistinctivePropertiesPayload {
   type PropsList = Partial<Record<'window' | 'document', (string | RegExp)[]>>
   // The order in the following list matters, because specific types of bots come first, followed by automation technologies.
-  const suspiciousPropsList: Partial<Record<BotKind, PropsList>> = {
+  const distinctivePropsList: Partial<Record<BotKind, PropsList>> = {
     [BotKind.Awesomium]: {
       window: ['awesomium'],
     },
@@ -76,18 +76,18 @@ export default function checkSuspiciousProperties(): SuspiciousPropertiesPayload
     },
   }
   let botName: BotKind
-  const result: SuspiciousPropertiesPayload = {}
+  const result: DistinctivePropertiesPayload = {}
   const windowProps = getObjectProps(window)
   let documentProps: string[] = []
   if (window.document !== undefined) documentProps = getObjectProps(window.document)
 
-  for (botName in suspiciousPropsList) {
-    const props = suspiciousPropsList[botName]
+  for (botName in distinctivePropsList) {
+    const props = distinctivePropsList[botName]
     if (props !== undefined) {
-      const windowContainSuspicious = props.window === undefined ? false : includes(windowProps, ...props.window)
-      const documentContainSuspicious =
+      const windowContains = props.window === undefined ? false : includes(windowProps, ...props.window)
+      const documentContains =
         props.document === undefined || !documentProps.length ? false : includes(documentProps, ...props.document)
-      result[botName] = windowContainSuspicious || documentContainSuspicious
+      result[botName] = windowContains || documentContains
     }
   }
 
