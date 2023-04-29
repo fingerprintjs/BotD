@@ -31,7 +31,7 @@ export const enum State {
  * @readonly
  * @enum {string}
  */
-export const enum BotKind {
+export enum BotKind {
   Awesomium = 'awesomium',
   Cef = 'cef',
   CefSharp = 'cefsharp',
