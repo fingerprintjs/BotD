@@ -187,5 +187,5 @@ See the [contributing guidelines](contributing.md) to learn how to start a playg
 [MIT](LICENSE)
 
 <p align="center">
-© 2022 FingerprintJS, Inc
+© 2023 FingerprintJS, Inc
 </p>
