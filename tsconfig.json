@@ -11,8 +11,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "dist",
