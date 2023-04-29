@@ -1,6 +1,6 @@
 import { version } from '../package.json'
 import BotDetector from './detector'
-import { sources, WindowSizePayload, ProcessPayload } from './sources'
+import { BotDetectorInterface } from './types'
 
 /**
  * Options for BotD loading
