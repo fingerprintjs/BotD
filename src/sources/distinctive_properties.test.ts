@@ -6,7 +6,14 @@ describe('Sources', () => {
       const bots = checkDistinctiveProperties()
 
       for (const [name, result] of Object.entries(bots)) {
-        expect(result).withContext(`Property: ${name}`).toBeFalse()
+        if (name === 'selenium') {
+          // Some browsers are orchestrated with Selenium on BrowserStack
+          expect(typeof result)
+            .withContext(`Property: ${name}`)
+            .toBe('boolean')
+        } else {
+          expect(result).withContext(`Property: ${name}`).toBeFalse()
+        }
       }
     })
   })

@@ -1,4 +1,4 @@
-import { isHeadlessChrome, isWebKit } from '../../tests/utils'
+import { getBrowserMajorVersion, isHeadlessChrome, isMobile, isWebKit } from '../../tests/utils'
 import { BotdError } from '../types'
 import getNotificationPermissions from './notification_permissions'
 
@@ -8,7 +8,11 @@ describe('Sources', () => {
       if (isWebKit()) {
         await expectAsync(getNotificationPermissions()).toBeRejectedWithError(
           BotdError,
-          'window.Notification is undefined',
+          isMobile()
+            ? 'window.Notification is undefined'
+            : (getBrowserMajorVersion() ?? 0) < 16
+            ? 'navigator.permissions is undefined'
+            : 'notificationPermissions signal unexpected behaviour',
         )
         return
       }
