@@ -8,28 +8,22 @@ describe('Sources', () => {
       const version = getBrowserVersion() ?? { major: 0, minor: 0 }
 
       if (isChromium()) {
-        if (isHeadlessChrome()) {
+        if (isHeadlessChrome() || isMobile()) {
           expect(result).toBe(0)
           return
         }
 
         if (version.major >= 94) {
           expect(result).toBe(5)
-        } else {
-          expect(result).toBe(3)
+          return
         }
-
-        return
       }
 
       if (isGecko()) {
         if (version.major >= 99) {
           expect(result).toBe(5)
-        } else {
-          expect(result).toBe(3)
+          return
         }
-
-        return
       }
 
       if (isWebKit()) {

@@ -5,8 +5,8 @@ describe('Sources', () => {
     it('returns expected values', () => {
       const bots = checkDistinctiveProperties()
 
-      for (const [, result] of Object.entries(bots)) {
-        expect(result).toBeFalse()
+      for (const [name, result] of Object.entries(bots)) {
+        expect(result).withContext(`Property: ${name}`).toBeFalse()
       }
     })
   })

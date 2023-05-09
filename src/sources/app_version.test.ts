@@ -1,4 +1,12 @@
-import { getBrowserVersion, isChromium, isGecko, isWebKit } from '../../tests/utils'
+import {
+  getBrowserVersion,
+  getOsMajorVersion,
+  isChromium,
+  isGecko,
+  isMacOS,
+  isMobile,
+  isWebKit,
+} from '../../tests/utils'
 import getAppVersion from './app_version'
 
 describe('Sources', () => {
@@ -20,7 +28,9 @@ describe('Sources', () => {
       }
 
       if (isGecko()) {
-        expect(value).toBe('5.0 (Macintosh)')
+        expect(value).toBe(
+          `5.0 (${isMacOS() ? 'Macintosh' : !isMobile() ? 'Windows' : 'Android ' + (getOsMajorVersion() ?? 0)})`,
+        )
         return
       }
 

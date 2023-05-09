@@ -30,6 +30,18 @@ export function isMobile(): boolean {
   return new UAParser().getDevice().type === 'mobile'
 }
 
+export function isMacOS(): boolean {
+  return new UAParser().getOS().name === 'Mac OS'
+}
+
+export function getOsMajorVersion(): number | undefined {
+  const version = new UAParser().getOS().version
+  if (version === undefined) {
+    return undefined
+  }
+  return parseInt(version.split('.')[0])
+}
+
 export function getBrowserMajorVersion(): number | undefined {
   const version = new UAParser().getBrowser().version
   if (version === undefined) {

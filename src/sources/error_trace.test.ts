@@ -1,4 +1,4 @@
-import { isChromium } from '../../tests/utils'
+import { getBrowserMajorVersion, isChromium } from '../../tests/utils'
 import getErrorTrace from './error_trace'
 
 describe('Sources', () => {
@@ -7,7 +7,11 @@ describe('Sources', () => {
       const result = getErrorTrace()
 
       if (isChromium()) {
-        expect(result).toContain("TypeError: Cannot read properties of null (reading '0')")
+        expect(result).toContain(
+          (getBrowserMajorVersion() ?? 0) < 93
+            ? "TypeError: Cannot read property '0' of null"
+            : "TypeError: Cannot read properties of null (reading '0')",
+        )
         return
       }
 

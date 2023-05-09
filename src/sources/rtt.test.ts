@@ -1,11 +1,11 @@
-import { isGecko, isWebKit } from '../../tests/utils'
+import { getBrowserMajorVersion, isChromium, isGecko, isWebKit } from '../../tests/utils'
 import { BotdError } from '../types'
 import getRTT from './rtt'
 
 describe('Sources', () => {
   describe('rtt', () => {
     it('returns an expected value or throws', () => {
-      if (isGecko() || isWebKit()) {
+      if (isGecko() || isWebKit() || (isChromium() && (getBrowserMajorVersion() ?? 0) < 61)) {
         expect(() => getRTT()).toThrow(new BotdError(-1, 'navigator.connection is undefined'))
         return
       }
