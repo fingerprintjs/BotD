@@ -242,10 +242,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fpjs-incubator/broyster@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@fpjs-incubator/broyster/-/broyster-0.1.4.tgz#ede85a12c22cd32a782ef459299c4f0f2a306f11"
-  integrity sha512-6tWyydx0D/RmW/zK0CRWZkwbqsWgJfvD2/6Y9t+Ag0uKzL1dTnVndmRQeuYQ/k4Uws0rRxx6qD3h8cD118HYsQ==
+"@fpjs-incubator/broyster@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@fpjs-incubator/broyster/-/broyster-0.1.5.tgz#2c9744caf70b59c75195de2a3f84986d5e0fed39"
+  integrity sha512-Li049XorxkNtF7k2QohFsPSCvNZs7GWG0ukehNJDg5zu/IPZvIHxs7zCp7S4Z4NC7NUzcOVsoMz5+UktRqYujw==
   dependencies:
     async-lock "^1.4.0"
     browserstack "~1.5.1"
@@ -586,6 +586,11 @@
   integrity sha512-f0KEEe05NvUnat+boPTZ0dgaLZ4SfSouXUgv5noUiefG2ajgKjmETo9ZJyuqsl7dfl2aHlLJUiki6B4ZYldiiw==
   dependencies:
     "@types/node" "*"
+
+"@types/ua-parser-js@^0.7.36":
+  version "0.7.36"
+  resolved "https://registry.yarnpkg.com/@types/ua-parser-js/-/ua-parser-js-0.7.36.tgz#9bd0b47f26b5a3151be21ba4ce9f5fa457c5f190"
+  integrity sha512-N1rW+njavs70y2cApeIw1vLMYXRwfBy+7trgavGuuTfOd7j1Yh7QTRc/yqsPl6ncokt72ZXuxEU0PiCp9bSwNQ==
 
 "@types/webpack@^5.28.0":
   version "5.28.0"
@@ -5033,6 +5038,11 @@ ua-parser-js@^0.7.30:
   version "0.7.33"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.33.tgz#1d04acb4ccef9293df6f70f2c3d22f3030d8b532"
   integrity sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==
+
+ua-parser-js@^1.0.35:
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-1.0.35.tgz#c4ef44343bc3db0a3cbefdf21822f1b1fc1ab011"
+  integrity sha512-fKnGuqmTBnIE+/KXSzCn4db8RTigUzw1AN0DmdU6hJovUTbYJKyqj+8Mt1c4VfRDnOVJnENmfYkIPZ946UrSAA==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
