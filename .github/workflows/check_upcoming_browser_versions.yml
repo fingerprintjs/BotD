@@ -6,7 +6,7 @@
 
 name: Check upcoming browser versions
 
-on: 
+on:
   schedule:
     - cron: '0 19 ? * MON-FRI'
 env:
@@ -31,8 +31,8 @@ jobs:
           restore-keys: nodemodules-
       - name: Install Node packages
         run: yarn install
-      - name: Build
-        run: yarn build
+      - name: Build test bundle
+        run: yarn build:test
       - name: Run unit tests
         uses: nick-fields/retry@v2
         with:
