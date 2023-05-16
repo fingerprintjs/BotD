@@ -6,9 +6,14 @@
 
 name: Check upcoming browser versions
 
+# on:
+#   schedule:
+#     - cron: '0 19 ? * MON-FRI'
 on:
-  schedule:
-    - cron: '0 19 ? * MON-FRI'
+  push:
+    branches:
+      - dev
+      - main
 env:
   BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
   BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
