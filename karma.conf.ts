@@ -1,13 +1,13 @@
 import { Config, CustomLauncher } from 'karma'
 import { KarmaTypescriptConfig } from 'karma-typescript/dist/api/configuration'
-import { karmaPlugin, setHttpsAndServerForKarma } from '@fpjs-incubator/broyster/node'
+import { karmaPlugin, setHttpsAndServerForKarma, BrowserFlags } from '@fpjs-incubator/broyster/node'
 
 declare module 'karma' {
   interface ConfigOptions {
     karmaTypescriptConfig?: KarmaTypescriptConfig | undefined
   }
 
-  interface Config {
+  interface Config extends ConfigOptions {
     preset?: string
     reporters: ConfigOptions['reporters']
   }
@@ -50,21 +50,21 @@ const browserstackBrowsers = {
   Windows11_FirefoxLatest: { platform: 'Windows', osVersion: '11', browserName: 'Firefox', browserVersion: 'latest-beta', useHttps: true },
   // Windows11_FirefoxLatest_Incognito: { platform: 'Windows', osVersion: '11', browserName: 'Firefox', browserVersion: 'latest-beta, ...firefoxIncognitoCapabilities },
   Windows11_EdgeLatest: { platform: 'Windows', osVersion: '11', browserName: 'Edge', browserVersion: 'latest-beta', useHttps: true },
-  'OSX10.14_Safari12': { platform: 'OS X', osVersion: 'Mojave', browserName: 'Safari', browserVersion: 'latest', useHttps: true },
-  OSX12_Safari15: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Safari', browserVersion: 'latest', useHttps: false },
-  OSX13_Safari16: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Safari', browserVersion: 'latest', useHttps: false },
+  'OSX10.14_Safari12': { platform: 'OS X', osVersion: 'Mojave', browserName: 'Safari', browserVersion: '12', useHttps: true },
+  OSX12_Safari15: { platform: 'OS X', osVersion: 'Monterey', browserName: 'Safari', browserVersion: '15', useHttps: false },
+  OSX13_Safari16: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Safari', browserVersion: '16', useHttps: false },
   OSX13_ChromeLatest: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true },
   // OSX13_ChromeLatest_Incognito: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Chrome', browserVersion: 'latest-beta, ...chromeIncognitoCapabilities },
   OSX13_FirefoxLatest: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Firefox', browserVersion: 'latest-beta', useHttps: true },
   // OSX13_FirefoxLatest_Incognito: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Firefox', browserVersion: 'latest-beta, ...firefoxIncognitoCapabilities },
   OSX13_EdgeLatest: { platform: 'OS X', osVersion: 'Ventura', browserName: 'Edge', browserVersion: 'latest-beta', useHttps: true },
-  Android13_ChromeLatest: { deviceName: ['Google Pixel 7', 'Google Pixel 7 Pro', 'Google Pixel 6 Pro'], platform: 'Android', osVersion: '13.0', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true },
-  iOS11_Safari: { deviceName: ['iPhone 8 Plus', 'iPhone 6S', 'iPhone 8', 'iPhone 6'], platform: 'iOS', osVersion: '11', browserName: 'Safari', useHttps: true },
-  iOS12_Safari: { deviceName: ['iPhone XS', 'iPhone 6S', 'iPhone 8 Plus', 'iPhone XR'], platform: 'iOS', osVersion: '12', browserName: 'Safari', useHttps: true },
-  iOS13_Safari: { deviceName: ['iPhone 11 Pro', 'iPhone 8', 'iPhone XS', 'iPhone 11 Pro Max'], platform: 'iOS', osVersion: '13', browserName: 'Safari', useHttps: true },
-  iOS14_Safari: { deviceName: ['iPhone 11', 'iPhone XS', 'iPhone 12 Pro', 'iPhone 12 mini'], platform: 'iOS', osVersion: '14', browserName: 'Safari', useHttps: true },
-  iOS15_Safari: { deviceName: ['iPhone 13', 'iPhone 13 Mini', 'iPhone 11 Pro', 'iPhone 11'], platform: 'iOS', osVersion: '15', browserName: 'Safari', useHttps: true },
-  iOS16_Safari: { deviceName: ['iPhone 14', 'iPhone 14 Pro Max', 'iPhone 14 Pro', 'iPhone 14 Plus'], platform: 'iOS', osVersion: '16', browserName: 'Safari', useHttps: true},
+  Android13_ChromeLatest: { deviceName: ['Google Pixel 7', 'Google Pixel 7 Pro', 'Google Pixel 6 Pro'], platform: 'Android', osVersion: '13.0', browserName: 'Chrome', browserVersion: 'latest-beta', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS11_Safari: { deviceName: ['iPhone 8 Plus', 'iPhone 6S', 'iPhone 8', 'iPhone 6'], platform: 'iOS', osVersion: '11', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS12_Safari: { deviceName: ['iPhone XS', 'iPhone 6S', 'iPhone 8 Plus', 'iPhone XR'], platform: 'iOS', osVersion: '12', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS13_Safari: { deviceName: ['iPhone 11 Pro', 'iPhone 8', 'iPhone XS', 'iPhone 11 Pro Max'], platform: 'iOS', osVersion: '13', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS14_Safari: { deviceName: ['iPhone 11', 'iPhone XS', 'iPhone 12 Pro', 'iPhone 12 mini'], platform: 'iOS', osVersion: '14', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS15_Safari: { deviceName: ['iPhone 13', 'iPhone 13 Mini', 'iPhone 11 Pro', 'iPhone 11'], platform: 'iOS', osVersion: '15', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent], },
+  iOS16_Safari: { deviceName: ['iPhone 14', 'iPhone 14 Pro Max', 'iPhone 14 Pro', 'iPhone 14 Plus'], platform: 'iOS', osVersion: '16', browserName: 'Safari', useHttps: true, flags: [BrowserFlags.MobileUserAgent],},
 }
 
 /* eslint-enable max-len */
@@ -143,6 +143,30 @@ function setupBrowserstack(config: Config) {
   setHttpsAndServerForKarma(config)
 }
 
+function setupBrowserStackBetaBuilds(config: Config) {
+  setupBrowserstack(config)
+
+  const customLaunchers: Record<string, CustomLauncher> = {}
+  for (const [key, data] of Object.entries(browserstackBrowsers)) {
+    if ('browserVersion' in data && data['browserVersion'].includes('beta')) {
+      customLaunchers[key] = {
+        base: 'BrowserStack',
+        name: key.replace(/_/g, ' '),
+        ...data,
+      }
+    }
+  }
+
+  config.set({
+    browsers: Object.keys(customLaunchers),
+    customLaunchers,
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    browserStack: { ...config.browserStack!, project: 'Monitoring' },
+  })
+}
+
+
 /**
  * Add `--preset local` or `--preset browserstack` to the Karma command to choose where to run the tests.
  */
@@ -152,6 +176,8 @@ module.exports = (config: Config) => {
       return setupLocal(config)
     case 'browserstack':
       return setupBrowserstack(config)
+    case 'browserstack-beta':
+      return setupBrowserStackBetaBuilds(config)
     default:
       throw new Error('No --preset option is set or an unknown value is set')
   }
