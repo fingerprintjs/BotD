@@ -16,7 +16,7 @@ import getWebDriver from './webdriver'
 import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowSize, { WindowSizePayload } from './window_size'
-import checkDistinctiveProperties from './distinctive_properties'
+import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
 
 export const sources = {
   userAgent: getUserAgent,
@@ -40,4 +40,4 @@ export const sources = {
   distinctiveProps: checkDistinctiveProperties,
 }
 
-export { WindowSizePayload, ProcessPayload }
+export { WindowSizePayload, ProcessPayload, DistinctivePropertiesPayload }

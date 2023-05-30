@@ -1,6 +1,6 @@
 import { version } from '../package.json'
 import BotDetector from './detector'
-import { sources, WindowSizePayload, ProcessPayload } from './sources'
+import { sources, WindowSizePayload, ProcessPayload, DistinctivePropertiesPayload } from './sources'
 import { BotdError, BotDetectorInterface, BotKind, BotDetectionResult } from './types'
 
 /**
@@ -46,4 +46,12 @@ export default { load }
 
 // The exports below are for private usage. They may change unexpectedly. Use them at your own risk.
 /** Not documented, out of Semantic Versioning, usage is at your own risk */
-export { sources, BotdError, WindowSizePayload, ProcessPayload, BotDetectionResult, BotKind }
+export {
+  sources,
+  BotdError,
+  WindowSizePayload,
+  ProcessPayload,
+  DistinctivePropertiesPayload,
+  BotDetectionResult,
+  BotKind,
+}
