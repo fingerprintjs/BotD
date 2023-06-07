@@ -1,6 +1,5 @@
 import getAppVersion from './app_version'
 import getDocumentElementKeys from './document_element_keys'
-import getDocumentProperties from './document_properties'
 import getErrorTrace from './error_trace'
 import getEvalLength from './eval_length'
 import getFunctionBind from './function_bind'
@@ -16,12 +15,12 @@ import getUserAgent from './user_agent'
 import getWebDriver from './webdriver'
 import getWebGL from './webgl'
 import getWindowExternal from './window_external'
-import getWindowProperties from './window_properties'
 import getWindowSize, { WindowSizePayload } from './window_size'
 import getPlatform from './platform'
 import getPluginNamesArray from './plugin_names_array'
 import getDeviceMemory from './device_memory'
 import getScreenDimensions from './screen_dimensions'
+import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
 
 export const sources = {
   userAgent: getUserAgent,
@@ -42,12 +41,11 @@ export const sources = {
   documentElementKeys: getDocumentElementKeys,
   functionBind: getFunctionBind,
   process: getProcess,
-  documentProps: getDocumentProperties,
-  windowProps: getWindowProperties,
+  distinctiveProps: checkDistinctiveProperties,
   platform: getPlatform,
   pluginsNameArray: getPluginNamesArray,
   deviceMemory: getDeviceMemory,
   screenDimensions: getScreenDimensions,
 }
 
-export { WindowSizePayload, ProcessPayload }
+export { WindowSizePayload, ProcessPayload, DistinctivePropertiesPayload }

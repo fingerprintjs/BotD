@@ -16,8 +16,7 @@ export type BotDetectionResult =
  * @readonly
  * @enum {number}
  */
-export const enum State {
-  Unexpected = -100,
+export enum State {
   Success = 0,
   Undefined = -1,
   NotFunction = -2,
@@ -27,22 +26,31 @@ export const enum State {
 
 /**
  * Enum for types of bots.
+ * Specific types of bots come first, followed by automation technologies.
  *
  * @readonly
  * @enum {string}
  */
-export const enum BotKind {
-  Unknown = 'unknown',
-  HeadlessChrome = 'headless_chrome',
-  PhantomJS = 'phantomjs',
-  Nightmare = 'nightmare',
-  Selenium = 'selenium',
+export enum BotKind {
+  Awesomium = 'awesomium',
+  Cef = 'cef',
+  CefSharp = 'cefsharp',
+  CoachJS = 'coachjs',
   Electron = 'electron',
+  FMiner = 'fminer',
+  Geb = 'geb',
+  NightmareJS = 'nightmarejs',
+  Phantomas = 'phantomas',
+  PhantomJS = 'phantomjs',
   Rhino = 'rhino',
-  CouchJS = 'couchjs',
+  Selenium = 'selenium',
   Sequentum = 'sequentum',
   SlimerJS = 'slimerjs',
-  CefSharp = 'cefsharp',
+  WebDriverIO = 'webdriverio',
+
+  WebDriver = 'webdriver',
+  HeadlessChrome = 'headless_chrome',
+  Unknown = 'unknown',
 }
 
 export type DetectorResponse = boolean | BotKind | undefined
@@ -140,14 +148,14 @@ export class BotdError extends Error {
   }
 }
 
-export const enum BrowserEngineKind {
+export enum BrowserEngineKind {
   Unknown = 'unknown',
   Chromium = 'chromium',
   Gecko = 'gecko',
   Webkit = 'webkit',
 }
 
-export const enum BrowserKind {
+export enum BrowserKind {
   Unknown = 'unknown',
   Chrome = 'chrome',
   Firefox = 'firefox',

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "target": "es5",
     "removeComments": false,
     "resolveJsonModule": true,
@@ -18,9 +18,16 @@
     "node_modules",
     "playground/dist"
   ],
+  // It must include everything that Rollup will encounter,
+  // and preferably nothing else in order not to compile excess files
+  "include": [
+    "src/index.ts",
+    "src/**/*.d.ts"
+  ],
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
+      "module": "commonjs",
+      "target": "es2021"
     }
   }
 }

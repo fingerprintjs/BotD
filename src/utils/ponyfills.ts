@@ -8,7 +8,7 @@ export function strIncludes(str: string, value: string): boolean {
 
 export function arrayFind<T>(array: T[], callback: (value: T, index: number, array: T[]) => boolean): T | undefined {
   if ('find' in array) return array.find(callback)
-  for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < (array as Array<T>).length; i++) {
     if (callback(array[i], i, array)) return array[i]
   }
   return undefined

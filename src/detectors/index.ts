@@ -1,6 +1,5 @@
 import { detectAppVersion } from './app_version'
 import { detectDocumentAttributes } from './document_element_keys'
-import { detectDocumentProperties } from './document_properties'
 import { detectErrorTrace } from './error_trace'
 import { detectEvalLengthInconsistency } from './eval_length'
 import { detectFunctionBind } from './function_bind'
@@ -15,17 +14,16 @@ import { detectUserAgent } from './user_agent'
 import { detectWebDriver } from './webdriver'
 import { detectWebGL } from './webgl'
 import { detectWindowExternal } from './window_external'
-import { detectWindowProperties } from './window_properties'
 import { detectWindowSize } from './window_size'
 import { detectPlatform } from './platform'
 import { detectPluginInconsistencyFirefox } from './plugins_inconsistency_ff'
 import { detectVmFromMemoryScreenDimensions } from './memory_screen_dimensions'
+import { detectDistinctiveProperties } from './distinctive_properties'
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const detectors = {
   detectAppVersion,
   detectDocumentAttributes,
-  detectDocumentProperties,
   detectErrorTrace,
   detectEvalLengthInconsistency,
   detectFunctionBind,
@@ -38,11 +36,11 @@ export const detectors = {
   detectWebDriver,
   detectWebGL,
   detectWindowExternal,
-  detectWindowProperties,
   detectWindowSize,
   detectMimeTypesConsistent,
   detectProductSub,
   detectPlatform,
   detectPluginInconsistencyFirefox,
   detectVmFromMemoryScreenDimensions,
+  detectDistinctiveProperties,
 }
