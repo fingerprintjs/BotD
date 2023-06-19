@@ -74,7 +74,9 @@ function makeBuildNumber() {
 }
 
 function setupLocal(config: Config) {
-  const files = ['src/**/*.ts', 'tests/**/*.ts', 'test-dist/botd.min.js']
+  const ciSpecificFiles = ['resources/karma/karma_global_setup_retries.ts']
+  const ciEnabled = process.env.CI
+  const files = [...(ciEnabled ? ciSpecificFiles : []), 'src/**/*.ts', 'tests/**/*.ts', 'test-dist/botd.min.js']
 
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],
@@ -100,10 +102,6 @@ function setupLocal(config: Config) {
       suppressErrorSummary: true,
       suppressPassed: true,
       suppressSkipped: true,
-    },
-
-    summaryReporter: {
-      show: 'skipped', // To know that some tests are skipped exactly where they are supposed to be skipped
     },
   })
 }
@@ -165,7 +163,6 @@ function setupBrowserStackBetaBuilds(config: Config) {
     browserStack: { ...config.browserStack!, project: 'Monitoring' },
   })
 }
-
 
 /**
  * Add `--preset local` or `--preset browserstack` to the Karma command to choose where to run the tests.
