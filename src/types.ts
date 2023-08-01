@@ -4,7 +4,7 @@ import { sources } from './sources'
 export type BotDetectionResult =
   | {
       bot: true
-      botKind: BotKind
+      botKind: BotKindType
     }
   | {
       bot: false
@@ -31,29 +31,31 @@ export const enum State {
  * @readonly
  * @enum {string}
  */
-export enum BotKind {
-  Awesomium = 'awesomium',
-  Cef = 'cef',
-  CefSharp = 'cefsharp',
-  CoachJS = 'coachjs',
-  Electron = 'electron',
-  FMiner = 'fminer',
-  Geb = 'geb',
-  NightmareJS = 'nightmarejs',
-  Phantomas = 'phantomas',
-  PhantomJS = 'phantomjs',
-  Rhino = 'rhino',
-  Selenium = 'selenium',
-  Sequentum = 'sequentum',
-  SlimerJS = 'slimerjs',
-  WebDriverIO = 'webdriverio',
+export const BotKind = {
+  Awesomium: 'awesomium',
+  Cef: 'cef',
+  CefSharp: 'cefsharp',
+  CoachJS: 'coachjs',
+  Electron: 'electron',
+  FMiner: 'fminer',
+  Geb: 'geb',
+  NightmareJS: 'nightmarejs',
+  Phantomas: 'phantomas',
+  PhantomJS: 'phantomjs',
+  Rhino: 'rhino',
+  Selenium: 'selenium',
+  Sequentum: 'sequentum',
+  SlimerJS: 'slimerjs',
+  WebDriverIO: 'webdriverio',
 
-  WebDriver = 'webdriver',
-  HeadlessChrome = 'headless_chrome',
-  Unknown = 'unknown',
-}
+  WebDriver: 'webdriver',
+  HeadlessChrome: 'headless_chrome',
+  Unknown: 'unknown',
+} as const
 
-export type DetectorResponse = boolean | BotKind | undefined
+export type BotKindType = typeof BotKind[keyof typeof BotKind]
+
+export type DetectorResponse = boolean | BotKindType | undefined
 
 /**
  * Represents a component with state and value.
