@@ -1,12 +1,12 @@
-import { BotKind } from '../types'
+import { BotKind, BotKindType } from '../types'
 import { getObjectProps, includes } from '../utils/misc'
 
-export type DistinctivePropertiesPayload = Partial<Record<BotKind, boolean>>
+export type DistinctivePropertiesPayload = Partial<Record<BotKindType, boolean>>
 
 export default function checkDistinctiveProperties(): DistinctivePropertiesPayload {
   type PropsList = Partial<Record<'window' | 'document', (string | RegExp)[]>>
   // The order in the following list matters, because specific types of bots come first, followed by automation technologies.
-  const distinctivePropsList: Partial<Record<BotKind, PropsList>> = {
+  const distinctivePropsList: Partial<Record<BotKindType, PropsList>> = {
     [BotKind.Awesomium]: {
       window: ['awesomium'],
     },
@@ -75,7 +75,7 @@ export default function checkDistinctiveProperties(): DistinctivePropertiesPaylo
       window: ['domAutomation', 'domAutomationController'],
     },
   }
-  let botName: BotKind
+  let botName: BotKindType
   const result: DistinctivePropertiesPayload = {}
   const windowProps = getObjectProps(window)
   let documentProps: string[] = []
