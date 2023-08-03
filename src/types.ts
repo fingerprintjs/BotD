@@ -32,6 +32,8 @@ export const enum State {
  * @enum {string}
  */
 export const BotKind = {
+  // Object is used instead of Typescript enum to avoid emitting IIFE which might be affected by further tree-shaking.
+  // See example of compiled enums https://stackoverflow.com/q/47363996)
   Awesomium: 'awesomium',
   Cef: 'cef',
   CefSharp: 'cefsharp',
