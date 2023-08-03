@@ -1,7 +1,7 @@
 import { version } from '../package.json'
 import BotDetector from './detector'
 import { sources, WindowSizePayload, ProcessPayload, DistinctivePropertiesPayload } from './sources'
-import { BotdError, BotDetectorInterface, BotKind, BotKindType, BotDetectionResult } from './types'
+import { BotdError, BotDetectorInterface, BotKind, BotDetectionResult } from './types'
 
 /**
  * Options for BotD loading
@@ -53,6 +53,5 @@ export {
   ProcessPayload,
   DistinctivePropertiesPayload,
   BotDetectionResult,
-  BotKindType as BotKind,
-  BotKind as BotKindEnum,
+  BotKind,
 }

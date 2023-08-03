@@ -4,7 +4,7 @@ import { sources } from './sources'
 export type BotDetectionResult =
   | {
       bot: true
-      botKind: BotKindType
+      botKind: BotKind
     }
   | {
       bot: false
@@ -53,9 +53,9 @@ export const BotKind = {
   Unknown: 'unknown',
 } as const
 
-export type BotKindType = typeof BotKind[keyof typeof BotKind]
+export type BotKind = typeof BotKind[keyof typeof BotKind]
 
-export type DetectorResponse = boolean | BotKindType | undefined
+export type DetectorResponse = boolean | BotKind | undefined
 
 /**
  * Represents a component with state and value.
