@@ -93,18 +93,19 @@ export function isAndroid(): boolean {
   )
 }
 
+// Source: https://github.com/fingerprintjs/fingerprintjs/blob/43a84516755440a89f3093a3b27a021d3d7351b6/src/utils/browser.ts#L100C1-L113C2
 export function isDesktopSafari(): boolean {
-  if (getBrowserEngineKind() !== BrowserEngineKind.Webkit) {
-    return false
-  }
   const w = window
+
   return (
     countTruthy([
       'safari' in w, // Always false in Karma and BrowserStack Automate
-      !('DeviceMotionEvent' in w),
       !('ongestureend' in w),
-      !('standalone' in navigator),
-    ]) >= 3
+      !('TouchEvent' in w),
+      !('orientation' in w),
+      'HTMLElement' in w && !('autocapitalize' in HTMLElement.prototype),
+      'Document' in w && 'pointerLockElement' in Document.prototype,
+    ]) >= 4
   )
 }
 
