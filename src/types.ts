@@ -16,7 +16,7 @@ export type BotDetectionResult =
  * @readonly
  * @enum {number}
  */
-export enum State {
+export const enum State {
   Success = 0,
   Undefined = -1,
   NotFunction = -2,
@@ -31,27 +31,31 @@ export enum State {
  * @readonly
  * @enum {string}
  */
-export enum BotKind {
-  Awesomium = 'awesomium',
-  Cef = 'cef',
-  CefSharp = 'cefsharp',
-  CoachJS = 'coachjs',
-  Electron = 'electron',
-  FMiner = 'fminer',
-  Geb = 'geb',
-  NightmareJS = 'nightmarejs',
-  Phantomas = 'phantomas',
-  PhantomJS = 'phantomjs',
-  Rhino = 'rhino',
-  Selenium = 'selenium',
-  Sequentum = 'sequentum',
-  SlimerJS = 'slimerjs',
-  WebDriverIO = 'webdriverio',
+export const BotKind = {
+  // Object is used instead of Typescript enum to avoid emitting IIFE which might be affected by further tree-shaking.
+  // See example of compiled enums https://stackoverflow.com/q/47363996)
+  Awesomium: 'awesomium',
+  Cef: 'cef',
+  CefSharp: 'cefsharp',
+  CoachJS: 'coachjs',
+  Electron: 'electron',
+  FMiner: 'fminer',
+  Geb: 'geb',
+  NightmareJS: 'nightmarejs',
+  Phantomas: 'phantomas',
+  PhantomJS: 'phantomjs',
+  Rhino: 'rhino',
+  Selenium: 'selenium',
+  Sequentum: 'sequentum',
+  SlimerJS: 'slimerjs',
+  WebDriverIO: 'webdriverio',
 
-  WebDriver = 'webdriver',
-  HeadlessChrome = 'headless_chrome',
-  Unknown = 'unknown',
-}
+  WebDriver: 'webdriver',
+  HeadlessChrome: 'headless_chrome',
+  Unknown: 'unknown',
+} as const
+
+export type BotKind = typeof BotKind[keyof typeof BotKind]
 
 export type DetectorResponse = boolean | BotKind | undefined
 
@@ -148,14 +152,14 @@ export class BotdError extends Error {
   }
 }
 
-export enum BrowserEngineKind {
+export const enum BrowserEngineKind {
   Unknown = 'unknown',
   Chromium = 'chromium',
   Gecko = 'gecko',
   Webkit = 'webkit',
 }
 
-export enum BrowserKind {
+export const enum BrowserKind {
   Unknown = 'unknown',
   Chrome = 'chrome',
   Firefox = 'firefox',
