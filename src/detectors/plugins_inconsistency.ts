@@ -2,9 +2,10 @@ import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '..
 
 export function detectPluginsLengthInconsistency({
   pluginsLength,
-  browser: { browserKind, isAndroid },
+  browser
 }: ComponentDict): DetectorResponse {
-  if (pluginsLength.state !== State.Success) return
+  if (pluginsLength.state !== State.Success || browser.state !== State.Success) return
+	const { isAndroid, browserKind } = browser.value
   if (browserKind !== BrowserKind.Chrome || isAndroid) return
   if (pluginsLength.value === 0) return BotKind.HeadlessChrome
 }

@@ -2,9 +2,9 @@ import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '..
 
 export function detectNotificationPermissions({
   notificationPermissions,
-  browser: { browserKind },
+  browser
 }: ComponentDict): DetectorResponse {
-  if (browserKind !== BrowserKind.Chrome) return false
+  if (browser.state !== State.Success || browser.value.browserKind !== BrowserKind.Chrome) return false
 
   if (notificationPermissions.state === State.Success && notificationPermissions.value) {
     return BotKind.HeadlessChrome
