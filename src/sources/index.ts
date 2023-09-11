@@ -1,9 +1,5 @@
-import collectIsAndroid from './android'
 import getAppVersion from './app_version'
-import collectBrowserKind from './browser_kind'
-import collectBrowserEngineKind from './browser_engine_kind'
 import getDocumentElementKeys from './document_element_keys'
-import hasDocumentFocus from './document_focus'
 import getErrorTrace from './error_trace'
 import getEvalLength from './eval_length'
 import getFunctionBind from './function_bind'
@@ -21,12 +17,21 @@ import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowSize, { WindowSizePayload } from './window_size'
 import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
+import { getBrowserEngineKind, getBrowserKind, getDocumentFocus, isAndroid } from '../utils/browser'
 
 export const sources = {
-  android: collectIsAndroid,
-  browserKind: collectBrowserKind,
-  browserEngineKind: collectBrowserEngineKind,
-  documentFocus: hasDocumentFocus,
+  android: function collectIsAndroid() {
+    return isAndroid()
+  },
+  browserKind: function collectBrowserKind() {
+    return getBrowserKind()
+  },
+  browserEngineKind: function collectBrowserEngineKind() {
+    return getBrowserEngineKind()
+  },
+  documentFocus: function hasDocumentFocus() {
+    return getDocumentFocus()
+  },
   userAgent: getUserAgent,
   appVersion: getAppVersion,
   rtt: getRTT,
