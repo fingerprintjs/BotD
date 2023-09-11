@@ -1,4 +1,5 @@
 import getAppVersion from './app_version'
+import getBrowserInformation from './browser'
 import getDocumentElementKeys from './document_element_keys'
 import getErrorTrace from './error_trace'
 import getEvalLength from './eval_length'
@@ -21,6 +22,7 @@ import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './dist
 export const sources = {
   userAgent: getUserAgent,
   appVersion: getAppVersion,
+  browser: getBrowserInformation,
   rtt: getRTT,
   windowSize: getWindowSize,
   pluginsLength: getPluginsLength,
