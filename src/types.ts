@@ -100,7 +100,10 @@ export type AbstractDetectionsDict = Record<string, BotDetectionResult>
 /**
  * Represents a dictionary of detectors detection.
  */
-export type DetectionDict<T extends AbstractDetectorDict<any> = DefaultDetectorDict> = Record<keyof T, BotDetectionResult>
+export type DetectionDict<T extends AbstractDetectorDict<any> = DefaultDetectorDict> = Record<
+  keyof T,
+  BotDetectionResult
+>
 
 /**
  * Dictionary of components.

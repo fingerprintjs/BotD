@@ -3,11 +3,11 @@ import { BrowserEngineKind, BrowserKind, ComponentDict, DetectorResponse, State 
 
 export function detectEvalLengthInconsistency({
   evalLength,
-  browser: browserComponent
+  browser: browserComponent,
 }: ComponentDict): DetectorResponse {
   if (evalLength.state !== State.Success || browserComponent.state !== State.Success) return
-	
-	const { browserKind, browserEngineKind } = browserComponent.value
+
+  const { browserKind, browserEngineKind } = browserComponent.value
   const length = evalLength.value
   return (
     (length === 37 && !arrayIncludes([BrowserEngineKind.Webkit, BrowserEngineKind.Gecko], browserEngineKind)) ||
