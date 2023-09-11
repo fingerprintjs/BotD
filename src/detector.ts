@@ -1,6 +1,7 @@
 import { BotDetectionResult, BotDetectorInterface, ComponentDict, DetectionDict } from './types'
 import { collect, detect } from './api'
-import { detectors, sources } from '.'
+import { detectors } from './detectors'
+import { sources } from './sources'
 
 /**
  * Class representing a bot detector.
