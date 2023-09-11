@@ -20,18 +20,10 @@ import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './dist
 import { getBrowserEngineKind, getBrowserKind, getDocumentFocus, isAndroid } from '../utils/browser'
 
 export const sources = {
-  android: function collectIsAndroid() {
-    return isAndroid()
-  },
-  browserKind: function collectBrowserKind() {
-    return getBrowserKind()
-  },
-  browserEngineKind: function collectBrowserEngineKind() {
-    return getBrowserEngineKind()
-  },
-  documentFocus: function hasDocumentFocus() {
-    return getDocumentFocus()
-  },
+  android: isAndroid,
+  browserKind: getBrowserKind,
+  browserEngineKind: getBrowserEngineKind,
+  documentFocus: getDocumentFocus,
   userAgent: getUserAgent,
   appVersion: getAppVersion,
   rtt: getRTT,
