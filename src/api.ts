@@ -1,9 +1,20 @@
-import { detectors } from './detectors'
-import { sources } from './sources'
-import { BotdError, BotDetectionResult, BotKind, Component, ComponentDict, DetectionDict, State } from './types'
+import {
+  AbstractDetectorDict,
+  AbstractSourceDict,
+  BotdError,
+  BotDetectionResult,
+  BotKind,
+  Component,
+  ComponentDict,
+  DetectionDict,
+  State,
+} from './types'
 
-export function detect(components: ComponentDict): [DetectionDict, BotDetectionResult] {
-  const detections = {} as DetectionDict
+export function detect<T extends AbstractDetectorDict>(
+  components: ComponentDict<any>,
+  detectors: T,
+): [DetectionDict<T>, BotDetectionResult] {
+  const detections = {} as DetectionDict<T>
   let finalDetection: BotDetectionResult = {
     bot: false,
   }
@@ -30,8 +41,8 @@ export function detect(components: ComponentDict): [DetectionDict, BotDetectionR
   return [detections, finalDetection]
 }
 
-export async function collect(): Promise<ComponentDict> {
-  const components = {} as ComponentDict
+export async function collect<T extends AbstractSourceDict>(sources: T): Promise<ComponentDict<T>> {
+  const components = {} as ComponentDict<T>
   const sourcesKeys = Object.keys(sources) as (keyof typeof sources)[]
 
   await Promise.all(

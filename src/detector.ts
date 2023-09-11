@@ -1,5 +1,6 @@
 import { BotDetectionResult, BotDetectorInterface, ComponentDict, DetectionDict } from './types'
 import { collect, detect } from './api'
+import { detectors, sources } from '.'
 
 /**
  * Class representing a bot detector.
@@ -28,7 +29,7 @@ export default class BotDetector implements BotDetectorInterface {
       throw new Error("BotDetector.detect can't be called before BotDetector.collect")
     }
 
-    const [detections, finalDetection] = detect(this.components)
+    const [detections, finalDetection] = detect(this.components, detectors)
 
     this.detections = detections
     return finalDetection
@@ -38,7 +39,7 @@ export default class BotDetector implements BotDetectorInterface {
    * @inheritdoc
    */
   public async collect(): Promise<ComponentDict> {
-    this.components = await collect()
+    this.components = await collect(sources)
     return this.components
   }
 }
