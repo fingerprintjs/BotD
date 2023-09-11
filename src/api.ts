@@ -10,11 +10,11 @@ import {
   State,
 } from './types'
 
-export function detect<T extends AbstractDetectorDict>(
-  components: ComponentDict<any>,
-  detectors: T,
-): [DetectionDict<T>, BotDetectionResult] {
-  const detections = {} as DetectionDict<T>
+export function detect<T extends ComponentDict, K extends AbstractDetectorDict<T>>(
+  components: T,
+  detectors: K,
+): [DetectionDict<K>, BotDetectionResult] {
+  const detections = {} as DetectionDict<K>
   let finalDetection: BotDetectionResult = {
     bot: false,
   }
