@@ -1,9 +1,7 @@
 import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '../types'
-import { getBrowserKind } from '../utils/browser'
 
-export function detectProductSub({ productSub }: ComponentDict): DetectorResponse {
+export function detectProductSub({ productSub, browser: { browserKind } }: ComponentDict): DetectorResponse {
   if (productSub.state !== State.Success) return false
-  const browserKind = getBrowserKind()
   if (
     (browserKind === BrowserKind.Chrome ||
       browserKind === BrowserKind.Safari ||
