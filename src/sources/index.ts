@@ -1,6 +1,9 @@
+import collectIsAndroid from './android'
 import getAppVersion from './app_version'
-import getBrowserInformation from './browser'
+import collectBrowserKind from './browser_kind'
+import collectBrowserEngineKind from './browser_engine_kind'
 import getDocumentElementKeys from './document_element_keys'
+import hasDocumentFocus from './document_focus'
 import getErrorTrace from './error_trace'
 import getEvalLength from './eval_length'
 import getFunctionBind from './function_bind'
@@ -20,9 +23,12 @@ import getWindowSize, { WindowSizePayload } from './window_size'
 import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
 
 export const sources = {
+  android: collectIsAndroid,
+  browserKind: collectBrowserKind,
+  browserEngineKind: collectBrowserEngineKind,
+  documentFocus: hasDocumentFocus,
   userAgent: getUserAgent,
   appVersion: getAppVersion,
-  browser: getBrowserInformation,
   rtt: getRTT,
   windowSize: getWindowSize,
   pluginsLength: getPluginsLength,

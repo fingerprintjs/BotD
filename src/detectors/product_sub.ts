@@ -1,13 +1,12 @@
 import { BotKind, BrowserKind, ComponentDict, DetectorResponse, State } from '../types'
 
-export function detectProductSub({ productSub, browser }: ComponentDict): DetectorResponse {
-  if (productSub.state !== State.Success || browser.state !== State.Success) return false
-  const { browserKind } = browser.value
+export function detectProductSub({ productSub, browserKind }: ComponentDict): DetectorResponse {
+  if (productSub.state !== State.Success || browserKind.state !== State.Success) return false
   if (
-    (browserKind === BrowserKind.Chrome ||
-      browserKind === BrowserKind.Safari ||
-      browserKind === BrowserKind.Opera ||
-      browserKind === BrowserKind.WeChat) &&
+    (browserKind.value === BrowserKind.Chrome ||
+      browserKind.value === BrowserKind.Safari ||
+      browserKind.value === BrowserKind.Opera ||
+      browserKind.value === BrowserKind.WeChat) &&
     productSub.value !== '20030107'
   )
     return BotKind.Unknown
