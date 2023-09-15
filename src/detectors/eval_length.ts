@@ -7,6 +7,9 @@ export function detectEvalLengthInconsistency({ evalLength }: ComponentDict): De
   const length = evalLength.value
   const browser = getBrowserKind()
   const browserEngine = getBrowserEngineKind()
+  if (browserEngine == BrowserEngineKind.Unknown) {
+    return false
+  }
   return (
     (length === 37 && !arrayIncludes([BrowserEngineKind.Webkit, BrowserEngineKind.Gecko], browserEngine)) ||
     (length === 39 && !arrayIncludes([BrowserKind.IE], browser)) ||
