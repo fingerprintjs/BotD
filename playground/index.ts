@@ -5,7 +5,7 @@ import {
   getDocumentFocus,
   getMozAppearanceSupport,
   isAndroid,
-  isDesktopSafari,
+  isDesktopWebKit,
 } from '../src/utils/browser'
 import './style.css'
 
@@ -43,7 +43,7 @@ const runDetection = async (): Promise<DetectionResult> => {
       documentFocus: getDocumentFocus(),
       mozAppearanceSupport: getMozAppearanceSupport(),
       isAndroid: isAndroid(),
-      isDesktopSafari: isDesktopSafari(),
+      isDesktopWebKit: isDesktopWebKit(),
     }
 
     return {
