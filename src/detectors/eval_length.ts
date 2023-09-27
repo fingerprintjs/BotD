@@ -14,6 +14,8 @@ export function detectEvalLengthInconsistency({
     return
 
   const length = evalLength.value
+  if (browserEngineKind.value === BrowserEngineKind.Unknown)
+    return false
   return (
     (length === 37 && !arrayIncludes([BrowserEngineKind.Webkit, BrowserEngineKind.Gecko], browserEngineKind.value)) ||
     (length === 39 && !arrayIncludes([BrowserKind.IE], browserKind.value)) ||
