@@ -53,16 +53,6 @@ A request includes the following information:
 -   The HTTP headers that the client sends, including the origin and the referrer of the page where the library runs
 -   The IP of the client
 
-You can turn off these requests by using the `monitoring` option:
-
-```diff
-const botdPromise = BotD.load({
-+ monitoring: false
-})
-```
-
-💡 Scripts downloaded from our CDN (https://openfpcdn.io) have monitoring disabled by default.
-
 ### CommonJS syntax:
 
 ```js
@@ -77,7 +67,7 @@ load()
 
 ## API
 
-#### `BotD.load({ monitoring?: boolean }): Promise<BotDetector>`
+#### `BotD.load(): Promise<BotDetector>`
 
 Builds an instance of `BotDetector`. We recommend calling it as early as possible,
 ideally during application startup. It returns a promise which you can chain on to call `BotDetector` methods later.

@@ -93,9 +93,12 @@ export function isAndroid(): boolean {
   )
 }
 
-// Source: https://github.com/fingerprintjs/fingerprintjs/blob/43a84516755440a89f3093a3b27a021d3d7351b6/src/utils/browser.ts#L100C1-L113C2
-export function isDesktopSafari(): boolean {
+// Source: https://github.com/fingerprintjs/fingerprintjs/blob/109f8ef802169df3fa1c5d1baa4b7bc0abbc1d91/src/utils/browser.ts#L102C1-L118C2
+export function isDesktopWebKit(): boolean {
+  // Checked in Safari and DuckDuckGo
+
   const w = window
+  const { HTMLElement, Document } = w
 
   return (
     countTruthy([
@@ -103,8 +106,8 @@ export function isDesktopSafari(): boolean {
       !('ongestureend' in w),
       !('TouchEvent' in w),
       !('orientation' in w),
-      'HTMLElement' in w && !('autocapitalize' in HTMLElement.prototype),
-      'Document' in w && 'pointerLockElement' in Document.prototype,
+      HTMLElement && !('autocapitalize' in HTMLElement.prototype),
+      Document && 'pointerLockElement' in Document.prototype,
     ]) >= 4
   )
 }
