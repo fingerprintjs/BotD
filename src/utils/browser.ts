@@ -52,9 +52,7 @@ export function getBrowserEngineKind(): BrowserEngineKind {
 
 export function getBrowserKind(): BrowserKind {
   const userAgent = navigator.userAgent?.toLowerCase()
-  if (strIncludes(userAgent, 'edg/')) {
-    return BrowserKind.Edge
-  } else if (strIncludes(userAgent, 'safari')) {
+  if (strIncludes(userAgent, 'safari')) {
     return BrowserKind.Safari
   } else if (strIncludes(userAgent, 'trident') || strIncludes(userAgent, 'msie')) {
     return BrowserKind.IE
