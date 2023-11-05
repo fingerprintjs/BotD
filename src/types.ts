@@ -87,11 +87,11 @@ export type DefaultDetectorDict = typeof detectors
  */
 export type SourceResponse<T> = T extends (...args: any[]) => any ? Awaited<ReturnType<T>> : T
 
-export type AbstractDetector = (...args: any[]) => DetectorResponse
+export type AbstractDetector<T> = (components: T) => DetectorResponse
 
 export type AbstractSourceDict = Record<string, SourceResponse<any>>
 
-export type AbstractDetectorDict = Record<string, AbstractDetector>
+export type AbstractDetectorDict<T> = Record<string, AbstractDetector<T>>
 
 export type AbstractComponentDict = Record<string, Component<any>>
 
@@ -100,7 +100,10 @@ export type AbstractDetectionsDict = Record<string, BotDetectionResult>
 /**
  * Represents a dictionary of detectors detection.
  */
-export type DetectionDict<T extends AbstractDetectorDict = DefaultDetectorDict> = Record<keyof T, BotDetectionResult>
+export type DetectionDict<T extends AbstractDetectorDict<any> = DefaultDetectorDict> = Record<
+  keyof T,
+  BotDetectionResult
+>
 
 /**
  * Dictionary of components.

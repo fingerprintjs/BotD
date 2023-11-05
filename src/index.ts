@@ -1,7 +1,9 @@
 import { version } from '../package.json'
 import BotDetector from './detector'
 import { sources, WindowSizePayload, ProcessPayload, DistinctivePropertiesPayload } from './sources'
+import { detectors } from './detectors'
 import { BotdError, BotDetectorInterface, BotKind, BotDetectionResult } from './types'
+import { collect, detect } from './api'
 
 /**
  * Sends an unpersonalized AJAX request to collect installation statistics
@@ -37,6 +39,9 @@ export default { load }
 /** Not documented, out of Semantic Versioning, usage is at your own risk */
 export {
   sources,
+  detectors,
+  collect,
+  detect,
   BotdError,
   WindowSizePayload,
   ProcessPayload,

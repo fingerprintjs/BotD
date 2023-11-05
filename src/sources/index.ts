@@ -17,8 +17,13 @@ import getWebGL from './webgl'
 import getWindowExternal from './window_external'
 import getWindowSize, { WindowSizePayload } from './window_size'
 import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
+import { getBrowserEngineKind, getBrowserKind, getDocumentFocus, isAndroid } from '../utils/browser'
 
 export const sources = {
+  android: isAndroid,
+  browserKind: getBrowserKind,
+  browserEngineKind: getBrowserEngineKind,
+  documentFocus: getDocumentFocus,
   userAgent: getUserAgent,
   appVersion: getAppVersion,
   rtt: getRTT,
