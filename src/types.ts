@@ -170,4 +170,5 @@ export const enum BrowserKind {
   Safari = 'safari',
   IE = 'internet_explorer',
   WeChat = 'wechat',
+  Edge = 'edge',
 }
