@@ -24,7 +24,7 @@ function monitor() {
   }
 }
 
-export async function load(options?: Record<keyof any, never>): Promise<BotDetectorInterface> {
+export async function load(options?: Record<keyof any, any>): Promise<BotDetectorInterface> {
   if (options?.monitoring ?? true) {
     monitor()
   }
