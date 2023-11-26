@@ -1,5 +1,6 @@
 import { getBrowserMajorVersion, getBrowserVersion, isHeadlessChrome, isMobile, isWebKit } from '../../tests/utils'
-import { BotdError } from '../types'
+import { BotdError, BrowserKind } from '../types'
+import { getBrowserKind, isDesktopWebKit } from '../utils/browser'
 import getNotificationPermissions from './notification_permissions'
 
 describe('Sources', () => {
@@ -20,7 +21,7 @@ describe('Sources', () => {
 
       const result = await getNotificationPermissions()
 
-      if (isHeadlessChrome() || isWebKit()) {
+      if (isHeadlessChrome() || (isWebKit() && !isDesktopWebKit() && getBrowserKind() !== BrowserKind.Safari)) {
         // It's true because HeadlessChrome returns "denied" and not "default".
         expect(result).toBeTrue()
         return
