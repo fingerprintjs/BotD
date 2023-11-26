@@ -1,7 +1,12 @@
-import { BotdError, State } from '../types'
+import { BotdError, BrowserEngineKind, State } from '../types'
+import { getBrowserEngineKind, isDesktopWebKit } from '../utils/browser'
 
 export default async function getNotificationPermissions(): Promise<boolean> {
   if (window.Notification === undefined) {
+    // if on mobile ios, ignore
+    if (getBrowserEngineKind() === BrowserEngineKind.Webkit && !isDesktopWebKit()) {
+      return false
+    }
     throw new BotdError(State.Undefined, 'window.Notification is undefined')
   }
   if (navigator.permissions === undefined) {

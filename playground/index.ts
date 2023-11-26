@@ -6,6 +6,7 @@ import {
   getMozAppearanceSupport,
   isAndroid,
   isDesktopWebKit,
+  isIPad,
 } from '../src/utils/browser'
 import './style.css'
 
@@ -44,6 +45,7 @@ const runDetection = async (): Promise<DetectionResult> => {
       mozAppearanceSupport: getMozAppearanceSupport(),
       isAndroid: isAndroid(),
       isDesktopWebKit: isDesktopWebKit(),
+      isIPad: isIPad(),
     }
 
     return {
