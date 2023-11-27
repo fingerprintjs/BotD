@@ -6,6 +6,17 @@ import { BotdError, BotDetectorInterface, BotKind, BotDetectionResult } from './
 import { collect, detect } from './api'
 
 /**
+ * Options for BotD loading
+ */
+export interface LoadOptions {
+  /**
+   * Set `false` to disable the unpersonalized AJAX request that the agent sends to collect installation statistics.
+   * It's always disabled in the version published to the FingerprintJS CDN.
+   */
+  monitoring?: boolean
+}
+
+/**
  * Sends an unpersonalized AJAX request to collect installation statistics
  */
 function monitor() {
@@ -24,8 +35,8 @@ function monitor() {
   }
 }
 
-export async function load(options?: Record<keyof any, any>): Promise<BotDetectorInterface> {
-  if (options?.monitoring ?? true) {
+export async function load({ monitoring = true }: Readonly<LoadOptions> = {}): Promise<BotDetectorInterface> {
+  if (monitoring) {
     monitor()
   }
   const detector = new BotDetector()
