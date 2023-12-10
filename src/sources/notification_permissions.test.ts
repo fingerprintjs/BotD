@@ -1,4 +1,4 @@
-import { getBrowserMajorVersion, getBrowserVersion, isHeadlessChrome, isMobile, isWebKit } from '../../tests/utils'
+import { getBrowserVersion, isHeadlessChrome, isWebKit } from '../../tests/utils'
 import { BotdError, BrowserEngineKind, BrowserKind } from '../types'
 import { getBrowserEngineKind, getBrowserKind, isDesktopWebKit } from '../utils/browser'
 import getNotificationPermissions from './notification_permissions'
@@ -6,26 +6,32 @@ import getNotificationPermissions from './notification_permissions'
 describe('Sources', () => {
   describe('notificaionPermissions', () => {
     it('returns an expected value or throws', async () => {
+      const { major } = getBrowserVersion() ?? { major: 0, minor: 0 }
+
       if (
         getBrowserKind() === BrowserKind.Safari &&
         getBrowserEngineKind() === BrowserEngineKind.Webkit &&
-        !isDesktopWebKit()
+        !isDesktopWebKit() &&
+        major >= 17
       ) {
-        return
-      }
-
-      const { major, minor } = getBrowserVersion() ?? { major: 0, minor: 0 }
-      if (isWebKit() && (major < 16 || (major === 16 && minor < 5))) {
         await expectAsync(getNotificationPermissions()).toBeRejectedWithError(
           BotdError,
-          isMobile()
-            ? 'window.Notification is undefined'
-            : (getBrowserMajorVersion() ?? 0) < 16
-            ? 'navigator.permissions is undefined'
-            : 'notificationPermissions signal unexpected behaviour',
+          'window.Notification is undefined',
         )
         return
       }
+
+      // if (isWebKit() && (major < 16 || (major === 16 && minor < 5))) {
+      //   await expectAsync(getNotificationPermissions()).toBeRejectedWithError(
+      //     BotdError,
+      //     isMobile()
+      //       ? 'window.Notification is undefined'
+      //       : (getBrowserMajorVersion() ?? 0) < 16
+      //       ? 'navigator.permissions is undefined'
+      //       : 'notificationPermissions signal unexpected behaviour',
+      //   )
+      //   return
+      // }
 
       const result = await getNotificationPermissions()
 
