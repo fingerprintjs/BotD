@@ -6,9 +6,13 @@ import getNotificationPermissions from './notification_permissions'
 describe('Sources', () => {
   describe('notificaionPermissions', () => {
     it('returns an expected value or throws', async () => {
-      const { major } = getBrowserVersion() ?? { major: 0, minor: 0 }
+      const { major, minor } = getBrowserVersion() ?? { major: 0, minor: 0 }
 
-      if (getBrowserKind() === BrowserKind.Safari && getBrowserEngineKind() === BrowserEngineKind.Webkit) {
+      if (
+        getBrowserKind() === BrowserKind.Safari &&
+        getBrowserEngineKind() === BrowserEngineKind.Webkit &&
+        (isMobile() || major < 16 || (major === 16 && minor < 5))
+      ) {
         let expected = ''
 
         if (isMobile()) {
