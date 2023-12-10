@@ -1,6 +1,6 @@
-import { getBrowserVersion, isHeadlessChrome, isWebKit } from '../../tests/utils'
+import { getBrowserVersion, isHeadlessChrome, isMobile, isWebKit } from '../../tests/utils'
 import { BotdError, BrowserEngineKind, BrowserKind } from '../types'
-import { getBrowserEngineKind, getBrowserKind, isDesktopWebKit } from '../utils/browser'
+import { getBrowserEngineKind, getBrowserKind } from '../utils/browser'
 import getNotificationPermissions from './notification_permissions'
 
 describe('Sources', () => {
@@ -8,16 +8,18 @@ describe('Sources', () => {
     it('returns an expected value or throws', async () => {
       const { major } = getBrowserVersion() ?? { major: 0, minor: 0 }
 
-      if (
-        getBrowserKind() === BrowserKind.Safari &&
-        getBrowserEngineKind() === BrowserEngineKind.Webkit &&
-        !isDesktopWebKit() &&
-        major >= 17
-      ) {
-        await expectAsync(getNotificationPermissions()).toBeRejectedWithError(
-          BotdError,
-          'window.Notification is undefined',
-        )
+      if (getBrowserKind() === BrowserKind.Safari && getBrowserEngineKind() === BrowserEngineKind.Webkit) {
+        let expected = ''
+
+        if (isMobile()) {
+          expected = 'window.Notification is undefined'
+        } else if (major < 16) {
+          expected = 'navigator.permissions is undefined'
+        } else {
+          expected = 'notificationPermissions signal unexpected behaviour'
+        }
+
+        await expectAsync(getNotificationPermissions()).toBeRejectedWithError(BotdError, expected)
         return
       }
 
