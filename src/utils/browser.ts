@@ -54,8 +54,6 @@ export function getBrowserKind(): BrowserKind {
   const userAgent = navigator.userAgent?.toLowerCase()
   if (strIncludes(userAgent, 'edg/')) {
     return BrowserKind.Edge
-  } else if (strIncludes(userAgent, 'safari')) {
-    return BrowserKind.Safari
   } else if (strIncludes(userAgent, 'trident') || strIncludes(userAgent, 'msie')) {
     return BrowserKind.IE
   } else if (strIncludes(userAgent, 'wechat')) {
@@ -66,6 +64,8 @@ export function getBrowserKind(): BrowserKind {
     return BrowserKind.Opera
   } else if (strIncludes(userAgent, 'chrome')) {
     return BrowserKind.Chrome
+  } else if (strIncludes(userAgent, 'safari')) {
+    return BrowserKind.Safari
   } else {
     return BrowserKind.Unknown
   }
