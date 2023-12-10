@@ -27,18 +27,6 @@ describe('Sources', () => {
         return
       }
 
-      // if (isWebKit() && (major < 16 || (major === 16 && minor < 5))) {
-      //   await expectAsync(getNotificationPermissions()).toBeRejectedWithError(
-      //     BotdError,
-      //     isMobile()
-      //       ? 'window.Notification is undefined'
-      //       : (getBrowserMajorVersion() ?? 0) < 16
-      //       ? 'navigator.permissions is undefined'
-      //       : 'notificationPermissions signal unexpected behaviour',
-      //   )
-      //   return
-      // }
-
       const result = await getNotificationPermissions()
 
       if (isHeadlessChrome() || isWebKit()) {
