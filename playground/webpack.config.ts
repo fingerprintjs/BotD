@@ -57,6 +57,8 @@ const config: Configuration = {
 
   performance: {
     hints: isDev ? false : 'error',
+    maxAssetSize: Infinity,
+    maxEntrypointSize: Infinity,
   },
 }
 
