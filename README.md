@@ -1,4 +1,4 @@
-<p align="center">
+<img width="1379" alt="image" src="https://github.com/fingerprintjs/BotD/assets/27387/c0973d43-5975-4d1c-bbdc-9dbdb65aaf99"><p align="center">
   <a href="https://fingerprint.com">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/dev/resources/logo_light.svg" />
@@ -177,10 +177,10 @@ However, if you require private support, please email us at [oss-support@fingerp
 
 See the [contributing guidelines](contributing.md) to learn how to start a playground, test and build.
 
-## Other products by Fingerprint
+## Other products by Fingerprint on GitHub!
 
 -   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://github.com/fingerprintjs/fingerprintjs)
--   [AEV -- Android App Environment Verification API](https://github.com/fingerprintjs/aev)
+-   [Fingerprint Android -- Android identification and fingerprinting in native apps](https://github.com/fingerprintjs/fingerprintjs-android)
 
 ### License
 
