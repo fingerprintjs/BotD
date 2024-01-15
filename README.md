@@ -1,4 +1,4 @@
-<img width="1379" alt="image" src="https://github.com/fingerprintjs/BotD/assets/27387/c0973d43-5975-4d1c-bbdc-9dbdb65aaf99"><p align="center">
+<p align="center">
   <a href="https://fingerprint.com">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/fingerprintjs/botd/dev/resources/logo_light.svg" />
