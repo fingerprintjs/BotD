@@ -6,7 +6,7 @@ import 'webpack-dev-server'
 
 const isDev = process.env.DEV === '1'
 const port = process.env.BOTD_PORT || 3000
-const host = process.env.BOTD_HOST;
+const host = process.env.BOTD_HOST
 
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
