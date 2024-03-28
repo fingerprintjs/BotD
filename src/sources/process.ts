@@ -8,8 +8,13 @@ export interface ProcessPayload {
 }
 
 export default function getProcess(): ProcessPayload {
-  if (window.process === undefined) {
-    throw new BotdError(State.Undefined, 'window.process is undefined')
+  const { process } = window
+  const errorPrefix = 'window.process is'
+  if (process === undefined) {
+    throw new BotdError(State.Undefined, `${errorPrefix} undefined`)
   }
-  return <ProcessPayload>window.process
+  if (process && typeof process !== 'object') {
+    throw new BotdError(State.UnexpectedBehaviour, `${errorPrefix} not an object`)
+  }
+  return <ProcessPayload>process
 }
