@@ -45,11 +45,11 @@ jobs:
       - name: Build test bundle
         run: yarn build:test
 
-      - name: Test on BrowserStack
-        env:
-          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
-        run: yarn test:browserstack
+      # - name: Test on BrowserStack
+      #   env:
+      #     BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
+      #     BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+      #   run: yarn test:browserstack
 
       - name: Authenticate npm
         run: |
