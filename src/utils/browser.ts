@@ -52,7 +52,11 @@ export function getBrowserEngineKind(): BrowserEngineKind {
 
 export function getBrowserKind(): BrowserKind {
   const userAgent = navigator.userAgent?.toLowerCase()
-  if (strIncludes(userAgent, 'wechat')) {
+  if (strIncludes(userAgent, 'edg/')) {
+    return BrowserKind.Edge
+  } else if (strIncludes(userAgent, 'trident') || strIncludes(userAgent, 'msie')) {
+    return BrowserKind.IE
+  } else if (strIncludes(userAgent, 'wechat')) {
     return BrowserKind.WeChat
   } else if (strIncludes(userAgent, 'firefox')) {
     return BrowserKind.Firefox
@@ -62,8 +66,6 @@ export function getBrowserKind(): BrowserKind {
     return BrowserKind.Chrome
   } else if (strIncludes(userAgent, 'safari')) {
     return BrowserKind.Safari
-  } else if (strIncludes(userAgent, 'trident') || strIncludes(userAgent, 'msie')) {
-    return BrowserKind.IE
   } else {
     return BrowserKind.Unknown
   }
@@ -93,18 +95,22 @@ export function isAndroid(): boolean {
   )
 }
 
-export function isDesktopSafari(): boolean {
-  if (getBrowserEngineKind() !== BrowserEngineKind.Webkit) {
-    return false
-  }
+// Source: https://github.com/fingerprintjs/fingerprintjs/blob/109f8ef802169df3fa1c5d1baa4b7bc0abbc1d91/src/utils/browser.ts#L102C1-L118C2
+export function isDesktopWebKit(): boolean {
+  // Checked in Safari and DuckDuckGo
+
   const w = window
+  const { HTMLElement, Document } = w
+
   return (
     countTruthy([
       'safari' in w, // Always false in Karma and BrowserStack Automate
-      !('DeviceMotionEvent' in w),
       !('ongestureend' in w),
-      !('standalone' in navigator),
-    ]) >= 3
+      !('TouchEvent' in w),
+      !('orientation' in w),
+      HTMLElement && !('autocapitalize' in HTMLElement.prototype),
+      Document && 'pointerLockElement' in Document.prototype,
+    ]) >= 4
   )
 }
 

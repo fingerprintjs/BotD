@@ -1,6 +1,6 @@
 {
   "name": "@krisseck/botd-extra",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
@@ -47,16 +47,13 @@
     "check:ssr": "node --require ./dist/botd.cjs.js --eval '' || (echo \"The distributive files can't be used with server side rendering. Make sure the code doesn't use browser API until an exported function is called.\" && exit 1)"
   },
   "devDependencies": {
-    "@fpjs-incubator/broyster": "^0.1.5",
+    "@fpjs-incubator/broyster": "^0.1.8",
     "@rollup/plugin-json": "^5.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-terser": "^0.4.0",
     "@types/jasmine": "^3.5.14",
-    "@types/karma": "^6.3.3",
-    "@types/karma-spec-reporter": "^0.0.3",
-    "@types/karma-summary-reporter": "^3.1.0",
     "@types/ua-parser-js": "^0.7.36",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
@@ -69,12 +66,6 @@
     "eslint-plugin-prettier": "^3.3.1",
     "html-webpack-plugin": "^5.5.0",
     "karma": "^6.4.1",
-    "karma-chrome-launcher": "^3.1.1",
-    "karma-firefox-launcher": "^2.1.2",
-    "karma-jasmine": "^4.0.2",
-    "karma-spec-reporter": "^0.0.34",
-    "karma-summary-reporter": "^3.1.1",
-    "karma-typescript": "^5.5.3",
     "license-webpack-plugin": "^4.0.2",
     "prettier": "^2.2.1",
     "promise-polyfill": "^8.2.0",

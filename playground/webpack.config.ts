@@ -5,6 +5,8 @@ import { Configuration } from 'webpack'
 import 'webpack-dev-server'
 
 const isDev = process.env.DEV === '1'
+const port = process.env.BOTD_PORT || 3000
+const host = process.env.BOTD_HOST
 
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
@@ -52,11 +54,14 @@ const config: Configuration = {
 
   devServer: {
     compress: !isDev,
-    port: 3000,
+    host: host,
+    port: port,
   },
 
   performance: {
     hints: isDev ? false : 'error',
+    maxAssetSize: Infinity,
+    maxEntrypointSize: Infinity,
   },
 }
 

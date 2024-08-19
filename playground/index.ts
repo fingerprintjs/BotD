@@ -5,8 +5,10 @@ import {
   getDocumentFocus,
   getMozAppearanceSupport,
   isAndroid,
-  isDesktopSafari,
+  isDesktopWebKit,
+  isIPad,
 } from '../src/utils/browser'
+import { getBrowserVersion } from '../tests/utils'
 import './style.css'
 
 type DetectionResult =
@@ -40,10 +42,12 @@ const runDetection = async (): Promise<DetectionResult> => {
     const debugData = {
       browserEngineKind: getBrowserEngineKind(),
       browserKind: getBrowserKind(),
+      browserVersion: getBrowserVersion(),
       documentFocus: getDocumentFocus(),
       mozAppearanceSupport: getMozAppearanceSupport(),
       isAndroid: isAndroid(),
-      isDesktopSafari: isDesktopSafari(),
+      isDesktopWebKit: isDesktopWebKit(),
+      isIPad: isIPad(),
     }
 
     return {

@@ -21,8 +21,13 @@ import getPluginNamesArray from './plugin_names_array'
 import getDeviceMemory from './device_memory'
 import getScreenDimensions from './screen_dimensions'
 import checkDistinctiveProperties, { DistinctivePropertiesPayload } from './distinctive_properties'
+import { getBrowserEngineKind, getBrowserKind, getDocumentFocus, isAndroid } from '../utils/browser'
 
 export const sources = {
+  android: isAndroid,
+  browserKind: getBrowserKind,
+  browserEngineKind: getBrowserEngineKind,
+  documentFocus: getDocumentFocus,
   userAgent: getUserAgent,
   appVersion: getAppVersion,
   rtt: getRTT,
