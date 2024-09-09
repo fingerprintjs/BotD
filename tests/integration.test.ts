@@ -1,4 +1,4 @@
-import * as BotDModule from '../src'
+import type * as BotDModule from '../src'
 
 /*
  * Checks that the distributive file works in a browser.
