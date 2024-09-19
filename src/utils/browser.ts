@@ -77,22 +77,30 @@ export function isAndroid(): boolean {
   const isItChromium = browserEngineKind === BrowserEngineKind.Chromium
   const isItGecko = browserEngineKind === BrowserEngineKind.Gecko
 
-  // Only 2 browser engines are presented on Android.
-  // Actually, there is also Android 4.1 browser, but it's not worth detecting it at the moment.
-  if (!isItChromium && !isItGecko) return false
-
   const w = window
+  const n = navigator
+  const c = 'connection'
 
   // Chrome removes all words "Android" from `navigator` when desktop version is requested
   // Firefox keeps "Android" in `navigator.appVersion` when desktop version is requested
-  return (
-    countTruthy([
-      'onorientationchange' in w,
-      'orientation' in w,
-      isItChromium && !('SharedWorker' in w),
-      isItGecko && /android/i.test(navigator.appVersion),
-    ]) >= 2
-  )
+  if (isItChromium) {
+    return (
+      countTruthy([
+        !('SharedWorker' in w),
+        // `typechange` is deprecated, but it's still present on Android (tested on Chrome Mobile 117)
+        // Removal proposal https://bugs.chromium.org/p/chromium/issues/detail?id=699892
+        // Note: this expression returns true on ChromeOS, so additional detectors are required to avoid false-positives
+        n[c] && 'ontypechange' in n[c],
+        !('sinkId' in new Audio()),
+      ]) >= 2
+    )
+  } else if (isItGecko) {
+    return countTruthy(['onorientationchange' in w, 'orientation' in w, /android/i.test(n.appVersion)]) >= 2
+  } else {
+    // Only 2 browser engines are presented on Android.
+    // Actually, there is also Android 4.1 browser, but it's not worth detecting it at the moment.
+    return false
+  }
 }
 
 // Source: https://github.com/fingerprintjs/fingerprintjs/blob/109f8ef802169df3fa1c5d1baa4b7bc0abbc1d91/src/utils/browser.ts#L102C1-L118C2
@@ -129,7 +137,7 @@ export function getDocumentFocus(): boolean {
 }
 
 export function isChromium86OrNewer(): boolean {
-  // Checked in Chrome 85 vs Chrome 86 both on desktop and Android
+  // Checked in Chrome 85 vs Chrome 86 both on desktop and Android. Checked in macOS Chrome 128, Android Chrome 127.
   const w = window
 
   return (
@@ -144,10 +152,10 @@ export function isChromium86OrNewer(): boolean {
 
 export function isIPad(): boolean {
   // Checked on:
-  // Safari on iPadOS (both mobile and desktop modes): 8, 11, 12, 13, 14
-  // Chrome on iPadOS (both mobile and desktop modes): 11, 12, 13, 14
-  // Safari on iOS (both mobile and desktop modes): 9, 10, 11, 12, 13, 14
-  // Chrome on iOS (both mobile and desktop modes): 9, 10, 11, 12, 13, 14
+  // Safari on iPadOS (both mobile and desktop modes): 8, 11-18
+  // Chrome on iPadOS (both mobile and desktop modes): 11-18
+  // Safari on iOS (both mobile and desktop modes): 9-18
+  // Chrome on iOS (both mobile and desktop modes): 9-18
 
   // Before iOS 13. Safari tampers the value in "request desktop site" mode since iOS 13.
   if (navigator.platform === 'iPad') {
@@ -159,9 +167,12 @@ export function isIPad(): boolean {
 
   return (
     countTruthy([
-      'MediaSource' in window, // Since iOS 13
-      !!Element.prototype.webkitRequestFullscreen, // Since iOS 12
-      // iPhone 4S that runs iOS 9 matches this. But it won't match the criteria above, so it won't be detected as iPad.
+      // Since iOS 13. Doesn't work in Chrome on iPadOS <15, but works in desktop mode.
+      'MediaSource' in window,
+      // Since iOS 12. Doesn't work in Chrome on iPadOS.
+      !!Element.prototype.webkitRequestFullscreen,
+      // iPhone 4S that runs iOS 9 matches this, but it is not supported
+      // Doesn't work in incognito mode of Safari ≥17 with split screen because of tracking prevention
       screenRatio > 0.65 && screenRatio < 1.53,
     ]) >= 2
   )
