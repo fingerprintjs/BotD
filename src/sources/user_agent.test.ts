@@ -6,7 +6,7 @@ describe('Sources', () => {
     it('returns an expected value', () => {
       const value = getUserAgent()
       const version = getBrowserEngineVersion() ?? { major: 0, minor: 0 }
-      expect(value).toMatch(new RegExp(`(Safari|Chrome|Firefox)/${version.major}.${version.minor}`))
+      expect(value).toMatch(new RegExp(`(AppleWebKit|Chrome|Firefox)/${version.major}.${version.minor}`))
     })
   })
 })
