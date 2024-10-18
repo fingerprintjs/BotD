@@ -1,4 +1,5 @@
 import {
+  getBrowserEngineVersion,
   getBrowserVersion,
   getOsMajorVersion,
   isChromium,
@@ -13,15 +14,16 @@ describe('Sources', () => {
   describe('appVersion', () => {
     it('returns an expected value', () => {
       const value = getAppVersion()
-      const version = getBrowserVersion() ?? { major: 0, minor: 0 }
 
       if (isWebKit()) {
+        const version = getBrowserVersion() ?? { major: 0, minor: 0 }
         expect(navigator.userAgent).toContain(value)
         expect(value).toContain(`Version/${version.major}.${version.minor}`)
         return
       }
 
       if (isChromium()) {
+        const version = getBrowserEngineVersion() ?? { major: 0, minor: 0 }
         expect(navigator.userAgent).toContain(value)
         expect(value).toContain(`Chrome/${version.major}.${version.minor}`)
         return
