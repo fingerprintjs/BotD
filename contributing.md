@@ -79,8 +79,6 @@ BotD will execute immediately and print the result on the page.
 The page reloads every time you change the source code.
 The code of the playground itself is located in the [playground](playground) directory.
 
-The playground is a quick way to run, test, and debug the code. The playground is located in the [playground](playground) directory.
-
 ### Code style
 
 Follow the repository's code style.
