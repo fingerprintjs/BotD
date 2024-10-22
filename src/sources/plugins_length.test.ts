@@ -1,4 +1,4 @@
-import { getBrowserVersion, isChromium, isGecko, isWebKit, isMobile, isHeadlessChrome } from '../../tests/utils'
+import { getBrowserVersion, isChromium, isGecko, isWebKit, isMobile } from '../../tests/utils'
 import getPluginsLength from './plugins_length'
 
 describe('Sources', () => {
@@ -8,7 +8,7 @@ describe('Sources', () => {
       const version = getBrowserVersion() ?? { major: 0, minor: 0 }
 
       if (isChromium()) {
-        if (isHeadlessChrome() || isMobile()) {
+        if (isMobile()) {
           expect(result).toBe(0)
           return
         }

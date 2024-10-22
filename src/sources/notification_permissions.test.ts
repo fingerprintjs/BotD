@@ -1,10 +1,10 @@
-import { getBrowserVersion, isHeadlessChrome, isMobile, isWebKit } from '../../tests/utils'
+import { getBrowserVersion, isMobile, isWebKit } from '../../tests/utils'
 import { BotdError, BrowserEngineKind, BrowserKind } from '../types'
 import { getBrowserEngineKind, getBrowserKind } from '../utils/browser'
 import getNotificationPermissions from './notification_permissions'
 
 describe('Sources', () => {
-  describe('notificaionPermissions', () => {
+  describe('notificationPermissions', () => {
     it('returns an expected value or throws', async () => {
       const { major, minor } = getBrowserVersion() ?? { major: 0, minor: 0 }
 
@@ -29,7 +29,7 @@ describe('Sources', () => {
 
       const result = await getNotificationPermissions()
 
-      if (isHeadlessChrome() || isWebKit()) {
+      if (isWebKit()) {
         // It's true because HeadlessChrome returns "denied" and not "default".
         expect(result).toBeTrue()
         return
