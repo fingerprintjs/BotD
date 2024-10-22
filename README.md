@@ -175,7 +175,8 @@ However, if you require private support, please email us at [oss-support@fingerp
 
 ## Contributing
 
-See the [contributing guidelines](contributing.md) to learn how to start a playground, test and build.
+See the [Contribution guidelines](contributing.md) to learn how to contribute to the project or run the project locally.
+Please read it carefully before making a pull request.
 
 ## Other products by Fingerprint on GitHub!
 
