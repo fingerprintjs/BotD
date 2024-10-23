@@ -31,6 +31,7 @@ If you want to fix a bug, create a signal source, or make any other code contrib
 After you clone the repository, check the [Working with code](#working-with-code) section to learn how to run, check, and build the code.
 
 In order for us to review and accept your code contributions, please follow these rules:
+
 - Your code quality should be at least as good as the code you modify.
 - Your code style (syntax, naming, coding patterns, etc) should follow the BotD style.
 - All the new code should be covered with automated tests.
@@ -74,7 +75,7 @@ Development playground lets you run BotD locally. Run this command to start a pl
 yarn dev:playground # Add '--port 8765' to change the server port
 ```
 
-Then open http://localhost:3000 in a browser.
+Then open <http://localhost:3000> in a browser.
 BotD will execute immediately and print the result on the page.
 The page reloads every time you change the source code.
 The code of the playground itself is located in the [playground](playground) directory.
@@ -114,6 +115,7 @@ Unit test files are located right next to individual module files that they chec
 Integration tests are located in the `tests` directory.
 
 To run the tests in a browser on your machine, build the project and run:
+
 ```bash
 yarn test:local --browsers ChromeHeadless
 # or to run in Firefox
@@ -123,12 +125,14 @@ yarn test:local
 ```
 
 To run the tests in browsers on [BrowserStack](https://www.browserstack.com), get a BrowserStack access key and run:
+
 ```bash
 # For Linux, macOS and WSL (Linux on Windows)
 BROWSERSTACK_USERNAME=your-username BROWSERSTACK_ACCESS_KEY=your-key yarn test:browserstack
 ```
 
 If you face `Error: spawn Unknown system error -86` on macOS, try installing Rosetta:
+
 ```bash
 softwareupdate --install-rosetta
 ```
@@ -199,6 +203,9 @@ These tests are meant to verify that the signal source returns expected values a
 In the event of significant changes or deprecation of the underlying APIs, these tests should start to fail in future browser versions.
 
 For inspiration see existing tests in [src/sources/](src/sources/).
+
+If your signal/detector is environment-specific, look at [browser utils](src/utils/browser.ts).
+You can also use browser utils in tests, [example](src/sources/notification_permissions.test.ts).
 
 ### How to publish
 
