@@ -168,6 +168,10 @@ The detection stage is implemented by detectors, functions that make conclusions
 The function are located in the [src/detectors](src/detectors) directory and listed in [src/detectors/index.ts](src/detectors/index.ts).
 A detector output is either the bot kind name, or `false` if the visitor is not a bot, or `true` if the visitor is an unknown bot.
 
+Avoid using `navigator.userAgent` or similar APIs, as they are frequently spoofed.
+Instead, for code that makes decisions based on browser name and version, use the functions available in [src/utils/browser.ts](src/utils/browser.ts).
+However, in tests, for greater reliability, use `navigator.userAgent` through the functions in [tests/utils.ts](tests/utils.ts).
+
 If a signal source meets an unexpected condition that doesn't allow it to return a proper signal,
 the signal should throw a `BotdError` object with the corresponding `state` and `message`.
 
@@ -203,9 +207,6 @@ These tests are meant to verify that the signal source returns expected values a
 In the event of significant changes or deprecation of the underlying APIs, these tests should start to fail in future browser versions.
 
 For inspiration see existing tests in [src/sources/](src/sources/).
-
-If your signal/detector is environment-specific, look at [browser utils](src/utils/browser.ts).
-You can also use browser utils in tests, [example](src/sources/notification_permissions.test.ts).
 
 ### How to publish
 
