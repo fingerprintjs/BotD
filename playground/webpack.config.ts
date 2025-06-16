@@ -1,12 +1,16 @@
-import { resolve } from 'path'
-import * as HtmlWebpackPlugin from 'html-webpack-plugin'
-import * as CopyWebpackPlugin from 'copy-webpack-plugin'
-import { Configuration } from 'webpack'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import type { Configuration } from 'webpack'
 import 'webpack-dev-server'
 
 const isDev = process.env.DEV === '1'
 const port = process.env.BOTD_PORT || 3000
 const host = process.env.BOTD_HOST
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
@@ -65,4 +69,4 @@ const config: Configuration = {
   },
 }
 
-module.exports = [config]
+export default config

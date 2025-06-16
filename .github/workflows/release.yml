@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     environment: main
 
@@ -17,14 +17,14 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 23
 
-      - uses: actions/cache@v3.0.2
+      - uses: actions/cache@v4
         id: yarn-cache
         with:
           path: |
