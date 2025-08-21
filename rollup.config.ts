@@ -6,7 +6,7 @@ import typescriptPlugin from '@rollup/plugin-typescript'
 import dtsPlugin from 'rollup-plugin-dts'
 import licensePlugin from 'rollup-plugin-license'
 
-const { dependencies } = JSON.parse(fs.readFileSync('package.json', 'utf8'))
+const { dependencies } = JSON.parse(fs.readFileSync('package.json', 'utf8')) || {}
 
 const outputDirectory = 'dist'
 
