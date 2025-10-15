@@ -52,6 +52,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
     "@types/jasmine": "^3.5.14",
+    "@types/node": "^24.0.12",
     "@types/ua-parser-js": "^0.7.36",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
