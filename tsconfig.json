@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node16",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "ES2018",
     "removeComments": false,
-    "resolveJsonModule": true,
     "importHelpers": true,
     "noErrorTruncation": true,
     "declaration": false,
@@ -19,7 +18,7 @@
   "include": ["src/index.ts", "src/**/*.d.ts"],
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs",
+      "module": "ESNext",
       "target": "es2021"
     }
   }
