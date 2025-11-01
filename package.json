@@ -1,6 +1,6 @@
 {
   "name": "@fingerprintjs/botd",
-  "version": "1.9.1",
+  "version": "2.0.0-alpha.0",
   "description": "botd is a browser library for JavaScript bot detection",
   "keywords": [
     "bot",
@@ -48,13 +48,13 @@
   },
   "devDependencies": {
     "@fpjs-incubator/broyster": "^0.2.3",
-    "@rollup/plugin-json": "^5.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^10.0.1",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/jasmine": "^3.5.14",
     "@types/node": "^24.0.12",
     "@types/ua-parser-js": "^0.7.36",
-    "@types/webpack": "^5.28.0",
+    "@types/webpack": "^5.28.5",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "copy-webpack-plugin": "^11.0.0",
@@ -76,14 +76,12 @@
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.4.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.3",
+    "typescript": "5.1.6",
     "ua-parser-js": "^1.0.35",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.0",
-    "webpack-merge": "^5.8.0"
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2",
+    "webpack-merge": "^6.0.1"
   },
-  "dependencies": {
-    "tslib": "^2.4.0"
-  }
+  "dependencies": {}
 }
