@@ -19,7 +19,7 @@
   "ts-node": {
     "compilerOptions": {
       "module": "ESNext",
-      "target": "es2021"
+      "target": "ES2018"
     }
   }
 }
