@@ -24,13 +24,17 @@
 
 ## BotD
 
-BotD is an open source library that we created to make it easy for  every developer to detect basic bots in their web apps. 
+BotD is an open source library that we created to make it easy for  every developer to detect basic bots in their web apps.
 
 It is available under a permissive MIT license and will always be free for developers and commercial use.
 
+## 🚧 Maintenance Status
+
+We keep the open-source BotD package healthy with timely critical fixes and regressions addressed as fast as possible. That said, the near-term roadmap is stability-only, so new features are unlikely to land soon. Please plan accordingly if you depend on upcoming enhancements.
+
 For more demanding applications we created a professional API-based bot detection software that is called [Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/).
 
-[⚡ View Our Demo](https://fingerprintjs.github.io/BotD).
+[⚡ View Our Demo](https://fingerprintjs.github.io/BotD)
 
 ## Quick start
 
@@ -39,7 +43,7 @@ For more demanding applications we created a professional API-based bot detectio
 ```html
 <script>
     // Initialize an agent at application startup, once per page/app.
-    const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
+    const botdPromise = import('https://openfpcdn.io/botd/v2').then((Botd) => Botd.load())
     // Get detection results when you need them.
     botdPromise
         .then((botd) => botd.detect())
@@ -48,7 +52,7 @@ For more demanding applications we created a professional API-based bot detectio
 </script>
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn-tkdie9?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-v2-cdn?devtoolsheight=100&file=index.html)
 
 ### NPM
 
@@ -70,7 +74,7 @@ botdPromise
     .catch((error) => console.error(error))
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn-jwtcvu?devtoolsheight=100&file=index.js)
+[Run this code](https://stackblitz.com/edit/botd-v2-npm?devtoolsheight=100&file=index.js)
 
 📕 [Full documentation](docs/api.md)
 
@@ -134,7 +138,7 @@ Full product comparison:
     <tr><td><b>Compliance</b></td><td align="center">Your infrastructure</td><td align="center">GDPR, CCPA compliant<sup>2</sup></td></tr>
     <tr><td><b>SLA</b></td><td align="center">No SLA</td><td align="center">99.9% Uptime</td></tr>
     <tr><td><b>Support</b></td><td align="center">GitHub community</td><td align="center">Support team via email, chat, and call-back within 1 business day</td></tr>
-   
+
   </tbody>
 </table>
 
@@ -159,8 +163,13 @@ Pro result example:
 
 ## Migrating from <code>v0</code>
 
--   [Migration guide](docs/migrating_v0_v1.md)
+-   [Migration guide](docs/migration/v0_v2.md)
 -   [V0 documentation](https://github.com/fingerprintjs/BotD/tree/v0)
+
+## Migrating from <code>v1</code>
+
+-   [Migration guide](docs/migration/v1_v2.md)
+-   [V1 documentation](https://github.com/fingerprintjs/BotD/tree/v1)
 
 ## Supported browsers
 
@@ -179,14 +188,14 @@ See the [Contribution guidelines](contributing.md) to learn how to contribute to
 Please read it carefully before making a pull request.
 
 ## Other products by Fingerprint on GitHub!
-
 -   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://github.com/fingerprintjs/fingerprintjs)
 -   [Fingerprint Android -- Android identification and fingerprinting in native apps](https://github.com/fingerprintjs/fingerprintjs-android)
+-   [Fingerprint iOS -- iOS identification and fingerprinting in native apps](https://github.com/fingerprintjs/fingerprintjs-ios)
 
 ### License
 
 [MIT](LICENSE)
 
 <p align="center">
-© 2023 FingerprintJS, Inc
+© 2025 FingerprintJS, Inc
 </p>

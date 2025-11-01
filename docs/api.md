@@ -1,6 +1,7 @@
 # BotD API Reference
 
-## [Migration guide](docs/migration-guide.md) from `0.1`
+## [Migration guide](./migration/v0_v2.md) from `v0.1`
+## [Migration guide](./migration/v1_v2.md) from `v1`
 
 ## Installation
 
@@ -9,7 +10,7 @@
 ```html
 <script>
     // Initialize the agent at application startup.
-    const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) => Botd.load())
+    const botdPromise = import('https://openfpcdn.io/botd/v2').then((Botd) => Botd.load())
     // Get detection results when you need them.
     botdPromise
         .then((botd) => botd.detect())
@@ -18,7 +19,7 @@
 </script>
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn-tkdie9?devtoolsheight=100&file=index.html)
+[Run this code](https://stackblitz.com/edit/botd-v2-cdn?devtoolsheight=100&file=index.html)
 
 For browsers that don't support [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 see the [browser support guide](browser_support.md#import-support).
@@ -42,9 +43,9 @@ load()
     .catch((error) => console.error(error))
 ```
 
-[Run this code](https://stackblitz.com/edit/botd-cdn-jwtcvu?devtoolsheight=100&file=index.js)
+[Run this code](https://stackblitz.com/edit/botd-v2-npm?devtoolsheight=100&file=index.js)
 
-**When you run BotD installed with NPM or Yarn, the library will send AJAX requests to FingerprintJS servers to collect usage statistics.**
+**When you run BotD installed with NPM or Yarn, the library will send AJAX requests to Fingerprint servers to collect usage statistics.**
 When the `load` function runs, there is a 0.1% chance of sending a request.
 The requests are sent at most once a week from one browser instance (unless the browser cache was cleared).
 A request includes the following information:
