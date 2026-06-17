@@ -78,19 +78,19 @@ botdPromise
 
 📕 [Full documentation](docs/api.md)
 
-## 🤖 Upgrade to Fingerprint Pro Bot Detection to detect sophisticated bots with confidence.
+## 🤖 Upgrade to Fingerprint Bot Detection to detect sophisticated bots with confidence.
 
-[Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/) is a professional bot detection service that processes all information server-side and transmits it securely to your servers using server-to-server APIs.
+[Fingerprint Bot Detection API](https://fingerprint.com/try/bot-detection/) is a professional bot detection API service that processes all information server-side and transmits it securely to your servers.
 
-Fingerprint Pro Bot Detection provides both browser and server-side APIs that make the process of bot detection fast and secure. When using the Pro Bot Detection, use the browser JavaScript SDK to obtain the requestID value and then verify this value using our server API.
+Fingerprint Bot Detection API provides both browser and server-side APIs that make the process of bot detection fast and secure. When using the Bot Detection, use the browser JavaScript SDK to detect browser automation tools and server-side Automation Intelligence API to detect more bot bot types, such as AI agents, AI assistants, and AI/LLM crawlers.
 
-The Pro product combines vast amounts of auxiliary data that bots leak (cursor movements, network overrides, browser changes and more) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular automation tools, their derivatives and plugins.
+The commercial product combines vast amounts of auxiliary data that bots expose (network properties, browser overrides) to be able to reliably deduplicate real users from automated software, resulting in the detection of popular AI tools, browser automation tools, their derivatives and plugins.
 
-A big advantage of the Pro detection is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
+A big advantage of the paid product is that it's able to distinguish good bots from bad ones that allow you to block malicious traffic without blocking search engine crawlers, monitoring workers, etc.
 
 <p align="center">
-  <a href="https://fingerprint.com/products/bot-detection/">
-    <img src="https://raw.githubusercontent.com/fingerprintjs/botd/dev/resources/pro_botd_screenshot.png" alt="Pro BotD screenshot" width="700px" />
+  <a href="https://fingerprint.com/try/bot-detection">
+    <img width="700" alt="image" src="https://github.com/user-attachments/assets/20112051-8f03-4ace-a806-570d77acace1" />
   </a>
 </p>
 
@@ -100,17 +100,19 @@ Full product comparison:
   <thead>
     <tr>
       <th></th>
-      <th align="center">Open Source</th>
-      <th align="center">Pro</th>
+      <th align="center">Open Source Library</th>
+      <th align="center">Bot Detection API</th>
     </tr>
   </thead>
   <tbody>
     <tr><td colspan="3"><h4>Core Features</h4></td></tr>
-    <tr><td>100% open source</td><td align="center">yes</td><td align="center">no<sup>1</sup></td></tr>
-    <!-- <tr><td>Accuracy</td><td align="center">up to 60%</td><td align="center"><b>99.5%</b></td></tr> -->
-    <tr><td><b>Search engine detection</b><br/><i>works in all modern browsers - see our full list of <a href="https://dev.fingerprint.com/docs/browser-support/" target="_blank">browsers supported</a></i></td><td align="center">–</td><td align="center">✓</td></tr>
-    <tr><td>Automation web services detection</td><td align="center">–</td><td align="center">✓</td></tr>
-    <tr><td>Automation browser extensions detection</td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td>100% open source</td><td align="center">yes</td><td align="center">no</td></tr>
+    <tr><td><b>AI Agent Detection</b><br/><i>OpenAI, Manus, AWS AgentCore</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>AI Assistant Detection</b><br/><i>ChatGPT, Anthropic, Google Gemini</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Web Bot Auth support</b><br/><i>Detect verified, signed, and spoofed identities</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Search Engine detection</b><br/><i>Google, Bing, DuckDuckGo</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td><b>Anti Detect Browser detection</b><br/><i>AdsPower, Dolphin Anty, Kameleo</i></td><td align="center">–</td><td align="center">✓</td></tr>
+    <tr><td>Browser Automation Tools detection</td><td align="center">partial</td><td align="center">full</td></tr>
     <tr><td colspan="3"><h4>Detectable automation tools & frameworks</h4></td></tr>
     <tr><td>Headless Browsers (<a href="https://www.google.com/chrome">Chrome</a>, <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>)</td><td align="center">✓</td><td align="center">✓</td></tr>
     <tr><td><b><a href="https://github.com/SeleniumHQ/selenium">seleniumHQ/selenium</a></b><br/><i>umbrella project encapsulating a variety of tools and libraries enabling web browser automation</i></td><td align="center">✓</td><td align="center">✓</td></tr>
@@ -128,6 +130,7 @@ Full product comparison:
     <!-- <tr><td><a href="______">______</a><br/><i>____________</i></td><td align="center">✓</td><td align="center">✓</td></tr> -->
     <!-- -->
     <tr><td colspan="3"><h4>Additional Features</h4></td></tr>
+    <tr><td><b>Requires JavaScript</b><br/><i>Requires a JavaScript library to detect bots</i></td><td align="center">yes</td><td align="center">no</td></tr>
     <tr><td><b>Server-side accuracy increase</b><br/><i>based on additional server-side data, such as TLS crypto support, ipv4/v6 data and others</i></td><td align="center">–</td><td align="center">✓</td></tr>
     <tr><td><b>Query API</b><br/><i>build flexible workflows</i></td><td align="center">–</td><td align="center">✓</td></tr>
     <!-- -->
@@ -135,59 +138,43 @@ Full product comparison:
     <tr><td><b>Data security</b></td><td align="center">Your infrastructure</td><td align="center">Encrypted at rest</td></tr>
     <tr><td><b>Storage</b></td><td align="center">Your infrastructure</td><td align="center">Unlimited up to 1 yr</td></tr>
     <tr><td><b>Regions</b></td><td align="center">Your infrastructure</td><td align="center">Hosting in US, EU and Mumbai</td></tr>
-    <tr><td><b>Compliance</b></td><td align="center">Your infrastructure</td><td align="center">GDPR, CCPA compliant<sup>2</sup></td></tr>
+    <tr><td><b>Compliance</b></td><td align="center">Your infrastructure</td><td align="center">GDPR, CCPA compliant<sup>1</sup></td></tr>
     <tr><td><b>SLA</b></td><td align="center">No SLA</td><td align="center">99.9% Uptime</td></tr>
     <tr><td><b>Support</b></td><td align="center">GitHub community</td><td align="center">Support team via email, chat, and call-back within 1 business day</td></tr>
 
   </tbody>
 </table>
 
-<sub>1. Pro uses the open source BotD library as well as proprietary technology for increased accuracy and result stability.</sub>
 
-<sub>2. Fingerprint Pro is GDPR and CCPA compliant as the data processor. You still need to be compliant as the data controller and use the bot detection for fraud prevention under legitimate interest or ask for user consent.</sub>
+<sub>1. Fingerprint Pro is GDPR and CCPA compliant as the data processor. You still need to be compliant as the data controller and use the bot detection for fraud prevention under legitimate interest or ask for user consent.</sub>
 
-Pro result example:
+Bot detection API result example:
 
 ```js
 {
-    "bot": {
-        "result": "bad"
-        "type": "selenium"
-    }
+  "bot": "bad",
+  "bot_type": "headless_chrome",
+  "bot_info": {
+    "category": "browser_automation",
+    "provider": "chromium/chromium",
+    "name": "ChromeHeadless",
+    "identity": "unknown",
+    "confidence": "medium"
+  }
 }
 ```
 
-🍿 [Live demo](https://fingerprint.com/products/bot-detection/)
+🍿 [Live demo](https://demo.fingerprint.com/playground)
 
-📕 [Fingerprint Pro documentation](https://dev.fingerprint.com)
+📕 [Fingerprint Bot Detection API Docs]([https://docs.fingerprint.com](https://docs.fingerprint.com/docs/bot-detection/overview))
 
-## Migrating from <code>v0</code>
-
--   [Migration guide](docs/migration/v0_v2.md)
--   [V0 documentation](https://github.com/fingerprintjs/BotD/tree/v0)
-
-## Migrating from <code>v1</code>
-
--   [Migration guide](docs/migration/v1_v2.md)
--   [V1 documentation](https://github.com/fingerprintjs/BotD/tree/v1)
-
-## Supported browsers
-
-The library supports all popular browsers.
-See more details and learn how to run the library in old browsers in the [browser support guide](docs/browser_support.md).
-
-## Where to get support
-
-Thanks to our [series B funding](https://fingerprint.com/blog/series-b/), we are happy to provide technical support for our open-source BotD library. We recommend using GitHub [Issues](https://github.com/fingerprintjs/BotD/issues) to submit bugs or [Discussions](https://github.com/fingerprintjs/BotD/discussions) to ask questions.
-Using issues and discussions publicly will help the open-source community and other users with similar issues.
-However, if you require private support, please email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
 
 ## Contributing
 
 See the [Contribution guidelines](contributing.md) to learn how to contribute to the project or run the project locally.
 Please read it carefully before making a pull request.
 
-## Other products by Fingerprint on GitHub!
+## Other open-source products by Fingerprint on GitHub!
 -   [FingerprintJS -- browser fingerprinting library that queries browser attributes and computes a hashed visitor identifier from them](https://github.com/fingerprintjs/fingerprintjs)
 -   [Fingerprint Android -- Android identification and fingerprinting in native apps](https://github.com/fingerprintjs/fingerprintjs-android)
 -   [Fingerprint iOS -- iOS identification and fingerprinting in native apps](https://github.com/fingerprintjs/fingerprintjs-ios)
@@ -197,5 +184,5 @@ Please read it carefully before making a pull request.
 [MIT](LICENSE)
 
 <p align="center">
-© 2025 FingerprintJS, Inc
+© 2026 FingerprintJS, Inc
 </p>
