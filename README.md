@@ -166,7 +166,7 @@ Bot detection API result example:
 
 🍿 [Live demo](https://demo.fingerprint.com/playground)
 
-📕 [Fingerprint Bot Detection API Docs]([https://docs.fingerprint.com](https://docs.fingerprint.com/docs/bot-detection/overview))
+📕 [Fingerprint Bot Detection API Docs](https://docs.fingerprint.com/docs/bot-detection/overview)
 
 
 ## Contributing
