@@ -34,7 +34,7 @@ We keep the open-source BotD package healthy with timely critical fixes and regr
 
 For more demanding applications we created a professional API-based bot detection software that is called [Fingerprint Pro Bot Detection](https://fingerprint.com/products/bot-detection/).
 
-[⚡ View Our Demo](https://fingerprintjs.github.io/BotD)
+[⚡ View Our Demo](https://fingerprintjs.github.io/BotD/main/)
 
 ## Quick start
 
